@@ -17,11 +17,10 @@ nav {
                 li {
 
                     a {
+                        color: #838383;
                         &.nav-link {
                             &.active {
-                                // border-radius: 50px;
-                                // background-color: #F0F1F3;
-                                // color: black;
+                                
                             }
                         }
 
@@ -80,4 +79,4 @@ nav {
     .create-listing {
         text-align: center;
     }
-}
+}   

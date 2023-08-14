@@ -9,10 +9,10 @@
 </head>
 <header>
     <!-- Phần này là navbar, có thể tạo li mới khi cần bổ sung item  -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand me-auto" href="#">
-                <img class="web-logo" src="" alt="brand logo (our team decide later)" onclick="index.html";>
+                <img class="web-logo" src="./resources/image/Group 2 EEET 2099.png" alt="brand logo (our team decide later)" onclick="index.html";>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
                 
                 <ul class="navbar-nav ms-auto nav-icons">
                     <li class="nav-item">
-                        <a class="nav-link" href=""> <i class="fa-solid fa-house"></i> Home</a>
+                        <a class="nav-link " href=""> <i class="fa-solid fa-house"></i> Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href=""> <i class="fa-solid fa-house-circle-check"></i> Stores</a>
@@ -60,7 +60,13 @@
                 <div class="col-sm-12 col-md-6 about-section">
                     <h6>Group name</h6>
                     <p class="text-justify">
-                    <!-- Cho vài lời vào đây cho vui :))) -->
+                        <ul class="footer-links">
+                            <li><h2>Author:</h2></li>
+                            <li><a href="">Giang Trong Duong - s3926135</a></li>
+                            <li><a href="">Ngo Viet Anh - 3879954</a></li>
+                            <li><a href="">Tran Mai Nhung - s3879954</a></li>
+                            <li><a href="">Tran Nguyen Ha Khanh - s3877707</a></li>
+                        </ul>
                     </p>
                 </div>
                 
@@ -75,12 +81,13 @@
                     </ul>
                 </div>
 
+
                 <div class="col-xs-6 col-md-3">
                     <h6>Others</h6>
                     <ul class="footer-links">
-                    <li><a href="{{ route('route_about') }}">About Us</a></li>
+                    <li><a href="">About Us</a></li>
                     <li><a href="#">Contact Us</a></li>
-                    <li><a href="{{ route('route_privacy') }}">Privacy Policy</a></li>
+                    <li><a href="">Privacy Policy</a></li>
                     </ul>
                 </div>
 
@@ -94,14 +101,6 @@
                     <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
                     <a href="#">Group 2 EEET2099 2023 Semester B</a>.
                     </p>
-                </div>
-
-                <div class="col-md-5 col-sm-6 col-xs-12">
-                    <ul class="social-icons">
-                    <img class="footer-logo" src="{{ asset('storage/images/logo/logo.png')}}" alt="logo">
-                    <li><a class="facebook" href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a class="github" href="https://github.com/VietNggRMIT/homie-g1"><i class="fa-brands fa-github"></i></a></li>
-                    </ul>
                 </div>
             </div>
         </div>

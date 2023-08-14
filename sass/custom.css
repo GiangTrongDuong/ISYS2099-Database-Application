@@ -1,6 +1,9 @@
 nav .container .navbar-brand .web-logo {
   width: 150px;
 }
+nav .navbar-collapse ul.nav-icons li a {
+  color: #838383;
+}
 nav .navbar-collapse ul.nav-icons li a.create-listing {
   border-radius: 10px;
   border: solid 1px #F0F1F3;
@@ -45,7 +48,7 @@ footer {
 }
 
 .footer-wrapper {
-  background-color: #26272b;
+  background-color: #000000;
   padding: 45px 0 20px;
   font-size: 15px;
   line-height: 24px;
@@ -91,7 +94,7 @@ footer {
   display: block;
 }
 .footer-links a {
-  color: #737373;
+  color: #aeaeae;
 }
 .footer-links a:active, .footer-links a:focus, .footer-links a:hover {
   color: #ffffff;
