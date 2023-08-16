@@ -2,8 +2,11 @@ from faker import Faker
 import csv
 import random
 
+# Generate data using Faker
+# Specify number of lines in main()
+
 FAKER = Faker()
-DATEFORMAT = "%m/%d/%Y %H:%M:%S"
+DATEFORMAT = "%Y-%m-%d %H:%M:%S"
 CATEGORY = {
     "Electronics": {
         "id": 1,
