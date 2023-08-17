@@ -2,9 +2,6 @@ from faker import Faker
 import csv
 import random
 
-# Generate data using Faker
-# Specify number of lines in main()
-
 FAKER = Faker()
 DATEFORMAT = "%Y-%m-%d %H:%M:%S"
 CATEGORY = {
@@ -17,14 +14,14 @@ CATEGORY = {
     },
     "Phone and Accessories": {
         "id": 2,
-        "parent": "Electronics",
+        "parent": 1,
         "attribute": "return",
         "value": "1 week",
         "required": "True"
     },
     "Laptop and Computer": {
         "id": 3,
-        "parent": "Electronics",
+        "parent": 1,
         "attribute": "return",
         "value": "1 month",
         "required": "True"
@@ -38,14 +35,14 @@ CATEGORY = {
     },
     "Men's Clothing": {
         "id": 5,
-        "parent": "Clothing",
+        "parent": 4,
         "attribute": "discount on next purchase",
         "value": "10%",
         "required": "False"
     },
     "Women's Clothing": {
         "id": 6,
-        "parent": "Clothing",
+        "parent": 4,
         "attribute": "discount on next purchase",
         "value": "15%",
         "required": "True"
@@ -60,7 +57,7 @@ EXPORT = {
     },
     "category":{
         "fn": "./py_data/category.csv",
-        "header": ["id","category_name","parent_category","attribute_name","attribute_value","required"]
+        "header": ["id","category_name","parent_category_id","attribute_name","attribute_value","required"]
     },
     "product":{
         "fn": "./py_data/product.csv",
@@ -123,7 +120,7 @@ def category():
             value = cate["value"]
             required = cate["required"]
             # write to csv
-            csvw.writerow([cid, parent, attribute, value, required])
+            csvw.writerow([cid, cname, parent, attribute, value, required])
         # print to debug
         # toString = f"""{cid} - {cname}: Child of \"{parent}\" 
         #             {attribute}: {value} - Attribute required: {required}"""
@@ -139,15 +136,15 @@ def product(num_rows,start_from = 1):
             title = FAKER.word(part_of_speech='adjective').capitalize() + " " + FAKER.word(part_of_speech='noun').capitalize() + " MK" + str(random.randint(1,1000))
             seller_id = random.randint(1, 100)
             price = random.randint(1000, 1000000)
-            category = list(CATEGORY)[random.randint(0,5)]
+            category = random.randint(1,6) # category id instead of name
             length = random.randint(10,150)
             width = random.randint(10,90)
             height = random.randint(10,150)
             image = FAKER.file_name(category='image')
-            created_at = FAKER.date_time().strftime(DATEFORMAT)
-            updated_at = FAKER.date_time().strftime(DATEFORMAT)
+            created_at = FAKER.date_time().strftime(DATEFORMAT) + ".000000"
+            updated_at = FAKER.date_time().strftime(DATEFORMAT) + ".000000"
             # write to csv
-            csvw.writerow([pid, title, price, category, length, width, height, image, created_at, updated_at])
+            csvw.writerow([pid, title, seller_id, price, category, length, width, height, image, created_at, updated_at])
             
             # print out to debug
             # toString = f"""{pid} - {title} by seller {seller_id}: 
