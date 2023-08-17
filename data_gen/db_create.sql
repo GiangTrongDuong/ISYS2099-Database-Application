@@ -4,7 +4,7 @@ create table if not exists category
     id                 int          not null
         primary key,
     category_name      varchar(50)  not null,
-    parent_category    varchar(50)  null,
+    parent_category_id int null,
     attribute_name     varchar(50)  not null,
     attribute_value    varchar(200) not null,
     required           varchar(50)  not null
@@ -17,7 +17,7 @@ create table if not exists product
     title      varchar(200) not null,
     seller_id  int          not null,
     price      int          not null,
-    category   varchar(200) not null,
+    category_id   int not null,
     length     int          not null,
     width      int          not null,
     height     int          not null,
