@@ -59,7 +59,7 @@ create table if not exists cart_details
 
 create table if not exists order_details
 (
-    order_id    int auto_increment
+    id    int auto_increment
         primary key,
     customer_id int  not null,
     status      text not null,

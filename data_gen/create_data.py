@@ -73,7 +73,7 @@ EXPORT = {
     },
     "order_details":{
         "fn": "./py_data/order_details.csv",
-        "header": ["order_id","customer_id","status","total_price"]
+        "header": ["id","customer_id","status","total_price"]
     },
     "order_item":{
         "fn": "./py_data/order_item.csv",
