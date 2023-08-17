@@ -4,7 +4,7 @@ create table if not exists category
     id                 int          not null
         primary key,
     category_name      varchar(50)  not null,
-    parent_category_id varchar(50)  null,
+    parent_category    varchar(50)  null,
     attribute_name     varchar(50)  not null,
     attribute_value    varchar(200) not null,
     required           varchar(50)  not null
@@ -34,7 +34,7 @@ create table if not exists user
     user_name     varchar(50)  not null,
     display_name  varchar(50)  not null,
     details       text         not null,
-    password_hash varchar(200) not null,
+    password_hash text		   not null,
     constraint user_user_name_uindex
         unique (user_name)
 );
@@ -51,8 +51,7 @@ create table if not exists warehouse
 
 create table if not exists cart_details
 (
-    customer_id int not null
-        primary key,
+    customer_id int not null,
     product_id  int not null,
     quantity    int not null,
     primary key (product_id, customer_id)

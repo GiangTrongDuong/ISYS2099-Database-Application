@@ -60,7 +60,7 @@ EXPORT = {
     },
     "category":{
         "fn": "./py_data/category.csv",
-        "header": ["id","category_name","parent_category_id","attribute_name","attribute_value","required"]
+        "header": ["id","category_name","parent_category","attribute_name","attribute_value","required"]
     },
     "product":{
         "fn": "./py_data/product.csv",
