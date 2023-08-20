@@ -25,3 +25,24 @@
 .h-sz-96 {
     height: var(--sz-96);
 }
+
+// scroll
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #DC761D #ccc;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: var(--sz-2);
+    height: var(--sz-2);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: #79A49C;
+    border-radius: var(--sz-half);
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background-color: #ccc;
+    border-radius: var(--sz-1);
+}
