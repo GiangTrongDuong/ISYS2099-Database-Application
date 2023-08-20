@@ -11,7 +11,8 @@ export const createElement = (containerName, htmlElement) => {
 */
 export const navigatePage = (id, type) => {
     if (type == "category") {
-        return `category.html?id=${id}`
+        // return `category.html?id=${id}`
+        return `index.html`
     }
     else if (type == "product") {
         return `product.html?id=${id}`
