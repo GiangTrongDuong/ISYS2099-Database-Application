@@ -9,13 +9,18 @@ export const createElement = (containerName, htmlElement) => {
     const urlParams = new URLSearchParams(window.location.search);
   const categoryId = urlParams.get('category');
 */
-export const navigatePage = (id, type) => {
+export const navigatePage = (type, id) => {
     if (type == "category") {
         // return `category.html?id=${id}`
         return `index.html`
     }
     else if (type == "product") {
-        return `product.html?id=${id}`
+        return `./product.html?id=${id}`
     }
     return `index.html`
+}
+
+export const getParameterByPath = (name) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
 }
