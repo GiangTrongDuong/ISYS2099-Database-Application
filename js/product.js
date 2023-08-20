@@ -1,4 +1,5 @@
-import { createElement, getParameterByPath } from './helperFuncs.js'
+// TODO: Add `Add to cart` onclick action later
+import { createElement, formatCurrencyVND, getParameterByPath } from './helperFuncs.js'
 
 const productList = [
     {
@@ -69,24 +70,30 @@ const productList = [
 
 ]
 
+
 const getProductById = (id) => {
     return productList.find(product => product.id == id)
 }
 const renderProductHtml = (product) => {
     return `<article class="row gx-4 gx-lg-5 align-items-center">
         <div class="col-md-6 h-sz-96">
-            <img class="h-100 w-100 obj-center-cover mb-5 mb-md-0"
+            <img class="h-100 w-100 obj-center-cover mb-5 mb-md-0 rounded-1"
                 src="${product.image}" alt="${product.title}" />
         </div>
         <div class="col-md-6">
-            <div class="small mb-1">SKU: ${product.id}</div>
+            <caption class="small mb-1">SKU: ${product.id}</caption>
             <h1 class="display-5 fw-bolder line-clamp-2">${product.title}</h1>
-            <div class="fs-5 mb-5">
-                <span>${product.price}</span>
+            <!-- Product price (Can add discount later) -->
+            <div class="fs-5 mb-3 mb-lg-4">
+                <span>${formatCurrencyVND(product.price)}</span>
             </div>
-            <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem
-                quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius
-                blanditiis delectus ipsam minima ea iste laborum vero?</p>
+            
+            <p class="lead">
+                Product Description: <br>
+                &emsp; - &ensp; Width: ${product.width ?? "Not Available"}<br>
+                &emsp; - &ensp; Length: ${product.length ?? "Not Available"}<br>
+                &emsp; - &ensp; Height: ${product.height ?? "Not Available"}<br>
+            </p>
             <div class="d-flex">
                 <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
                     style="max-width: 3rem" />
