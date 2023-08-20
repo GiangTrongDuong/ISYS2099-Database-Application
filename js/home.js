@@ -92,7 +92,7 @@ const renderContent = () => {
         return `<section class="col">
             <a role="button" class="fs-1 mb-4 mb-md-3 fw-bolder line-clamp-1 text-center text-dark 
             link-underline link-dark link-underline-opacity-0 link-underline-opacity-75-hover"
-            href="${navigatePage("category", category.id)}>
+            href="${navigatePage("category", category.id)}">
                 ${category.category_name}
             </a>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 gy-5 gx-4 gx-lg-10 overflow-x-scroll flex-nowrap scrollbar pb-5">
