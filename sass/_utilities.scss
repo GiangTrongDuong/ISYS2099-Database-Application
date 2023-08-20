@@ -1,0 +1,27 @@
+@for $i from 1 through 5 {
+    .line-clamp-#{$i} {
+        -webkit-line-clamp: #{$i};
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+// Object styling
+.obj-center-cover {
+    object-fit: cover;
+    object-position: center;
+}
+
+// font-size
+// .h5-custom {
+
+// }
+
+// height
+.h-sz-80 {
+    height: var(--sz-80);
+}
+.h-sz-96 {
+    height: var(--sz-96);
+}
