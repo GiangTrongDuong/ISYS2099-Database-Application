@@ -1,5 +1,5 @@
 // TODO: Add `Add to cart` onclick action later
-import { createElement, formatCurrencyVND, getParameterByPath } from './helperFuncs.js'
+import { createElement, formatCurrencyVND, getParameterByPath, navigatePage } from './helperFuncs.js'
 
 const productList = [
     {
@@ -81,7 +81,7 @@ const renderProductHtml = (product) => {
                 src="${product.image}" alt="${product.title}" />
         </div>
         <div class="col-md-6">
-            <caption class="small mb-1">SKU: ${product.id}</caption>
+            <caption class="small mb-1 line-clamp-2">SKU: ${product.id} - Seller Id: ${product.seller_id}</caption>
             <h1 class="display-5 fw-bolder line-clamp-2">${product.title}</h1>
             <!-- Product price (Can add discount later) -->
             <div class="fs-5 mb-3 mb-lg-4">
@@ -89,6 +89,7 @@ const renderProductHtml = (product) => {
             </div>
             
             <p class="lead">
+                Product Category: <a class="line-clamp-1 link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="${navigatePage('category', product.category)}">Category ${product.category}</a> <br>
                 Product Description: <br>
                 &emsp; - &ensp; Width: ${product.width ?? "Not Available"}<br>
                 &emsp; - &ensp; Length: ${product.length ?? "Not Available"}<br>
