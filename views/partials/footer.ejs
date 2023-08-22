@@ -20,7 +20,7 @@
           <div class="col-xs-6 col-md-3">
               <h6>Categories</h6>
               <ul class="footer-links">
-              <li><a href="">something</a></li>
+              <li><a href="'<%= navigatePage('cateogyr', id) %>">something</a></li>
               <li><a href="">something</a></li>
               <li><a href="">something</a></li>
               <li><a href="">something</a></li>
@@ -32,9 +32,9 @@
           <div class="col-xs-6 col-md-3">
               <h6>Others</h6>
               <ul class="footer-links">
-              <li><a href="/about-us">About Us</a></li>
-              <li><a href="/contact-us">Contact Us</a></li>
-              <li><a href="/privacy-policy">Privacy Policy</a></li>
+              <li><a href="<%= navigatePage("about") %>">About Us</a></li>
+              <li><a href="<%= navigatePage("contact") %>">Contact Us</a></li>
+              <li><a href="<%= navigatePage("privacy") %>">Privacy Policy</a></li>
               </ul>
           </div>
 

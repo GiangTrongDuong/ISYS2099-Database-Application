@@ -14,6 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 // to apply css styles
 app.use(express.static('public'));
 
+// reusable function for all ejs
+app.locals.navigatePage = navigatePage;
+
 // Modules
 const user = require('./modules/user');
 const product = require('./modules/product');
@@ -31,7 +34,6 @@ app.use('/', others)
 // full route to Home page: /
 app.get("/", function (req, res) {
     res.render('home/index', {
-        navigatePage: navigatePage,
         // TODO: add real data
         categoryList: dummyCatList,
     })
@@ -43,7 +45,6 @@ app.get("/product", function (req, res) {
     // TODO: get product data from database using id
     //....
     res.render(`product/product`, {
-        navigatePage: navigatePage,
         formatCurrencyVND: formatCurrencyVND,
         // TODO: add real data
         product: dummyProduct,

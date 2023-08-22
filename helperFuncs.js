@@ -3,19 +3,20 @@
     const urlParams = new URLSearchParams(window.location.search);
   const categoryId = urlParams.get('category');
 */
-const navigatePage = (type, id) => {
+const navigatePage = (type, id = -1) => {
+    // home, login, signup, category, product, about, privacy, stores, contact
     type = type.trim();
     // maybe change current location to new location
+    if (type == "home") {
+        return `/`;
+    }
     if (type === "category") {
         return `/category?id=${id}`; // Use a route in your Node.js server to handle this URL
     }
-    else if (type === "product") {
+    if (type === "product") {
         return `/product?id=${id}`; // Adjust the URL to include the product ID
     }
-    else if (type === "cart") {
-        return `/cart`; // Use a route in your Node.js server to handle this URL
-    }
-    return `/`; // Use the root URL for the home page
+    return `/${type}`; // Use the root URL for the home page
 }
 
 const getParameterByPath = (name) => {
