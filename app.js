@@ -13,6 +13,8 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 // to apply css styles
 app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // reusable function for all ejs
 app.locals.navigatePage = navigatePage;
@@ -33,7 +35,9 @@ app.use('/', others)
 
 // full route to Home page: /
 app.get("/", function (req, res) {
-    res.render('home/index', {
+    res.render('layout.ejs', {
+        title: "Home",
+        bodyFile: "home/index.ejs",
         // TODO: add real data
         categoryList: dummyCatList,
     })

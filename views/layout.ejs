@@ -1,0 +1,20 @@
+<html lang="en">
+
+<head>
+    <%- include ('./partials/head') %>
+        <title><%= title %></title>
+</head>
+<header id="header">
+    <%- include ('./partials/header') %>
+</header>
+
+<body>
+    <!-- Pass bodyFile as filename, locals as other arguments -->
+    <%- include(bodyFile, locals) %>
+</body>
+
+<footer class="footer">
+    <%- include ('./partials/footer') %>
+</footer>
+
+</html>
