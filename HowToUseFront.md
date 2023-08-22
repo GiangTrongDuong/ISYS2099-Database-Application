@@ -1,4 +1,0 @@
-- If want to modify:
-  - Nav/ Footer: go to `./js/generalElement.js`
-- If want to use:
-  - Nav/ Footer:  add

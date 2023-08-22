@@ -4,10 +4,12 @@
   "description": "Database application project for course ISYS2099 by group 2, semester 2 2023",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+
   },
   "keywords": [],
-  "author": "",
+  "author": "Group 2",
   "license": "ISC",
   "dependencies": {
     "connect-flash": "^0.1.1",

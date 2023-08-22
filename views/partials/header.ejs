@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand me-auto" href="#">
+        <img class="web-logo" src="/resources/image/Group 2 EEET 2099.png" alt="brand logo (our team decide later)"
+            onclick="index.html" ;>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav ms-auto nav-icons">
+            <% navElements.forEach(item=> { %>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= item.url %>">
+                        <i class="<%= item.iconClass %>"></i>
+                        <%= item.title %>
+                    </a>
+                </li>
+                <% });%>
+        </ul>
+    </div>
+</nav>
