@@ -5,6 +5,18 @@ const { dummyCatList, dummyProduct } = require('./dummyData.js');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const uri = "mongodb+srv://eeet2099group2:eeet2099Pass@databaseapplicationproj.fexqmnq.mongodb.net/?retryWrites=true&w=majority";
+async function connect(){
+  try{
+    await mongoose.connect(uri);
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+connect();
+
 require('dotenv').config();
 
 // view engine setup
@@ -25,6 +37,7 @@ const product = require('./modules/product');
 const cart = require('./modules/cart');
 const order = require('./modules/order');
 const others = require('./modules/others');
+const { default: mongoose } = require('mongoose');
 
 app.use('/', user)
 app.use('/', product)
