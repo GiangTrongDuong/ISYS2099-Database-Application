@@ -1,7 +1,7 @@
 const express = require('express'); 
 const router = express.Router(); 
 
-var root = 'others/'; //root folder to pages
+var root = './others/'; //root folder to pages
 
 router.get('/about-us', function(req, res) { 
   res.render(root + 'about');

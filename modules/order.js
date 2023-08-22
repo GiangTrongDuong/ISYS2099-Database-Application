@@ -1,7 +1,7 @@
 const express = require('express'); 
 const router = express.Router(); 
 
-var root = '/order'; //root folder to pages
+var root = './order/'; //root folder to pages
 
 // full route to order page: /order
 router.get('/', function(req, res) { 
@@ -18,7 +18,7 @@ router.get('/history', function(req, res) {
 // full route to order-detail page: /order/:id
 router.get('/:id', function(req, res) { 
   const order = null; //store info to display 
-  res.render(root + 'order_detail', {order: order});
+  res.render(root + 'order_detail', {order_id: req.params.id});
 }); 
 
 
