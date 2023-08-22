@@ -1,24 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand me-auto" href="#">
-        <img class="web-logo" src="/resources/image/Group 2 EEET 2099.png" alt="brand logo (our team decide later)"
-            onclick="index.html" ;>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav ms-auto nav-icons">
-            <% navElements.forEach(item=> { %>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="<%= item.url %>">
-                        <i class="<%= item.iconClass %>"></i>
-                        <%= item.title %>
-                    </a>
-                </li>
-                <% });%>
-        </ul>
-    </div>
+  <div class="container">
+      <a class="navbar-brand me-auto" href="#">
+          <img class="web-logo" src="../resources/image/Group 2 EEET 2099.png" alt="brand logo (our team decide later)" onclick="index.html";>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          <ul class="navbar-nav ms-auto nav-icons">
+              <li class="nav-item">
+                  <a class="nav-link " href=""> <i class="fa-solid fa-house"></i> Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href=""> <i class="fa-solid fa-house-circle-check"></i> Stores</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-solid fa-bars"></i> Resources
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                      <li><a class="dropdown-item" href="">About Us</a></li>
+                      <li><a class="dropdown-item" href="">Privacy</a></li>
+                  </ul>
+              </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href=""> <i class="fa-solid fa-arrow-right-to-bracket"></i> Log in</a>
+                  </li>
+              <li class="nav-item">
+                  <a class="nav-link" href=""> <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign up</a>
+              </li>
+          </ul>
+      </div>
+  </div>
 </nav>
