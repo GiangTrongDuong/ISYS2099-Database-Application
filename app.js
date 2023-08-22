@@ -48,7 +48,9 @@ app.get("/product", function (req, res) {
     const productId = req.query.id;
     // TODO: get product data from database using id
     //....
-    res.render(`product/product`, {
+    res.render('layout.ejs', {
+        title: "Product",
+        bodyFile: "product/product.ejs",
         formatCurrencyVND: formatCurrencyVND,
         // TODO: add real data
         product: dummyProduct,
