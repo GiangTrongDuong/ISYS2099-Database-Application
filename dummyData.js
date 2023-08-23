@@ -75,5 +75,6 @@ const dummyProduct = {
     created_at: '1994-06-17 11:12:46',
     updated_at: '1993-03-19 03:54:27'
 }
+const dummyParentCatIds = [1, 2]
 
-module.exports = { dummyCatList, dummyProduct };
+module.exports = { dummyCatList, dummyProduct, dummyParentCatIds };
