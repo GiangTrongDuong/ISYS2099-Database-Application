@@ -1,6 +1,6 @@
 const electronicsCat = {
     "id": 1,
-    "category_name": "Electronics",
+    "name": "Electronics",
     "products": [
         {
             id: 1,
@@ -31,7 +31,7 @@ const electronicsCat = {
 }
 const clothingCat = {
     "id": 2,
-    "category_name": "Clothing",
+    "name": "Clothing",
     "products": [
         {
             id: 5,

@@ -1,22 +1,46 @@
 // navigate category: href="category.html?category=1"
+
+const { HOME_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE, ABOUT_ROUTE, MY_ACCOUNT_ROUTE, PRIVACY_ROUTE, CONTACT_ROUTE, CATEGORY_ROUTE, PRODUCT_ROUTE, CART_ROUTE, ORDER_ROUTE, ORDER_HISTORY_ROUTE } = require("./constants");
+
 /* using
     const urlParams = new URLSearchParams(window.location.search);
   const categoryId = urlParams.get('category');
 */
 const navigatePage = (type, id = -1) => {
-    // home, login, signup, category, product, about, privacy, stores, contact
+    // home, login, signup, my-account
+    // category, product, cart, order, order-history, order-detail
+    // about, privacy, stores, contact
     type = type.trim();
-    // maybe change current location to new location
-    if (type == "home") {
-        return `/`;
+    switch (type) {
+        case "home":
+            return `${HOME_ROUTE}`;
+        case "login":
+            return `${LOGIN_ROUTE}`;
+        case "signup":
+            return `${SIGNUP_ROUTE}`;
+        case "my-account":
+            return `${MY_ACCOUNT_ROUTE}`;
+        case "about":
+            return `${ABOUT_ROUTE}`;
+        case "privacy":
+            return `${PRIVACY_ROUTE}`;
+        case "contact":
+            return `${CONTACT_ROUTE}`;
+        case "category":
+            return `${CATEGORY_ROUTE}/${id}`;
+        case "product":
+            return `${PRODUCT_ROUTE}/${id}`;
+        case "cart":
+            return `${CART_ROUTE}`;
+        case "order":
+            return `${ORDER_ROUTE}`;
+        case "order-history":
+            return `${ORDER_HISTORY_ROUTE}`;
+        case "order-detail":
+            return `${ORDER_ROUTE}/${id}`;
+        default:
+            return `${HOME_ROUTE}`;
     }
-    if (type === "category") {
-        return `/category?id=${id}`; // Use a route in your Node.js server to handle this URL
-    }
-    if (type === "product") {
-        return `/product?id=${id}`; // Adjust the URL to include the product ID
-    }
-    return `/${type}`; // Use the root URL for the home page
 }
 
 const getParameterByPath = (name) => {

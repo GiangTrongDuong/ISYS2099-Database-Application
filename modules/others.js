@@ -1,17 +1,18 @@
 const express = require('express'); 
+const { ABOUT_ROUTE, PRIVACY_ROUTE, CONTACT_ROUTE } = require('../constants');
 const router = express.Router(); 
 
-var root = 'others/'; //root folder to pages
+let root = './others/'; //root folder to pages
 
-router.get('/about-us', function(req, res) { 
+router.get(`${ABOUT_ROUTE}`, function(req, res) { 
   res.render(root + 'about');
 }); 
 
-router.get('/privacy-policy', function(req, res) { 
+router.get(`${PRIVACY_ROUTE}`, function(req, res) { 
   res.render(root + 'policy'); 
 }); 
 
-router.get('/contact-us', function(req, res) { 
+router.get(`${CONTACT_ROUTE}`, function(req, res) { 
   res.render(root + 'contact'); 
 }); 
 

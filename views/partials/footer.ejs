@@ -20,11 +20,11 @@
           <div class="col-xs-6 col-md-3">
               <h6>Categories</h6>
               <ul class="footer-links">
-              <li><a href="'<%= navigatePage('category') %>">something</a></li>
-              <li><a href="">something</a></li>
-              <li><a href="">something</a></li>
-              <li><a href="">something</a></li>
-              <li><a href="">something</a></li>
+                <% categoryList.slice(0,5).forEach(category => { %>
+                    <li><a href="'<%= navigatePage('category', category.id) %>">
+                        <%= category.name %>
+                    </a></li>
+                <% }) %>
               </ul>
           </div>
 

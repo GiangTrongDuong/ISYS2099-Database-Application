@@ -1,14 +1,16 @@
 const express = require('express');
 const path = require('path');
-const { navigatePage, formatCurrencyVND } = require('./helperFuncs.js');
-const { dummyCatList, dummyProduct } = require('./dummyData.js');
+const { navigatePage } = require('./helperFuncs.js');
+const { CONNECTED_URI, PORT } = require('./constants.js');
+const { dummyCatList } = require('./dummyData.js');
+require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 3000;
+const { default: mongoose } = require('mongoose');
 
-const uri = "mongodb+srv://eeet2099group2:eeet2099Pass@databaseapplicationproj.fexqmnq.mongodb.net/?retryWrites=true&w=majority";
+
 async function connect(){
   try{
-    await mongoose.connect(uri);
+    await mongoose.connect(CONNECTED_URI);
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error(error);
@@ -16,8 +18,6 @@ async function connect(){
 };
 
 connect();
-
-require('dotenv').config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,7 +37,6 @@ const product = require('./modules/product');
 const cart = require('./modules/cart');
 const order = require('./modules/order');
 const others = require('./modules/others');
-const { default: mongoose } = require('mongoose');
 
 app.use('/', user)
 app.use('/', product)
@@ -56,21 +55,8 @@ app.get("/", function (req, res) {
     })
 });
 
-// full route to Product page: /product
-app.get("/product", function (req, res) {
-    const productId = req.query.id;
-    // TODO: get product data from database using id
-    //....
-    res.render('layout.ejs', {
-        title: "Product",
-        bodyFile: "product/product.ejs",
-        formatCurrencyVND: formatCurrencyVND,
-        // TODO: add real data
-        product: dummyProduct,
-    })
-});
 
-app.listen(port, function () {
+app.listen(PORT, function () {
     console.log("Server started on port 3000");
 });
 
