@@ -1,7 +1,7 @@
 const express = require('express'); 
 const router = express.Router(); 
 
-var root = '/cart'; //root folder to pages
+var root = './cart/'; //root folder to pages
 
 // full route to cart page: /my-cart
 router.get('/', function(req, res) { 

@@ -1,7 +1,7 @@
 const express = require('express'); 
 const router = express.Router(); 
 
-var root = '/user'; //root folder to pages
+var root = './user/'; //root folder to pages
 
 // full route to login page: /login
 router.get('/login', function(req, res) {
