@@ -1,3 +1,21 @@
-<div class="container-xl">
-  Order detail page
-</div>
+<html lang="en">
+<head>
+  <%- include ('../partials/head') %>
+  <title>Order Detail</title>
+</head>
+
+<body>
+  <header id="header">
+    <%- include ('../partials/header') %>
+  </header>
+
+    <div class="container-xl">
+      Details for order <%= order_id %>
+    </div>
+
+    <footer class="footer">
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+</html>
