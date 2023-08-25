@@ -1,0 +1,12 @@
+{
+  "name": "Generate DB for group assignment",
+  "version": "0.1.0",
+  "dependencies": {
+    "mysql2": "^2.3.0",
+    "dotenv": "^16.0.1"
+  },
+  "main": "add_data.js",
+  "scripts": {
+    "start": "node add_data.js"
+  }
+}

@@ -10,11 +10,9 @@ create table if not exists user
     constraint user_user_name_uindex
         unique (user_name)
 );
-
 create table if not exists warehouse
 (
-    id             int auto_increment
-        primary key,
+    id             int auto_increment primary key,
     name           varchar(200) not null,
     address        varchar(200) not null,
     total_area     int          not null,
@@ -23,8 +21,7 @@ create table if not exists warehouse
 
 create table if not exists product
 (
-    id         int auto_increment
-        primary key,
+    id         int auto_increment primary key,
     title      varchar(200) not null,
     seller_id  int          not null,
     price      int          not null,
@@ -54,8 +51,7 @@ create table if not exists cart_details
 
 create table if not exists order_details
 (
-    id          int auto_increment
-        primary key,
+    id          int auto_increment  primary key,
     customer_id int  not null,
     status      text not null,
     total_price int  not null,
