@@ -14,16 +14,16 @@ This ```.env``` file is in ```.gitignore```.
 This will execute both sql files.
 
 Get dependencies ```node install```
-Run via ```node .```
-or ```node add_data.js```
+
+Run via ```node .``` or ```node add_data.js```
 
 ## Run SQL files
-Copy the contents of the files to your MySQL console and run these chunks
+Copy the contents of the files to your MySQL console and run these chunks.
+
 Run db_create first, then db_inserts
 
 # Other files
-- create_data.py generates CSV files to be used as data
+- ```create_data.py``` generates CSV files to be used as data
     - ITF: skip CSV altogether and create SQL inserts right away?
-- These CSV files are stored in py_data/
-    - 
+- These CSV files are stored in ```py_data/```
 
