@@ -1,6 +1,6 @@
 const express = require('express'); 
 const router = express.Router(); 
-const { dummyProduct, dummyCatList } = require('../dummyData.js');
+const { dummyProduct, dummyCatList, dummyParentCatIds } = require('../dummyData.js');
 const { formatCurrencyVND } = require('../helperFuncs.js');
 const { PRODUCT_ROUTE } = require('../constants.js');
 
@@ -20,6 +20,8 @@ router.get(`${PRODUCT_ROUTE}/:id`, function(req, res) {
       categoryList: dummyCatList,
       // TODO: add real data
       product: dummyProduct,
+      // TODO: add real data - parent categories of current product's category
+      parentCategoryIds: dummyParentCatIds
   })
 }); 
 
