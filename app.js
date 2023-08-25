@@ -37,12 +37,14 @@ const product = require('./modules/product');
 const cart = require('./modules/cart');
 const order = require('./modules/order');
 const others = require('./modules/others');
+const category = require('./modules/category');
 
 app.use('/', user)
 app.use('/', product)
 app.use('/my-cart', cart)
 app.use('/order', order)
 app.use('/', others)
+app.use('/category', category)
 
 
 // full route to Home page: /
