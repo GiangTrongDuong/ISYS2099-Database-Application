@@ -1,0 +1,7 @@
+id,category_name,parent_category_id,attribute_name,attribute_value,required
+1,Electronics,,warranty,6 months,True
+2,Phone and Accessories,1,return,1 week,True
+3,Laptop and Computer,1,return,1 month,True
+4,Clothing,,return,1 week,True
+5,Men's Clothing,4,discount on next purchase,10%,False
+6,Women's Clothing,4,discount on next purchase,15%,True
