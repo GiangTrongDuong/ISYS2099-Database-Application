@@ -13,9 +13,8 @@ This ```.env``` file is in ```.gitignore```.
 ## Run add_data.js
 This will execute both sql files.
 
-```node install
-node . 
-```
+Get dependencies ```node install```
+Run via ```node .```
 or ```node add_data.js```
 
 ## Run SQL files
