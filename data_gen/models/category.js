@@ -1,26 +1,27 @@
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.NVA_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 //schema for category
 const categorySchema = new mongoose.Schema({
     name:{
         type: String,
         required: [true, "Name is required"]
     },
-
+    // it's optional to enter attribute details
+    // if name and value are null then required is set to false
     attribute_name:{
-        type:String,
+        type:String
     },
     attribute_value:{
-        type: Schema.Types.Mixed,
+        type: mongoose.Schema.Types.Mixed,
         required: true
     },
-    attribute_require:{
+    attribute_required:{
         type:Boolean,
         required: true
     },
-
+    // store ObjectId of parent
     parent_category:{
-        type: mongoose.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'Category',
     },
 });

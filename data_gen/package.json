@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "dependencies": {
     "mysql2": "^2.3.0",
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "mongoose": "^5.11.15",
+    "express": "^4.17.1"
   },
-  "main": "add_data.js",
+  "main": "add_sql_data.js",
   "scripts": {
     "start": "node add_data.js"
   }

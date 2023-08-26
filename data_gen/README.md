@@ -15,7 +15,7 @@ This will execute both sql files.
 
 Get dependencies ```node install```
 
-Run via ```node .``` or ```node add_data.js```
+Run via ```node .``` or ```node add_sql_data.js```
 
 ## Run SQL files
 Copy the contents of the files to your MySQL console and run these chunks.
