@@ -1,0 +1,248 @@
+[
+  {
+    "name": "electronics",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": null
+  },
+  {
+    "name": "phone and accessories",
+    "AttName": "shipping",
+    "AttValue": "free shipping",
+    "AttRequired": false,
+    "Parrent": "electronics"
+  },
+  {
+    "name": "computer and accessories",
+    "AttName": "shipping",
+    "AttValue": "premium shipping",
+    "AttRequired": true,
+    "Parrent": "electronics"
+  },
+  {
+    "name": "phone",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "phone and accessories"
+  },
+  {
+    "name": "phone accessories",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "phone and accessories"
+  },
+  {
+    "name": "computer",
+    "AttName": "warranty",
+    "AttValue": "2 year+",
+    "AttRequired": false,
+    "Parrent": "computer and accessories"
+  },
+  {
+    "name": "home appliances",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": null
+  },
+  {
+    "name": "kitchen appliances",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "home appliances"
+  },
+  {
+    "name": "other appliances",
+    "AttName": "installation",
+    "AttValue": "free installation",
+    "AttRequired": true,
+    "Parrent": "home appliances"
+  },
+  {
+    "name": "refridgerator",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "kitchen appliances"
+  },
+  {
+    "name": "cooker and oven",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "kitchen appliances"
+  },
+  {
+    "name": "TV",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "other appliances"
+  },
+  {
+    "name": "lamps",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "other appliances"
+  },
+  {
+    "name": "furniture",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": null
+  },
+  {
+    "name": "seating and bedding",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "furniture"
+  },
+  {
+    "name": "decor",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "furniture"
+  },
+  {
+    "name": "chairs and sofa",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "seating and bedding"
+  },
+  {
+    "name": "bed",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "seating and bedding"
+  },
+  {
+    "name": "wall decor",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "decor"
+  },
+  {
+    "name": "floor decor",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "decor"
+  },
+  {
+    "name": "fashion",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": null
+  },
+  {
+    "name": "male fashion",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "fashion"
+  },
+  {
+    "name": "female fashion",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "fashion"
+  },
+  {
+    "name": "male clothing",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "male fashion"
+  },
+  {
+    "name": "male accessories",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "male fashion"
+  },
+  {
+    "name": "boy clothing",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "male fashion"
+  },
+  {
+    "name": "female clothing",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "female fashion"
+  },
+  {
+    "name": "female accessories",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "female fashion"
+  },
+  {
+    "name": "girl clothing",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "female fashion"
+  },
+  {
+    "name": "sports",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": null
+  },
+  {
+    "name": "sportswear",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "sport"
+  },
+  {
+    "name": "male sportwear",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "sport clothing"
+  },
+  {
+    "name": "female sportwear",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "sport clothing"
+  },
+  {
+    "name": "racket sports",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "sport equipment"
+  },
+  {
+    "name": "ball sports",
+    "AttName": null,
+    "AttValue": null,
+    "AttRequired": false,
+    "Parrent": "sport equipment"
+  }
+  
+]
