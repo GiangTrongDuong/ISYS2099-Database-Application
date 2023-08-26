@@ -1,3 +1,6 @@
+# Please document your changes into change.log 
+No one is reading yer commit messages
+
 # Set up
 Create a ```.env``` file, copy the following, and insert your own info:
 ```
@@ -7,6 +10,7 @@ PASSWORD=''
 DATABASE=''
 ```
 You may have to create a new database/schema.
+
 This ```.env``` file is in ```.gitignore```.
 
 # Run
@@ -26,4 +30,3 @@ Run db_create first, then db_inserts
 - ```create_data.py``` generates CSV files to be used as data
     - ITF: skip CSV altogether and create SQL inserts right away?
 - These CSV files are stored in ```py_data/```
-

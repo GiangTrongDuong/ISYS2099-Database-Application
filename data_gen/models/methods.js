@@ -32,7 +32,7 @@ const saveCat = async(newName, newAN, newAV, newAR, newPAName) => {
     }
 }
 
-const createCat = async(arrayOfCats) => {
+const createCats = async(arrayOfCats) => {
 
 }
 

@@ -2,10 +2,11 @@
   "name": "Generate DB for group assignment",
   "version": "0.1.0",
   "dependencies": {
-    "mysql2": "^2.3.0",
     "dotenv": "^16.0.1",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
     "mongoose": "^5.11.15",
-    "express": "^4.17.1"
+    "mysql2": "^2.3.0"
   },
   "main": "add_sql_data.js",
   "scripts": {

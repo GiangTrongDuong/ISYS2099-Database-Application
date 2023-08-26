@@ -214,21 +214,21 @@
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parent": "sport"
+    "Parent": "Sports"
   },
   {
     "name": "Male Sportswear",
     "AttName": "Shipping",
     "AttValue": "Same Day Delivery",
     "AttRequired": false,
-    "Parent": "Sports Clothing"
+    "Parent": "Sportswear"
   },
   {
     "name": "Female Sportswear",
     "AttName": "Discount on Next Purchase",
     "AttValue": "0.15",
     "AttRequired": false,
-    "Parent": "Sports Clothing"
+    "Parent": "Sportswear"
   },
   {
     "name": "Sports Equipment",

@@ -1,73 +1,14 @@
 require('dotenv').config();
+const fs = require('fs');
 const mg = require('./models/methods');
+const mongoose = require('mongoose');
 // const express = require('express');
+const json_fn = './categoryData.json';
 
-const c1 = [
-    {
-        "name": "electronics",
-        "AttName": "return",
-        "AttValue": "none",
-        "AttRequired": false,
-        "Parent": null
-    },
-    {
-        "name": "home appliances",
-        "AttName": "return",
-        "AttValue": "1 month",
-        "AttRequired": false,
-        "Parent": null
-      },
-]
-const c2 = [
-    {
-        "name": "phone and accessories",
-        "AttName": "shipping",
-        "AttValue": "free shipping",
-        "AttRequired": false,
-        "Parent": "electronics"
-    },
-    {
-        "name": "computer and accessories",
-        "AttName": "shipping",
-        "AttValue": "premium shipping",
-        "AttRequired": true,
-        "Parent": "electronics"
-    },
-    {
-        "name": "kitchen appliances",
-        "AttName": "warranty",
-        "AttValue": "1 year",
-        "AttRequired": false,
-        "Parent": "home appliances"
-    }
-]
-const c3 = [
-    {
-        "name": "phone",
-        "AttName": "warranty",
-        "AttValue": "1 year",
-        "AttRequired": false,
-        "Parent": "phone and accessories"
-    },
-    {
-        "name": "phone accessories",
-        "AttName": "shipping",
-        "AttValue": "free shipping",
-        "AttRequired": false,
-        "Parent": "phone and accessories"
-    },
-    {
-        "name": "computer",
-        "AttName": "warranty",
-        "AttValue": "2 year+",
-        "AttRequired": false,
-        "Parent": "computer and accessories"
-    }
-]
+//TODO: Specify collection name to ensure consistency?
 const forLoop = async (clist) => {
     for (const c of clist){
         try{
-            console.log('----');
             const checkId = await mg.findIdFromName(c.name);
             if(!checkId){
                 console.log("\t Saving category: " + c.name);
@@ -85,7 +26,16 @@ const forLoop = async (clist) => {
     }
     return;
 }
-// forLoop(c1);
-forLoop(c2);
-// forLoop(c3);
+
+fs.readFile(json_fn, 'utf-8', async (readErr, data) => {
+    if (readErr) {
+        console.log("Error reading file: " + readErr);
+        return;
+    }
+    const json_data = JSON.parse(data);
+    await forLoop(json_data);
+})
+// mongoose.disconnect();
+
+
 

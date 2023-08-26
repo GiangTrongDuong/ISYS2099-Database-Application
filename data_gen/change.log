@@ -1,0 +1,5 @@
+Sat 26/8/2023: Viet Anh
+- Set up methods to interact with MongoDB (models/methods.js)
+- Since attributes are not required to be entered, AttValue is not required
+- SQL files, CSV data files, Python script moved to /sql_data/
+- TODO: Set collection.document name (in .env?) to ensure consistency
