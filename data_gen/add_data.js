@@ -41,39 +41,8 @@ connection.connect(err => {
     connection.beginTransaction((err) => {
         // Execute: create tables
         executeSqlFile('./db_create.sql');
-        // var rl1 = readline.createInterface({
-        //     input: fs.createReadStream('./db_create.sql'),
-        //     terminal: false
-        //    });
-        //   rl1.on('line', function(chunk){
-        //     connection.query(chunk.toString('ascii'), function(err, sets, fields){
-        //         if(err){
-        //             fs.appendFile('error.log', `===== Create: ${err}\n`, (fileErr) => {
-        //                 if (fileErr) {
-        //                     console.error('Error writing to error.log:', fileErr);
-        //                 }
-        //             });
-        //         }
-        //     });
-        //   });
-
         // Execute: insert data
         executeSqlFile('./db_inserts.sql');
-        // var rl2 = readline.createInterface({
-        //     input: fs.createReadStream('./db_inserts.sql'),
-        //     terminal: false
-        //    });
-        //   rl2.on('line', function(chunk){
-        //     connection.query(chunk.toString('ascii'), function(err, sets, fields){
-        //         if(err){
-        //             fs.appendFile('error.log', `===== Insert: ${err}\n`, (fileErr) => {
-        //                 if (fileErr) {
-        //                     console.error('Error writing to error.log:', fileErr);
-        //                 }
-        //             });
-        //         }
-        //     });
-        //   });
 
     // Commit the transaction if everything is successful
         connection.commit((err => {
