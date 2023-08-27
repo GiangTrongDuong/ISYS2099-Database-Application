@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const database = require('./database');
 
-router.get("/", function(request, response, next){
+router.get("/", function(req, res, next){
 
 	var query = "SELECT * FROM product ORDER BY id";
 
@@ -14,7 +14,7 @@ router.get("/", function(request, response, next){
 		}
 		else
 		{
-			response.render('data', {title:'Node.js MySQL CRUD Application', action:'list', sampleData:data});
+			response.render('index', {title:'Test gen', sampleData:data});
 		}
 
 	});
