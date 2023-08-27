@@ -1,12 +1,9 @@
 <html lang="en">
 <body>
     <div>
-        <h1><%title%></h1>
+        <h1><%= title %></h1>
     </div>
     <div class="container-xl">
-        <% if(action == 'add') { %>
-
-            <% } else { %>
                 
             <div class="card">
                 <div class="card-header">
@@ -25,19 +22,21 @@
                                 <th>image</th>
                             </tr>
                             <%
-                            if(sampleData.length > 0)
-                            {
-                                sampleData.forEach(function(data){
+                            if(sampleData){
+                                if(sampleData.length > 0)
+                                {
+                                    sampleData.forEach(function(data){
                             %>
-                            <tr>
-                                <td><%= data.id %></td>
-                                <td><%= data.title %></td>
-                                <td><%= data.price %></td>
-                                <td><%= data.image %></td>
-                                <td></td>
-                            </tr>
+                                        <tr>
+                                            <td><%= data.id %></td>
+                                            <td><%= data.title %></td>
+                                            <td><%= data.price %></td>
+                                            <td><%= data.image %></td>
+                                            <td></td>
+                                        </tr>
                             <%
-                                });
+                                    });
+                                }
                             }
                             else
                             {
@@ -52,8 +51,6 @@
                     </div>
                 </div>
             </div>
-
-            <% } %>
     </div>
 </body>
 </html>
