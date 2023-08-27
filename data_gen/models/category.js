@@ -6,21 +6,22 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: [true, "Name is required"]
     },
-
+    // it's optional to enter attribute details
+    // if name and value are null then required is set to false
     attribute_name:{
-        type:String,
+        type:String
     },
     attribute_value:{
-        type: Schema.Types.Mixed,
-        required: true
+        type: mongoose.Schema.Types.Mixed,
+        // required: true
     },
-    attribute_require:{
+    attribute_required:{
         type:Boolean,
         required: true
     },
-
+    // store ObjectId of parent
     parent_category:{
-        type: mongoose.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'Category',
     },
 });

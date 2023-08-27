@@ -1,3 +1,3 @@
 ./.env
-./pydata/
-./node_modules
+./sql_data/py_data/
+./node_modules/

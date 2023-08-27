@@ -1,248 +1,255 @@
 [
   {
-    "name": "electronics",
+    "name": "Electronics",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": null
+    "Parent": null
   },
   {
-    "name": "phone and accessories",
-    "AttName": "shipping",
-    "AttValue": "free shipping",
+    "name": "Phone and Accessories",
+    "AttName": "Shipping",
+    "AttValue": "Free Shipping",
     "AttRequired": false,
-    "Parrent": "electronics"
+    "Parent": "Electronics"
   },
   {
-    "name": "computer and accessories",
-    "AttName": "shipping",
-    "AttValue": "premium shipping",
+    "name": "Computer and Accessories",
+    "AttName": "Shipping",
+    "AttValue": "Premium Shipping",
     "AttRequired": true,
-    "Parrent": "electronics"
+    "Parent": "Electronics"
   },
   {
-    "name": "phone",
-    "AttName": null,
-    "AttValue": null,
-    "AttRequired": false,
-    "Parrent": "phone and accessories"
-  },
-  {
-    "name": "phone accessories",
-    "AttName": null,
-    "AttValue": null,
-    "AttRequired": false,
-    "Parrent": "phone and accessories"
-  },
-  {
-    "name": "computer",
-    "AttName": "warranty",
+    "name": "Phone",
+    "AttName": "Warranty",
     "AttValue": "2 year+",
     "AttRequired": false,
-    "Parrent": "computer and accessories"
+    "Parent": "Phone and Accessories"
   },
   {
-    "name": "home appliances",
+    "name": "Phone Accessories",
+    "AttName": "return",
+    "AttValue": "no return",
+    "AttRequired": false,
+    "Parent": "Phone and Accessories"
+  },
+  {
+    "name": "Computer",
+    "AttName": "Warranty",
+    "AttValue": "2 year+",
+    "AttRequired": false,
+    "Parent": "Computer and Accessories"
+  },
+  {
+    "name": "Home Appliances",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": null
+    "Parent": null
   },
   {
-    "name": "kitchen appliances",
+    "name": "Kitchen Appliances",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": "home appliances"
+    "Parent": "Home Appliances"
   },
   {
-    "name": "other appliances",
+    "name": "Other Appliances",
     "AttName": "installation",
     "AttValue": "free installation",
     "AttRequired": true,
-    "Parrent": "home appliances"
+    "Parent": "Home Appliances"
   },
   {
-    "name": "refridgerator",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Refridgerator",
+    "AttName": "Energy Consumption",
+    "AttValue": "High",
     "AttRequired": false,
-    "Parrent": "kitchen appliances"
+    "Parent": "Kitchen Appliances"
   },
   {
-    "name": "cooker and oven",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Cooker and Oven",
+    "AttName": "installation",
+    "AttValue": "installed with fee",
     "AttRequired": false,
-    "Parrent": "kitchen appliances"
+    "Parent": "Kitchen Appliances"
   },
   {
     "name": "TV",
-    "AttName": null,
-    "AttValue": null,
+    "AttName": "Warranty",
+    "AttValue": "1 year",
     "AttRequired": false,
-    "Parrent": "other appliances"
+    "Parent": "Other Appliances"
   },
   {
-    "name": "lamps",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Lamps",
+    "AttName": "Energy Consumption",
+    "AttValue": "Low",
     "AttRequired": false,
-    "Parrent": "other appliances"
+    "Parent": "Other Appliances"
   },
   {
-    "name": "furniture",
+    "name": "Furniture",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": null
+    "Parent": null
   },
   {
-    "name": "seating and bedding",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Seating and Bedding",
+    "AttName": "Shipping",
+    "AttValue": "Free Shipping",
     "AttRequired": false,
-    "Parrent": "furniture"
+    "Parent": "Furniture"
   },
   {
-    "name": "decor",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Decor",
+    "AttName": "return",
+    "AttValue": "3 weeks",
     "AttRequired": false,
-    "Parrent": "furniture"
+    "Parent": "Furniture"
   },
   {
-    "name": "chairs and sofa",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Chairs and Sofas",
+    "AttName": "return",
+    "AttValue": "1 month",
     "AttRequired": false,
-    "Parrent": "seating and bedding"
+    "Parent": "Seating and Bedding"
   },
   {
-    "name": "bed",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Bed",
+    "AttName": "return",
+    "AttValue": "no return",
     "AttRequired": false,
-    "Parrent": "seating and bedding"
+    "Parent": "Seating and Bedding"
   },
   {
-    "name": "wall decor",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Wall Decor",
+    "AttName": "Shipping",
+    "AttValue": "Same Day Delivery",
     "AttRequired": false,
-    "Parrent": "decor"
+    "Parent": "Decor"
   },
   {
-    "name": "floor decor",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Floor Decor",
+    "AttName": "Shipping",
+    "AttValue": "Free Shipping",
     "AttRequired": false,
-    "Parrent": "decor"
+    "Parent": "Decor"
   },
   {
-    "name": "fashion",
+    "name": "Fashion",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": null
+    "Parent": null
   },
   {
-    "name": "male fashion",
+    "name": "Male Fashion",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": "fashion"
+    "Parent": "Fashion"
   },
   {
-    "name": "female fashion",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Female Fashion",
+    "AttName": "return",
+    "AttValue": "3 days",
     "AttRequired": false,
-    "Parrent": "fashion"
+    "Parent": "Fashion"
   },
   {
-    "name": "male clothing",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Male Clothing",
+    "AttName": "Shipping",
+    "AttValue": "Premium Shipping",
     "AttRequired": false,
-    "Parrent": "male fashion"
+    "Parent": "Male Fashion"
   },
   {
-    "name": "male accessories",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Male Accessories",
+    "AttName": "Return",
+    "AttValue": "3 days",
     "AttRequired": false,
-    "Parrent": "male fashion"
+    "Parent": "Male Fashion"
   },
   {
-    "name": "boy clothing",
+    "name": "Boy Clothing",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": "male fashion"
+    "Parent": "Male Fashion"
   },
   {
-    "name": "female clothing",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Female Clothing",
+    "AttName": "Shipping",
+    "AttValue": "Same Day Delivery",
     "AttRequired": false,
-    "Parrent": "female fashion"
+    "Parent": "Female Fashion"
   },
   {
-    "name": "female accessories",
+    "name": "Female Accessories",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": "female fashion"
+    "Parent": "Female Fashion"
   },
   {
-    "name": "girl clothing",
+    "name": "Girl Clothing",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": "female fashion"
+    "Parent": "Female Fashion"
   },
   {
-    "name": "sports",
-    "AttName": null,
-    "AttValue": null,
-    "AttRequired": false,
-    "Parrent": null
+    "name": "Sports",
+    "AttName": "return",
+    "AttValue": "no return",
+    "AttRequired": true,
+    "Parent": null
   },
   {
-    "name": "sportswear",
+    "name": "Sportswear",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": "sport"
+    "Parent": "Sports"
   },
   {
-    "name": "male sportwear",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Male Sportswear",
+    "AttName": "Shipping",
+    "AttValue": "Same Day Delivery",
     "AttRequired": false,
-    "Parrent": "sport clothing"
+    "Parent": "Sportswear"
   },
   {
-    "name": "female sportwear",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Female Sportswear",
+    "AttName": "Discount on Next Purchase",
+    "AttValue": "0.15",
     "AttRequired": false,
-    "Parrent": "sport clothing"
+    "Parent": "Sportswear"
   },
   {
-    "name": "racket sports",
+    "name": "Sports Equipment",
     "AttName": null,
     "AttValue": null,
     "AttRequired": false,
-    "Parrent": "sport equipment"
+    "Parent": "Sports"
   },
   {
-    "name": "ball sports",
-    "AttName": null,
-    "AttValue": null,
+    "name": "Racket Sports",
+    "AttName": "Discount on Next Purchase",
+    "AttValue": "0.08",
     "AttRequired": false,
-    "Parrent": "sport equipment"
+    "Parent": "Sports Equipment"
+  },
+  {
+    "name": "Ball Sports",
+    "AttName": "Warranty",
+    "AttValue": "1 month",
+    "AttRequired": false,
+    "Parent": "Sports Equipment"
   }
   
 ]
