@@ -14,9 +14,7 @@ router.get("/", function(req, res){
 			res.render('home/index', { error: false, title: "Test gen", sampleData:data});
 			// res.json({"data": data});
 		}
-
 	});
-
 });
 
 

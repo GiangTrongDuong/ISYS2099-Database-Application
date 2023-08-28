@@ -25,6 +25,7 @@ create table if not exists product
     title      varchar(200) not null,
     seller_id  int          not null,
     price      int          not null,
+    description text NULL,
     category   varchar(200) not null,
     length     int          not null,
     width      int          not null,

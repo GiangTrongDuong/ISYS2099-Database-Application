@@ -26,7 +26,7 @@ EXPORT = {
     },
     "product":{
         "fn": "./py_data/product.csv",
-        "header": ["id","title","seller_id","price","category","length","width","height","image","created_at","updated_at"]
+        "header": ["id","title","seller_id","price","description","category","length","width","height","image","created_at","updated_at"]
     },
     "warehouse":{
         "fn": "./py_data/warehouse.csv",
@@ -47,6 +47,8 @@ EXPORT = {
 }
 
 def user(num_rows, start_from = 1):
+    # doesn't specify that 1 admin - 1 wh; the below is not tested
+    current_wh = 0
     with open(EXPORT["user"]["fn"], 'w', newline='') as csvfile:
         csvw = csv.writer(csvfile)
         csvw.writerow(EXPORT["user"]["header"])
@@ -64,32 +66,12 @@ def user(num_rows, start_from = 1):
                 details = FAKER.address().replace("\n", ", ") # customer address
             elif role == 'Warehouse Admin':
                 display_name = FAKER.unique.name() # warehouse admin's name
-                details = random.randint(1,50) # warehouse id
+                details = current_wh + 1
             password_hash = FAKER.md5()
             # write to csv
             csvw.writerow([uid, role, user_name, display_name, details, password_hash])
             # print to debug
             # print(f"{uid} - {user_name} - {display_name}: {role} \n\t Details: {details} - Password hash: {password_hash}")
-    return
-
-# Unused since we have a functional mongoDB now
-def category():
-    with open(EXPORT["category"]["fn"], 'w', newline='') as csvfile:
-        csvw = csv.writer(csvfile)
-        csvw.writerow(EXPORT["category"]["header"])
-        for cname in CATEGORY:
-            cate = CATEGORY[cname]
-            cid = cate["id"]
-            parent = cate["parent"]
-            attribute = cate["attribute"]
-            value = cate["value"]
-            required = cate["required"]
-            # write to csv
-            csvw.writerow([cid, cname, parent, attribute, value, required])
-        # print to debug
-        # toString = f"""{cid} - {cname}: Child of \"{parent}\" 
-        #             {attribute}: {value} - Attribute required: {required}"""
-        # print(toString)
     return
 
 # help get descriptive name for product title
@@ -104,6 +86,14 @@ def product_first_part(seed):
     elif seed == 3:
         return ["Made", "Born"][random.randint(0,1)] + " in " + FAKER.country() + ":"
     return ""
+
+def price_range(price):
+    if price < 33000:
+        return "a cheap"
+    elif price < 66000:
+        return "an affordably priced"
+    else:
+        return "a luxury"
 
 def product(num_rows,start_from = 1):
     sellers = [5,8,11,15,16,23,26,28,33,34,35,38,41,50,51,52,
@@ -129,8 +119,15 @@ def product(num_rows,start_from = 1):
             date2 = FAKER.date_time()
             created_at = (min(date1, date2)).strftime(DATEFORMAT) + ".000000"
             updated_at = (max(date1, date2)).strftime(DATEFORMAT) + ".000000"
+            rt = FAKER.text(max_nb_chars=150).replace("\n", ' ').replace("\t", ' ')
+            description = (f"{title} is a {price_range(price)} {category.lower()} that cannot be found in your local stores! "
+                           f"{rt}")
+                        # Backend: 
+                        # After the first '!', newline.
+                        # Show specs: length, width, height
+                        # "Added by <seller link> on <created_at>"
             # write to csv
-            csvw.writerow([pid, title, seller_id, price, category, length, width, height, image, created_at, updated_at])
+            csvw.writerow([pid, title, seller_id, price, description, category, length, width, height, image, created_at, updated_at])
             
             # print out to debug
             # toString = f"""{pid} - {title} by seller {seller_id}: 
@@ -227,10 +224,10 @@ def order_item(num_users, start_from = 1):
 
 def main():
     # user(100)
-    # product(200)
+    product(200)
     # category()
     # warehouse(20)
-    cart_details()
+    # cart_details()
     # order_details(100)
     # order_item(100)
     return 0
