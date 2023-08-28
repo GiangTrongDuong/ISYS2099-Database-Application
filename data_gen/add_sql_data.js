@@ -49,7 +49,9 @@ connection.connect(err => {
             if (err) {
                 connection.rollback();
             }
-            console.log('Finished writing people table');
+            console.log('Finished writing.');
+            // You'll no longer have to manually ctrl + c
+            connection.end()
         }));
     });
 });

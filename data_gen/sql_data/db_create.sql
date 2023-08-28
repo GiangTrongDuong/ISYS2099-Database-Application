@@ -56,6 +56,7 @@ create table if not exists order_details
     customer_id int  not null,
     status      text not null,
     total_price int  not null,
+    created_at datetime not null,
     constraint order_details_user_id_fk
         foreign key (customer_id) references user (id)
 );

@@ -6,3 +6,6 @@ Sat 26/8: Viet Anh
 
 Sun 27/8: Duong, Viet Anh
 - test_read_sql: database (connection), read_data.js (route for reading), app.js ("main")
+
+Mon 28/8: Viet Anh
+- Add product.description, change sql_data/db_create, sql_data/db_inserts to reflect

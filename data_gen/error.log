@@ -1,1 +1,5 @@
 ===== Query: Error: Duplicate entry '1' for key 'user.PRIMARY'
+===== Query: Error: Unknown column 'order_id' in 'field list'
+===== Query: Error: Unknown column 'order_id' in 'field list'
+===== Query: Error: Unknown column 'order_id' in 'field list'
+===== Query: Error: Unknown column 'order_id' in 'field list'

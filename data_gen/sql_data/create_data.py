@@ -38,7 +38,7 @@ EXPORT = {
     },
     "order_details":{
         "fn": "./py_data/order_details.csv",
-        "header": ["order_id","customer_id","status","total_price"]
+        "header": ["id","customer_id","status","total_price", "created_at"]
     },
     "order_item":{
         "fn": "./py_data/order_item.csv",
@@ -191,8 +191,9 @@ def order_details(num_rows, start_from = 1):
             customer_id = USER[random.randint(0,len(USER) - 1)]
             status = ['Accepted', 'Inbound', 'Rejected'][random.randint(0,2)]
             total_price = random.randint(10000,1000000)
+            created_at = FAKER.date_time().strftime(DATEFORMAT) + ".000000"
             # write to csv
-            csvw.writerow([order_id, customer_id, status,total_price])
+            csvw.writerow([order_id, customer_id, status,total_price,created_at])
             
             # print to debug
             # toString = f"Order {order_id} by customer {customer_id} of cost {total_price} is {status}"
@@ -224,11 +225,11 @@ def order_item(num_users, start_from = 1):
 
 def main():
     # user(100)
-    product(200)
+    # product(200)
     # category()
     # warehouse(20)
     # cart_details()
-    # order_details(100)
+    order_details(100)
     # order_item(100)
     return 0
 
