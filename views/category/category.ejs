@@ -1,27 +1,52 @@
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Database Group 2 Shop</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Database Group 2 Shop Homepage</p>
+            <span class="display-6 fw-medium">
+                ID: <%= category.id %>
+            </span>
+            <h1 class="display-4 fw-bolder">
+                <%= category["category_name"] %>
+            </h1>
+            <p class="lead fw-normal text-white-50 mb-0">
+                Welcome to <%= category["category_name"] %> products page
+            </p>
         </div>
     </div>
 </header>
 <!-- Js -->
-<section id="home-content-product" class="container mt-5 py-5 w-100">
-    <div class="row py-5">
-        <% categoryList.forEach(category=> { %>
-            <section class="col">
-                <a role="button" class="fs-1 mb-4 mb-md-3 fw-bolder line-clamp-1 text-center text-dark 
-                link-underline link-dark link-underline-opacity-0 link-underline-opacity-75-hover"
-                    href="<%= navigatePage(" category", category.id) %>">
-                    <%= category.name %>
-                </a>
-                <div
-                    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 gy-5 gx-4 gx-lg-10 overflow-x-scroll flex-nowrap scrollbar pb-5">
-                    <% category.products.forEach(product=> { %>
-                        <%- include('./product-card', {navigatePage, product}) %>
-                            <% }) %>
-                </div>
-                <% }) %>
-    </div>
+<section id="category" class="container mt-5 w-100">
+    <!-- Children Categories List -->
+    <% if (category.childCategories?.length !=0) { %>
+        <section class="row my-5 py-5">
+            <h1 role="button" class="fs-1 pb-3
+            fw-bolder line-clamp-1 text-center text-dark 
+            link-underline link-dark link-underline-opacity-0 link-underline-opacity-75-hover">
+                Child Categories
+            </h1>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3
+                gx-4 gx-lg-10 flex-grow-1 px-1
+                overflow-x-scroll flex-nowrap scrollbar pb-5 px-0">
+                <% category.childCategories.forEach(childCat=> { %>
+                    <a role="button" class="card-custom-container col d-inline-block "
+                    href="<%= navigatePage('category', childCat.id) %>">
+                        <div class="card card-custom text-light border-0 w-100 h-100 overflow-hidden">
+                            <img src="<%= `https://source.unsplash.com/random/${childCat['category_name']}` %>"
+                                class="card-custom-img w-100 h-100" alt="<%= childCat['category_name'] %>">
+                            <div class="card-img-overlay bg-dark 
+                            d-flex justify-content-center align-items-center flex-column " style="--bs-bg-opacity: .5">
+                                <h4 class="card-title line-clamp-2 text-center">
+                                    <%= childCat["category_name"] %>
+                                </h4>
+                                <h5>Id: <%= childCat.id %>
+                                </h5>
+                            </div>
+                        </div>
+                    </a>
+                    <% }) %>
+            </div>
+        </section>
+        <% } %>
+            <!-- Product List Of Category -->
+
+
 </section>

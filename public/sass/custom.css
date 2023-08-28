@@ -154,6 +154,17 @@
   border-radius: var(--sz-1);
 }
 
+.card-custom-container {
+  height: var(--sz-96);
+  width: var(--sz-96);
+}
+.card-custom-img {
+  -o-object-position: center;
+     object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 nav .container .navbar-brand .web-logo {
   width: 150px;
 }

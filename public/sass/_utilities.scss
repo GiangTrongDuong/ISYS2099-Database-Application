@@ -13,15 +13,11 @@
     object-position: center;
 }
 
-// font-size
-// .h5-custom {
-
-// }
-
 // height
 .h-sz-80 {
     height: var(--sz-80);
 }
+
 .h-sz-96 {
     height: var(--sz-96);
 }
@@ -45,4 +41,17 @@
 .scrollbar::-webkit-scrollbar-track {
     background-color: #ccc;
     border-radius: var(--sz-1);
+}
+
+// cards
+.card-custom {
+    &-container {
+        height: var(--sz-96);
+        width: var(--sz-96);
+    }
+
+    &-img {
+        object-position: center;
+        object-fit: cover;
+    }
 }

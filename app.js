@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
-const { navigatePage } = require('./helperFuncs.js');
+const { navigatePage, formatCurrencyVND } = require('./helperFuncs.js');
 const { CONNECTED_URI, PORT } = require('./constants.js');
-const { dummyCatList } = require('./dummyData.js');
+const { dummyCatList, dummyProductCatList } = require('./dummyData.js');
 require('dotenv').config();
 const app = express();
 const { default: mongoose } = require('mongoose');
@@ -44,16 +44,21 @@ app.use('/', product)
 app.use('/my-cart', cart)
 app.use('/order', order)
 app.use('/', others)
-app.use('/category', category)
+app.use('/', category)
 
 
 // full route to Home page: /
 app.get("/", function (req, res) {
     res.render('layout.ejs', {
         title: "Home",
-        bodyFile: "home/index.ejs",
+        bodyFile: "./home/index.ejs",
+        formatCurrencyVND: formatCurrencyVND,
         // TODO: add real data
         categoryList: dummyCatList,
+        // TODO: add real data
+        // render 3 categories
+        // render products from database for 3 categories
+        categoryProductList: dummyProductCatList,
     })
 });
 
