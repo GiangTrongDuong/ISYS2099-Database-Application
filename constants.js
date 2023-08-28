@@ -3,7 +3,7 @@ const CART_ROUTE = '/cart';
 const CATEGORY_ROUTE = '/category';
 
 const ORDER_ROUTE = '/order';
-const ORDER_HISTORY_ROUTE = '/order/history';
+const ORDER_HISTORY_ROUTE = '/history'; //full route: /order/history
 
 const ABOUT_ROUTE = '/about-us';
 const PRIVACY_ROUTE = '/privacy';
