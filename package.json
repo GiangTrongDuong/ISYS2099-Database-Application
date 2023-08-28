@@ -20,7 +20,8 @@
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
     "mongodb": "^5.8.0",
-    "mongoose": "^7.4.4",
+    "mongoose": "^7.4.3",
+    "mysql2": "^3.6.0",
     "path": "^0.12.7"
   }
 }
