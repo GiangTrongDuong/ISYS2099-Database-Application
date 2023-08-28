@@ -56,9 +56,17 @@ const formatCurrencyVND = (number) => {
     return formatter.format(number);
 }
 
+// convert '''a,b,c''' to '''("a", "b", "c")''' to use in SQL query
+function parenthesesString(inputString) {
+    const items = inputString.split(',');
+    const formattedItems = items.map(item => `"${item.trim()}"`).join(', ');
+    return `(${formattedItems})`;
+  }
+
 module.exports = {
     // createElement,
     navigatePage,
     getParameterByPath,
-    formatCurrencyVND
+    formatCurrencyVND,
+    parenthesesString
 }

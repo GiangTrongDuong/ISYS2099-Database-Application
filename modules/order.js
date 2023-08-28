@@ -6,7 +6,7 @@ const router = express.Router();
 
 let root = `.${ORDER_ROUTE}`;
 
-// full route to order page: /order
+// full route to order page: /order/order
 router.get(`${ORDER_ROUTE}`, function (req, res) {
   const order = null; //store info to display 
   res.render("layout.ejs", {
@@ -37,7 +37,7 @@ router.get(`${ORDER_HISTORY_ROUTE}/:uid`, async (req, res) => { //add user id to
   }
 });
 
-// full route to order-detail page: /order/:id
+// full route to order-detail page: /order/order/:id
 router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
   try{
     const order = await db.get_order_item(req.params.id);

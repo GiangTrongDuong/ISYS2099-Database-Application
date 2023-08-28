@@ -3,24 +3,84 @@ const router = express.Router();
 const { dummyProduct, dummyCatList } = require('../dummyData.js');
 const { formatCurrencyVND } = require('../helperFuncs.js');
 const { PRODUCT_ROUTE } = require('../constants.js');
+const db = require('../models/function_product.js');
 
 let root = `.${PRODUCT_ROUTE}`
 
 // full route to product-detail page: /product/:id
-router.get(`${PRODUCT_ROUTE}/:id`, function(req, res) { 
-  const productId = req.params.id;
-  // TODO: get product data from database using id
-  const product = null; //store info to display 
+router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => { 
+  try{
+    const product = await db.from_id(req.params['id']); //store info to display 
+    res.json({"product": product});
+    // res.render('layout.ejs', {
+    //     title: "Product",
+    //     bodyFile: `${root}/product`,
+    //     formatCurrencyVND: formatCurrencyVND,
+    //     // TODO: add real data - categoryList
+    //     categoryList: dummyCatList,
+    //     product: product,
+    // });
+  }
+  catch (err){
+    res.send("Cannot fetch product with id " + req.params.id);
+  }
+}); 
 
-  res.render('layout.ejs', {
-      title: "Product",
-      bodyFile: `${root}/product`,
-      formatCurrencyVND: formatCurrencyVND,
-      // TODO: add real data - categoryList
-      categoryList: dummyCatList,
-      // TODO: add real data
-      product: dummyProduct,
-  })
+// full route to product-detail page: /product/seller/:seller_id
+router.get(`${PRODUCT_ROUTE}/seller/:seller_id`, async (req, res) => { 
+  try{
+    const product_list = await db.from_seller(req.params.seller_id);
+    res.json({"product_list": product_list});
+    // res.render('layout.ejs', {
+    //     title: "Product",
+    //     bodyFile: `${root}/product`,
+    //     formatCurrencyVND: formatCurrencyVND,
+    //     // TODO: add real data - categoryList
+    //     categoryList: dummyCatList,
+    //     product_list: product_list
+    // });
+  }
+  catch (err){
+    res.send("Cannot fetch product by seller with id " + req.params.seller_id);
+  }
+}); 
+
+// File to show products in a category
+router.get(`${PRODUCT_ROUTE}/cat/:category`, async (req, res) => { 
+  try{
+    const product_list = await db.from_category(req.params.category);
+    res.json({"Products": product_list});
+    // res.render('layout.ejs', {
+    //     title: "Product",
+    //     bodyFile: `${root}/product`,
+    //     formatCurrencyVND: formatCurrencyVND,
+    //     // TODO: add real data - categoryList
+    //     categoryList: dummyCatList,
+    //     product_list: product_list
+    // });
+  }
+  catch (err){
+    res.send("Cannot fetch item with id " + req.params.id);
+  }
+}); 
+
+// Show products containing keywords
+router.get(`${PRODUCT_ROUTE}/search/:words`, async (req, res) => { 
+  try{
+    const product_list = await db.contain_word(req.params.words);
+    res.json({"Products": product_list});
+    // res.render('layout.ejs', {
+    //     title: "Product",
+    //     bodyFile: `${root}/product`,
+    //     formatCurrencyVND: formatCurrencyVND,
+    //     // TODO: add real data - categoryList
+    //     categoryList: dummyCatList,
+    //     product_list: product_list
+    // });
+  }
+  catch (err){
+    res.send("Cannot fetch item with id " + req.params.id);
+  }
 }); 
 
 module.exports = router;
