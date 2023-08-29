@@ -18,3 +18,9 @@ Tue 29/8: Viet Anh
     19: Customer123!
     82: Seller123!
 - Add DROP TABLE IF EXISTS to '''sql_data/db_create.sql''' to speed up future data gen.
+
+Tue 29/8: Viet Anh
+- Add table warehouse_item (warehouse_id, product_id, quantity) for product storage
+- Add product.remaining to store how many products are available
+- Data: change warehouse.remaining_area to reflect actual data
+    + The function to do this update is in sql_data/helpful.sql

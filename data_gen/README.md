@@ -1,8 +1,8 @@
 # Please document your changes into change.log 
-No one is reading yer commit messages
+No one is reading yer commit messages (sorry!)
 
 # Set up
-Create a ```.env``` file, copy the following, and insert your own info:
+Find or create a ```.env``` file, copy the following, and insert your own info:
 ```
 HOST=''
 USER=''
