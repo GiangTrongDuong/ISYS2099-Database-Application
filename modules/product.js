@@ -19,6 +19,7 @@ router.get(`${PRODUCT_ROUTE}/:id`, function(req, res) {
       // TODO: add real data - categoryList
       categoryList: dummyCatList,
       // TODO: add real data
+      // TODO: add parenCategoryIds to product
       product: dummyProduct,
       // TODO: add real data - parent categories of current product's category
       parentCategoryIds: dummyParentCatIds

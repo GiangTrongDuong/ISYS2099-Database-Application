@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Category = require('../models/category');
 const { CATEGORY_ROUTE } = require('../constants');
-const { dummyCatList, dummyProductCatList } = require('../dummyData');
+const { dummyCatList, dummyClothingProducts } = require('../dummyData');
 const { formatCurrencyVND } = require('../helperFuncs');
 
 let root = './category/'; //root folder to pages
@@ -19,12 +19,11 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
     try {
         const id = req.params.id;
         /* TODO: rendered real category, include:
-            Breadcumb (Home > Category > ...)
             Child categories
             Products */
         // const renderedCategory = await Category.findById(id).exec();
         const renderedCategory = dummyCatList.find((category) => category.id == id);
-        renderedCategory.products = dummyProductCatList;
+        renderedCategory.products = dummyClothingProducts;
         renderedCategory.childCategories = dummyCatList.filter((category) => category["parent_category_id"] == id);
 
         res.render("layout.ejs", {

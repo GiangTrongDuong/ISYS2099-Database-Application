@@ -48,7 +48,7 @@ const womenClothingCat = {
 }
 const dummyCatList = [electronicsCat, phoneCat, laptopCat, clothingCat, menClothingCat, womenClothingCat];
 
-const electronicsProducts = [
+const dummyElectronicsProducts = [
     {
         id: 1,
         image: "https://source.unsplash.com/random/razor",
@@ -74,7 +74,7 @@ const electronicsProducts = [
         price: 258,
     }
 ]
-const clothingProducts = [
+const dummyClothingProducts = [
     {
         id: 5,
         image: "https://source.unsplash.com/random/tshirt",
@@ -102,10 +102,10 @@ const clothingProducts = [
 ]
 const dummyProductCatList = dummyCatList.filter(cat => {
     if (cat.id === 1) {
-        cat.products = electronicsProducts;
+        cat.products = dummyElectronicsProducts;
         return cat;
     } else if (cat.id === 4) {
-        cat.products = clothingProducts;
+        cat.products = dummyClothingProducts;
         return cat;
     }
 }
@@ -125,4 +125,4 @@ const dummyProduct = {
 }
 const dummyParentCatIds = [1, 2]
 
-module.exports = { dummyCatList, dummyProduct, dummyParentCatIds, dummyProductCatList };
+module.exports = { dummyCatList, dummyProduct, dummyParentCatIds, dummyProductCatList, dummyClothingProducts, dummyElectronicsProducts };

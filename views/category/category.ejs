@@ -28,7 +28,7 @@
                 overflow-x-scroll flex-nowrap scrollbar pb-5 px-0">
                 <% category.childCategories.forEach(childCat=> { %>
                     <a role="button" class="card-custom-container col d-inline-block "
-                    href="<%= navigatePage('category', childCat.id) %>">
+                        href="<%= navigatePage('category', childCat.id) %>">
                         <div class="card card-custom text-light border-0 w-100 h-100 overflow-hidden">
                             <img src="<%= `https://source.unsplash.com/random/${childCat['category_name']}` %>"
                                 class="card-custom-img w-100 h-100" alt="<%= childCat['category_name'] %>">
@@ -47,6 +47,27 @@
         </section>
         <% } %>
             <!-- Product List Of Category -->
-
+            <section class="row my-5 py-5">
+                <h1 class="fs-1 pb-3
+                fw-bolder line-clamp-1 text-center text-dark ">
+                    Product List
+                </h1>
+                <div class="container px-4 px-lg-5 mt-5 over">
+                    <% if (category.products?.length!=0) { %>
+                        <div class="row gx-4 gx-lg-5 gy-5
+                        row-cols-1 row-cols-sm-2 row-cols-md-3 
+                        justify-content-center">
+                            <% category.products.forEach(product=> { console.log(product); %>
+                                <%- include('../partials/product-card', {navigatePage, product, formatCurrencyVND}) %>
+                                    <% }) %>
+                        </div>
+                        <% } else { %>
+                            <h3 class="fs-3 pb-3
+                            fw-medium text-center text-secondary ">
+                                There is no product in this category
+                            </h3>
+                            <% } %>
+                </div>
+            </section>
 
 </section>
