@@ -9,38 +9,50 @@
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                <form method="POST" class="mx-1 mx-md-4">
+                <form action="/signup" method="POST" class="mx-1 mx-md-4">
 
                   <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="displayName" class="form-control" />
                       <label class="form-label" for="displayName">Display Name</label>
+                      <input required type="text" name="displayName" id="displayName" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="username" class="form-control" />
                       <label class="form-label" for="username">User Name</label>
+                      <input required type="text" id="username" name="username" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <select required class="form-select" name="account" id="account">
+                      <option value="Customer">Customer Account</option>
+                      <option value="Seller">Seller Account</option>
+                      <option value="Warehouse Admin">Warehouse Admin Account</option>
+                    </select>
+                  </div>
+                  
+                  <div class="d-flex flex-row align-items-center mb-4"> 
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="password" class="form-control" />
                       <label class="form-label" for="password">Password</label>
+                      <input required type="password" id="password" name="password" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="details">Bio</label>
+                      <input required type="text" id="details" name="details" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex justify-content-center mb-5">
-                    <a href="/login">>Already have an account? Sign in now!</a>
+                    <a href="/login">Already have an account? Sign in now!</a>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" action= class="btn btn-primary btn-lg">Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
 
                   </div>
 

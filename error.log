@@ -2,4 +2,5 @@ Start Connection Error: Access denied for user 'root'@'localhost' (using passwor
 'Start Connection TypeError: Cannot read properties of undefined (reading 'length')
 'Start Connection TypeError: Cannot read properties of undefined (reading 'length')
 'Start Connection TypeError: Cannot read properties of undefined (reading 'length')
+'Start Connection Error: Access denied for user 'root'@'localhost' (using password: NO)
 '
