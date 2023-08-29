@@ -9,3 +9,11 @@ Sun 27/8: Duong, Viet Anh
 
 Mon 28/8: Viet Anh
 - Add product.description, change sql_data/db_create, sql_data/db_inserts to reflect
+
+Tue 29/8: Viet Anh
+- Change users 1 (WH Admin), 19 (Customer), 82 (Seller) accounts 
+(they have the most orders/products -> easier to test)
+- New passwords for the accounts above:
+    1: Warehouse123!
+    19: Customer123!
+    82: Seller123!
