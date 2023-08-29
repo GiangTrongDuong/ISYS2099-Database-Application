@@ -26,7 +26,7 @@ EXPORT = {
     },
     "product":{
         "fn": "./py_data/product.csv",
-        "header": ["id","title","seller_id","price","description","category","length","width","height","image","created_at","updated_at"]
+        "header": ["id","title","seller_id","price","description","category","length","width","height","image","remaining","created_at","updated_at"]
     },
     "warehouse":{
         "fn": "./py_data/warehouse.csv",
@@ -43,6 +43,10 @@ EXPORT = {
     "order_item":{
         "fn": "./py_data/order_item.csv",
         "header": ["order_id","product_id","quantity"]
+    },
+    "warehouse_item":{
+        "fn": "./py_data/warehouse_item.csv",
+        "header": ["warehouse_id","product_id","quantity"]
     }
 }
 
@@ -99,6 +103,7 @@ def product(num_rows,start_from = 1):
     sellers = [5,8,11,15,16,23,26,28,33,34,35,38,41,50,51,52,
                55,57,60,62,64,66,67,71,73,74,75,82,84,89,94,95,99,100]
     with open(EXPORT["product"]["fn"], 'w', newline='') as csvfile:
+    # with open("sample_product.csv", 'w', newline='') as csvfile:
         csvw = csv.writer(csvfile)
         csvw.writerow(EXPORT["product"]["header"])
         first_adj = ["color", "company'S", "prefix + name's", "Made/Born in Country"]
@@ -111,23 +116,25 @@ def product(num_rows,start_from = 1):
             seller_id = sellers[random.randint(0, len(sellers) - 1)]
             price = random.randint(1000, 1000000)
             category = CATEGORY[random.randint(0, len(CATEGORY) - 1)] # category name instead of id
-            length = random.randint(10,150)
-            width = random.randint(10,90)
-            height = random.randint(10,150)
+            # get some decimals for specs
+            length = random.randint(10,500) / 100
+            width  = random.randint(10,500) / 100
+            height = random.randint(10,500) / 100
             image = FAKER.file_name(category='image')
+            remaining = random.randint(1, 150)
             date1 = FAKER.date_time()
             date2 = FAKER.date_time()
             created_at = (min(date1, date2)).strftime(DATEFORMAT) + ".000000"
             updated_at = (max(date1, date2)).strftime(DATEFORMAT) + ".000000"
             rt = FAKER.text(max_nb_chars=150).replace("\n", ' ').replace("\t", ' ')
-            description = (f"{title} is a {price_range(price)} {category.lower()} that cannot be found in your local stores! "
+            description = (f"{title} is {price_range(price)} {category.lower()} that cannot be found in your local stores! "
                            f"{rt}")
                         # Backend: 
                         # After the first '!', newline.
                         # Show specs: length, width, height
                         # "Added by <seller link> on <created_at>"
             # write to csv
-            csvw.writerow([pid, title, seller_id, price, description, category, length, width, height, image, created_at, updated_at])
+            csvw.writerow([pid, title, seller_id, price, description, category, length, width, height, image, remaining, created_at, updated_at])
             
             # print out to debug
             # toString = f"""{pid} - {title} by seller {seller_id}: 
@@ -154,8 +161,6 @@ def warehouse(num_rows, start_from = 1):
             # toString = f"""{wid} - {name} at {address}: 
             #         \t Total: {total_area} -- Remaining: {remaining_area}"""
             # print(toString)
-        
-    return
 
 USER = [6,9,10,12,13,18,19,27,30,32,36,37,42,44,45,48,49,54,56,59,63,65,68,69,79,80,83,85,90,92,93,96,97,98]
 def cart_details(start_from = 1):
@@ -223,14 +228,33 @@ def order_item(num_users, start_from = 1):
             # print(toString)
     return
 
+def warehouse_item(num_warehouse, start_from=1):
+    with open(EXPORT["warehouse_item"]["fn"], 'w', newline='') as csvfile:
+        csvw = csv.writer(csvfile)
+        csvw.writerow(EXPORT["warehouse_item"]["header"])
+        for wid in range(start_from, num_warehouse + 1):
+            warehouse_id = wid
+            weight = [5,6,7,7,7,7,12,12,12,12,13] # how many items in the warehouse
+            existing = [] # (wid, pid) is unique
+            for i in range(0, weight[random.randint(0, len(weight) - 1)]):
+                pid = random.randint(1,100)
+                while pid in existing:
+                    pid = random.randint(1,100)
+                existing.append(pid)
+                
+                quantity = random.randint(1,10)
+                # write to csv
+                csvw.writerow([warehouse_id, pid, quantity])
+
 def main():
     # user(100)
-    # product(200)
+    product(200)
     # category()
     # warehouse(20)
     # cart_details()
-    order_details(100)
+    # order_details(100)
     # order_item(100)
+    # warehouse_item(20)
     return 0
 
 main()

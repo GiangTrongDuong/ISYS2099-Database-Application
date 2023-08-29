@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS warehouse_item;
 DROP TABLE IF EXISTS cart_details;
 DROP TABLE IF EXISTS order_item;
 DROP TABLE IF EXISTS order_details;
@@ -22,8 +23,8 @@ create table if not exists warehouse
     id             int auto_increment primary key,
     name           varchar(200) not null,
     address        varchar(200) not null,
-    total_area     int          not null,
-    remaining_area int          not null
+    total_area     decimal(10,2)          not null,
+    remaining_area decimal(10,2)          not null
 );
 
 create table if not exists product
@@ -34,10 +35,11 @@ create table if not exists product
     price      int          not null,
     description text NULL,
     category   varchar(200) not null,
-    length     int          not null,
-    width      int          not null,
-    height     int          not null,
+    length     DECIMAL(10,2)          not null,
+    width      DECIMAL(10,2)          not null,
+    height     DECIMAL(10,2)          not null,
     image      text         null,
+    remaining int not null,
     created_at datetime     not null,
     updated_at datetime     not null,
     constraint product_user_id_fk
@@ -78,5 +80,18 @@ create table if not exists order_item
     constraint order_item_order_details_id_fk
         foreign key (order_id) references order_details (id),
     constraint order_item_product_id_fk
+        foreign key (product_id) references product (id)
+);
+
+create table if not exists warehouse_item
+(
+    warehouse_id int not null,
+    product_id int not null,
+    quantity int not null,
+    constraint wid_pid 
+        unique (warehouse_id, product_id),
+    constraint warehouse_item_warehouse_id_fk
+        foreign key (warehouse_id) references warehouse (id),
+    constraint warehouse_item_product_id_fk
         foreign key (product_id) references product (id)
 );
