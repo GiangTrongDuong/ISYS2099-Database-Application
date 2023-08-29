@@ -8,7 +8,7 @@ const { HOME_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE, ABOUT_ROUTE, MY_ACCOUNT_ROUTE, PR
 */
 const navigatePage = (type, id = -1) => {
     // home, login, signup, my-account
-    // category, product, cart, order, order-history, order-detail
+    // category, category-list, product, cart, order, order-history, order-detail
     // about, privacy, stores, contact
     type = type.trim();
     switch (type) {
@@ -28,6 +28,8 @@ const navigatePage = (type, id = -1) => {
             return `${CONTACT_ROUTE}`;
         case "category":
             return `${CATEGORY_ROUTE}/${id}`;
+        case "category-list":
+            return `${CATEGORY_ROUTE}`;
         case "product":
             return `${PRODUCT_ROUTE}/${id}`;
         case "cart":

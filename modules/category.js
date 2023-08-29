@@ -9,8 +9,13 @@ let root = './category/'; //root folder to pages
 
 router.get(`${CATEGORY_ROUTE}`, async (req, res) => {
     try {
-        let categories = await Category.find({}).limit(50).exec();
-        // res.status(200).send(categories);
+        // let categories = await Category.find({}).limit(50).exec();
+        res.render("layout.ejs", {
+            title: "Category List",
+            bodyFile: `${root}/categories.ejs`,
+            // TODO: add real data - categoryList
+            categoryList: dummyCatList
+        });
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
     }
@@ -34,7 +39,6 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
             // TODO: add real data - categoryList
             categoryList: dummyCatList
         });
-        // res.status(200).send(renderedCategory);
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
     }

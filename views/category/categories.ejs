@@ -1,0 +1,26 @@
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">
+                List of Categories
+            </h1>
+        </div>
+    </div>
+</header>
+<section id="categories" class="container mt-5">
+    <section class="row my-5 py-5">
+        <h1 class="fs-1 pb-3
+        fw-bolder line-clamp-1 text-center text-dark ">
+            Category List
+        </h1>
+        <div class="row px-4 px-lg-5 mt-5
+        gx-4 gx-lg-5 gy-5 w-100
+            row-cols-1 row-cols-sm-2 row-cols-md-3 
+            justify-content-center">
+            <% categoryList.forEach(childCat=> { %>
+                <%- include('../partials/category-card.ejs', {navigatePage, category: childCat}) %>
+                    <% }) %>
+
+        </div>
+    </section>
+</section>
