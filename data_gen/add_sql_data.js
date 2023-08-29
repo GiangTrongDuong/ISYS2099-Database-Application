@@ -21,6 +21,9 @@ connection.connect(err => {
         return;
     }
     console.log('Connected to the database');
+    console.log('============== IMPORTANT =================');
+    console.log(`Your tables with name: user, product, warehouse, order_details, 
+                order_item, cart_details WILL BE DROPPED.`);
 
     // Begin a transaction to start pumping data in
     async function executeSqlFile(filePath) {

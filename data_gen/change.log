@@ -17,3 +17,4 @@ Tue 29/8: Viet Anh
     1: Warehouse123!
     19: Customer123!
     82: Seller123!
+- Add DROP TABLE IF EXISTS to '''sql_data/db_create.sql''' to speed up future data gen.

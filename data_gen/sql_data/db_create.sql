@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS cart_details;
+DROP TABLE IF EXISTS order_item;
+DROP TABLE IF EXISTS order_details;
+DROP TABLE IF EXISTS warehouse;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS user;
+
 create table if not exists user
 (
     id            int auto_increment
