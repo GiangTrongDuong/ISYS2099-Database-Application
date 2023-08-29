@@ -7,6 +7,7 @@ require('dotenv').config();
 const app = express();
 const { default: mongoose } = require('mongoose');
 
+const auth = require('./models/user_authentication.js');
 
 async function connect(){
   try{
@@ -60,3 +61,9 @@ app.listen(PORT, function () {
     console.log("Server started on port 3000");
 });
 
+//Post
+// app.post("/login",(req,res) => {
+//     const user = req.body.username;
+//     const password = req.body.password;
+//     auth.login(user,password);
+// })

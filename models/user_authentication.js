@@ -44,4 +44,4 @@ async function login(userName,password){
 login("DoF","bayleaft");
 signUp("Customer","DoF","ZingGiang","He like stuff","bayleaft");*/
 login("david23","")
-module.exports = {signUp};
+module.exports = {signUp,login};
