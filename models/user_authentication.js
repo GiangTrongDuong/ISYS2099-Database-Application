@@ -71,9 +71,9 @@ async function updatePassword(uid, pw) {
 login("DoF","bayleaft");
 signUp("Customer","DoF","ZingGiang","He like stuff","bayleaft");*/
 // login("david23","")
-updatePassword(19, "Customer123!"); //user name: dorothy28
-updatePassword(1, "Warehouse123!"); //user name: robertsstacy
-updatePassword(82, "Seller123!");   //user name: lauraking
+// updatePassword(19, "Customer123!"); //user name: dorothy28
+// updatePassword(1, "Warehouse123!"); //user name: robertsstacy
+// updatePassword(82, "Seller123!");   //user name: lauraking
 // login("dorothy28", "Customer123!");
 
 
