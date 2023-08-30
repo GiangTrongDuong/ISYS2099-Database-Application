@@ -1,6 +1,12 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
+
+//session and parser
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 const { navigatePage } = require('./helperFuncs.js');
 const { CONNECTED_URI, PORT } = require('./constants.js');
 const { dummyCatList } = require('./dummyData.js');
@@ -24,9 +30,26 @@ connect();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 //Use body-parser middleware to parse URL-encoded data
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true
+ }));
 app.use(bodyParser.json());
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  method: ["GET","POST"],
+  credentials: true
+}));
+app.use(cookieParser());
+app.use(session({
+  key: "username",
+  secret: "Group2",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    expires: 60 * 60,
+  },
+}));
 
 // to apply css styles
 app.use(express.static('public'));
@@ -58,7 +81,6 @@ app.get("/", function (req, res) {
         categoryList: dummyCatList,
     })
 });
-
 
 app.listen(PORT, function () {
     console.log("Server started on port 3000");

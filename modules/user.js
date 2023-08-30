@@ -1,10 +1,35 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const { LOGIN_ROUTE, SIGNUP_ROUTE, MY_ACCOUNT_ROUTE } = require('../constants');
+const database = require('../models/dbSqlConnect');
 const { dummyCatList } = require('../dummyData');
 const router = express.Router();
+
+
+//session
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const bodyParser = require('body-parser');
-const db = require("../models/user_authentication");
+const cors = require('cors');
 var root = './user'; //root folder to pages
+
+//router dependencies
+router.use(cors({
+  origin: ["http://localhost:3000"],
+  method: ["GET","POST"],
+  credentials: true
+}));
+
+router.use(cookieParser());
+router.use(session({
+  key: "username",
+  secret: "Group2",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    expires: 60 * 60,
+  },
+}));
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -20,14 +45,29 @@ router.get(`${LOGIN_ROUTE}`, function (req, res) {
 });
 
 router.post(`${LOGIN_ROUTE}`, async function (req, res) {
-  try{
-    console.log(req.body);
-    const result = await db.login(req.body.username,req.body.password);
-    console.log(result);
-    
-  }catch (err){
-    
-  }
+  var userName = req.body.username;
+  var password = req.body.password;
+  database.query(`SELECT role, user_name, password_hash 
+        FROM user 
+        WHERE user_name = "${userName}";`,(error, uresults) => {
+        if(uresults.length > 0){
+            bcrypt.compare(password, uresults[0].password_hash).then(function(result){
+                if(result == true){
+                    res.redirect("/");
+                    req.session.user = {role: uresults[0].role, user_name: uresults[0].user_name};
+                    console.log(req.session.user);
+                } else {
+                    res.render("./user/login.ejs",{
+                      message: "Incorrect password"
+                    })
+                }
+            });
+        } else if (uresults.length <= 0){
+          res.render("./user/login.ejs",{
+            message: "No user found!"
+          })
+        }
+    })
   
 })
 
@@ -42,9 +82,31 @@ router.get(`${SIGNUP_ROUTE}`, function (req, res) {
 });
 
 router.post(`${SIGNUP_ROUTE}`, async function (req,res){
-  const result = await db.signUp(req.body.account, req.body.username, req.body.displayName, req.body.details, req.body.password)
-  
-})
+  var role = req.body.account;
+  var userName = req.body.username;
+  var displayName = req.body.displayName;
+  var details = req.body.details;
+  var password = req.body.password;
+  const saltRounds = 10;
+  database.query(`SELECT * 
+        FROM user 
+        WHERE user_name = "${userName}";`,(error, results) => {
+        if(results.length > 0){
+        console.log("Taken username!");
+        } else {
+            bcrypt.hash(password, saltRounds, function (err, hash){
+                const result = database.query(`
+                    INSERT INTO user (role, user_name, display_name, details, password_hash)
+                    VALUE (?,?,?,?,?)
+                    `, [role, userName, displayName, details, hash]);
+                const User = {role: role, user_name: userName};
+                req.session.user = User;
+                console.log(req.session.user);
+                res.redirect("/my-account");
+            });
+            
+        }
+})});
 
 // full route to my-account page: /my-account
 router.get(`${MY_ACCOUNT_ROUTE}`, function (req, res) {
