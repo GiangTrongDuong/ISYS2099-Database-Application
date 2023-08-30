@@ -1,0 +1,822 @@
+[{
+  "_id": {
+    "$oid": "64e9f0dc90cae43934765fbd"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55794b1a152d108aa242"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    }
+  ],
+  "name": "Electronics",
+  "parent_category": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0dc90cae43934765fc1"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
+      "aName": "Shipping",
+      "aValue": "Free Shipping",
+      "aRequired": false
+    }
+  ],
+  "name": "Phone and Accessories",
+  "parent_category": {
+    "$oid": "64e9f0dc90cae43934765fbd"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0dc90cae43934765fc7"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa24f"
+      },
+      "aName": "Shipping",
+      "aValue": "Premium Shipping",
+      "aRequired": true
+    }
+  ],
+  "name": "Computer and Accessories",
+  "parent_category": {
+    "$oid": "64e9f0dc90cae43934765fbd"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0dd90cae43934765fcd"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa256"
+      },
+      "aName": "Warranty",
+      "aValue": "2 year+",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
+      "aName": "Shipping",
+      "aValue": "Free Shipping",
+      "aRequired": false
+    }
+  ],
+  "name": "Phone",
+  "parent_category": {
+    "$oid": "64e9f0dc90cae43934765fc1"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0dd90cae43934765fd3"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557b4b1a152d108aa25f"
+      },
+      "aName": "return",
+      "aValue": "no return",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
+      "aName": "Shipping",
+      "aValue": "Free Shipping",
+      "aRequired": false
+    }
+  ],
+  "name": "Phone Accessories",
+  "parent_category": {
+    "$oid": "64e9f0dc90cae43934765fc1"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0dd90cae43934765fd9"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557b4b1a152d108aa268"
+      },
+      "aName": "Warranty",
+      "aValue": "2 year+",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa24f"
+      },
+      "aName": "Shipping",
+      "aValue": "Premium Shipping",
+      "aRequired": true
+    }
+  ],
+  "name": "Computer",
+  "parent_category": {
+    "$oid": "64e9f0dc90cae43934765fc7"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0de90cae43934765fdf"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557b4b1a152d108aa271"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    }
+  ],
+  "name": "Home Appliances",
+  "parent_category": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0de90cae43934765fe3"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557b4b1a152d108aa277"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    }
+  ],
+  "name": "Kitchen Appliances",
+  "parent_category": {
+    "$oid": "64e9f0de90cae43934765fdf"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0de90cae43934765fe9"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa27e"
+      },
+      "aName": "installation",
+      "aValue": "free installation",
+      "aRequired": true
+    }
+  ],
+  "name": "Other Appliances",
+  "parent_category": {
+    "$oid": "64e9f0de90cae43934765fdf"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0de90cae43934765fef"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa285"
+      },
+      "aName": "Energy Consumption",
+      "aValue": "High",
+      "aRequired": false
+    }
+  ],
+  "name": "Refridgerator",
+  "parent_category": {
+    "$oid": "64e9f0de90cae43934765fe3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0de90cae43934765ff5"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa28c"
+      },
+      "aName": "installation",
+      "aValue": "installed with fee",
+      "aRequired": false
+    }
+  ],
+  "name": "Cooker and Oven",
+  "parent_category": {
+    "$oid": "64e9f0de90cae43934765fe3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0de90cae43934765ffb"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557d4b1a152d108aa293"
+      },
+      "aName": "Warranty",
+      "aValue": "1 year",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa27e"
+      },
+      "aName": "installation",
+      "aValue": "free installation",
+      "aRequired": true
+    }
+  ],
+  "name": "TV",
+  "parent_category": {
+    "$oid": "64e9f0de90cae43934765fe9"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0df90cae43934766001"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557d4b1a152d108aa29c"
+      },
+      "aName": "Energy Consumption",
+      "aValue": "Low",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa27e"
+      },
+      "aName": "installation",
+      "aValue": "free installation",
+      "aRequired": true
+    }
+  ],
+  "name": "Lamps",
+  "parent_category": {
+    "$oid": "64e9f0de90cae43934765fe9"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0df90cae43934766007"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557d4b1a152d108aa2a5"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    }
+  ],
+  "name": "Furniture",
+  "parent_category": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0df90cae4393476600b"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2ab"
+      },
+      "aName": "Shipping",
+      "aValue": "Free Shipping",
+      "aRequired": false
+    }
+  ],
+  "name": "Seating and Bedding",
+  "parent_category": {
+    "$oid": "64e9f0df90cae43934766007"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0df90cae43934766011"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2b2"
+      },
+      "aName": "return",
+      "aValue": "3 weeks",
+      "aRequired": false
+    }
+  ],
+  "name": "Decor",
+  "parent_category": {
+    "$oid": "64e9f0df90cae43934766007"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0df90cae43934766017"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2b9"
+      },
+      "aName": "return",
+      "aValue": "1 month",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2ab"
+      },
+      "aName": "Shipping",
+      "aValue": "Free Shipping",
+      "aRequired": false
+    }
+  ],
+  "name": "Chairs and Sofas",
+  "parent_category": {
+    "$oid": "64e9f0df90cae4393476600b"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e090cae4393476601d"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557f4b1a152d108aa2c2"
+      },
+      "aName": "return",
+      "aValue": "no return",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2ab"
+      },
+      "aName": "Shipping",
+      "aValue": "Free Shipping",
+      "aRequired": false
+    }
+  ],
+  "name": "Bed",
+  "parent_category": {
+    "$oid": "64e9f0df90cae4393476600b"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e090cae43934766023"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557f4b1a152d108aa2cb"
+      },
+      "aName": "Shipping",
+      "aValue": "Same Day Delivery",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2b2"
+      },
+      "aName": "return",
+      "aValue": "3 weeks",
+      "aRequired": false
+    }
+  ],
+  "name": "Wall Decor",
+  "parent_category": {
+    "$oid": "64e9f0df90cae43934766011"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e090cae43934766029"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef557f4b1a152d108aa2d4"
+      },
+      "aName": "Shipping",
+      "aValue": "Free Shipping",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2b2"
+      },
+      "aName": "return",
+      "aValue": "3 weeks",
+      "aRequired": false
+    }
+  ],
+  "name": "Floor Decor",
+  "parent_category": {
+    "$oid": "64e9f0df90cae43934766011"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e090cae4393476602f"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2dd"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    }
+  ],
+  "name": "Fashion",
+  "parent_category": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e090cae43934766033"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2e3"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    }
+  ],
+  "name": "Male Fashion",
+  "parent_category": {
+    "$oid": "64e9f0e090cae4393476602f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e090cae43934766039"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2ea"
+      },
+      "aName": "return",
+      "aValue": "3 days",
+      "aRequired": false
+    }
+  ],
+  "name": "Female Fashion",
+  "parent_category": {
+    "$oid": "64e9f0e090cae4393476602f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e190cae4393476603f"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55814b1a152d108aa2f1"
+      },
+      "aName": "Shipping",
+      "aValue": "Premium Shipping",
+      "aRequired": false
+    }
+  ],
+  "name": "Male Clothing",
+  "parent_category": {
+    "$oid": "64e9f0e090cae43934766033"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e190cae43934766045"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55814b1a152d108aa2f8"
+      },
+      "aName": "Return",
+      "aValue": "3 days",
+      "aRequired": false
+    }
+  ],
+  "name": "Male Accessories",
+  "parent_category": {
+    "$oid": "64e9f0e090cae43934766033"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e190cae4393476604b"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55814b1a152d108aa2ff"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    }
+  ],
+  "name": "Boy Clothing",
+  "parent_category": {
+    "$oid": "64e9f0e090cae43934766033"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e190cae43934766051"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55814b1a152d108aa306"
+      },
+      "aName": "Shipping",
+      "aValue": "Same Day Delivery",
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2ea"
+      },
+      "aName": "return",
+      "aValue": "3 days",
+      "aRequired": false
+    }
+  ],
+  "name": "Female Clothing",
+  "parent_category": {
+    "$oid": "64e9f0e090cae43934766039"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e190cae43934766057"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55824b1a152d108aa30f"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2ea"
+      },
+      "aName": "return",
+      "aValue": "3 days",
+      "aRequired": false
+    }
+  ],
+  "name": "Female Accessories",
+  "parent_category": {
+    "$oid": "64e9f0e090cae43934766039"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e290cae4393476605d"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55824b1a152d108aa318"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2ea"
+      },
+      "aName": "return",
+      "aValue": "3 days",
+      "aRequired": false
+    }
+  ],
+  "name": "Girl Clothing",
+  "parent_category": {
+    "$oid": "64e9f0e090cae43934766039"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e290cae43934766063"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55824b1a152d108aa321"
+      },
+      "aName": "return",
+      "aValue": "no return",
+      "aRequired": true
+    }
+  ],
+  "name": "Sports",
+  "parent_category": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e290cae43934766067"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55834b1a152d108aa327"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef55824b1a152d108aa321"
+      },
+      "aName": "return",
+      "aValue": "no return",
+      "aRequired": true
+    }
+  ],
+  "name": "Sportswear",
+  "parent_category": {
+    "$oid": "64e9f0e290cae43934766063"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e290cae4393476606d"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55834b1a152d108aa330"
+      },
+      "aName": "Shipping",
+      "aValue": "Same Day Delivery",
+      "aRequired": false
+    }
+  ],
+  "name": "Male Sportswear",
+  "parent_category": {
+    "$oid": "64e9f0e290cae43934766067"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e290cae43934766073"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55834b1a152d108aa337"
+      },
+      "aName": "Discount on Next Purchase",
+      "aValue": "0.15",
+      "aRequired": false
+    }
+  ],
+  "name": "Female Sportswear",
+  "parent_category": {
+    "$oid": "64e9f0e290cae43934766067"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e390cae43934766079"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55844b1a152d108aa33e"
+      },
+      "aName": null,
+      "aValue": null,
+      "aRequired": false
+    },
+    {
+      "_id": {
+        "$oid": "64ef55824b1a152d108aa321"
+      },
+      "aName": "return",
+      "aValue": "no return",
+      "aRequired": true
+    }
+  ],
+  "name": "Sports Equipment",
+  "parent_category": {
+    "$oid": "64e9f0e290cae43934766063"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64e9f0e390cae4393476607f"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55844b1a152d108aa347"
+      },
+      "aName": "Discount on Next Purchase",
+      "aValue": "0.08",
+      "aRequired": false
+    }
+  ],
+  "name": "Racket Sports",
+  "parent_category": {
+    "$oid": "64e9f0e390cae43934766079"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9f0e390cae43934766085"
+  },
+  "attribute": [
+    {
+      "_id": {
+        "$oid": "64ef55844b1a152d108aa34e"
+      },
+      "aName": "Warranty",
+      "aValue": "1 month",
+      "aRequired": false
+    }
+  ],
+  "name": "Ball Sports",
+  "parent_category": {
+    "$oid": "64e9f0e390cae43934766079"
+  },
+  "__v": 0
+}]

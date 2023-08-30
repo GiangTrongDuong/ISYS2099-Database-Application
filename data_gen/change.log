@@ -24,3 +24,7 @@ Tue 29/8: Viet Anh
 - Add product.remaining to store how many products are available
 - Data: change warehouse.remaining_area to reflect actual data
     + The function to do this update is in sql_data/helpful.sql
+
+Wed 30/8: Viet Anh
+- MongoDB: attribute to attribute: [{name, value, required}]
+- Script to reflect this change, models/category also
