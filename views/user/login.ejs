@@ -9,13 +9,13 @@
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 
-                <form action="/login" method="post" class="mx-1 mx-md-4">
+                <form action="/login" method="POST" class="mx-1 mx-md-4">
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="email">Your username</label>
-                      <input type="text" id="username" class="form-control" />
+                      <input required type="text" id="username" name="username" class="form-control" />
                     </div>
                   </div>
 
@@ -23,7 +23,7 @@
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="password">Password</label>
-                      <input type="password" id="password" class="form-control" />
+                      <input required type="password" id="password" name="password" class="form-control" />
                     </div>
                   </div>
 

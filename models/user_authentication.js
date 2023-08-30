@@ -3,10 +3,10 @@ const bcrypt = require('bcrypt');
 
 async function signUp(role, userName, displayName, details, password){
     const saltRounds = 10;
-    database.query(`SELECT * 
+    await database.query(`SELECT * 
         FROM user 
         WHERE user_name = "${userName}";`,(error, results) => {
-    if(results.length > 0){
+        if(results.length > 0){
         console.log("Taken username!");
         } else {
             bcrypt.hash(password, saltRounds, function (err, hash){
@@ -21,7 +21,7 @@ async function signUp(role, userName, displayName, details, password){
         }
 })};
 
-async function login(userName,password){
+async function login(userName,password) {
     database.query(`SELECT password_hash 
         FROM user 
         WHERE user_name = "${userName}";`,(error, results, fields) => {
@@ -30,14 +30,15 @@ async function login(userName,password){
             bcrypt.compare(password, results[0].password_hash).then(function(result){
                 if(result == true){
                     console.log("correct login");
+                    return "correct";
                 } else {
                     console.log("incorrect password");
-                    console.log(results[0].password_hash);
+                    return "incorrect";
                 }
             });
-        } else if (error){
+        } else if (results.length <= 0){
             console.log("No username found");
-            return;
+            return "no_user";
         }
     })
 };
