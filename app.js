@@ -14,7 +14,13 @@ require('dotenv').config();
 const app = express();
 const { default: mongoose } = require('mongoose');
 
-const auth = require('./models/user_authentication.js');
+const isAuth = (req, res, next) => {
+  if(req.session.isAuth){
+    next();
+  } else {
+    res.redirect("/login");
+  }
+} 
 
 async function connect(){
   try{
@@ -27,10 +33,15 @@ async function connect(){
 
 connect();
 
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  method: ["GET","POST"],
+  credentials: true
+}));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 //Use body-parser middleware to parse URL-encoded data
 app.use(bodyParser.urlencoded({ extended: true
  }));
@@ -69,7 +80,7 @@ const others = require('./modules/others');
 app.use('/', user)
 app.use('/', product)
 app.use('/my-cart', cart)
-app.use('/order', order)
+app.use('/order', order, isAuth)
 app.use('/', others)
 
 // full route to Home page: /
@@ -79,10 +90,21 @@ app.get("/", function (req, res) {
         bodyFile: "home/index.ejs",
         // TODO: add real data
         categoryList: dummyCatList,
+        res: res,
+        req: req,
     })
+    console.log(req.session.isAuth);
+    console.log(req.session.user);
 });
 
 app.listen(PORT, function () {
     console.log("Server started on port 3000");
 });
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if(err) throw err;
+    res.redirect("/");
+  });
+})
 

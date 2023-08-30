@@ -36,12 +36,13 @@ router.use(bodyParser.json());
 
 // full route to login page: /login
 router.get(`${LOGIN_ROUTE}`, function (req, res) {
-  res.render("layout.ejs", {
-    title: "Login",
-    bodyFile: `${root}/login`,
-    // TODO: add real data - categoryList
-    categoryList: dummyCatList,
-  })
+    res.render("layout.ejs", {
+      title: "Login",
+      bodyFile: `${root}/login`,
+      // TODO: add real data - categoryList
+      categoryList: dummyCatList,
+      req,
+    })
 });
 
 router.post(`${LOGIN_ROUTE}`, async function (req, res) {
@@ -53,19 +54,16 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
         if(uresults.length > 0){
             bcrypt.compare(password, uresults[0].password_hash).then(function(result){
                 if(result == true){
-                    res.redirect("/");
                     req.session.user = {role: uresults[0].role, user_name: uresults[0].user_name};
-                    console.log(req.session.user);
+                    req.session.isAuth = true;
+                    console.log(req.session.isAuth);
+                    res.redirect("/my-account");
                 } else {
-                    res.render("./user/login.ejs",{
-                      message: "Incorrect password"
-                    })
+                    res.redirect("/login");
                 }
             });
         } else if (uresults.length <= 0){
-          res.render("./user/login.ejs",{
-            message: "No user found!"
-          })
+          res.redirect("/login");
         }
     })
   
