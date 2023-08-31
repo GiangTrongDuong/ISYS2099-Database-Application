@@ -14,14 +14,6 @@ require('dotenv').config();
 const app = express();
 const { default: mongoose } = require('mongoose');
 
-const isAuth = (req, res, next) => {
-  if(req.session.isAuth){
-    next();
-  } else {
-    res.redirect("/login");
-  }
-} 
-
 async function connect(){
   try{
     await mongoose.connect(CONNECTED_URI);
@@ -32,12 +24,6 @@ async function connect(){
 };
 
 connect();
-
-app.use(cors({
-  origin: ["http://localhost:3000"],
-  method: ["GET","POST"],
-  credentials: true
-}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,6 +37,7 @@ app.use(cors({
   method: ["GET","POST"],
   credentials: true
 }));
+
 app.use(cookieParser());
 app.use(session({
   key: "username",
@@ -58,7 +45,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    expires: 60 * 60,
+    maxAge: 3600000,
   },
 }));
 
@@ -80,8 +67,8 @@ const others = require('./modules/others');
 app.use('/', user)
 app.use('/', product)
 app.use('/my-cart', cart)
-app.use('/order', order, isAuth)
-app.use('/', others)
+app.use('/order', order)
+app.use('/', others )
 
 // full route to Home page: /
 app.get("/", function (req, res) {
@@ -93,7 +80,6 @@ app.get("/", function (req, res) {
         res: res,
         req: req,
     })
-    console.log(req.session.isAuth);
     console.log(req.session.user);
 });
 

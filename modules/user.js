@@ -4,13 +4,14 @@ const { LOGIN_ROUTE, SIGNUP_ROUTE, MY_ACCOUNT_ROUTE } = require('../constants');
 const database = require('../models/dbSqlConnect');
 const { dummyCatList } = require('../dummyData');
 const router = express.Router();
-
+const isAuth = require("../models/isAuth");
 
 //session
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
 var root = './user'; //root folder to pages
 
 //router dependencies
@@ -19,20 +20,6 @@ router.use(cors({
   method: ["GET","POST"],
   credentials: true
 }));
-
-router.use(cookieParser());
-router.use(session({
-  key: "username",
-  secret: "Group2",
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    expires: 60 * 60,
-  },
-}));
-
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
 
 // full route to login page: /login
 router.get(`${LOGIN_ROUTE}`, function (req, res) {
@@ -99,7 +86,6 @@ router.post(`${SIGNUP_ROUTE}`, async function (req,res){
                     `, [role, userName, displayName, details, hash]);
                 const User = {role: role, user_name: userName};
                 req.session.user = User;
-                console.log(req.session.user);
                 res.redirect("/my-account");
             });
             
@@ -107,14 +93,14 @@ router.post(`${SIGNUP_ROUTE}`, async function (req,res){
 })});
 
 // full route to my-account page: /my-account
-router.get(`${MY_ACCOUNT_ROUTE}`, function (req, res) {
+router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
   const user = null; //store info to display 
   res.render("layout.ejs", {
     title: "My Account",
     bodyFile: `${root}/my_account`,
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
-    user: user
+    req: req,
   });
 });
 

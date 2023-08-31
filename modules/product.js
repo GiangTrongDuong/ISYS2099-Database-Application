@@ -7,6 +7,19 @@ const db = require('../models/function_product.js');
 
 let root = `.${PRODUCT_ROUTE}`
 
+//session
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+router.use(cors({
+  origin: ["http://localhost:3000"],
+  method: ["GET","POST"],
+  credentials: true
+}));
+//end-of session
+
 // full route to product-detail page: /product/:id
 router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => { 
   try{

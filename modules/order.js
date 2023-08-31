@@ -6,6 +6,22 @@ const router = express.Router();
 
 let root = `.${ORDER_ROUTE}`;
 
+//session
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+router.use(cors({
+  origin: ["http://localhost:3000"],
+  method: ["GET","POST"],
+  credentials: true
+}));
+
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+//end-of session  
+
 // full route to order page: /order/order
 router.get(`${ORDER_ROUTE}`, function (req, res) {
   const order = null; //store info to display 
