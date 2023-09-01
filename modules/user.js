@@ -32,6 +32,7 @@ router.get(`${LOGIN_ROUTE}`, function (req, res) {
     })
 });
 
+// Verify log in - might want to move query to models/user_authentication
 router.post(`${LOGIN_ROUTE}`, async function (req, res) {
   var userName = req.body.username;
   var password = req.body.password;
@@ -53,7 +54,6 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
           res.redirect("/login");
         }
     })
-  
 })
 
 // full route to signup page: /signup
@@ -66,6 +66,7 @@ router.get(`${SIGNUP_ROUTE}`, function (req, res) {
   });
 });
 
+//Verify sign up - might want to move the query to models/user_authentication
 router.post(`${SIGNUP_ROUTE}`, async function (req,res){
   var role = req.body.account;
   var userName = req.body.username;
@@ -76,32 +77,35 @@ router.post(`${SIGNUP_ROUTE}`, async function (req,res){
   database.query(`SELECT * 
         FROM user 
         WHERE user_name = "${userName}";`,(error, results) => {
-        if(results.length > 0){
-        console.log("Taken username!");
-        } else {
-            bcrypt.hash(password, saltRounds, function (err, hash){
-                const result = database.query(`
-                    INSERT INTO user (role, user_name, display_name, details, password_hash)
-                    VALUE (?,?,?,?,?)
-                    `, [role, userName, displayName, details, hash]);
-                const User = {role: role, user_name: userName};
-                req.session.user = User;
-                res.redirect("/my-account");
-            });
-            
-        }
-})});
+          if(results.length > 0){
+            console.log("Taken username!");
+          } else { 
+              bcrypt.hash(password, saltRounds, function (err, hash){
+                  const result = database.query(`
+                      INSERT INTO user (role, user_name, display_name, details, password_hash)
+                      VALUE (?,?,?,?,?)
+                      `, [role, userName, displayName, details, hash]);
+                  const User = {role: role, user_name: userName};
+                  req.session.user = User;
+                  res.redirect("/my-account");
+              });
+          }
+        })
+});
 
 // full route to my-account page: /my-account
-router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
-  const user = null; //store info to display 
-  res.render("layout.ejs", {
-    title: "My Account",
-    bodyFile: `${root}/my_account`,
-    // TODO: add real data - categoryList
-    categoryList: dummyCatList,
-    req: req,
-  });
+// set UID here just to test
+router.get(`${MY_ACCOUNT_ROUTE}/:uid`, isAuth.isAuth, function (req, res) { 
+  //why dont we check isAuth right here? if false then redirect to log in
+  const user = get_user_data(req.params.uid); //store info to display 
+  res.json(user);
+  // res.render("layout.ejs", {
+  //   title: "My Account",
+  //   bodyFile: `${root}/my_account`,
+  //   // TODO: add real data - categoryList
+  //   categoryList: dummyCatList,
+  //   req: req,
+  // });
 });
 
 module.exports = router;

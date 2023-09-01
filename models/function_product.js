@@ -89,5 +89,26 @@ async function contain_word (query_word, limit) {
     })
 }
 
-module.exports = { from_category, from_seller, from_id, contain_word}
+async function getPrice(pid){
+    return new Promise((resolve, reject) => {
+        database.query(`SELECT price FROM product WHERE id = ${pid} LIMIT 1;`, function (err, result){
+            if (err) reject({"message":"Error getting price " + err});
+            // else resolve(parseInt(result.price));
+            else resolve(result[0].price);
+        });
+    });
+}
+
+async function getVolume(pid){
+    return new Promise((resolve, reject) => {
+        database.query(`SELECT length, width, height FROM product 
+            WHERE id = ${pid} LIMIT 1;`, function (err, result){
+            if (err) reject({"message":"Error getting dimensions " + err});
+            // else resolve(parseInt(result.price));
+            else resolve(result[0].length * result[0].width * result[0].height);
+        });
+    });
+}
+
+module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume}
 

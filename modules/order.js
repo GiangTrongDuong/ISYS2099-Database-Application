@@ -23,15 +23,20 @@ router.use(bodyParser.json());
 //end-of session  
 
 // full route to order page: /order/order
-router.get(`${ORDER_ROUTE}`, function (req, res) {
-  const order = null; //store info to display 
-  res.render("layout.ejs", {
-    title: "Place Order",
-    bodyFile: `${root}/place_order`,
-    // TODO: add real data - categoryList
-    categoryList: dummyCatList,
-    order: order
-  });
+//TODO: turn this into POST
+router.get(`${ORDER_ROUTE}/`, async (req, res) => {
+  // const order = JSON.parse(req.params.product_quantity_list); //store info to display 
+  const order = [{"pid": 1, "quantity": 10}, {"pid": 2, "quantity":4}];
+  const message = await db.place_order(1,order);
+  res.json(message);
+  console.log(message);
+  // res.render("layout.ejs", {
+  //   title: "Place Order",
+  //   bodyFile: `${root}/place_order`,
+  //   // TODO: add real data - categoryList
+  //   categoryList: dummyCatList,
+  //   order: order
+  // });
 });
 
 // full route to order-history page: /order/history
@@ -56,15 +61,16 @@ router.get(`${ORDER_HISTORY_ROUTE}/:uid`, async (req, res) => { //add user id to
 // full route to order-detail page: /order/order/:id
 router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
   try{
-    const order = await db.get_order_item(req.params.id);
-    res.render("layout.ejs", {
-      title: "Order Detail",
-      bodyFile: `${root}/order_detail`,
-      // TODO: add real data - categoryList
-      categoryList: dummyCatList,
-      order: order,
-      order_id: req.params.id
-    });
+    const {order_items, total_price} = await db.get_order_item(req.params.id);
+    res.json({"order_items": order_items, "total_price": total_price});
+    // res.render("layout.ejs", {
+    //   title: "Order Detail",
+    //   bodyFile: `${root}/order_detail`,
+    //   // TODO: add real data - categoryList
+    //   categoryList: dummyCatList,
+    //   order: order,
+    //   order_id: req.params.id
+    // });
   }
   catch (err) {
     res.send("Cannot fetch items from oid: " + req.params.oid);

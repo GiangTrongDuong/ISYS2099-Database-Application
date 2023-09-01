@@ -58,10 +58,10 @@ router.get(`${PRODUCT_ROUTE}/seller/:seller_id`, async (req, res) => {
   }
 }); 
 
-// File to show products in a category
-router.get(`${PRODUCT_ROUTE}/cat/:category`, async (req, res) => { 
+// File to show products in a list of categories
+router.get(`${PRODUCT_ROUTE}/cat/:categories`, async (req, res) => { 
   try{
-    const product_list = await db.from_category(req.params.category);
+    const product_list = await db.from_category(req.params.categories);
     res.json({"Products": product_list});
     // res.render('layout.ejs', {
     //     title: "Product",
