@@ -1,6 +1,21 @@
+const mongoose = require("mongoose");
 const category = require('./category.js');
+const ObjectId = mongoose.Types.ObjectId;
 
-// This file declare methods to interact with mongo DB
+const connectMongoDB = () => {
+    console.log('Connecting to MongoDB ...')
+    mongoose.connect(
+        process.env.MONGODB_URI,
+      {useNewUrlParser: true, useUnifiedTopology: true}
+    )
+    .then(() => {
+      console.log('MongoDB connection SUCCESS');
+    })
+    .catch((err) => {
+      console.error('MongoDB connection FAIL', err)
+    });
+  }
+
 
 // save a category to db
 const saveCat = async(newID, newName, newAN, newAV, newAR, newPAId) => {
@@ -108,8 +123,44 @@ const dropAll = async () =>{
     await category.deleteMany({});
 }
 
-//find by category name and update
+
+
+//find by category id and update
+const updateCat = async (newCat) => {
+    try {
+        const oldCat = await category.findOne({_id: newCat._id});
+
+
+    } catch (err) {
+        console.log(err)
+    }
+}
 //find all children
+const getAllChildren = async (id) => {
+    try {
+        // const cat = await category.findOne({_id: id});
+        const children_cats = await category.aggregate( [
+            { $match: { _id: ObjectId(id) } },
+            { $graphLookup: {
+                  from: "categories",
+                  startWith: "$_id",
+                  connectFromField: "_id",
+                  connectToField: "parent_category",
+                  as: "children"
+               }
+            },
+            { $project: {
+                "children_categories": "$children._id"
+              }
+            }
+        ] )
+        
+        return children_cats;
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 //delete category (we'll check if it has products via sql then call this function)
 
-module.exports = { saveCat, createCats, findCatsByAttribute, findIdFromName, addAtt, dropAll}
+module.exports = {connectMongoDB, saveCat, createCats, findCatsByAttribute, findIdFromName, addAtt, dropAll, updateCat, getAllChildren}

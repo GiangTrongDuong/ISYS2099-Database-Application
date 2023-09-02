@@ -1,10 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
 const mg = require('./models/methods');
-const mongoose = require('mongoose');
-// const express = require('express');
-// const json_fn = './categoryData.json';
-const json_fn = './catWithId.json';
+const json_fn = './cat_att_list.json';
 
 //TODO: Specify collection name to ensure consistency?
 const forLoop = async (clist) => {
@@ -42,13 +39,26 @@ const forLoop = async (clist) => {
     return;
 }
 
-fs.readFile(json_fn, 'utf-8', async (readErr, data) => {
-    mg.dropAll();
-    if (readErr) {
-        console.log("Error reading file: " + readErr);
-        return;
-    }
-    const json_data = JSON.parse(data);
-    await forLoop(json_data);
-})
-// mongoose.disconnect();
+
+const importData = async () => {
+    fs.readFile(json_fn, 'utf-8', async (readErr, data) => {
+        try {
+            mg.dropAll();
+            if (readErr) {
+                console.log("Error reading file: " + readErr);
+                return;
+            }
+            const json_data = JSON.parse(data);
+            await forLoop(json_data);
+            console.log('Data Import Success')
+            process.exit()
+        } catch (error) {
+            console.error('Error with data import', error)
+            process.exit(1)
+        }
+    })
+}
+
+mg.connectMongoDB();
+importData()
+

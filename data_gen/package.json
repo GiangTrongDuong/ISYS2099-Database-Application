@@ -2,6 +2,7 @@
   "name": "Generate DB for group assignment",
   "version": "0.1.0",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
@@ -10,6 +11,9 @@
   },
   "main": "add_sql_data.js",
   "scripts": {
-    "start": "node add_data.js"
+    "start": "node add_data.js",
+    "importdata:mongodb": "node add_to_mongo.js",
+    "importdata:mysq": "node add_sql_data.js",
+    "test:mongo": "node test_mongo/test_mongo.js"
   }
 }
