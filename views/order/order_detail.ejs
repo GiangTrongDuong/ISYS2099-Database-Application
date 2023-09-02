@@ -1,3 +1,23 @@
 <div class="container-xl">
   Details for order <%= order_id %>
 </div>
+<%
+  if(order){
+    if(order.length > 0) {
+      order.forEach(function(item){
+%>
+        <div>
+            <h2>Product <%= item.product_name %> with quantity <%= item.quantity %></h2>
+            <!-- go to product link using item.product_id -->
+            <a href="">View <%= item.product_name %></a>
+        </div>
+<%
+      });
+    }
+  }
+  else {
+    %>
+      <div>No Data Found</div>
+    <%
+  }
+%>

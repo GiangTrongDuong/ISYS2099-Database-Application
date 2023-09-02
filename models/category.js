@@ -7,20 +7,18 @@ const categorySchema = new Schema({
         required: [true, "Name is required"]
     },
 
-    attribute:[{
-        attribute_name:{
-            type:String,
+    attribute:[
+        {aName:{
+            type:mongoose.Schema.Types.String,
         },
-        attribute_value:{
-            type: Schema.Types.Mixed,
-            required: true
+        aValue:{
+            type:mongoose.Schema.Types.Mixed
         },
-        attribute_require:{
-            type:Boolean,
-            required: true
-        }
-    }],
-    
+        aRequired:{
+            type:mongoose.Schema.Types.boolean
+        }}
+    ],
+
     parent_category:{
         type: mongoose.Types.ObjectId, 
         ref: 'Category',

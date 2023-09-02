@@ -1,12 +1,18 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
+
+//session and parser
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 const { navigatePage, formatCurrencyVND } = require('./helperFuncs.js');
 const { CONNECTED_URI, PORT } = require('./constants.js');
 const { dummyCatList, dummyProductCatList } = require('./dummyData.js');
 require('dotenv').config();
 const app = express();
 const { default: mongoose } = require('mongoose');
-
 
 async function connect(){
   try{
@@ -22,7 +28,27 @@ connect();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
+//Use body-parser middleware to parse URL-encoded data
+app.use(bodyParser.urlencoded({ extended: true
+ }));
+app.use(bodyParser.json());
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  method: ["GET","POST"],
+  credentials: true
+}));
+
+app.use(cookieParser());
+app.use(session({
+  key: "username",
+  secret: "Group2",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 3600000,
+  },
+}));
+
 // to apply css styles
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -46,7 +72,6 @@ app.use('/order', order)
 app.use('/', others)
 app.use('/', category)
 
-
 // full route to Home page: /
 app.get("/", function (req, res) {
     res.render('layout.ejs', {
@@ -55,15 +80,20 @@ app.get("/", function (req, res) {
         formatCurrencyVND: formatCurrencyVND,
         // TODO: add real data
         categoryList: dummyCatList,
-        // TODO: add real data
-        // render 3 categories
-        // render products from database for 3 categories
-        categoryProductList: dummyProductCatList,
+        res: res,
+        req: req,
     })
+    console.log(req.session.user);
 });
-
 
 app.listen(PORT, function () {
     console.log("Server started on port 3000");
 });
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if(err) throw err;
+    res.redirect("/");
+  });
+})
 
