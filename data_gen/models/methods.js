@@ -18,38 +18,17 @@ const connectMongoDB = () => {
 
 
 // save a category to db
-const saveCat = async(newID, newName, newAN, newAV, newAR, newPAId) => {
+const saveCat = async(newID, newName, newAtt, newPAId) => {
     try {
         var newCat = new category;
         newCat._id = newID;
         newCat.name = newName;
-        // attribute
-        var an = newAN;
-        var av = newAV;
-        var ar = false;
-        if(!newAN){
-            ar = false;
-        }
-        else{
-            ar = newAR;
-        }
-        newCat.attribute = [
-            {aName: an,
-            aValue: av,
-            aRequired: ar}
-        ]
-        //
-        if (!newPAId){
-            newCat.parent_category = null;
-        }
-        else {
-            newCat.parent_category = newPAId;
-        }
+        newCat.attribute = newAtt
+        newCat.parent_category = newPAId;
         
-        var saved = await newCat.save();
+        let saved = await newCat.save();
+        saved = addParentAtt(newID)
         console.log("=== Category " + newName + " saved to DB.");
-        console.log("oooooo parent: " + newCat.parent_category);
-        // return saved;
     }
     catch (error) {
         console.log("Category save error: " + error);
@@ -60,17 +39,24 @@ const createCats = async(arrayOfCats) => {
 
 }
 
-// the below is not tested
-const findCatsByAttribute = async(newAN, newAV) => {
+// findCatsByAttribute takes a pair of attribute name & value, then return a list of category has that attribute
+const findCatsByAttribute = async(name, value) => {
     try {
-        const sameAN = await category.find({ attribute_name: newAN }, function (err, manyCat) {
-            if (err) return console.log("Finding category by attribute: " + err);
-        })
-        // TODO : loop through manyCat and check for value = newAV
-        // return list of category name -> SQL: find product where category in returned list
+        //find all cats that have aName = name & aValue = value
+        const cats = await category.find({attribute: {$elemMatch: {aName: name, aValue: value}}})
+        return cats
     }
     catch (err) {
         console.log("Find by attribute error: " + err);
+    }
+}
+
+const findCatById = async(id) => {
+    try {
+        const cat = await category.findOne({_id: id});
+        return cat;
+    } catch (err) {
+        console.log(err)
     }
 }
 
@@ -119,6 +105,39 @@ const addAtt = async (catName) => {
     }
 }
 
+
+// add parent's attribute to current object's attribute
+// the data is structured nicely so we only need to go up 1 level
+const addParentAtt = async (catId) => {
+    try{
+        const current = await findCatById(catId);
+        if (current.parent_category){
+            const parent = await findCatById(current.parent_category);
+            if (parent.attribute) {
+                for (const pa of parent.attribute) {
+                    let existed = false;
+                    for (const ca of current.attribute) {
+                        if (ca._id == pa._id) {
+                            existed = true;
+                            break;
+                        }
+                    }
+                    if (!existed) current.attribute.push(pa);
+                }
+                await current.save();
+                console.log(`${current.name}: added parent's attribute (parent is ${parent.name})`);
+            }
+        }
+        else {
+            console.log(`${current.name}: no parent to inherit attribute`);
+        }
+        return current;
+    }
+    catch (err){
+        console.log("Cannot add parent's attribute" + err);
+    }
+}
+
 const dropAll = async () =>{
     await category.deleteMany({});
 }
@@ -128,7 +147,7 @@ const dropAll = async () =>{
 //find by category id and update
 const updateCat = async (newCat) => {
     try {
-        const oldCat = await category.findOne({_id: newCat._id});
+        const oldCat = await findCatById(newCat._id)
 
 
     } catch (err) {
@@ -163,4 +182,4 @@ const getAllChildren = async (id) => {
 
 //delete category (we'll check if it has products via sql then call this function)
 
-module.exports = {connectMongoDB, saveCat, createCats, findCatsByAttribute, findIdFromName, addAtt, dropAll, updateCat, getAllChildren}
+module.exports = {connectMongoDB, saveCat, createCats, findCatsByAttribute, findCatById, findIdFromName, addAtt, addParentAtt, dropAll, updateCat, getAllChildren}

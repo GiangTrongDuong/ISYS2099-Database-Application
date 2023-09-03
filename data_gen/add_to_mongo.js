@@ -3,36 +3,28 @@ const fs = require('fs');
 const mg = require('./models/methods');
 const json_fn = './cat_att_list.json';
 
+
 //TODO: Specify collection name to ensure consistency?
 const forLoop = async (clist) => {
     for (const c of clist){
         try{
-            const checkId = await mg.findIdFromName(c.name);
-            if(!checkId){
+            const checkId = await mg.findCatById(c._id['$oid']);
+            if(!checkId){ //if category is not added
                 console.log("\t Saving category: " + c.name);
-                // save instead of create so that we catch error for the category
-                if (c.parent_category){
-                    const saved = await mg.saveCat(c._id['$oid'], c.name, c.attribute_name, c.attribute_value, c.attribute_required, c.parent_category['$oid']);
+                const att_list = c.attribute;
+                let al = []
+                for (const a of att_list) {
+                    let temp = {...a, _id: a._id['$oid'] }
+                    al.push(temp)
                 }
-                else{
-                    const saved = await mg.saveCat(c._id['$oid'], c.name, c.attribute_name, c.attribute_value, c.attribute_required, null);
-                }
-                console.log("Added category: " + c.name);
-                console.log("Adding attributes...");
-                try{
-                    await mg.addAtt(c.name);
-                }
-                catch(err){
-                    console.log("OOOOOOOOOO " + err);
-                }
-                console.log("--------------------------------------------");
+                const saved = await mg.saveCat(c._id['$oid'], c.name, al, c.parent_category ? c.parent_category['$oid'] : null);
             }
             else{
                 console.log("This category is already in the database: " + c.name);
             }
         }
         catch (err){
-            console.log(err);
+            // console.log(err);
         }
         
     }
