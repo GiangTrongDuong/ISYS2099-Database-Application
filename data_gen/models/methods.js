@@ -21,14 +21,16 @@ const connectMongoDB = () => {
 const saveCat = async(newID, newName, newAtt, newPAId) => {
     try {
         var newCat = new category;
-        newCat._id = newID;
+        if (newID) newCat._id = newID
         newCat.name = newName;
         newCat.attribute = newAtt
         newCat.parent_category = newPAId;
+        console.log(newCat)
         
         let saved = await newCat.save();
-        saved = addParentAtt(newID)
-        console.log("=== Category " + newName + " saved to DB.");
+        saved = addParentAtt(newCat._id);
+        console.log("=== Category " + newCat.name + " saved to DB.");
+        return saved;
     }
     catch (error) {
         console.log("Category save error: " + error);

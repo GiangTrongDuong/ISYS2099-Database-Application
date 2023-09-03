@@ -5,8 +5,9 @@ const mg = require('../models/methods');
 const {sendResponse} = require('../middleware/middleware');
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 mg.connectMongoDB()
 
@@ -14,7 +15,7 @@ app.get("/", (req, res) => {
   res.json({ message: "API running..." });
 });
 
-app.get("/category/get-all-childern/:id", async (req, res) => {
+app.get("/category/get-all-children/:id", async (req, res) => {
   
   try {
     const id = req.params.id;
@@ -25,6 +26,17 @@ app.get("/category/get-all-childern/:id", async (req, res) => {
     sendResponse(res, 500, `Error ${err}`);
   }
 
+});
+
+app.post("/category", async (req, res) => {
+  try {
+    const {_id, name, attribute, parent_category} = req.body;
+    const result = await mg.saveCat(_id, name, attribute, parent_category);
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
 });
 
 
