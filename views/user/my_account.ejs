@@ -54,10 +54,18 @@
                 consequuntur dolores impedit consequatur corporis dolore recusandae perspiciatis at a, esse, quam
                 architecto maiores saepe.
             </h6>
-            <!-- Seller products -->
-            <% if (user.role == 'seller') { %>
+            <!-- Seller products / Items / Order History -->
+            <%if (user.role == "user") {%>
+              <form action="" method="">
+                <button type="submit" class="btn btn-outline-dark">Order History</button>
+              </form>
+            <%} else if (user.role == "warehouse") {%>
+              <form action="" method="">
+                <button type="submit" class="btn btn-outline-dark">Warehouse Item</button>
+              </form>
+            <%} else if (user.role == "seller"){%>
               <a href="<%= navigatePage("product-list-seller", user.id) %>">View Products</a>
-            <% } %>
+            <%}%>
           </article>
         </div>
       </section>
