@@ -32,6 +32,8 @@ const navigatePage = (type, id = -1) => {
             return `${CATEGORY_ROUTE}`;
         case "product":
             return `${PRODUCT_ROUTE}/${id}`;
+        case "product-list-seller":
+            return `${PRODUCT_ROUTE}/seller/${id}`;
         case "cart":
             return `${CART_ROUTE}`;
         case "order":

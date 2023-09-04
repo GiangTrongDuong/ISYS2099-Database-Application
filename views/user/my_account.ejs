@@ -1,7 +1,106 @@
-<div class="container-xl">
-  My Account page
-  <a href="/">click</button>
-  <form action="/logout" method="POST">
-    <button action="submit" class="btn-primary">Logout</button>
-  </form>
+<div class="page-content page-container d-flex justify-content-center p-lg-5 p-3 w-100 h-75" id="page-content">
+  <section class="card user-card-full w-md-75 w-100 h-100 overflow-scroll overflow-sm-hidden shadow-sm">
+    <div class="row h-100">
+      <!-- Basic User Info -->
+      <section class="col-md-4 col-sm-5 user-profile h-100" style="background: linear-gradient(to right, #ee5a6f, #f29263);">
+        <div class="card-body
+        d-flex flex-column align-items-center justify-content-center gap-2
+        h-100 text-center text-white">
+          <img src="https://img.icons8.com/bubbles/100/000000/user.png"
+            class="d-none d-sm-block img-fluid rounded-circle w-75 ratio ratio-1x1 object-fit-cover" alt="User-Profile-Image">
+          <h6 class="fw-bold fs-4 line-clamp-1">
+            <%= user.display_name %>
+          </h6>
+          <p>
+            <%= user.role %>
+          </p>
+          <div class="row row-cols-1 row-cols-md-2 justify-content-between w-100">
+            <button class="update-button col btn btn-link link-light link-offset-2">
+              <i class="fa-solid fa-pen-to-square feather icon-edit"></i>
+              Update
+            </button>
+            <form class="col mb-0" action="/logout" method="POST">
+              <button action="submit" class=" btn btn-link link-light link-offset-2">Logout</button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- Display Section -->
+      <section class="info-section col-md-8 col-sm-7 h-100">
+        <div class="card-body h-100 overflow-scroll">
+          <h6 class="mb-4 pb-3 border-bottom fw-bold">Information</h6>
+          <article class="row">
+            <div class="col-sm-6">
+              <p class="fw-bold mb-3 line-clamp-1">Username</p>
+              <h6 class="text-muted">
+                <%= user.display_name %>
+              </h6>
+            </div>
+            <div class="col-sm-6">
+              <p class="fw-bold mb-3">Password</p>
+              <h6 class="text-secondary">&#x25CF; &#x25CF; &#x25CF; &#x25CF; &#x25CF;</h6>
+            </div>
+          </article>
+          <h6 class="mb-4 mt-4 pb-3 border-bottom fw-bold">Biography</h6>
+          <article class="row flex-grow-1">
+            <p class="fw-bold mb-3">Details</p>
+            <h6 class="text-muted flex-grow-1 lh-base">
+              <%= user.details %>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto culpa, mollitia temporibus molestias
+                sapiente omnis voluptatem fugiat suscipit, dolores in porro. Voluptates dolorum odio quae et, atque
+                iusto
+                esse repellendus!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sint ullam eius in, distinctio eligendi
+                consequuntur dolores impedit consequatur corporis dolore recusandae perspiciatis at a, esse, quam
+                architecto maiores saepe.
+            </h6>
+            <!-- Seller products -->
+            <% if (user.role == 'seller') { %>
+              <a href="<%= navigatePage("product-list-seller", user.id) %>">View Products</a>
+            <% } %>
+          </article>
+        </div>
+      </section>
+      <!-- Update section -->
+      <section class="update-section col-sm-8 h-100" style="display: none;">
+        <div class="card-body h-100 overflow-scroll">
+          <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Information</h6>
+          <form action="/update-user-info" method="POST">
+            <!-- Example form fields, modify as needed -->
+            <div class="mb-3">
+              <label for="user_name" class="form-label">Username</label>
+              <input type="text" class="form-control" id="user_name" name="user_name" value="<%= user.user_name %>">
+            </div>
+            <div class="mb-3">
+              <label for="display_name" class="form-label">Display Name</label>
+              <input type="text" class="form-control" id="display_name" name="display_name" value="<%= user.display_name %>">
+            </div>
+            <div class="mb-3">
+              <label for="details" class="form-label">Details</label>
+              <textarea class="form-control" id="details" name="details" rows="4"><%= user.details %></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark">Save Changes</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </section>
+</div>
+
+
+<script>
+  document.querySelector('.update-button').addEventListener('click', function () {
+    const infoSection = document.querySelector('.info-section');
+    const updateSection = document.querySelector('.update-section');
+
+    // Toggle display properties
+    if (infoSection.style.display !== 'none') {
+      infoSection.style.display = 'none';
+      updateSection.style.display = 'block';
+    } else {
+      infoSection.style.display = 'block';
+      updateSection.style.display = 'none';
+    }
+  });
+</script>
 </div>

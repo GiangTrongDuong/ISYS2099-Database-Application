@@ -4,7 +4,7 @@ const database = require('./dbSqlConnect');
 
 const get_user_data = async (uid) => {
     return Promise ((resolve, reject) => {
-        database.query(`SELECT role, user_name, display_name, details
+        database.query(`SELECT id, role, user_name, display_name, details
             FROM user WHERE id = ${uid};`, (error, results) => {
                 if (error) reject (error);
                 else resolve(results);
