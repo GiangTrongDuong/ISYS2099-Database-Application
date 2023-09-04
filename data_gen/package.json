@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node add_data.js",
     "importdata:mongodb": "node add_to_mongo.js",
-    "importdata:mysq": "node add_sql_data.js",
+    "importdata:mysql": "node add_sql_data.js",
     "test:mongo": "node test_mongo/test_mongo.js"
   }
 }

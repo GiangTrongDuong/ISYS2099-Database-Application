@@ -17,38 +17,43 @@ CATEGORY = ["Phone", "Phone Accessories", "Computer", "Computer Accessories",
 # Export file names and header
 EXPORT = {
     "user":{
-        "fn": "./py_data/user.csv",
+        "fn": "./user.csv",
         "header": ["id","role","user_name","display_name","details","password_hash"]
     },
     "category":{
-        "fn": "./py_data/category.csv",
+        "fn": "./category.csv",
         "header": ["id","category_name","parent_category_id","attribute_name","attribute_value","required"]
     },
     "product":{
-        "fn": "./py_data/product.csv",
+        "fn": "./product.csv",
         "header": ["id","title","seller_id","price","description","category","length","width","height","image","remaining","created_at","updated_at"]
     },
     "warehouse":{
-        "fn": "./py_data/warehouse.csv",
+        "fn": "./warehouse.csv",
         "header": ["id","name","address","total_area","remaining_area"]
     },
     "cart_details":{
-        "fn": "./py_data/cart_details.csv",
+        "fn": "./cart_details.csv",
         "header": ["customer_id","product_id","quantity"]
     },
     "order_details":{
-        "fn": "./py_data/order_details.csv",
+        "fn": "./order_details.csv",
         "header": ["id","customer_id","status","total_price", "created_at"]
     },
     "order_item":{
-        "fn": "./py_data/order_item.csv",
+        "fn": "./order_item.csv",
         "header": ["order_id","product_id","quantity"]
     },
     "warehouse_item":{
-        "fn": "./py_data/warehouse_item.csv",
+        "fn": "./warehouse_item.csv",
         "header": ["warehouse_id","product_id","quantity"]
     }
 }
+
+IMAGE_FILE = './product_image/random_image_urls.txt' # should have 200 lines of image urls
+IMG_ARRAY = []
+with open (IMAGE_FILE, 'r') as f:
+    IMG_ARRAY = f.readlines()
 
 def user(num_rows, start_from = 1):
     # doesn't specify that 1 admin - 1 wh; the below is not tested
@@ -120,7 +125,7 @@ def product(num_rows,start_from = 1):
             length = random.randint(10,500) / 100
             width  = random.randint(10,500) / 100
             height = random.randint(10,500) / 100
-            image = FAKER.file_name(category='image')
+            image = IMG_ARRAY[new_id-1].replace('\n', '')
             remaining = random.randint(1, 150)
             date1 = FAKER.date_time()
             date2 = FAKER.date_time()

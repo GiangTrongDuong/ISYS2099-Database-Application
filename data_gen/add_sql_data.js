@@ -41,11 +41,22 @@ connection.connect(err => {
             }
         });
     };
-    connection.beginTransaction((err) => {
+
+    connection.beginTransaction(async (err) => {
+        if (err) console.log(err);
         // Execute: create tables
-        executeSqlFile('./sql_data/db_create.sql');
+        await executeSqlFile('./sql_data/db_create.sql');
         // Execute: insert data
-        executeSqlFile('./sql_data/db_inserts.sql');
+        await executeSqlFile('./sql_data/db_inserts.sql');
+        // Procedures file, like ./sql_data/db_warehouse_trans.sql, does not run
+        // They needed to be copied and executed in dbms
+        await executeSqlFile('./sql_data/db_warehouse_trans.sql');
+        // console.log(" ============== Entering procedures ======================= ");
+        // const warehouse_transaction = fs.readFileSync('./sql_data/db_warehouse_trans.sql', 'utf-8');
+        // connection.query(warehouse_transaction, (error, results) =>{
+        //     if (error) console.log(error);
+        //     else console.log("Procedure stored successfully: " + results);
+        // });
 
     // Commit the transaction if everything is successful
         connection.commit((err => {
