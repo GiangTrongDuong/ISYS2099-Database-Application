@@ -63,6 +63,7 @@ router.get(`${SIGNUP_ROUTE}`, function (req, res) {
     bodyFile: `${root}/signup`,
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
+    req: req,
   });
 });
 
