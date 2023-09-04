@@ -95,17 +95,66 @@ router.post(`${SIGNUP_ROUTE}`, async function (req,res){
 
 // full route to my-account page: /my-account
 // set UID here just to test
-router.get(`${MY_ACCOUNT_ROUTE}/:uid`, isAuth.isAuth, function (req, res) { 
+router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) { 
   //why dont we check isAuth right here? if false then redirect to log in
-  const user = get_user_data(req.params.uid); //store info to display 
-  res.json(user);
-  // res.render("layout.ejs", {
-  //   title: "My Account",
-  //   bodyFile: `${root}/my_account`,
-  //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
-  //   req: req,
-  // });
+  const userInfo = (req.session.user); //store info to display 
+  const userName = userInfo.user_name;
+  console.log(userName);
+  const role = userInfo.role;
+  database.query(`SELECT * 
+  FROM user 
+  WHERE user_name = "${userName}"`,(error,result) => {
+    if(result){
+      console.log(result);
+      const user_name = result[0].user_name;
+      const display_name = result[0].display_name;
+      const details = result[0].details;
+      //req will be changed based on Nhung proposal
+
+      if(role == "user"){
+        res.render("layout.ejs", {
+          title: "My Account",
+          bodyFile: `${root}/my_account`,
+          // TODO: add real data - categoryList
+          categoryList: dummyCatList,
+          req: req,
+          user_name: user_name,
+          display_name: display_name,
+          details: details,
+          role: "user",
+        });
+      } else if (role == "Warehouse Admin"){
+        res.render("layout.ejs", {
+          title: "My Account",
+          bodyFile: `${root}/my_account`,
+          // TODO: add real data - categoryList
+          categoryList: dummyCatList,
+          req: req,
+          user_name: user_name,
+          display_name: display_name,
+          details: details,
+          role: "warehouse",
+        });
+      } else if (role == "Seller"){
+        res.render("layout.ejs", {
+          title: "My Account",
+          bodyFile: `${root}/my_account`,
+          // TODO: add real data - categoryList
+          categoryList: dummyCatList,
+          req: req,
+          user_name: user_name,
+          display_name: display_name,
+          details: details,
+          role: "seller",
+        });
+      }
+      
+    } else {
+      console.log("error finding user from database");
+    }
+  });
+
+  
 });
 
 module.exports = router;

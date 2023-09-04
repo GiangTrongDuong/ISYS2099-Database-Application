@@ -1,7 +1,31 @@
-<div class="container-xl">
-  My Account page
-  <a href="/">click</button>
-  <form action="/logout" method="POST">
-    <button action="submit" class="btn-primary">Logout</button>
+<div class="row">
+  <div class="container-xl">
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+            class="rounded-circle img-fluid" style="width: 150px;">
+          <h5 class="my-3"><%= display_name %></h5>
+          <p class="text-muted mb-1"><%= user_name %></p>
+          <p class="text-muted mb-4"><%= details %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <%if (role == "user") {%>
+      <form action="" method="">
+        <button type="submit" class="btn btn-outline-dark">Order History</button>
+      </form>
+    <%} else if (role == "warehouse") {%>
+      <form action="" method="">
+        <button type="submit" class="btn btn-outline-dark">Warehouse Item</button>
+      </form>
+    <%} else if (role == "seller"){%>
+      <form action="" method="">
+        <button type="submit" class="btn btn-outline-dark">My Products</button>
+      </form>
+    <%}%>
   </form>
 </div>
