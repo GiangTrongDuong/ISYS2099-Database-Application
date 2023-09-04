@@ -28,3 +28,8 @@ Tue 29/8: Viet Anh
 Wed 30/8: Viet Anh
 - MongoDB: attribute to attribute: [{name, value, required}]
 - Script to reflect this change, models/category also
+
+Sun 3/9: Khanh
+- Function to get all children and below from a category
+- Route to test the above
+- package.json: set script name
