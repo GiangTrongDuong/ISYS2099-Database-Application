@@ -76,14 +76,16 @@ app.use('/', category)
 app.get("/", function (req, res) {
     res.render('layout.ejs', {
         title: "Home",
-        bodyFile: "./home/index.ejs",
+        bodyFile: "home/index.ejs",
         formatCurrencyVND: formatCurrencyVND,
         // TODO: add real data
         categoryList: dummyCatList,
+        // TODO: add real data
+        categoryProductList: dummyProductCatList,
         res: res,
         req: req,
     })
-    console.log(req.session.user);
+    console.log(req?.session?.user);
 });
 
 app.listen(PORT, function () {

@@ -25,7 +25,7 @@
                   </ul>
               </li>
 
-              <% if (!req.session.user) {%>
+              <% if (!req?.session?.user) {%>
                   <li class="nav-item">
                       <a class="nav-link" href="<%= navigatePage("login") %>"> <i class="fa-solid fa-arrow-right-to-bracket"></i> Log in</a>
                   </li>
