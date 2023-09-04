@@ -98,18 +98,42 @@ router.post(`${SIGNUP_ROUTE}`, async function (req,res){
 
 // full route to my-account page: /my-account
 // set UID here just to test
-router.get(`${MY_ACCOUNT_ROUTE}/:uid`, isAuth.isAuth, function (req, res) { 
+router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) { 
   //why dont we check isAuth right here? if false then redirect to log in
-  const user = get_user_data(req.params.uid); //store info to display 
-  // res.json(user);
-  res.render("layout.ejs", {
-    title: "My Account",
-    bodyFile: `${root}/my_account`,
-    // TODO: add real data - categoryList
-    categoryList: dummyCatList,
-    // req: req,
-    userSession: req?.session?.user,
-    user: user
+  const userInfo = (req.session.user); //store info to display 
+  const userName = userInfo.user_name;
+  console.log(userName);
+  const role = userInfo.role;
+  database.query(`SELECT * 
+  FROM user 
+  WHERE user_name = "${userName}"`,(error,result) => {
+    if(result){
+      console.log(result);
+      const user = result[0]; 
+      user.role = () => {
+        if (user.role == "user"){
+          return "user";
+        } else if (user.role == "Warehouse Admin"){
+          return "warehouse";
+        } else if (user.role == "Seller"){
+          return "seller";
+        }
+      }
+      // res.json(user);
+      res.render("layout.ejs", {
+        title: "My Account",
+        bodyFile: `${root}/my_account`,
+        // TODO: add real data - categoryList
+        categoryList: dummyCatList,
+        // req: req,
+        userSession: req?.session?.user,
+        user: user
+      });
+      
+    } else {
+      console.log("error finding user from database");
+      // render error page
+    }
   });
 });
 
