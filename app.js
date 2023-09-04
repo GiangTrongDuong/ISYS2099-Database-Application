@@ -82,8 +82,9 @@ app.get("/", function (req, res) {
         categoryList: dummyCatList,
         // TODO: add real data
         categoryProductList: dummyProductCatList,
-        res: res,
-        req: req,
+        // res: res,
+        // req: req, // => session: req.session.user
+        userSession: req?.session?.user
     })
     console.log(req?.session?.user);
 });

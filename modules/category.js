@@ -14,7 +14,8 @@ router.get(`${CATEGORY_ROUTE}`, async (req, res) => {
             title: "Category List",
             bodyFile: `${root}/categories.ejs`,
             // TODO: add real data - categoryList
-            categoryList: dummyCatList
+            categoryList: dummyCatList,
+            userSession: req?.session?.user,
         });
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
@@ -35,9 +36,11 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
             title: "Category",
             bodyFile: `${root}/category.ejs`,
             formatCurrencyVND: formatCurrencyVND,
-            category: renderedCategory,
             // TODO: add real data - categoryList
-            categoryList: dummyCatList
+            categoryList: dummyCatList,
+            userSession: req?.session?.user,
+            // TODO: add real data - category
+            category: renderedCategory,
         });
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });

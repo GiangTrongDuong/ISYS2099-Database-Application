@@ -28,7 +28,8 @@ router.get(`${LOGIN_ROUTE}`, function (req, res) {
       bodyFile: `${root}/login`,
       // TODO: add real data - categoryList
       categoryList: dummyCatList,
-      req,
+      // req,
+      userSession: req?.session?.user
     })
 });
 
@@ -63,7 +64,8 @@ router.get(`${SIGNUP_ROUTE}`, function (req, res) {
     bodyFile: `${root}/signup`,
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
-    req: req,
+    // req: req,
+    userSession: req?.session?.user
   });
 });
 
@@ -99,14 +101,16 @@ router.post(`${SIGNUP_ROUTE}`, async function (req,res){
 router.get(`${MY_ACCOUNT_ROUTE}/:uid`, isAuth.isAuth, function (req, res) { 
   //why dont we check isAuth right here? if false then redirect to log in
   const user = get_user_data(req.params.uid); //store info to display 
-  res.json(user);
-  // res.render("layout.ejs", {
-  //   title: "My Account",
-  //   bodyFile: `${root}/my_account`,
-  //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
-  //   req: req,
-  // });
+  // res.json(user);
+  res.render("layout.ejs", {
+    title: "My Account",
+    bodyFile: `${root}/my_account`,
+    // TODO: add real data - categoryList
+    categoryList: dummyCatList,
+    // req: req,
+    userSession: req?.session?.user,
+    user: user
+  });
 });
 
 module.exports = router;
