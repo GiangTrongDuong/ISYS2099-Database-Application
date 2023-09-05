@@ -20,9 +20,9 @@ const PORT = process.env.PORT || 3000;
 
 const MEMBERS = [
     {
-        name: "Giang Tran Trong Duong",
-        studentID: "sxxxxxxx",
-        email: "@gmail.com",
+        name: "Giang Trong Duong",
+        studentID: "s3926135",
+        email: "s3926135@rmit.edu.com",
         github: "https://github.com/GiangTrongDuong",
     }, {
         name: "Tran Mai Nhung",
@@ -30,14 +30,14 @@ const MEMBERS = [
         email: "nhungmaitran1412@gmail.com",
         github: "https://github.com/Puppychan",
     }, {
-        name: "Nguyen Viet Anh",
-        studentID: "s3879954",
-        email: "",
+        name: "Ngo Viet Anh",
+        studentID: "s3928859",
+        email: "s3928859@rmit.edu.vn",
         github: "https://github.com/vietanh00",
     }, {
         name: "Tran Nguyen Ha Khanh",
         studentID: "s3877707",
-        email: "",
+        email: "s3877707@rmit.edu.vn",
         github: "https://github.com/hakhanhne"
     }
 ]

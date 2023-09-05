@@ -50,6 +50,7 @@ router.get(`${CONTACT_ROUTE}`, function(req, res) {
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
     userSession: req?.session?.user,
+    members: MEMBERS,
   }); 
 }); 
 
