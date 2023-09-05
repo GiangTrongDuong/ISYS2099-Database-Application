@@ -123,6 +123,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
           display_name: display_name,
           details: details,
           role: "user",
+          id: id,
         });
       } else if (role == "Warehouse Admin"){
         res.render("layout.ejs", {
@@ -135,6 +136,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
           display_name: display_name,
           details: details,
           role: "warehouse",
+          id: id,
         });
       } else if (role == "Seller"){
         res.render("layout.ejs", {
@@ -147,6 +149,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
           display_name: display_name,
           details: details,
           role: "seller",
+          id: id,
         });
       }
       

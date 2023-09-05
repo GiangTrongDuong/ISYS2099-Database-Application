@@ -58,7 +58,9 @@
                 <button type="submit" class="btn btn-outline-dark">Warehouse Item</button>
               </form>
             <%} else if (role == "seller"){%>
-              <a href="<%= navigatePage("product-list-seller", id) %>">View Products</a>
+              <form action="<%= navigatePage("product-list-seller", id) %>">
+                <button type="submit" class="btn btn-outline-dark" href="">View Products</a>
+                </form>
             <%}%>
           </article>
         </div>
