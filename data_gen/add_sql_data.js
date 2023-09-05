@@ -49,12 +49,13 @@ connection.connect(err => {
         // Execute: insert data
         await executeSqlFile('./sql_data/db_inserts.sql');
         // Procedures file, like ./sql_data/procedure_warehouse_trans.sql
-        // These files don't specify delimiter; but if you want to copy them in dbms, then you need delimiter
+        // These files must not specify delimiter; but if you want to copy them in dbms, then you need delimiter
         await executeSqlFile('./sql_data/procedure_warehouse_trans.sql');
         await executeSqlFile('./sql_data/procedure_place_order.sql');
         await executeSqlFile('./sql_data/procedure_free_wh_space.sql');
         await executeSqlFile('./sql_data/trigger_update_order.sql');
-        
+        await executeSqlFile('./sql_data/procedure_wh_move.sql');
+
     // Commit the transaction if everything is successful
         connection.commit((err => {
             if (err) {

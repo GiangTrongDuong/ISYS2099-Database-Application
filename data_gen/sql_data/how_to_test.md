@@ -71,3 +71,15 @@ update order_details set status = 'Rejected' where id = OID;
     product.remaining should stay the same
 - If the order status was not inbound, or if the new status is neither Rejected nor Accepted, error will be thrown.
 
+5. Test wh_move_product in procedure_wh_move.sql:
+- Run this statement to find out warehouses storing some product (replace with your pid):
+```
+SELECT wi.*, wh.remaining_area 
+FROM warehouse_item wi, warehouse wh WHERE wi.warehouse_id = wh.id AND wi.product_id = 6;
+```
+- Call the procedure (pid, quantity to be moved, source warehouse, destination warehouse).
+Make sure that your destination has enough space.
+```
+CALL wh_move_product(6, 1, 20, 1);
+```
+- Call the first statement again to see the difference. Notice the remaining_area as well.
