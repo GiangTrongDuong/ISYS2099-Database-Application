@@ -67,7 +67,7 @@ const category = require('./modules/category');
 
 app.use('/', user)
 app.use('/', product)
-app.use('/my-cart', cart)
+app.use('/', cart)
 app.use('/order', order)
 app.use('/', others)
 app.use('/', category)

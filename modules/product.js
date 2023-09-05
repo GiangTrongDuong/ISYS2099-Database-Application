@@ -1,6 +1,6 @@
 const express = require('express'); 
 const router = express.Router(); 
-const { dummyProduct, dummyCatList, dummyParentCatIds } = require('../dummyData.js');
+const { dummyCatList } = require('../dummyData.js');
 const { formatCurrencyVND, formatDate } = require('../helperFuncs.js');
 const { PRODUCT_ROUTE } = require('../constants.js');
 const db = require('../models/function_product.js');
@@ -23,20 +23,18 @@ router.use(cors({
 // full route to product-detail page: /product/:id
 router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => { 
   try{
-    // const product = dummyProduct;
+    // get product
     const product = await db.from_id(req.params['id']); //store info to display 
-    res.json({"product": product});
-    // res.render('layout.ejs', {
-    //     title: "Product",
-    //     bodyFile: `${root}/product`,
-    //     formatCurrencyVND: formatCurrencyVND,
-    //     // TODO: add real data - categoryList
-    //     categoryList: dummyCatList,
-    //     parentCategoryIds: dummyParentCatIds,
-    //     userSession: req?.session?.user,
-    //     product: product,
-    //     formatDate: formatDate
-    // });
+    res.render('layout.ejs', {
+        title: "Product",
+        bodyFile: `${root}/product`,
+        formatCurrencyVND: formatCurrencyVND,
+        // TODO: add real data - categoryList
+        categoryList: dummyCatList,
+        userSession: req?.session?.user,
+        product: product[0],
+        formatDate: formatDate
+    });
   }
   catch (err){
     res.send("Cannot fetch product with id " + req.params.id);
@@ -46,16 +44,18 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
 // full route to product-detail page: /product/seller/:seller_id
 router.get(`${PRODUCT_ROUTE}/seller/:seller_id`, async (req, res) => { 
   try{
-    const product_list = await db.from_seller(req.params.seller_id);
-    res.json({"product_list": product_list});
-    // res.render('layout.ejs', {
-    //     title: "Product",
-    //     bodyFile: `${root}/product`,
-    //     formatCurrencyVND: formatCurrencyVND,
-    //     // TODO: add real data - categoryList
-    //     categoryList: dummyCatList,
-    //     product_list: product_list
-    // });
+    const productList = await db.from_seller(req.params.seller_id);
+    // res.json({"product_list": product_list});
+    console.log(productList, productList.length);
+    res.render('layout.ejs', {
+        title: "Product",
+        bodyFile: `${root}/product-list`,
+        formatCurrencyVND: formatCurrencyVND,
+        // TODO: add real data - categoryList
+        categoryList: dummyCatList,
+        userSession: req?.session?.user,
+        productList: productList
+    });
   }
   catch (err){
     res.send("Cannot fetch product by seller with id " + req.params.seller_id);

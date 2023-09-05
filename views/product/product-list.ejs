@@ -8,7 +8,7 @@
     </div>
 </header>
 <section id="categories" class="container mt-5">
-    <section class="row my-5 py-5">
+    <section class="container px-4 px-lg-5 mt-5 ">
         <h1 class="fs-1 pb-3
         fw-bolder line-clamp-1 text-center text-dark ">
             Product List
@@ -18,7 +18,7 @@
             row-cols-1 row-cols-sm-2 row-cols-md-3 
             justify-content-center">
             <% productList.forEach(product=> { %>
-                <%- include('../partials/product-card.ejs', {product, formatCurrencyVND}) %>
+                <%- include('../partials/product-card.ejs', {navigatePage, product, formatCurrencyVND}) %>
                     <% }) %>
 
         </div>

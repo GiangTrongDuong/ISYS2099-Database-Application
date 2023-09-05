@@ -1,37 +1,4 @@
 <div class="container-xl" id="product-content">
-  <!-- Breadcrumb -->
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb mt-4 mb-0">
-      <li class="breadcrumb-item">
-        <a class="link-dark" href="<%= navigatePage('home') %>">Home</a>
-      </li>
-      <!-- Parent Categories -->
-      <% if (parentCategoryIds) { %> <% parentCategoryIds.forEach(parentCatId=>
-      { %>
-      <li class="breadcrumb-item">
-        <a
-          class="link-dark"
-          href="<%= navigatePage('category', parentCatId) %>"
-        >
-          <%= parentCatId %>
-        </a>
-      </li>
-      <% })} %>
-      <!-- Current Product Category -->
-      <li class="breadcrumb-item">
-        <a
-          class="link-dark"
-          href="<%= navigatePage('category', product.category) %>"
-        >
-          <%= product.category %>
-        </a>
-      </li>
-      <!-- Current Product -->
-      <li class="breadcrumb-item active" aria-current="page">
-        <%= product.title %>
-      </li>
-    </ol>
-  </nav>
   <!-- Product section-->
   <section id="product-content-product" class="py-5 mb-5">
     <article class="row gx-4 gx-lg-5 align-items-center">
