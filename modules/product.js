@@ -23,9 +23,9 @@ router.use(cors({
 // full route to product-detail page: /product/:id
 router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => { 
   try{
-    const product = dummyProduct;
-    // const product = await db.from_id(req.params['id']); //store info to display 
-    // res.json({"product": product});
+    // const product = dummyProduct;
+    const product = await db.from_id(req.params['id']); //store info to display 
+    res.json({"product": product});
     res.render('layout.ejs', {
         title: "Product",
         bodyFile: `${root}/product`,
