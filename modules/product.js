@@ -26,17 +26,17 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
     // const product = dummyProduct;
     const product = await db.from_id(req.params['id']); //store info to display 
     res.json({"product": product});
-    res.render('layout.ejs', {
-        title: "Product",
-        bodyFile: `${root}/product`,
-        formatCurrencyVND: formatCurrencyVND,
-        // TODO: add real data - categoryList
-        categoryList: dummyCatList,
-        parentCategoryIds: dummyParentCatIds,
-        userSession: req?.session?.user,
-        product: product,
-        formatDate: formatDate
-    });
+    // res.render('layout.ejs', {
+    //     title: "Product",
+    //     bodyFile: `${root}/product`,
+    //     formatCurrencyVND: formatCurrencyVND,
+    //     // TODO: add real data - categoryList
+    //     categoryList: dummyCatList,
+    //     parentCategoryIds: dummyParentCatIds,
+    //     userSession: req?.session?.user,
+    //     product: product,
+    //     formatDate: formatDate
+    // });
   }
   catch (err){
     res.send("Cannot fetch product with id " + req.params.id);
