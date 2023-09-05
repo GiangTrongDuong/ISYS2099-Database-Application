@@ -3,5 +3,5 @@
 
 node_modules/
 
-# Ignore log files
+# Ignore all log files
 *.log
