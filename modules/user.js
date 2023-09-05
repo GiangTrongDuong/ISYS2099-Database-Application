@@ -45,7 +45,6 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
                 if(result == true){
                     req.session.user = {role: uresults[0].role, user_name: uresults[0].user_name, id: uresults[0].id};
                     req.session.isAuth = true;
-                    console.log(uresults[0].id)
                     res.redirect("/my-account");
                 } else {
                     res.redirect("/login");
@@ -159,5 +158,19 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
     }
   });
 });
+
+// router.get("/cart", function (req, res) {
+//   const info = req.session.user;
+//   const id = info.id;
+//   console.log(id);
+//   const cartItems = database.query(`SELECT cd.product_id, cd.quantity, p.title, p.price, cd.quantity*p.price AS totalp
+//   FROM cart_details cd JOIN product p
+//   WHERE cd.product_id = p.id AND cd.customer_id = ${id};`); //store info to display 
+//   console.log(cartItems);
+//   res.render("layout.ejs",{
+//     title: "Cart",
+//   }
+//   );
+// });
 
 module.exports = router;
