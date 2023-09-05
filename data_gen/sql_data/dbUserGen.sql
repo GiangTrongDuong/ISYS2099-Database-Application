@@ -1,3 +1,8 @@
+DROP USER IF EXISTS 'guest'@'localhost';
+DROP USER IF EXISTS 'customer'@'localhost';
+DROP USER IF EXISTS 'seller'@'localhost';
+DROP USER IF EXISTS 'warehouse'@'localhost';
+
 -- Guest priviledge (read only, write for user table)
 CREATE USER 'guest'@'localhost'
 IDENTIFIED BY 'guestpass';
