@@ -1,0 +1,7 @@
+# Ignore files related to API keys
+# .env
+
+node_modules/
+
+# Ignore log files
+*.log

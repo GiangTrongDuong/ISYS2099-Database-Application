@@ -28,7 +28,8 @@ router.get(`${LOGIN_ROUTE}`, function (req, res) {
       bodyFile: `${root}/login`,
       // TODO: add real data - categoryList
       categoryList: dummyCatList,
-      req,
+      // req,
+      userSession: req?.session?.user
     })
 });
 
@@ -62,6 +63,8 @@ router.get(`${SIGNUP_ROUTE}`, function (req, res) {
     bodyFile: `${root}/signup`,
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
+    // req: req,
+    userSession: req?.session?.user
   });
 });
 
@@ -144,14 +147,22 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
           details: details,
           role: "seller",
         });
-      }
+      console.log(result);
+      const user = result[0]; 
+      user.role = () => {
+        if (user.role == "user"){
+          return "user";
+        } else if (user.role == "Warehouse Admin"){
+          return "warehouse";
+        } else if (user.role == "Seller"){
+          return "seller";
+        }
       
     } else {
       console.log("error finding user from database");
+      // render error page
     }
   });
-
-  
 });
 
 module.exports = router;

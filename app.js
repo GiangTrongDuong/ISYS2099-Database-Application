@@ -7,9 +7,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const { navigatePage } = require('./helperFuncs.js');
+const { navigatePage, formatCurrencyVND } = require('./helperFuncs.js');
 const { CONNECTED_URI, PORT } = require('./constants.js');
-const { dummyCatList } = require('./dummyData.js');
+const { dummyCatList, dummyProductCatList } = require('./dummyData.js');
 require('dotenv').config();
 const app = express();
 const { default: mongoose } = require('mongoose');
@@ -63,24 +63,30 @@ const product = require('./modules/product');
 const cart = require('./modules/cart');
 const order = require('./modules/order');
 const others = require('./modules/others');
+const category = require('./modules/category');
 
 app.use('/', user)
 app.use('/', product)
 app.use('/my-cart', cart)
 app.use('/order', order)
-app.use('/', others )
+app.use('/', others)
+app.use('/', category)
 
 // full route to Home page: /
 app.get("/", function (req, res) {
     res.render('layout.ejs', {
         title: "Home",
         bodyFile: "home/index.ejs",
+        formatCurrencyVND: formatCurrencyVND,
         // TODO: add real data
         categoryList: dummyCatList,
-        res: res,
-        req: req,
+        // TODO: add real data
+        categoryProductList: dummyProductCatList,
+        // res: res,
+        // req: req, // => session: req.session.user
+        userSession: req?.session?.user
     })
-    console.log(req.session.user);
+    console.log(req?.session?.user);
 });
 
 app.listen(PORT, function () {

@@ -26,6 +26,7 @@ router.get(`${ABOUT_ROUTE}`, function(req, res) {
     bodyFile: `${root}/about`,
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
+    userSession: req?.session?.user,
   });
   console.log(req.session.user);
 }); 
@@ -36,6 +37,7 @@ router.get(`${PRIVACY_ROUTE}`, function(req, res) {
     bodyFile: `${root}/policy`,
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
+    userSession: req?.session?.user,
   }); 
 }); 
 
@@ -45,6 +47,7 @@ router.get(`${CONTACT_ROUTE}`, function(req, res) {
     bodyFile: `${root}/contact`,
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
+    userSession: req?.session?.user,
   }); 
 }); 
 
