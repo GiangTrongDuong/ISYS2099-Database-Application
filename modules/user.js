@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { LOGIN_ROUTE, SIGNUP_ROUTE, MY_ACCOUNT_ROUTE } = require('../constants');
-const database = require('../models/dbSqlConnect');
+const database = require('../models/connection/dbSqlConnect');
 const { dummyCatList } = require('../dummyData');
 const router = express.Router();
 const isAuth = require("../models/isAuth");
@@ -45,7 +45,6 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
                 if(result == true){
                     req.session.user = {role: uresults[0].role, user_name: uresults[0].user_name};
                     req.session.isAuth = true;
-                    console.log(req.session.isAuth);
                     res.redirect("/my-account");
                 } else {
                     res.redirect("/login");
@@ -102,33 +101,57 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
   //why dont we check isAuth right here? if false then redirect to log in
   const userInfo = (req.session.user); //store info to display 
   const userName = userInfo.user_name;
-  console.log(userName);
   const role = userInfo.role;
   database.query(`SELECT * 
   FROM user 
   WHERE user_name = "${userName}"`,(error,result) => {
     if(result){
-      console.log(result);
-      const user = result[0]; 
-      user.role = () => {
-        if (user.role == "user"){
-          return "user";
-        } else if (user.role == "Warehouse Admin"){
-          return "warehouse";
-        } else if (user.role == "Seller"){
-          return "seller";
-        }
+      const user_name = result[0].user_name;
+      const display_name = result[0].display_name;
+      const details = result[0].details;
+      const id = result[0].id;
+      //req will be changed based on Nhung proposal
+
+      if(role == "user"){
+        res.render("layout.ejs", {
+          title: "My Account",
+          bodyFile: `${root}/my_account`,
+          // TODO: add real data - categoryList
+          categoryList: dummyCatList,
+          userSession: req?.session?.user,
+          user_name: user_name,
+          display_name: display_name,
+          details: details,
+          role: "user",
+          id: id,
+        });
+      } else if (role == "Warehouse Admin"){
+        res.render("layout.ejs", {
+          title: "My Account",
+          bodyFile: `${root}/my_account`,
+          // TODO: add real data - categoryList
+          categoryList: dummyCatList,
+          userSession: req?.session?.user,
+          user_name: user_name,
+          display_name: display_name,
+          details: details,
+          role: "warehouse",
+          id: id,
+        });
+      } else if (role == "Seller"){
+        res.render("layout.ejs", {
+          title: "My Account",
+          bodyFile: `${root}/my_account`,
+          // TODO: add real data - categoryList
+          categoryList: dummyCatList,
+          userSession: req?.session?.user,
+          user_name: user_name,
+          display_name: display_name,
+          details: details,
+          role: "seller",
+          id: id,
+        });
       }
-      // res.json(user);
-      res.render("layout.ejs", {
-        title: "My Account",
-        bodyFile: `${root}/my_account`,
-        // TODO: add real data - categoryList
-        categoryList: dummyCatList,
-        // req: req,
-        userSession: req?.session?.user,
-        user: user
-      });
       
     } else {
       console.log("error finding user from database");

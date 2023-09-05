@@ -1,4 +1,4 @@
-const database = require('./dbSqlConnect');
+const database = require('./connection/dbSqlConnect');
 // This file gets warehouse data and calculates how to insert products
 
 async function get_warehouse_data (wid) {
