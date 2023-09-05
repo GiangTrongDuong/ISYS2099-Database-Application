@@ -1,5 +1,5 @@
 const express = require('express'); 
-const { ABOUT_ROUTE, PRIVACY_ROUTE, CONTACT_ROUTE } = require('../constants');
+const { ABOUT_ROUTE, PRIVACY_ROUTE, CONTACT_ROUTE, MEMBERS } = require('../constants');
 const { dummyCatList } = require('../dummyData');
 const router = express.Router(); 
 const isAuth = require('../models/isAuth');
@@ -27,6 +27,8 @@ router.get(`${ABOUT_ROUTE}`, function(req, res) {
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
     userSession: req?.session?.user,
+    members: MEMBERS,
+
   });
   console.log(req.session.user);
 }); 

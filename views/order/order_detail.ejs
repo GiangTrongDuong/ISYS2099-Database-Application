@@ -8,8 +8,8 @@
 %>
         <div>
             <h2>Product <%= item.product_name %> with quantity <%= item.quantity %></h2>
-            <!-- go to product link using item.product_id -->
-            <a href="">View <%= item.product_name %></a>
+            // go to product link using item.product_id
+            <a href="<%= navigatePage("product", item.product_id) %>">View <%= item.product_name %></a>
         </div>
 <%
       });

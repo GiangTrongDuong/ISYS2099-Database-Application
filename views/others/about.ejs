@@ -1,3 +1,39 @@
-<div class="container-xl">
-  About Us
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">About Us</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Database Group 2 Shop</p>
+    </div>
+  </div>
+</header>
+<div class="container-xl my-5">
+  <h1 class="text-center mb-5">Team Members</h1>
+  <div class="row row-cols-md-2 gy-5 justify-content-center mb-5">
+    <% members.forEach((member, index)=> { %>
+      <section class="col d-flex align-items-center justify-content-center">
+        <div class="card-about p-0">
+          <div class="card-image">
+            <img src="https://source.unsplash.com/random?member&<%= index %>" alt="">
+          </div>
+          <div class="card-content d-flex flex-column align-items-center px-2">
+            <h4 class="pt-2">
+              <%= member.name %>
+            </h4>
+            <h5>
+              <%= member.studentID %>
+            </h5>
+
+            <div class="social-icons mt-1 d-flex justify-content-center">
+              <a style="--i:2" role="button" class="btn btn-secondary" href="<% member.github %>">
+                <i class="fa fa-github"></i>
+              </a>
+              <a style="--i:3" role="button" class="btn btn-secondary" href="<%= member.email %>">
+                <i class="fa-solid fa-envelope"></i>
+              </a>
+              </ul>
+            </div>
+          </div>
+      </section>
+      <% }) %>
+  </div>
 </div>
