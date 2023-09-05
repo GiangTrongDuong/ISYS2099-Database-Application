@@ -41,20 +41,24 @@ router.get(`${ORDER_ROUTE}/`, async (req, res) => {
 
 // full route to order-history page: /order/history
 // router.get(`${ORDER_HISTORY_ROUTE}`, function (req, res) { //og
-router.get(`${ORDER_HISTORY_ROUTE}/:uid`, async (req, res) => { //add user id to test
+router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test
   try{
-    const orders = await db.get_orders(req.params.uid);
+    const info = req.session.user;
+    const id = info.id;
+    console.log(id);
+    const orders = await db.get_orders(id);
     res.render("layout.ejs", {
       title: "Order History",
       bodyFile: `${root}/order_history`,
       // TODO: add real data - categoryList
       categoryList: dummyCatList,
       orders: orders,
-      uid: req.params.uid
+      id: id,
+      userSession: req.session.user,
     });
   }
   catch (err) {
-    res.send("Cannot fetch orders from uid: " + req.params.uid + " with error: " + err);
+    res.send("Cannot fetch orders from uid: " + req.params.id + " with error: " + err);
   }
 });
 

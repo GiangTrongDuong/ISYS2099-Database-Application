@@ -15,6 +15,12 @@
               <li class="nav-item">
                   <a class="nav-link" href="<%= navigatePage("stores") %>"> <i class="fa-solid fa-house-circle-check"></i> Stores</a>
               </li>
+              <% if (!userSession) {%>
+            <% } else { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= navigatePage("my-account") %>"> <i class="bi bi-person-circle"></i> My Account</a>
+                </li>
+              <% } %>
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="fa-solid fa-bars"></i> Resources
@@ -33,7 +39,7 @@
                   <a class="nav-link" href="<%= navigatePage("signup") %>"> <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign up</a>
               </li>
               <% } else { %>
-                <li><form action="/logout" method="POST"><button type="submit" class="btn-primary">Logout</button></form></li>
+                <li><form action="/logout" method="POST"><button type="submit" class="btn btn-danger">Logout</button></form></li>
                 <% } %>
           </ul>
       </div>

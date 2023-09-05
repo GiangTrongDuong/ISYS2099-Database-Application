@@ -39,7 +39,7 @@ const navigatePage = (type, id = -1) => {
         case "order":
             return `${ORDER_ROUTE}`;
         case "order-history":
-            return `${ORDER_HISTORY_ROUTE}`;
+            return `order${ORDER_HISTORY_ROUTE}`;
         case "order-detail":
             return `${ORDER_ROUTE}/${id}`;
         default:

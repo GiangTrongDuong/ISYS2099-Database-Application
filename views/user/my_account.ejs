@@ -50,7 +50,7 @@
             </h6>
             <!-- Seller products / Items / Order History -->
             <%if (role == "user") {%>
-              <form action="" method="">
+              <form action="<%= navigatePage("order-history") %>" method="">
                 <button type="submit" class="btn btn-outline-dark">Order History</button>
               </form>
             <%} else if (role == "warehouse") {%>
