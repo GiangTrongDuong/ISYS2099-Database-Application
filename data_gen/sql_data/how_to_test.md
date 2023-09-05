@@ -16,6 +16,8 @@ FROM product p, warehouse w WHERE p.id = PID ORDER BY w.remaining_area DESC;
 ```
 - Run the SELECT statement before, compare the new results. If the quantity you entered is more than the warehouse's capacity, you should see it be stored in other warehouses.
 
+NOTE: Woa! There is some bug going on where, if the volume of the product is too small, area and shit will be fucked up! NVA: when demo, choose some big products!
+
 2. To test ```procedure_free_wh_space.sql```:
 - Run this snippet to find out the state of the warehouse. Replace pid with any pid of your choice
 ```
@@ -42,3 +44,30 @@ SELECT @cost;
 to find out if the order insert is correctly done.
 - Total order cost should be inserted separately
 - This script should be tested in nodejs using async
+
+4. Test trigger_update_order
+- Run each of these statements and note their output (screenshot/picture)
+```
+-- get an inbound order
+SELECT * FROM order_details where status = 'Inbound' order by id desc;
+-- get the list of product_id and quantity from your chosen order
+SELECT * from order_item where order_id = OID;
+-- get the amount of product in stock - replace PID with the product you got
+select id, remaining from product where id = PID;
+-- get the space of the warehouse storing this product
+select wi.*, wh.remaining_area
+from warehouse_item wi, warehouse wh 
+where wi.warehouse_id = wh.id and product_id = PID order by wh.remaining_area;
+```
+- Now try and update the order_details table 
+```
+update order_details set status = 'Rejected' where id = OID;
+```
+- If status is changed to Rejected: 
+    warehouse.remaining_area should stay the same
+    product.remaining should increase (to the amount in the second statement)
+- If status is changed to Accepted:
+    warehouse.remaining_area should be freed up
+    product.remaining should stay the same
+- If the order status was not inbound, or if the new status is neither Rejected nor Accepted, error will be thrown.
+
