@@ -21,6 +21,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
+    "moment": "^2.29.4",
     "mongodb": "^5.8.0",
     "mongoose": "^7.4.3",
     "mysql2": "^3.6.0",

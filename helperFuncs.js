@@ -1,5 +1,5 @@
 // navigate category: href="category.html?category=1"
-
+const moment = require('moment');
 const { HOME_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE, ABOUT_ROUTE, MY_ACCOUNT_ROUTE, PRIVACY_ROUTE, CONTACT_ROUTE, CATEGORY_ROUTE, PRODUCT_ROUTE, CART_ROUTE, ORDER_ROUTE, ORDER_HISTORY_ROUTE } = require("./constants");
 
 /* using
@@ -60,6 +60,10 @@ const formatCurrencyVND = (number) => {
     return formatter.format(number);
 }
 
+const formatDate = (date) => {
+    return moment(date).format('LL');
+}
+
 // convert '''a,b,c''' to '''("a", "b", "c")''' to use in SQL query
 function parenthesesString(inputString) {
     const items = inputString.split(',');
@@ -83,6 +87,7 @@ module.exports = {
     navigatePage,
     getParameterByPath,
     formatCurrencyVND,
+    formatDate,
     parenthesesString,
     getCurrentTimeString
 }

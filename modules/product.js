@@ -1,7 +1,7 @@
 const express = require('express'); 
 const router = express.Router(); 
 const { dummyProduct, dummyCatList, dummyParentCatIds } = require('../dummyData.js');
-const { formatCurrencyVND } = require('../helperFuncs.js');
+const { formatCurrencyVND, formatDate } = require('../helperFuncs.js');
 const { PRODUCT_ROUTE } = require('../constants.js');
 const db = require('../models/function_product.js');
 
@@ -23,16 +23,20 @@ router.use(cors({
 // full route to product-detail page: /product/:id
 router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => { 
   try{
-    const product = await db.from_id(req.params['id']); //store info to display 
-    res.json({"product": product});
-    // res.render('layout.ejs', {
-    //     title: "Product",
-    //     bodyFile: `${root}/product`,
-    //     formatCurrencyVND: formatCurrencyVND,
-    //     // TODO: add real data - categoryList
-    //     categoryList: dummyCatList,
-    //     product: product,
-    // });
+    const product = dummyProduct;
+    // const product = await db.from_id(req.params['id']); //store info to display 
+    // res.json({"product": product});
+    res.render('layout.ejs', {
+        title: "Product",
+        bodyFile: `${root}/product`,
+        formatCurrencyVND: formatCurrencyVND,
+        // TODO: add real data - categoryList
+        categoryList: dummyCatList,
+        parentCategoryIds: dummyParentCatIds,
+        userSession: req?.session?.user,
+        product: product,
+        formatDate: formatDate
+    });
   }
   catch (err){
     res.send("Cannot fetch product with id " + req.params.id);
