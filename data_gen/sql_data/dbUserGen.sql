@@ -11,20 +11,20 @@ ON testg2.user
 TO 'guest'@'localhost';
 
 -- User Priviledge --
-CREATE USER 'user'@'localhost'
+CREATE USER 'customer'@'localhost'
 IDENTIFIED BY 'userpass';
 
 GRANT SELECT 
 ON testg2.product
-TO 'user'@'localhost';
+TO 'customer'@'localhost';
 
 GRANT SELECT, INSERT, UPDATE
 ON testg2.user
-TO 'user'@'localhost';
+TO 'customer'@'localhost';
 
 GRANT SELECT, INSERT, UPDATE
 ON testg2.user
-TO 'user'@'localhost';
+TO 'customer'@'localhost';
 
 -- Seller
 CREATE USER 'seller'@'localhost'
