@@ -9,10 +9,10 @@
           <img src="https://img.icons8.com/bubbles/100/000000/user.png"
             class="d-none d-sm-block img-fluid rounded-circle w-75 ratio ratio-1x1 object-fit-cover" alt="User-Profile-Image">
           <h6 class="fw-bold fs-4 line-clamp-1">
-            <%= user.display_name %>
+            <%= display_name %>
           </h6>
           <p>
-            <%= user.role %>
+            <%= role %>
           </p>
           <div class="row row-cols-1 row-cols-md-2 justify-content-between w-100">
             <button class="update-button col btn btn-link link-light link-offset-2">
@@ -33,7 +33,7 @@
             <div class="col-sm-6">
               <p class="fw-bold mb-3 line-clamp-1">Username</p>
               <h6 class="text-muted">
-                <%= user.display_name %>
+                <%= display_name %>
               </h6>
             </div>
             <div class="col-sm-6">
@@ -45,26 +45,20 @@
           <article class="row flex-grow-1">
             <p class="fw-bold mb-3">Details</p>
             <h6 class="text-muted flex-grow-1 lh-base">
-              <%= user.details %>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto culpa, mollitia temporibus molestias
-                sapiente omnis voluptatem fugiat suscipit, dolores in porro. Voluptates dolorum odio quae et, atque
-                iusto
-                esse repellendus!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sint ullam eius in, distinctio eligendi
-                consequuntur dolores impedit consequatur corporis dolore recusandae perspiciatis at a, esse, quam
-                architecto maiores saepe.
+              <%= details %>
+
             </h6>
             <!-- Seller products / Items / Order History -->
-            <%if (user.role == "user") {%>
+            <%if (role == "user") {%>
               <form action="" method="">
                 <button type="submit" class="btn btn-outline-dark">Order History</button>
               </form>
-            <%} else if (user.role == "warehouse") {%>
+            <%} else if (role == "warehouse") {%>
               <form action="" method="">
                 <button type="submit" class="btn btn-outline-dark">Warehouse Item</button>
               </form>
-            <%} else if (user.role == "seller"){%>
-              <a href="<%= navigatePage("product-list-seller", user.id) %>">View Products</a>
+            <%} else if (role == "seller"){%>
+              <a href="<%= navigatePage("product-list-seller", id) %>">View Products</a>
             <%}%>
           </article>
         </div>
@@ -77,15 +71,15 @@
             <!-- Example form fields, modify as needed -->
             <div class="mb-3">
               <label for="user_name" class="form-label">Username</label>
-              <input type="text" class="form-control" id="user_name" name="user_name" value="<%= user.user_name %>">
+              <input type="text" class="form-control" id="user_name" name="user_name" value="<%= user_name %>">
             </div>
             <div class="mb-3">
               <label for="display_name" class="form-label">Display Name</label>
-              <input type="text" class="form-control" id="display_name" name="display_name" value="<%= user.display_name %>">
+              <input type="text" class="form-control" id="display_name" name="display_name" value="<%= display_name %>">
             </div>
             <div class="mb-3">
               <label for="details" class="form-label">Details</label>
-              <textarea class="form-control" id="details" name="details" rows="4"><%= user.details %></textarea>
+              <textarea class="form-control" id="details" name="details" rows="4"><%= details %></textarea>
             </div>
             <button type="submit" class="btn btn-dark">Save Changes</button>
           </form>

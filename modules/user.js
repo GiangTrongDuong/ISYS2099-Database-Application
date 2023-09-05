@@ -109,6 +109,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
       const user_name = result[0].user_name;
       const display_name = result[0].display_name;
       const details = result[0].details;
+      const id = result[0].id;
       //req will be changed based on Nhung proposal
 
       if(role == "user"){
@@ -117,7 +118,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
           bodyFile: `${root}/my_account`,
           // TODO: add real data - categoryList
           categoryList: dummyCatList,
-          req: req,
+          userSession: req?.session?.user,
           user_name: user_name,
           display_name: display_name,
           details: details,
@@ -129,7 +130,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
           bodyFile: `${root}/my_account`,
           // TODO: add real data - categoryList
           categoryList: dummyCatList,
-          req: req,
+          userSession: req?.session?.user,
           user_name: user_name,
           display_name: display_name,
           details: details,
@@ -141,22 +142,13 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
           bodyFile: `${root}/my_account`,
           // TODO: add real data - categoryList
           categoryList: dummyCatList,
-          req: req,
+          userSession: req?.session?.user,
           user_name: user_name,
           display_name: display_name,
           details: details,
           role: "seller",
         });
-      console.log(result);
-      const user = result[0]; 
-      user.role = () => {
-        if (user.role == "user"){
-          return "user";
-        } else if (user.role == "Warehouse Admin"){
-          return "warehouse";
-        } else if (user.role == "Seller"){
-          return "seller";
-        }
+      }
       
     } else {
       console.log("error finding user from database");

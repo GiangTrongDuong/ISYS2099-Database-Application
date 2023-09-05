@@ -1,4 +1,4 @@
-const database = require('./dbSqlConnect');
+const database = require('./connection/dbSqlConnect');
 const { parenthesesString } = require('../helperFuncs');
 
 async function from_id (pid) {
