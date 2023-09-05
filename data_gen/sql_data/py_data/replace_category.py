@@ -1,6 +1,6 @@
 import json
 
-catfile = '../cat_att_list.json'
+catfile = '../../cat_att_list.json'
 nf = './prod.txt'
 out = './newprod.txt'
 

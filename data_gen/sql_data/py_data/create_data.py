@@ -7,10 +7,11 @@ DATEFORMAT = "%Y-%m-%d %H:%M:%S"
 
 # The categories below are the lowest levels. Products can only be of these categories.
 # For complete list of categories (i.e. these + parents), check mongoDB.
-CATEGORY = ["Phone", "Phone Accessories", "Computer", "Computer Accessories", 
+# TODO: REplace those with cat id
+CATEGORY = ["Phone", "Phone Accessories", "Computer", 
           "Refridgerator", "Cooker and Oven", "TV", "Lamps",
-          "Chairs and Sofas", "Bed", "Wall Decoration", "Floor Decoration",
-          "Male Clothing", "Male Accessories", "Boy Clothing and Accessories", "Female Clothing", "Female Accessories", "Girl Clothing and Accessories",
+          "Chairs and Sofas", "Bed", "Wall Decor", "Floor Decor",
+          "Male Clothing", "Male Accessories", "Boy Clothing", "Female Clothing", "Female Accessories", "Girl Clothing",
           "Male Sportswear", "Female Sportswear", "Racket Sports", "Ball Sports"]
 
 
