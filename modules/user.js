@@ -37,14 +37,15 @@ router.get(`${LOGIN_ROUTE}`, function (req, res) {
 router.post(`${LOGIN_ROUTE}`, async function (req, res) {
   var userName = req.body.username;
   var password = req.body.password;
-  database.query(`SELECT role, user_name, password_hash 
+  database.query(`SELECT id, role, user_name, password_hash 
         FROM user 
         WHERE user_name = "${userName}";`,(error, uresults) => {
         if(uresults.length > 0){
             bcrypt.compare(password, uresults[0].password_hash).then(function(result){
                 if(result == true){
-                    req.session.user = {role: uresults[0].role, user_name: uresults[0].user_name};
+                    req.session.user = {role: uresults[0].role, user_name: uresults[0].user_name, id: uresults[0].id};
                     req.session.isAuth = true;
+                    console.log(uresults[0].id)
                     res.redirect("/my-account");
                 } else {
                     res.redirect("/login");
@@ -88,8 +89,7 @@ router.post(`${SIGNUP_ROUTE}`, async function (req,res){
                       VALUE (?,?,?,?,?)
                       `, [role, userName, displayName, details, hash]);
                   const User = {role: role, user_name: userName};
-                  req.session.user = User;
-                  res.redirect("/my-account");
+                  res.redirect("/login");
               });
           }
         })
@@ -112,7 +112,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
       const id = result[0].id;
       //req will be changed based on Nhung proposal
 
-      if(role == "user"){
+      if(role == "Customer"){
         res.render("layout.ejs", {
           title: "My Account",
           bodyFile: `${root}/my_account`,
