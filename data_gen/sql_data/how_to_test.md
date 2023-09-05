@@ -2,7 +2,7 @@ Since the procedures are not created in sql clients, we don't need to specify de
 But if you want to copy the procedures and run them in sql clients, add ```DELIMITER $$``` at the beginning,
 replace ```END``` with ```END $$```, and add ```DELIMITER ;``` at the end of the procedure.
 
-1. To test ```db_warehouse_trans.sql```:
+1. To test ```procedure_warehouse_trans.sql```:
 - Run this snippet to find out how many product items can be stored. Replace ```PID``` with a product id of your choice.
 
 ```
@@ -16,4 +16,29 @@ FROM product p, warehouse w WHERE p.id = PID ORDER BY w.remaining_area DESC;
 ```
 - Run the SELECT statement before, compare the new results. If the quantity you entered is more than the warehouse's capacity, you should see it be stored in other warehouses.
 
+2. To test ```procedure_free_wh_space.sql```:
+- Run this snippet to find out the state of the warehouse. Replace pid with any pid of your choice
+```
+SELECT wh.id, wh.remaining_area from warehouse wh, warehouse_item wi 
+where wh.id = wi.warehouse_id and wi.product_id = 87;
+```
+You may want to screenshot / take a picture.
+- Call the procedure by running 
+```
+CALL free_wh_space(87,1);
+```
+This will output something like "Warehouse 123 has freed 456 volume units"; check warehouse 123 before and after.
 
+3. To test ```procedure_place_order.sql```:
+- You must first insert a new order with
+```
+INSERT INTO order_details(customer_id, status, total_price, created_at) VALUES (6, 'Inbound', 0, NOW());
+```
+- Then you can call each of these lines
+```
+CALL order_trans(101, 15, 1, @cost); --order id, product id, quantity
+SELECT @cost;
+```
+to find out if the order insert is correctly done.
+- Total order cost should be inserted separately
+- This script should be tested in nodejs using async
