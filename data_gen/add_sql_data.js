@@ -53,6 +53,7 @@ connection.connect(err => {
         await executeSqlFile('./sql_data/procedure_warehouse_trans.sql');
         await executeSqlFile('./sql_data/procedure_place_order.sql');
         await executeSqlFile('./sql_data/procedure_free_wh_space.sql');
+        await executeSqlFile('./sql_data/trigger_update_order.sql');
         
     // Commit the transaction if everything is successful
         connection.commit((err => {
