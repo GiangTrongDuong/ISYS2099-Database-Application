@@ -1,47 +1,52 @@
+DROP USER IF EXISTS 'guestg2'@'localhost';
+DROP USER IF EXISTS 'customerg2'@'localhost';
+DROP USER IF EXISTS 'sellerg2'@'localhost';
+DROP USER IF EXISTS 'warehouseg2'@'localhost';
+
 -- Guest priviledge (read only, write for user table)
-CREATE USER 'guest'@'localhost'
+CREATE USER 'guestg2'@'localhost'
 IDENTIFIED BY 'guestpass';
 
 GRANT SELECT
 ON testg2.product
-TO 'guest'@'localhost';
+TO 'guestg2'@'localhost';
 
 GRANT SELECT,INSERT
 ON testg2.user
-TO 'guest'@'localhost';
+TO 'guestg2'@'localhost';
 
 -- User Priviledge --
-CREATE USER 'customer'@'localhost'
+CREATE USER 'customerg2'@'localhost'
 IDENTIFIED BY 'userpass';
 
 GRANT SELECT 
 ON testg2.product
-TO 'customer'@'localhost';
+TO 'customerg2'@'localhost';
 
 GRANT SELECT, INSERT, UPDATE
 ON testg2.user
-TO 'customer'@'localhost';
+TO 'customerg2'@'localhost';
 
 GRANT SELECT, INSERT, UPDATE
 ON testg2.user
-TO 'customer'@'localhost';
+TO 'customerg2'@'localhost';
 
 -- Seller
-CREATE USER 'seller'@'localhost'
+CREATE USER 'sellerg2'@'localhost'
 IDENTIFIED BY 'sellerpass';
 
 GRANT SELECT, INSERT, UPDATE
 ON testg2.product
-TO 'seller'@'localhost';
+TO 'sellerg2'@'localhost';
 
 GRANT INSERT, UPDATE
 ON testg2.warehouse
-TO 'seller'@'localhost';
+TO 'sellerg2'@'localhost';
 
 -- Warehouse
-CREATE USER 'warehouse'@'localhost'
+CREATE USER 'warehouseg2'@'localhost'
 IDENTIFIED BY 'warepass';
 
 GRANT DELETE
 ON testg2.warehouse
-TO 'warehouse'@'localhost';
+TO 'warehouseg2'@'localhost';
