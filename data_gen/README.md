@@ -22,7 +22,7 @@ Get dependencies ```node install```
 Run via ```node .``` or ```node add_sql_data.js```
 
 ## Run SQL files
-Copy the contents of the files to your MySQL console and run these chunks.
+You can also copy the contents of the files to your MySQL console and run these chunks.
 
 Run db_create first, then db_inserts
 

@@ -27,7 +27,7 @@ BEGIN
     SET total_inserted = volume_of_one * quant;
     -- Start a transaction
     START TRANSACTION;
-    WHILE total_inserted > 0 DO
+    WHILE quant > 0 DO
         -- Find a warehouse with sufficient remaining_area - pick the ones with most remaining_area first
         SELECT w.id, w.remaining_area INTO wid, rem_area 
         FROM warehouse w WHERE w.remaining_area >= total_inserted
@@ -41,7 +41,7 @@ BEGIN
 
             IF existing_quantity IS NOT NULL THEN
                 -- Update the quantity if the pair exists
-                UPDATE warehouse_item SET quantity = quantity + quant 
+                UPDATE warehouse_item SET quantity = (quantity + quant)
                 WHERE warehouse_id = wid AND product_id = pid;
             ELSE
                 -- Insert into the warehouse
@@ -52,19 +52,21 @@ BEGIN
             -- Update remaining_area in the warehouse
             UPDATE warehouse SET remaining_area = remaining_area - total_inserted WHERE id = wid;
 
-            SET total_inserted = 0; -- All space allocated
+            SET quant = 0; -- All space allocated
         ELSE
             -- No warehouse with sufficient space found, try the next available warehouse
             -- prioritize ones with more space; only see ones that can store 1 item of product
             SELECT id, remaining_area INTO wid, rem_area 
             FROM warehouse WHERE remaining_area > volume_of_one ORDER BY remaining_area DESC LIMIT 1;
-
+			
+            -- Found a warehouse to store some of the load
             IF wid IS NOT NULL THEN
 				-- find out how many items this warehouse can store
                 SET quantity_inserted = FLOOR(rem_area / volume_of_one);
 				
                 -- Calculate space to insert into the current warehouse
                 SET volume_inserted = quantity_inserted * volume_of_one;
+                -- Decrease the load to be inserted next time
                 SET total_inserted = total_inserted - volume_inserted;
                 SET quant = quant - quantity_inserted;
                 -- check if (warehouse id, product id) exists in warehouse_item
@@ -85,7 +87,7 @@ BEGIN
                 UPDATE warehouse SET remaining_area = remaining_area - volume_inserted WHERE id = wid;
             ELSE
                 -- No warehouse available with any space, exit loop
-                SET total_inserted = 0;
+                SET quant = 0;
             END IF;
         END IF;
     END WHILE;

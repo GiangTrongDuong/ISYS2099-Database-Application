@@ -52,15 +52,13 @@ connection.connect(err => {
         await executeSqlFile('./sql_data/db_add_index.sql');
         // Execute: insert data
         await executeSqlFile('./sql_data/db_inserts.sql');
-        // Procedures file, like ./sql_data/db_warehouse_trans.sql, does not run
-        // They needed to be copied and executed in dbms
-        await executeSqlFile('./sql_data/db_warehouse_trans.sql');
-        // console.log(" ============== Entering procedures ======================= ");
-        // const warehouse_transaction = fs.readFileSync('./sql_data/db_warehouse_trans.sql', 'utf-8');
-        // connection.query(warehouse_transaction, (error, results) =>{
-        //     if (error) console.log(error);
-        //     else console.log("Procedure stored successfully: " + results);
-        // });
+        // Procedures file, like ./sql_data/procedure_warehouse_trans.sql
+        // These files must not specify delimiter; but if you want to copy them in dbms, then you need delimiter
+        await executeSqlFile('./sql_data/procedure_warehouse_trans.sql');
+        await executeSqlFile('./sql_data/procedure_place_order.sql');
+        await executeSqlFile('./sql_data/procedure_free_wh_space.sql');
+        await executeSqlFile('./sql_data/trigger_update_order.sql');
+        await executeSqlFile('./sql_data/procedure_wh_move.sql');
 
     // Commit the transaction if everything is successful
         connection.commit((err => {

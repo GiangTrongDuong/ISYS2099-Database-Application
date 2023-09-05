@@ -21,7 +21,7 @@ create index customer_id_idx on order_details (customer_id); -- use when query t
 create index created_at_idx on order_details (created_at); -- use when query orders then order them with "order by created_at"
 
 -- table order_item
-create index order_id_idx on order_item (order_id); -- use when join query with table order_details to get the items in an order
+create index order_id_idx on order_item (order_id); -- use when join query with table order_details to  get the items in an order
 create index product_id_idx on order_item (product_id); -- use when join query with table product
 
 -- table warehouse_item
