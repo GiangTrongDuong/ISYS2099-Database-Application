@@ -266,6 +266,12 @@ nav .container .navbar-brand .web-logo {
 nav .navbar-collapse ul.nav-icons li a {
   color: #838383;
 }
+nav .navbar-collapse ul.nav-icons li a.nav-link.show {
+  color: #333;
+}
+nav .navbar-collapse ul.nav-icons li a:hover {
+  color: #333;
+}
 nav .navbar-collapse ul.nav-icons li a.create-listing {
   border-radius: 10px;
   border: solid 1px #F0F1F3;
