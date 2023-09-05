@@ -46,6 +46,10 @@ connection.connect(err => {
         if (err) console.log(err);
         // Execute: create tables
         await executeSqlFile('./sql_data/db_create.sql');
+        // // Execute: partiotn tables
+        // await executeSqlFile('./sql_data/db_partition.sql');
+        // Execute: add indexes on tables
+        await executeSqlFile('./sql_data/db_add_index.sql');
         // Execute: insert data
         await executeSqlFile('./sql_data/db_inserts.sql');
         // Procedures file, like ./sql_data/procedure_warehouse_trans.sql
