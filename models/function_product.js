@@ -10,7 +10,7 @@ async function from_id (pid) {
             else resolve(results);
         })
     })
-}
+};
 
 // limit is optional, order by created_at; return list of product 
 async function from_category (cat_list, limit) {
@@ -36,7 +36,7 @@ async function from_category (cat_list, limit) {
             });
         }
     })
-}
+};
 
 // limit is optional, order by created at
 // return list of product id i.e. [1,2,3,4,...] currently string: "1,2,3,4,..."
@@ -72,7 +72,7 @@ async function from_seller (query_seller_id, limit) {
                 });
         }
     })
-}
+};
 
 // limit is optional, order by created at
 // return list of product id i.e. [1,2,3,4,...] currently string: "1,2,3,4,..."
@@ -97,7 +97,7 @@ async function contain_word (query_word, limit) {
                 });
         }
     })
-}
+};
 
 async function getPrice(pid){
     return new Promise((resolve, reject) => {
@@ -107,7 +107,7 @@ async function getPrice(pid){
             else resolve(result[0].price);
         });
     });
-}
+};
 
 async function getVolume(pid){
     return new Promise((resolve, reject) => {
@@ -118,7 +118,7 @@ async function getVolume(pid){
             else resolve(result[0].length * result[0].width * result[0].height);
         });
     });
-}
+};
 
 async function addToCart(uid, pid){
     return new Promise((resolve, reject) => {
@@ -138,7 +138,7 @@ async function addToCart(uid, pid){
             console.log(uresult);
         })
     })
-}
+};
 
 async function updateDetails(pid, title, price, description){
     return new Promise((resolve, reject) => {
@@ -148,9 +148,9 @@ async function updateDetails(pid, title, price, description){
             else resolve(result);
         })
     })
-}
+};
 
-async function createProduct(title, seller_id, price, description, category, length, width, height, image, created_at, update_at){
+async function createProduct(title, seller_id, price, description, category, length, width, height, image){
     return new Promise((resolve, reject)=> {
         database.query(`SELECt * FROM product WHERE title = "${title}"`, (err, qresult) => {
             if (qresult.length >= 1){
@@ -166,6 +166,18 @@ async function createProduct(title, seller_id, price, description, category, len
             }
         })
     })
+};
+
+async function deleteProduct(pid){
+    return new Promise((resolve, reject) => {
+        database.query(`DELETE FROM product WHERE id = ${pid}`,(err, result) => {
+            if(err){
+                reject(err);
+            } else if (result){
+                resolve(result);
+            }
+        })
+    })
 }
-module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, addToCart}
+module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, addToCart, updateDetails, createProduct, deleteProduct}
 

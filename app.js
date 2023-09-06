@@ -65,6 +65,7 @@ const order = require('./modules/order');
 const others = require('./modules/others');
 const category = require('./modules/category');
 const seller = require('./modules/seller');
+const warehouse = require('./modules/warehouse');
 
 app.use('/', user)
 app.use('/', product)
@@ -73,6 +74,7 @@ app.use('/order', order)
 app.use('/', others)
 app.use('/', category)
 app.use('/', seller)
+app.use('/warehouse', warehouse);
 
 // full route to Home page: /
 app.get("/", function (req, res) {
