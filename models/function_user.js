@@ -12,6 +12,15 @@ const get_user_data = async (uid) => {
     });
 }
 
-// Should we move user_authentication here?
+async function updateUser(uid,username, display, details){
+    return new Promise ((resolve, reject) => {
+        database.query(`UPDATE user 
+        SET user_name = "${username}", display_name = "${display}", details = "${details}" 
+        WHERE id = ${uid};`, (err, result) =>{
+            if(err) reject (err);
+            else resolve (result);
+        })
+    })
+}
 
-module.exports = {get_user_data}
+module.exports = {get_user_data, updateUser}

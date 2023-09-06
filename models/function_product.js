@@ -142,7 +142,7 @@ async function addToCart(uid, pid){
 
 async function updateDetails(pid, title, price, description){
     return new Promise((resolve, reject) => {
-        database.query(`UPDATE product SET title = "${title}", price = ${price}, description = "${description}", updated_at = ${getCurrentTimeString} 
+        database.query(`UPDATE product SET title = "${title}", price = ${price}, description = "${description}", updated_at = ${getCurrentTimeString} npm
         WHERE id = ${pid};`, (err, result) => {
             if(err) reject (err);
             else resolve(result);
