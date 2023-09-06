@@ -51,6 +51,4 @@ async function decreaseQuantity(uid, pid){
     })
 };
 
-async function updateProduct()
-
 module.exports = { getCartItem, removeCartItem, increaseQuantity, decreaseQuantity }

@@ -114,9 +114,8 @@ async function getVolume(pid){
 
 async function addToCart(uid, pid){
     return new Promise((resolve, reject) => {
-        database.query(`SELECT * FROM cart_details WHERE customer_id = ${uid} AND product_id = ${pid}`, (err, result) =>{
-            if(err) reject (err);
-            if(result.length > 0){
+        database.query(`SELECT * FROM cart_details WHERE customer_id = ${uid} AND product_id = ${pid}`, (err, uresult) =>{
+            if(uresult.length >= 1){
                 database.query(`UPDATE cart_details SET quantity = quantity + 1 
                 WHERE customer_id = ${uid} AND product_id = ${pid};`, (err, result) => {
                     if(err) reject (err);
@@ -128,9 +127,14 @@ async function addToCart(uid, pid){
                     else resolve(result);
                 })
             }
+            console.log(uresult);
         })
     })
 }
 
-module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume}
+// addToCart(19, 5).then(function(result){
+//     console.log(result);
+// })
+
+module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, addToCart}
 
