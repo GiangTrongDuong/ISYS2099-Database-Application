@@ -1,0 +1,31 @@
+<section id="seller" class="container mt-5 w-100">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% productList.forEach(product=> { %>
+      <tr>
+        <th scope="row"></th>
+        <td>title</td>
+        <td>price</td>
+        <td>desc</td>
+        <td>cat</td>
+        <td>
+          <button>Update Item</button>
+        </td>
+        <td>
+          <button>Delete Item</button>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+</section>
