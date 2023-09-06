@@ -26,9 +26,9 @@ router.use(bodyParser.json());
 //end-of session
 
 // full route to cart page: /my-cart
-router.get(`${CART_ROUTE}`, isAuth.isAuth, async (req, res) => {
+router.get(`${CART_ROUTE}`, async (req, res) => {
   try {
-    const info = req.session.user;
+    const info = req?.session?.user;
     const id = info.id;
     const renderedCart = await db.getCartItem(id); //store info to display 
     const cartItems = renderedCart.items;
@@ -37,7 +37,7 @@ router.get(`${CART_ROUTE}`, isAuth.isAuth, async (req, res) => {
     res.render("layout.ejs", {
       title: "Cart",
       bodyFile: `${root}/cart`,
-      userSession: req?.user?.session,
+      userSession: info,
       formatCurrencyVND: formatCurrencyVND,
       // TODO: add real data - categoryList
       categoryList: dummyCatList,
@@ -50,7 +50,7 @@ router.get(`${CART_ROUTE}`, isAuth.isAuth, async (req, res) => {
   }
 });
 
-router.post(`/deletecart`, async (req, res) => {
+router.post(`${CART_ROUTE}/delete-cart/:id`, async (req, res) => {
   try {
     const info = req.session.user;
     const id = info.id;
@@ -60,21 +60,45 @@ router.post(`/deletecart`, async (req, res) => {
   }
 });
 
-router.post(`/increasecart`, async (req, res) => {
+router.post(`${CART_ROUTE}/change-cart/:pid`, async (req, res) => {
   try {
     const info = req.session.user;
     const id = info.id;
+    const productId = req.params.pid;
+    const quantity = req.body.quantity;
+    // call function to increase quantity
+    const results = await db.changeQuantity(id, productId, quantity); //store info to display 
+    res.redirect(`${CART_ROUTE}`);
+    // res.json({ status: "success", updatedQuantity: quantity });
 
   } catch (err) {
     res.send("Error fetching data!" + err);
   }
 });
 
-router.post(`/decreasecart`, async (req, res) => {
+router.post(`${CART_ROUTE}/increase-cart/:pid`, async (req, res) => {
   try {
     const info = req.session.user;
     const id = info.id;
+    const productId = req.params.pid;
+    // call function to increase quantity
+    await db.increaseQuantity(id, productId); //store info to display 
+    res.redirect(`${CART_ROUTE}`);
+    // res.json({ status: "success", updatedQuantity: quantity });
+  } catch (err) {
+    res.send("Error fetching data!" + err);
+  }
+});
 
+router.post(`${CART_ROUTE}/decrease-cart/:pid`, async (req, res) => {
+  try {
+    const info = req.session.user;
+    const id = info.id;
+    const productId = req.params.pid;
+    // call function to decrease quantity
+    await db.decreaseQuantity(id, productId); //store info to display 
+    res.redirect(`${CART_ROUTE}`);
+    // res.json({ status: "success", updatedQuantity: quantity });
   } catch (err) {
     res.send("Error fetching data!" + err);
   }
