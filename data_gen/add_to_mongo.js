@@ -1,91 +1,56 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const mg = require('../models/methods');
-const {sendResponse} = require('../middleware/middleware');
-
-const app = express();
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-mg.connectMongoDB()
-
-app.get("/", (req, res) => {
-  res.json({ message: "API running..." });
-});
-
-app.get("/category/get-all-children/:id", async (req, res) => {
-  
-  try {
-    const id = req.params.id;
-    const result = await mg.getAllChildren(id);
-    if (result) sendResponse(res, 200, `ok`, result);
-    else sendResponse(res, 404, `No category with id ${id} is found`, null);
-
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
-
-app.post("/category", async (req, res) => {
-  try {
-    const {_id, name, attribute, parent_category} = req.body;
-    const result = await mg.saveCat(_id, name, attribute, parent_category);
-    sendResponse(res, 200, `ok`, result);
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
-
-app.get("/category", async (req, res) => {
-  try {
-    const result = await mg.getAllCats();
-    sendResponse(res, 200, `ok`, result);
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
-
-app.get("/category/lowestlevel", async (req, res) => {
-  try {
-    const result = await mg.getLowestLevelCats();
-    sendResponse(res, 200, `ok`, result);
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
-
-app.delete("/category/delete-cat-only/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await mg.deleteCat(id);
-    if (result) sendResponse(res, 200, `Transaction succeeded. Category is deleted.`);
-    else sendResponse(res, 500, `Transaction failed. Category is not deleted.`);
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
-
-app.delete("/category/delete-cat-and-children/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await mg.deleteCatAndChildren(id);
-    if (result.length != 0) sendResponse(res, 200, `Category and its children are deleted.`, result);
-    if (result.length == 0) sendResponse(res, 404, `No category with ID ${id} is found.`, result);
-    else sendResponse(res, 500, `Transaction failed. Category and its children are not deleted.`);
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
+require('dotenv').config();
+const fs = require('fs');
+const mg = require('./models/methods');
+const json_fn = './cat_att_list.json';
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+//TODO: Specify collection name to ensure consistency?
+const forLoop = async (clist) => {
+    for (const c of clist){
+        try{
+            const checkId = await mg.findCatById(c._id['$oid']);
+            if(!checkId){ //if category is not added
+                console.log("\t Saving category: " + c.name);
+                const att_list = c.attribute;
+                let al = []
+                for (const a of att_list) {
+                    let temp = {...a, _id: a._id['$oid'] }
+                    al.push(temp)
+                }
+                const saved = await mg.saveCat(c._id['$oid'], c.name, al, c.parent_category ? c.parent_category['$oid'] : null);
+            }
+            else{
+                console.log("This category is already in the database: " + c.name);
+            }
+        }
+        catch (err){
+            // console.log(err);
+        }
+        
+    }
+    return;
+}
+
+
+const importData = async () => {
+    fs.readFile(json_fn, 'utf-8', async (readErr, data) => {
+        try {
+            mg.dropAll();
+            if (readErr) {
+                console.log("Error reading file: " + readErr);
+                return;
+            }
+            const json_data = JSON.parse(data);
+            await forLoop(json_data);
+            console.log('Data Import Success')
+            process.exit()
+        } catch (error) {
+            console.error('Error with data import', error)
+            process.exit(1)
+        }
+    })
+}
+
+mg.connectMongoDB();
+importData()
 
