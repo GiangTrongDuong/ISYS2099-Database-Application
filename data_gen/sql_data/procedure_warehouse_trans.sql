@@ -1,3 +1,4 @@
+DROP PROCEDURE IF EXISTS product_to_wh;
 CREATE PROCEDURE product_to_wh(
     IN pid INT,
     IN quant INT
@@ -53,6 +54,7 @@ BEGIN
             UPDATE warehouse SET remaining_area = remaining_area - total_inserted WHERE id = wid;
 
             SET quant = 0; -- All space allocated
+            SELECT 'All of the products are allocated.' AS result;
         ELSE
             -- No warehouse with sufficient space found, try the next available warehouse
             -- prioritize ones with more space; only see ones that can store 1 item of product
@@ -87,11 +89,11 @@ BEGIN
                 UPDATE warehouse SET remaining_area = remaining_area - volume_inserted WHERE id = wid;
             ELSE
                 -- No warehouse available with any space, exit loop
+                SELECT 'No more items of this product can be allocated.' AS result;
                 SET quant = 0;
             END IF;
         END IF;
     END WHILE;
-
     -- Commit the transaction
     COMMIT;
 END

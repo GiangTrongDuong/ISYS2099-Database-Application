@@ -1,4 +1,5 @@
 -- move some copies of a product from one warehouse to another
+DROP PROCEDURE IF EXISTS wh_move_product;
 CREATE PROCEDURE wh_move_product(
     IN pid INT,
     -- quantity of products being moved
