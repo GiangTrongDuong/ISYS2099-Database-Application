@@ -58,11 +58,20 @@ async function decreaseQuantity(uid, pid) {
 }
 async function changeQuantity(uid, pid, newQuantity) {
     return new Promise((resolve, reject) => {
-        database.query(`UPDATE cart_details SET quantity = ${newQuantity}
+        if (newQuantity == 0) {
+            database.query(`DELETE FROM cart_details
+            WHERE customer_id = ${uid} and product_id = ${pid};`, (error, result) => {
+                if (error) reject(error);
+                else resolve(result);
+            });
+        }
+        else {
+            database.query(`UPDATE cart_details SET quantity = ${newQuantity}
         WHERE customer_id = ${uid} AND product_id = ${pid};`, (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-        })
+                if (error) reject(error);
+                else resolve(result);
+            })
+        }
     })
 };
 

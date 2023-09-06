@@ -8,7 +8,7 @@
           <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
         </div> -->
       </section>
-
+      <% if (cartItems?.length!=0) { %>
       <% cartItems.forEach(cartItem => { %>
       <div class="card rounded-3 mb-4 shadow-sm">
         <section class="card-body p-4">
@@ -32,7 +32,7 @@
               <button class="decrease-btn btn btn-link px-2" data-path="<%= navigatePage("cart-decrease", cartItem.product_id) %>">
                 <i class="fas fa-minus"></i>
               </button>
-              
+
               <input min="0" name="quantity" value="<%= cartItem.quantity %>" type="number" class="form-control form-control-sm quantity-input" data-path="<%= navigatePage("cart-change", cartItem.product_id) %>" />
               <button class="increase-btn btn btn-link px-2" data-path="<%= navigatePage("cart-increase", cartItem.product_id) %>">
                 <i class="fas fa-plus"></i>
@@ -44,17 +44,23 @@
             </div>
             <!-- remove -->
             <div class="pb-2 pb-md-0 col text-end">
-              <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+              <button class="delete-btn btn btn-link text-danger px-2" data-path="<%= navigatePage("cart-delete", cartItem.product_id) %>"><i class="fas fa-trash fa-lg"></i></a>
             </div>
           </div>
         </section>
       </div>
       <% }) %>
+      <% } else { %>
+      <h3 class="fs-3 pb-3
+        fw-medium text-center text-secondary ">
+        Empty Cart
+      </h3>
+      <% } %>
 
 
       <section class="card w-100 shadow-sm">
         <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
-          <button type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+          <button disabled="<%= cartItems?.length == 0 %>" type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
           <h5 class="m-md-0 mt-3 p-0 text-end line-clamp-2"><%= formatCurrencyVND(totalPrice) %></h5>
         </div>
       </section>
@@ -69,7 +75,7 @@
         e.preventDefault(); // Stop the form from submitting normally
         // get input element
         const input = $(this).siblings('input[type=number]')[0];
-        // this.parentNode.querySelector('input[type=number]')
+
         let actionType = $(this).hasClass('increase-btn') ? "increase" : "decrease";
         let actionPath = $(this).data("path");
         // console.log(navigatePage(`${action}`, productId));
@@ -94,9 +100,7 @@
         if (isNaN(newQuantity) || newQuantity < 0 || newQuantity.trim() == "") {
           input.value = 1;
         }
-
         let actionPath = $(this).data("path");
-
         $.post(actionPath, {
           quantity: newQuantity
         }, function(response) {
@@ -105,6 +109,20 @@
         }).fail(function() {
           // TODO: error here
           alert("Error communicating with the server when updating cart!");
+        });
+      });
+
+      // Handle delete
+      $(".delete-btn").on("click", function(e) {
+        e.preventDefault(); // Stop the form from submitting normally
+        // get post path
+        let actionPath = $(this).data("path");
+        // call route
+        $.post(actionPath, {}, function(response) {
+          location.reload();
+        }).fail(function() {
+          // TODO: error here
+          alert("Error deleting cart!");
         });
       });
     });

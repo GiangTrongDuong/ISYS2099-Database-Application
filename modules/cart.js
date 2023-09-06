@@ -50,11 +50,14 @@ router.get(`${CART_ROUTE}`, async (req, res) => {
   }
 });
 
-router.post(`${CART_ROUTE}/delete-cart/:id`, async (req, res) => {
+router.post(`${CART_ROUTE}/delete-cart/:pid`, async (req, res) => {
   try {
     const info = req.session.user;
     const id = info.id;
-
+    const productId = req.params.pid;
+    // call function to delete cart item
+    await db.removeCartItem(id, productId); //store info to display 
+    res.redirect(`${CART_ROUTE}`);
   } catch (err) {
     res.send("Error fetching data!" + err);
   }

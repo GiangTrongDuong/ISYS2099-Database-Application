@@ -47,6 +47,8 @@ const navigatePage = (type, id = -1) => {
             return `${CART_ROUTE}/increase-cart/${id}`;
         case "cart-decrease":
             return `${CART_ROUTE}/decrease-cart/${id}`;
+        case "cart-delete":
+            return `${CART_ROUTE}/delete-cart/${id}`;
         case "order":
             return `${ORDER_ROUTE}`;
         case "order-history":
