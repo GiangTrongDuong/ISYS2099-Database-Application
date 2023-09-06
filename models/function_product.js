@@ -50,7 +50,11 @@ async function from_seller (query_seller_id, limit) {
                 ORDER BY created_at DESC
                 LIMIT ${limit} ;`, (error, results) => {
                     if (error) reject(error);
-                    else resolve(results);
+                    else resolve({
+                        sellerName: results[0].seller_display_name,
+                        sellerUsername: results[0].seller_username,
+                        productList: results
+                    });
                 });
         }
         else{
@@ -60,7 +64,11 @@ async function from_seller (query_seller_id, limit) {
                 WHERE seller_id = ${query_seller_id}
                 ORDER BY created_at DESC;`, (error, results) => {
                     if (error) reject(error);
-                    else resolve(results);
+                    else resolve({
+                        sellerName: results[0].seller_display_name,
+                        sellerUsername: results[0].seller_username,
+                        productList: results
+                    });
                 });
         }
     })

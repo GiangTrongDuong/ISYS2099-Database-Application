@@ -6,8 +6,7 @@
         <div class="card-body
         d-flex flex-column align-items-center justify-content-center gap-2
         h-100 text-center text-white">
-          <img src="https://img.icons8.com/bubbles/100/000000/user.png"
-            class="d-none d-sm-block img-fluid rounded-circle w-75 ratio ratio-1x1 object-fit-cover" alt="User-Profile-Image">
+          <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="d-none d-sm-block img-fluid rounded-circle w-75 ratio ratio-1x1 object-fit-cover" alt="User-Profile-Image">
           <h6 class="fw-bold fs-4 line-clamp-1">
             <%= display_name %>
           </h6>
@@ -49,13 +48,15 @@
 
             </h6>
             <!-- Seller products / Items / Order History -->
-            <%if (role == "user") {%>
-              <button onclick="location.href = `<%= navigatePage('order-history', id)%>`;" class="btn btn-outline-dark w-25 rounded-pill">Order History</button>
-            <%} else if (role == "warehouse") {%>
-              <button onclick="location.href = `<%= navigatePage('warehouse-item', id)%>`;" class="btn btn-outline-dark w-25 rounded-pill">Warehouse Items</button>
-            <%} else if (role == "seller"){%>
-              <button onclick="location.href = `<%= navigatePage('product-list-seller', id)%>`;" class="btn btn-outline-dark w-25 rounded-pill">View Products</button>
-            <%}%>
+            <form action="">
+              <%if (role == "user") {%>
+              <button onclick="location.href = `<%= navigatePage('order-history', id)%>`;" class="btn btn-outline-dark rounded-3">Order History</button>
+              <%} else if (role == "warehouse") {%>
+              <button onclick="location.href = `<%= navigatePage('warehouse-item', id)%>`;" class="btn btn-outline-dark rounded-3">Warehouse Items</button>
+              <%} else if (role == "seller"){%>
+              <button onclick="location.href = `<%= navigatePage('product-list-seller', id)%>`;" class="btn btn-outline-dark rounded-3">View Products</button>
+              <%}%>
+            </form>
           </article>
         </div>
       </section>
@@ -68,26 +69,26 @@
             <div class="mb-3">
               <label for="user_name" class="form-label">Username</label>
               <input type="text" class="form-control" id="user_name" name="user_name" value="<%= user_name %>">
-            </div>
-            <div class="mb-3">
-              <label for="display_name" class="form-label">Display Name</label>
-              <input type="text" class="form-control" id="display_name" name="display_name" value="<%= display_name %>">
-            </div>
-            <div class="mb-3">
-              <label for="details" class="form-label">Details</label>
-              <textarea class="form-control" id="details" name="details" rows="4"><%= details %></textarea>
-            </div>
-            <button type="submit" class="btn btn-dark">Save Changes</button>
-          </form>
         </div>
-      </section>
+        <div class="mb-3">
+          <label for="display_name" class="form-label">Display Name</label>
+          <input type="text" class="form-control" id="display_name" name="display_name" value="<%= display_name %>">
+        </div>
+        <div class="mb-3">
+          <label for="details" class="form-label">Details</label>
+          <textarea class="form-control" id="details" name="details" rows="4"><%= details %></textarea>
+        </div>
+        <button type="submit" class="btn btn-dark">Save Changes</button>
+        </form>
     </div>
   </section>
+</div>
+</section>
 </div>
 
 
 <script>
-  document.querySelector('.update-button').addEventListener('click', function () {
+  document.querySelector('.update-button').addEventListener('click', function() {
     const infoSection = document.querySelector('.info-section');
     const updateSection = document.querySelector('.update-section');
 

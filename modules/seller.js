@@ -10,9 +10,10 @@ let root = `.${SELLER_ROUTE}`
 // full route to product-detail page: /product/seller/:seller_id
 router.get(`${SELLER_ROUTE}/:seller_id`, async (req, res) => {
     try {
-        let productList = await productDb.from_seller(req.params.seller_id);
-        const sellerDisplayName = productList[0].seller_display_name;
-        const sellerUsername = productList[0].seller_username;
+        let renderedSellerProduct = await productDb.from_seller(req.params.seller_id);
+        const sellerDisplayName = renderedSellerProduct.sellerDisplayName;
+        const sellerUsername = renderedSellerProduct.sellerUsername;
+        const productList = renderedSellerProduct.productList;
         res.render('layout.ejs', {
             title: "Seller",
             bodyFile: `${root}/seller`,

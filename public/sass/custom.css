@@ -134,6 +134,15 @@
   height: var(--sz-96);
 }
 
+.h-sz-44 {
+  height: var(--sz-44);
+}
+
+@media screen and (min-width: 768px) {
+  .h-sz-md-40 {
+    height: var(--sz-40);
+  }
+}
 .scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #DC761D #ccc;
