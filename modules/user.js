@@ -45,7 +45,6 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
                 if(result == true){
                     req.session.user = {role: uresults[0].role, user_name: uresults[0].user_name, id: uresults[0].id};
                     req.session.isAuth = true;
-                    console.log(uresults[0].id)
                     res.redirect("/my-account");
                 } else {
                     res.redirect("/login");
