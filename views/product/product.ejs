@@ -3,15 +3,11 @@
   <section id="product-content-product" class="py-5 mb-5">
     <article class="row gx-4 gx-lg-5 align-items-center">
       <div class="col-md-6 h-sz-96">
-        <img
-          class="h-100 w-100 obj-center-cover mb-5 mb-md-0 rounded-1"
-          src="<%= product.image %>"
-          alt="<%= product.title %>"
-        />
+        <img class="h-100 w-100 obj-center-cover mb-5 mb-md-0 rounded-1" src="<%= product.image %>" alt="<%= product.title %>" />
       </div>
       <div class="col-md-6">
         <caption class="small mb-1 line-clamp-2">
-          SKU: <%= product.id %> - Seller Id: <%= product.seller_id %>
+          SKU: <%= product.id %> - <a class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="<%= navigatePage("product-list-seller", product.seller_id) %>">Seller Id: <%= product.seller_id %></a>
         </caption>
         <h1 class="display-5 fw-bolder line-clamp-2"><%= product.title %></h1>
         <!-- Product price (Can add discount later) -->
@@ -24,10 +20,7 @@
         </caption>
         <p class="lead">
           Product Category:
-          <a
-            class="line-clamp-1 link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-            href="<%= navigatePage('category', product.category) %>"
-            >Category <%= product.category %>
+          <a class="line-clamp-1 link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="<%= navigatePage('category', product.category) %>">Category <%= product.category %>
           </a>
           <br />
           Product Description: <br />
@@ -36,13 +29,7 @@
           &emsp; - &ensp; Height: <%= product.height %><br />
         </p>
         <div class="d-flex">
-          <input
-            class="form-control text-center me-3"
-            id="inputQuantity"
-            type="num"
-            value="1"
-            style="max-width: 3rem"
-          />
+          <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
           <button class="btn btn-outline-dark flex-shrink-0" type="button">
             <i class="bi-cart-fill me-1"></i>
             Add to cart

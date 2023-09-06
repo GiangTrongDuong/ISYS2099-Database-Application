@@ -50,17 +50,11 @@
             </h6>
             <!-- Seller products / Items / Order History -->
             <%if (role == "user") {%>
-              <form action="<%= navigatePage("order-history") %>" method="">
-                <button type="submit" class="btn btn-outline-dark">Order History</button>
-              </form>
+              <button onclick="location.href = `<%= navigatePage('order-history', id)%>`;" class="btn btn-outline-dark w-25 rounded-pill">Order History</button>
             <%} else if (role == "warehouse") {%>
-              <form action="" method="">
-                <button type="submit" class="btn btn-outline-dark">Warehouse Item</button>
-              </form>
+              <button onclick="location.href = `<%= navigatePage('warehouse-item', id)%>`;" class="btn btn-outline-dark w-25 rounded-pill">Warehouse Items</button>
             <%} else if (role == "seller"){%>
-              <form action="<%= navigatePage("product-list-seller", id) %>">
-                <button type="submit" class="btn btn-outline-dark" href="">View Products</a>
-                </form>
+              <button onclick="location.href = `<%= navigatePage('product-list-seller', id)%>`;" class="btn btn-outline-dark w-25 rounded-pill">View Products</button>
             <%}%>
           </article>
         </div>

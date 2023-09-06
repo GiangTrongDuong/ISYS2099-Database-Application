@@ -1,4 +1,5 @@
 const PRODUCT_ROUTE = '/product';
+const SELLER_ROUTE = '/seller';
 const CART_ROUTE = '/cart';
 const CATEGORY_ROUTE = '/category';
 
@@ -44,6 +45,7 @@ const MEMBERS = [
 
 module.exports = {
     PRODUCT_ROUTE,
+    SELLER_ROUTE,
     CART_ROUTE,
     ORDER_ROUTE,
     ORDER_HISTORY_ROUTE,

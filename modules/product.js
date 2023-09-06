@@ -41,27 +41,6 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
   }
 }); 
 
-// full route to product-detail page: /product/seller/:seller_id
-router.get(`${PRODUCT_ROUTE}/seller/:seller_id`, async (req, res) => { 
-  try{
-    const productList = await db.from_seller(req.params.seller_id);
-    // res.json({"product_list": product_list});
-    console.log(productList, productList.length);
-    res.render('layout.ejs', {
-        title: "Product",
-        bodyFile: `${root}/product-list`,
-        formatCurrencyVND: formatCurrencyVND,
-        // TODO: add real data - categoryList
-        categoryList: dummyCatList,
-        userSession: req?.session?.user,
-        productList: productList
-    });
-  }
-  catch (err){
-    res.send("Cannot fetch product by seller with id " + req.params.seller_id);
-  }
-}); 
-
 // File to show products in a list of categories
 router.get(`${PRODUCT_ROUTE}/cat/:categories`, async (req, res) => { 
   try{

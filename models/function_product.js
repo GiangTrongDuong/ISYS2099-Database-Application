@@ -43,8 +43,9 @@ async function from_category (cat_list, limit) {
 async function from_seller (query_seller_id, limit) {
     return new Promise ((resolve, reject) => {
         if (limit){
-            database.query(`SELECT *
+            database.query(`SELECT product.*, user.user_name AS seller_username, user.display_name AS seller_display_name
                 FROM product
+                INNER JOIN user ON product.seller_id = user.id 
                 WHERE seller_id = ${query_seller_id}
                 ORDER BY created_at DESC
                 LIMIT ${limit} ;`, (error, results) => {
@@ -53,8 +54,9 @@ async function from_seller (query_seller_id, limit) {
                 });
         }
         else{
-            database.query(`SELECT *
+            database.query(`SELECT product.*, user.user_name AS seller_username, user.display_name AS seller_display_name
                 FROM product
+                INNER JOIN user ON product.seller_id = user.id 
                 WHERE seller_id = ${query_seller_id}
                 ORDER BY created_at DESC;`, (error, results) => {
                     if (error) reject(error);

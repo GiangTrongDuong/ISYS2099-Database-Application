@@ -1,0 +1,14 @@
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h5 class="fst-italic">Seller</h5>
+      <h1 class="display-4 fw-bolder">
+        <%= sellerDisplayName %>
+      </h1>
+      <p class="lead fw-normal text-white-50 mb-0"><%= sellerUsername %></p>
+    </div>
+  </div>
+</header>
+<section id="seller" class="container mt-5 w-100">
+  <%- include('../partials/product-list', {productList, type: "Seller"}) %>
+</section>
