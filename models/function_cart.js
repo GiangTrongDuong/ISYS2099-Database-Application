@@ -17,6 +17,29 @@ async function getCartItem(uid) {
     })
 };
 
+
+async function addToCart(uid, pid, additionalQuantity = 1){
+    return new Promise((resolve, reject) => {
+        database.query(`SELECT * FROM cart_details WHERE customer_id = ${uid} AND product_id = ${pid}`, (err, uresult) =>{
+            if(uresult.length >= 1){
+                // if product already in cart, increase quantity
+                database.query(`UPDATE cart_details SET quantity = quantity + ${additionalQuantity}
+                WHERE customer_id = ${uid} AND product_id = ${pid};`, (err, result) => {
+                    if(err) reject (err);
+                    else resolve (result);
+                })
+            } else {
+                // if product not in cart, add to cart
+                database.query(`INSERT INTO cart_details VALUE (${uid}, ${pid}, ${additionalQuantity})`, (err, result) =>{
+                    if (err) reject (err);
+                    else resolve(result);
+                })
+            }
+            console.log(uresult);
+        })
+    })
+};
+
 async function removeCartItem(uid, pid) {
     return new Promise((resolve, reject) => {
         database.query(`DELETE FROM cart_details 
@@ -77,4 +100,4 @@ async function changeQuantity(uid, pid, newQuantity) {
 
 
 
-module.exports = { getCartItem, removeCartItem, increaseQuantity, decreaseQuantity, changeQuantity }
+module.exports = { getCartItem, removeCartItem, increaseQuantity, decreaseQuantity, changeQuantity, addToCart }

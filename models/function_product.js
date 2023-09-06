@@ -120,26 +120,6 @@ async function getVolume(pid){
     });
 };
 
-async function addToCart(uid, pid){
-    return new Promise((resolve, reject) => {
-        database.query(`SELECT * FROM cart_details WHERE customer_id = ${uid} AND product_id = ${pid}`, (err, uresult) =>{
-            if(uresult.length >= 1){
-                database.query(`UPDATE cart_details SET quantity = quantity + 1 
-                WHERE customer_id = ${uid} AND product_id = ${pid};`, (err, result) => {
-                    if(err) reject (err);
-                    else resolve (result);
-                })
-            } else {
-                database.query(`INSERT INTO cart_details VALUE (${uid}, ${pid}, ${1})`, (err, result) =>{
-                    if (err) reject (err);
-                    else resolve(result);
-                })
-            }
-            console.log(uresult);
-        })
-    })
-};
-
 async function updateDetails(pid, title, price, description){
     return new Promise((resolve, reject) => {
         database.query(`UPDATE product SET title = "${title}", price = ${price}, description = "${description}", updated_at = ${getCurrentTimeString} npm
@@ -179,5 +159,5 @@ async function deleteProduct(pid){
         })
     })
 }
-module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, addToCart, updateDetails, createProduct, deleteProduct}
+module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, updateDetails, createProduct, deleteProduct}
 

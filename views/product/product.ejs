@@ -29,8 +29,9 @@
           &emsp; - &ensp; Height: <%= product.height %><br />
         </p>
         <form class="d-flex cart-form" data-path="<%= navigatePage("add-to-cart", product.id) %>">
-          <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-          <button class="btn btn-outline-dark flex-shrink-0 add-cart-btn" type="submit">
+          <input class="form-control text-center me-3" min="0" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+          <button class="btn btn-dark flex-shrink-0 add-cart-btn" type="submit"
+          <%= !userSession ? "disabled" : "" %>>
             <i class="bi-cart-fill me-1"></i>
             Add to cart
           </button>
@@ -61,8 +62,11 @@
       event.preventDefault(); // Stop the form from submitting normally
       // get post path
       let actionPath = $(this).data("path");
+      console.log(actionPath);
       // call route
-      $.post(actionPath, {}, function(response) {
+      $.post(actionPath, {
+        quantity: $("#inputQuantity").val(),
+      }, function(response) {
         // location.reload();
         addToCartModal.modal('show');
       }).fail(function() {

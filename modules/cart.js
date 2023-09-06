@@ -50,6 +50,21 @@ router.get(`${CART_ROUTE}`, async (req, res) => {
   }
 });
 
+// add to cart
+router.post(`${CART_ROUTE}/add-cart/:pid`, async (req, res) => {
+  try {
+    const info = req.session.user;
+    const id = info.id;
+    const productId = req.params.pid;
+    const quantity = req.body.quantity;
+    // call function to delete cart item
+    await db.addToCart(id, productId, quantity); //store info to display 
+    res.redirect(`${CART_ROUTE}`);
+  } catch (err) {
+    res.send("Error fetching data!" + err);
+  }
+});
+
 router.post(`${CART_ROUTE}/delete-cart/:pid`, async (req, res) => {
   try {
     const info = req.session.user;
