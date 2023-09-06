@@ -80,6 +80,7 @@ const findCatById = async(id) => {
     }
 }
 
+
 //find by category name and return id (used when creating category)
 const findIdFromName = async (newName) => {
     try {
@@ -128,6 +129,7 @@ const addParentAtt = async (catId) => {
     }
     catch (err){
         console.log("Cannot add parent's attribute" + err);
+        throw(err)
     }
 }
 
@@ -140,10 +142,9 @@ const dropAll = async () =>{
 const updateCat = async (newCat) => {
     try {
         const oldCat = await findCatById(newCat._id)
-
-
     } catch (err) {
         console.log(err)
+        throw (err)
     }
 }
 
@@ -160,7 +161,8 @@ const getAllChildren = async (id) => {
                   as: "children"
                }
             },
-            { $project: {
+            { $project: { // each record will show category _id and list of its children's ids
+                _id: 1,
                 "children_categories": "$children._id"
               }
             }
@@ -173,6 +175,36 @@ const getAllChildren = async (id) => {
         else return null
     } catch (err) {
         console.log(err)
+        throw(err)
+    }
+}
+
+// get lowest level categories (cats that are not a parent of any category)
+const getLowestLevelCats = async () => {
+    try {
+        const cats = await category.aggregate( [
+            { $lookup: {
+                  from: "categories",
+                  localField: "_id",
+                  foreignField: "parent_category",
+                  as: "child"
+                }
+            },
+            { $match: {child: {$size: 0}} // select record that has no child 
+            },
+            { $project: { // show only _id and name for each record
+                _id: 1,
+                name: 1
+              }
+            }
+        ])
+
+        // aggregation will return an array
+        return cats
+
+    } catch (err) {
+        console.log(err)
+        throw(err)
     }
 }
 
@@ -230,4 +262,4 @@ const deleteCatAndChildren = async(id) => {
 }
 
 
-module.exports = {connectMongoDB, saveCat, createCats, findCatsByAttribute, findCatById, findIdFromName, addParentAtt, dropAll, updateCat, getAllChildren, getAllCats, deleteCat, deleteCatAndChildren}
+module.exports = {connectMongoDB, saveCat, createCats, findCatsByAttribute, findCatById, findIdFromName, addParentAtt, dropAll, updateCat, getAllChildren, getAllCats, getLowestLevelCats, deleteCat, deleteCatAndChildren}
