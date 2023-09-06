@@ -23,3 +23,4 @@ for count,line in enumerate(input_file):
             modified_line = line.replace(wrapped_cat, f"\'{record_cat[cat_name]}\'")
             output_file.write(modified_line)
             break
+# TODO: Get all lowest children cat ids to use in future data gen

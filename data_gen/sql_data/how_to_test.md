@@ -83,3 +83,22 @@ Make sure that your destination has enough space.
 CALL wh_move_product(6, 1, 20, 1);
 ```
 - Call the first statement again to see the difference. Notice the remaining_area as well.
+
+6. To test the trigger when deleting product:
+- Run this to find out the orders with the product in it:
+```
+SELECT oi.*, od.status FROM order_item oi, order_details od 
+WHERE oi.order_id = od.id AND oi.product_id = @pid_deleted;
+```
+- If your product is in an Inbound order, then you won't be able to delete it.
+- Otherwise, check the space of the warehouses storing this product:
+```
+SELECT wi.*, wh.remaining_area , (length * width * height) as volume
+FROM warehouse wh, warehouse_item wi, product p
+WHERE wh.id = wi.warehouse_id AND p.id = @pid_deleted AND p.id = wi.product_id;
+```
+- After deletion: ``` DELETE FROM product WHERE id = @pid_deleted; ```
+check the warehouse space and order_item again. 
+```
+SELECT id, remaining_area FROM warehouse WHERE id = @warehouse_with_deleted_pid;
+```
