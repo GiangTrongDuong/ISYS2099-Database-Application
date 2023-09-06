@@ -28,7 +28,7 @@
           &emsp; - &ensp; Length: <%= product.length %><br />
           &emsp; - &ensp; Height: <%= product.height %><br />
         </p>
-        <form class="d-flex" action="" method="post">
+        <form class="d-flex cart-form" data-path="<%= navigatePage("add-to-cart", product.id) %>">
           <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
           <button class="btn btn-outline-dark flex-shrink-0 add-cart-btn" type="submit">
             <i class="bi-cart-fill me-1"></i>
@@ -38,21 +38,37 @@
       </div>
     </article>
   </section>
+  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Open modal
+  </button> -->
 </div>
-<!-- <script>
+<%- include('../partials/modal', {
+  modalId: "addToCartModal",
+  heading: "Success Add To Cart",
+  // render body with message and button
+  body: `
+    <p class="lead">Add to cart successfully!</p>
+    <a class="btn btn-primary" href="${navigatePage("cart")}">Go to cart</a>
+  `,
+  isFullScreenSm: false,
+}) %>
+<script>
   $(document).ready(function() {
     // Handle add to cart
-    $(".delete-btn").on("click", function(e) {
-      e.preventDefault(); // Stop the form from submitting normally
+    $(".cart-form").on("submit", function(event) {
+      // get addToCartModal
+      let addToCartModal = $("#addToCartModal");
+      event.preventDefault(); // Stop the form from submitting normally
       // get post path
       let actionPath = $(this).data("path");
       // call route
       $.post(actionPath, {}, function(response) {
-        location.reload();
+        // location.reload();
+        addToCartModal.modal('show');
       }).fail(function() {
         // TODO: error here
         alert("Error add an item cart!");
       });
     });
   });
-</script> -->
+</script>
