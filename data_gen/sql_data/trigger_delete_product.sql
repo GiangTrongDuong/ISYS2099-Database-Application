@@ -1,3 +1,4 @@
+DROP TRIGGER IF EXISTS product_delete_trigger;
 CREATE TRIGGER product_delete_trigger
 BEFORE DELETE ON product
 FOR EACH ROW

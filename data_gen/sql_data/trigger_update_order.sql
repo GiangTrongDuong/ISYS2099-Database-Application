@@ -1,10 +1,14 @@
+DROP TRIGGER IF EXISTS customer_update_order;
 CREATE TRIGGER customer_update_order
 AFTER UPDATE ON `order_details`
 FOR EACH ROW
 BEGIN
 	DECLARE done INT DEFAULT 0;
     -- Check if the order status changed to "Accepted" or "Rejected"
-    IF (NEW.status = 'Accepted' OR NEW.status = 'Rejected') AND (OLD.status = 'Inbound') THEN
+    IF (NEW.status = 'Inbound') AND (OLD.status = 'Inbound') THEN
+		SIGNAL SQLSTATE '01000' SET message_text = 'No status change.';
+    -- Check if the order status changed to "Accepted" or "Rejected"    
+    ELSEIF (NEW.status = 'Accepted' OR NEW.status = 'Rejected') AND (OLD.status = 'Inbound') THEN
 		BEGIN
 			DECLARE pid INT;
 			DECLARE quant INT;	

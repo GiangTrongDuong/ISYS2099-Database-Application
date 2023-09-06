@@ -1,3 +1,4 @@
+DROP PROCEDURE IF EXISTS product_to_wh
 CREATE PROCEDURE product_to_wh(
     IN pid INT,
     IN quant INT

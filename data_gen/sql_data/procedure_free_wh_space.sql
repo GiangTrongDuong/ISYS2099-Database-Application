@@ -1,3 +1,5 @@
+DROP PROCEDURE IF EXISTS free_wh_space;
+
 CREATE PROCEDURE free_wh_space(
     IN pid INT,
     IN quant INT

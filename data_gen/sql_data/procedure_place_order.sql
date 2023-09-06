@@ -1,5 +1,7 @@
 -- place order using transaction
 -- output the cost of pid * quantity 
+
+DROP PROCEDURE IF EXISTS order_trans;
 CREATE PROCEDURE order_trans(
 -- take in the order id, product id, quantity; return the cost of product * quantity
 -- an entry in order_details is already created
