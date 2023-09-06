@@ -1,5 +1,5 @@
 const database = require('./connection/dbSqlConnect');
-const { parenthesesString } = require('../helperFuncs');
+const { parenthesesString, getCurrentTimeString } = require('../helperFuncs');
 
 async function from_id (pid) {
     return new Promise ((resolve, reject) => {
@@ -140,9 +140,32 @@ async function addToCart(uid, pid){
     })
 }
 
-// addToCart(19, 5).then(function(result){
-//     console.log(result);
-// })
+async function updateDetails(pid, title, price, description){
+    return new Promise((resolve, reject) => {
+        database.query(`UPDATE product SET title = "${title}", price = ${price}, description = "${description}", updated_at = ${getCurrentTimeString} 
+        WHERE id = ${pid};`, (err, result) => {
+            if(err) reject (err);
+            else resolve(result);
+        })
+    })
+}
 
+async function createProduct(title, seller_id, price, description, category, length, width, height, image, created_at, update_at){
+    return new Promise((resolve, reject)=> {
+        database.query(`SELECt * FROM product WHERE title = "${title}"`, (err, qresult) => {
+            if (qresult.length >= 1){
+                resolve("Taken product title");
+            } else {
+                database.query(`
+                INSERT INTO product (title, seller_id, price, description, category, length, width, height, image, created_at, updated_at)
+                VALUE (${title},${seller_id},${price},${description},${category},${length},${width},${image},${getCurrentTimeString()},${getCurrentTimeString()});`,
+                (err, result) =>{
+                    if(err) reject (err);
+                    else resolve(result);
+                }) 
+            }
+        })
+    })
+}
 module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, addToCart}
 

@@ -88,7 +88,6 @@ app.get("/", function (req, res) {
         // req: req, // => session: req.session.user
         userSession: req?.session?.user
     })
-    console.log(req?.session?.user);
 });
 
 app.listen(PORT, function () {

@@ -30,7 +30,6 @@ router.get(`${ABOUT_ROUTE}`, function(req, res) {
     members: MEMBERS,
 
   });
-  console.log(req.session.user);
 }); 
 
 router.get(`${PRIVACY_ROUTE}`, function(req, res) { 
