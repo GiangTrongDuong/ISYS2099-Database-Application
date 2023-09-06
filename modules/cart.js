@@ -29,8 +29,7 @@ router.get(`${CART_ROUTE}`, async (req, res) => {
   try{
     const info = req.session.user;
   const id = info.id;
-  const cartItems = await db.getCartItem(id); //store info to display 
-  console.log(cartItems);
+  const cartItems = await db.getCartItem(id); //store info to display
   res.render("layout.ejs",{
     title: "Cart",
     userSession: req?.user?.session,

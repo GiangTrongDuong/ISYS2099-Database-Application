@@ -33,8 +33,8 @@ async function increaseQuantity(uid, pid){
 
 async function decreaseQuantity(uid, pid){
     return new Promise ((resolve, reject) => {
-        database.query(`SELECT quantity FROM user WHERE customer_id = ${uid} AND product_id = ${pid}`, (error, result) => {
-        if(result[0].quantity == 1){
+        database.query(`SELECT quantity FROM user WHERE customer_id = ${uid} AND product_id = ${pid}`, (error, resultCheck) => {
+        if(resultCheck[0].quantity == 1){
             database.query(`DELETE FROM cart_details
             WHERE customer_id = ${uid} and product_id = ${pid};`, (error, result)=>{
                 if(error) reject (error);
@@ -49,8 +49,8 @@ async function decreaseQuantity(uid, pid){
         }
         });
     })
-}
+};
 
-
+async function updateProduct()
 
 module.exports = { getCartItem, removeCartItem, increaseQuantity, decreaseQuantity }
