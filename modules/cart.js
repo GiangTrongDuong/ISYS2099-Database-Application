@@ -2,6 +2,7 @@ const express = require('express');
 const { CART_ROUTE } = require('../constants');
 const { dummyCatList } = require('../dummyData');
 const db = require('../models/function_cart');
+const dorder = require('../models/function_order');
 const router = express.Router();
 const isAuth = require("../models/isAuth");
 
@@ -107,4 +108,11 @@ router.post(`${CART_ROUTE}/decrease-cart/:pid`, async (req, res) => {
   }
 });
 
+router.post(`${CART_ROUTE}/place-order`, async (req, res) => {
+  try{
+
+  }catch (err){
+    res.send(err);
+  }
+})
 module.exports = router;

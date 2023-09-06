@@ -33,7 +33,7 @@ router.get(`${SELLER_ROUTE}/:seller_id`, async (req, res) => {
     }
 });
 
-router.post(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => {
+router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => {
     try{
         const info = req?.session?.user;
         const id = info.id;
@@ -72,10 +72,10 @@ router.post(`${MY_ACCOUNT_ROUTE}/create-product`, isAuth.isAuth, async (req,res)
 
 router.post(`${MY_ACCOUNT_ROUTE}/update-product`, isAuth.isAuth, async (req, res)=>{
     try{
-    const pid = null;
-    const title = null;
-    const price = null;
-    const description = null;
+    const pid = req.params.id;
+    const title = req.params.title;
+    const price = req.params.price;
+    const description = req.params.description;
         await productDb.updateDetails(pid,title,price,description);
         res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
     }catch (err){
