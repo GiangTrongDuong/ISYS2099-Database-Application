@@ -50,6 +50,16 @@ app.get("/category", async (req, res) => {
   }
 });
 
+app.get("/category/lowestlevel", async (req, res) => {
+  try {
+    const result = await mg.getLowestLevelCats();
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
 app.delete("/category/delete-cat-only/:id", async (req, res) => {
   try {
     const id = req.params.id;
