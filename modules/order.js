@@ -45,7 +45,6 @@ router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test
   try{
     const info = req.session.user;
     const id = info.id;
-    console.log(id);
     const orders = await db.get_orders(id);
     res.render("layout.ejs", {
       title: "Order History",

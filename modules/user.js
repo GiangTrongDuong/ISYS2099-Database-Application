@@ -5,6 +5,7 @@ const database = require('../models/connection/dbSqlConnect');
 const { dummyCatList } = require('../dummyData');
 const router = express.Router();
 const isAuth = require("../models/isAuth");
+const insertDB = require('../models/function_user');
 
 //session
 const cookieParser = require('cookie-parser');
@@ -158,5 +159,19 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
     }
   });
 });
+
+router.post(`/update-user-info`, isAuth.isAuth, async (req, res) => {
+  try {
+    const info = req.session.user;
+    const id = info.id;
+    const user_name = req.body.user_name;
+    const display = req.body.display_name;
+    const detail = req.body.details;
+    await insertDB.updateUser(id, user_name, display, detail);
+    res.redirect("/my-account");
+  } catch (err) {
+    console.log(err);
+  }
+})
 
 module.exports = router;
