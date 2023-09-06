@@ -30,19 +30,48 @@ router.get(`${CART_ROUTE}`, async (req, res) => {
     const info = req.session.user;
   const id = info.id;
   const cartItems = await db.getCartItem(id); //store info to display 
-  res.json(cartItems);  
-  // res.render("layout.ejs",{
-  //   title: "Cart",
-  //   userSession: req?.user?.session,
-  //   bodyFile:`${root}/cart`,
-  //   cartItems: cartItems,
-  // }
-  // );
+  console.log(cartItems);
+  res.render("layout.ejs",{
+    title: "Cart",
+    userSession: req?.user?.session,
+    bodyFile:`${root}/carttest`,
+    cartItems: cartItems,
+    categoryList: dummyCatList,
+  }
+  );
   } catch (err){
     res.send("Cannot fetch carts item! with" + err);
   }
-  
-  
+});
+
+router.post(`/deletecart`, async (req, res) => {
+  try{
+    const info = req.session.user;
+    const id = info.id;
+
+  } catch (err){
+    res.send ("Error fetching data!" + err); 
+  }
+});
+
+router.post(`/increasecart`, async (req, res) => {
+  try{
+    const info = req.session.user;
+    const id = info.id;
+
+  } catch (err){
+    res.send ("Error fetching data!" + err); 
+  }
+});
+
+router.post(`/decreasecart`, async (req, res) => {
+  try{
+    const info = req.session.user;
+    const id = info.id;
+
+  } catch (err){
+    res.send ("Error fetching data!" + err); 
+  }
 });
 
 module.exports = router;

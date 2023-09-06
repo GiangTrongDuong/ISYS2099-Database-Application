@@ -159,18 +159,4 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
   });
 });
 
-// router.get("/cart", function (req, res) {
-//   const info = req.session.user;
-//   const id = info.id;
-//   console.log(id);
-//   const cartItems = database.query(`SELECT cd.product_id, cd.quantity, p.title, p.price, cd.quantity*p.price AS totalp
-//   FROM cart_details cd JOIN product p
-//   WHERE cd.product_id = p.id AND cd.customer_id = ${id};`); //store info to display 
-//   console.log(cartItems);
-//   res.render("layout.ejs",{
-//     title: "Cart",
-//   }
-//   );
-// });
-
 module.exports = router;
