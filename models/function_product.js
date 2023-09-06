@@ -120,5 +120,29 @@ async function getVolume(pid){
     });
 }
 
-module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume}
+async function addToCart(uid, pid){
+    return new Promise((resolve, reject) => {
+        database.query(`SELECT * FROM cart_details WHERE customer_id = ${uid} AND product_id = ${pid}`, (err, uresult) =>{
+            if(uresult.length >= 1){
+                database.query(`UPDATE cart_details SET quantity = quantity + 1 
+                WHERE customer_id = ${uid} AND product_id = ${pid};`, (err, result) => {
+                    if(err) reject (err);
+                    else resolve (result);
+                })
+            } else {
+                database.query(`INSERT INTO cart_details VALUE (${uid}, ${pid}, ${1})`, (err, result) =>{
+                    if (err) reject (err);
+                    else resolve(result);
+                })
+            }
+            console.log(uresult);
+        })
+    })
+}
+
+// addToCart(19, 5).then(function(result){
+//     console.log(result);
+// })
+
+module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, addToCart}
 

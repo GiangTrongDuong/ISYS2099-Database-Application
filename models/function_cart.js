@@ -64,7 +64,7 @@ async function changeQuantity(uid, pid, newQuantity) {
             else resolve(result);
         })
     })
-}
+};
 
 
 
