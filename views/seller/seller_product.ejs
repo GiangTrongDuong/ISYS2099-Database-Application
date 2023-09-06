@@ -1,3 +1,5 @@
+<!-- Form: add id to `td` -> add id to `input` inside modal body 
+  -> Inside script: get value form id in `td` -> assign value to input `id`  -->
 <div class="container-fluid bg-light-subtle text-emphasis-light">
   <button class="btn btn-outline-dark">Add product</button>
   <table class="table">
@@ -13,43 +15,66 @@
       </tr>
     </thead>
     <tbody>
-      <% for(var product of productList ){ %>
+      <% productList.forEach(product => { %>
       <tr>
         <th scope="row"><%= product.id %></th>
-        <td><%= product.title %></td>
-        <td><%= product.price %></td>
-        <td><%= product.description %></td>
-        <td><%= product.category %></td>
+        <td id="product-title"><%= product.title %></td>
+        <td id="product-price"><%= product.price %></td>
+        <td id="product-description"><%= product.description %></td>
+        <td id="product-category"><%= product.category %></td>
         <td>
-          <button class="btn btn-outline-success" >Update Item</button>
+          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#updateProductModal" onclick="showUpdateModal(this)">Update Item</button>
         </td>
         <td>
           <button class="btn btn-danger">Delete Item</button>
         </td>
       </tr>
-      <% } %>
+      <% }) %>
     </tbody>
+</div>
+
+<%- include('../partials/modal', {
+  modalId: "updateProductModal",
+  heading: "Update Product Information",
+  // render body with message and button
+  body: `
+  <div class="card">
+    <div class="card-body h-100 overflow-scroll">
+      <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Product Information</h6>
+      <form action="/update-user-info" method="POST">
+        <input type="hidden" class="id" name="id" value="">
+        <div class="mb-3">
+          <label for="user_name" class="form-label">Title</label>
+          <input type="text" class="form-control" id="update-title" name="title" value="">
+        </div>
+        <div class="mb-3">
+          <label for="user_name" class="form-label">Price</label>
+          <input type="text" class="form-control" id="update-price" name="price" value="">
+        </div>
+        <div class="mb-3">
+          <label for="user_name" class="form-label">Description</label>
+          <input type="text" class="form-control" id="update-description" name="description" value="">
+        </div>
+        <button type="submit" class="btn btn-dark">Save Changes</button>
+      </form>
+    </div>
   </div>
+  `,
+  isFullScreenSm: false,
+}) %>
+<script>
+  function showUpdateModal(buttonElement) {
+    // Find the closest <tr> element which is the parent of the clicked button
+    const row = buttonElement.closest('tr');
 
+    // Get the product data from the td elements
+    const productTitle = row.querySelector('#product-title').innerText;
+    const productPrice = row.querySelector('#product-price').innerText;
+    const productDescription = row.querySelector('#product-description').innerText;
 
-    <section class="update-section col-sm-8 h-100" style="display: none;">
-      <div class="card-body h-100 overflow-scroll">
-        <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Product Information</h6>
-        <form action="/update-user-info" method="POST">
-          <input type="hidden" class="id" name="id" value="">
-          <div class="mb-3">
-            <label for="user_name" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="">
-          </div>
-          <div class="mb-3">
-            <label for="user_name" class="form-label">Price</label>
-            <input type="text" class="form-control" id="price" name="price" value="">
-          </div>
-          <div class="mb-3">
-            <label for="user_name" class="form-label">Description</label>
-            <input type="text" class="form-control" id="description" name="description" value="">
-          </div>
-            <button type="submit" class="btn btn-dark">Save Changes</button>
-        </form>
-      </div>
-    </section>
+    // Now set this data into the modal fields
+    document.querySelector('#updateProductModal #update-title').value = productTitle;
+    document.querySelector('#updateProductModal #update-price').value = productPrice;
+    document.querySelector('#updateProductModal #update-description').value = productDescription;
+  }
+</script>

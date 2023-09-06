@@ -62,7 +62,6 @@
       event.preventDefault(); // Stop the form from submitting normally
       // get post path
       let actionPath = $(this).data("path");
-      console.log(actionPath);
       // call route
       $.post(actionPath, {
         quantity: $("#inputQuantity").val(),
