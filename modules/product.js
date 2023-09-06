@@ -1,6 +1,6 @@
 const express = require('express'); 
 const router = express.Router(); 
-const { dummyProduct, dummyCatList } = require('../dummyData.js');
+const { dummyProduct, dummyCatList, dummyParentCatIds } = require('../dummyData.js');
 const { formatCurrencyVND } = require('../helperFuncs.js');
 const { PRODUCT_ROUTE } = require('../constants.js');
 const db = require('../models/function_product.js');

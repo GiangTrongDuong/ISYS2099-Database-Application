@@ -29,6 +29,7 @@ router.get(`${CART_ROUTE}`, function (req, res) {
     bodyFile: `${root}/cart`,
     // TODO: add real data - categoryList
     categoryList: dummyCatList,
+    userSession: req?.session?.user,
     // TODO: add real data
     cartItems: cartItems,
   });
