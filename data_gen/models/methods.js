@@ -14,7 +14,18 @@ const connectMongoDB = () => {
     .catch((err) => {
       console.error('MongoDB connection FAIL', err)
     });
-  }
+}
+
+const getAllCats = async() => {
+    try {
+        const allCats = await category.find();
+        return allCats
+    }
+    catch (err) {
+        console.error('Get all category failed: ', err)
+    }
+
+}
 
 
 // save a category to db
@@ -25,7 +36,6 @@ const saveCat = async(newID, newName, newAtt, newPAId) => {
         newCat.name = newName;
         newCat.attribute = newAtt
         newCat.parent_category = newPAId;
-        console.log(newCat)
         
         let saved = await newCat.save();
         saved = addParentAtt(newCat._id);
@@ -37,7 +47,15 @@ const saveCat = async(newID, newName, newAtt, newPAId) => {
     }
 }
 
-const createCats = async(arrayOfCats) => {
+const createCats = async(list_cats) => {
+    try {
+        for (cat of list_cats) {
+            saveCat(cat._id, cat.name, cat.attribute, cat.parent_category);
+        }
+    }
+    catch (error) {
+        console.log("Create categories error: " + error);
+    }
 
 }
 
@@ -83,33 +101,6 @@ const findIdFromName = async (newName) => {
 
 // add parent's attribute to current object's attribute
 // the data is structured nicely so we only need to go up 1 level
-const addAtt = async (catName) => {
-    try{
-        const current = await category.findOne({name: catName});
-        if (current.parent_category){
-            console.log(current.name);
-            // console.log("ooooooooooo" + current.parent_category);
-            const parent = await category.findById(current.parent_category);
-            try{
-                // console.log("cccccccccccccc"); //check if parent is found
-                if (parent.attribute[0].aName){
-                    current.attribute.push(...parent.attribute);
-                    await current.save();
-                }
-                // console.log("DDDDDDDDDDDDDDD"); // announce save is done
-            } catch (err){
-                console.log("PPPPPPPPP" + err);
-            }
-        }
-    }
-    catch (err){
-
-    }
-}
-
-
-// add parent's attribute to current object's attribute
-// the data is structured nicely so we only need to go up 1 level
 const addParentAtt = async (catId) => {
     try{
         const current = await findCatById(catId);
@@ -119,7 +110,7 @@ const addParentAtt = async (catId) => {
                 for (const pa of parent.attribute) {
                     let existed = false;
                     for (const ca of current.attribute) {
-                        if (ca._id == pa._id) {
+                        if (ca.aName == pa.aValue || ca._id == pa._id) {
                             existed = true;
                             break;
                         }
@@ -145,7 +136,6 @@ const dropAll = async () =>{
 }
 
 
-
 //find by category id and update
 const updateCat = async (newCat) => {
     try {
@@ -156,10 +146,10 @@ const updateCat = async (newCat) => {
         console.log(err)
     }
 }
+
 //find all children
 const getAllChildren = async (id) => {
     try {
-        // const cat = await category.findOne({_id: id});
         const children_cats = await category.aggregate( [
             { $match: { _id: ObjectId(id) } },
             { $graphLookup: {
@@ -175,13 +165,69 @@ const getAllChildren = async (id) => {
               }
             }
         ] )
-        
-        return children_cats;
+
+        // aggregation will return an array
+        // however, we search by id, so we know that the array will have only one element
+        // thus, we only need to return the element at index 0
+        if (children_cats.length == 1) return children_cats[0];
+        else return null
     } catch (err) {
         console.log(err)
     }
 }
 
-//delete category (we'll check if it has products via sql then call this function)
+// deleteCat() delete a category by id
+// then update parent_category of its children to null
+// return the deleted category
+const deleteCat = async(id) => {
+    const session = await category.startSession();
+    session.startTransaction();
+    try {
+        const deleted = await category.findOneAndDelete({ _id : id });
+        await category.updateMany(  {parent_category: id},
+                                    {$set: {parent_category: null}}
+                                );
+        await session.commitTransaction();
+        session.endSession();
+        return deleted;
+    }
+    catch (error) {
+        console.log(error)
+        await session.abortTransaction();
+        session.endSession();
+        return null
+    }
+}
 
-module.exports = {connectMongoDB, saveCat, createCats, findCatsByAttribute, findCatById, findIdFromName, addAtt, addParentAtt, dropAll, updateCat, getAllChildren}
+// deleteCat() delete a category by id and all of its children tree
+// return a list of delelted cats
+// return empty list if no cat found
+// return null on error
+const deleteCatAndChildren = async(id) => {
+    const session = await category.startSession();
+    session.startTransaction();
+    try {
+        const delete_list = [];
+        const children = await getAllChildren(id);
+        let deleted = await category.findOneAndDelete({ _id : id });
+        if (deleted) {
+            delete_list.push(deleted._id);
+            for (cat_id of children.children_categories) {
+                deleted = await category.findOneAndDelete({ _id : cat_id });
+                delete_list.push(deleted._id);
+            }
+        }
+        await session.commitTransaction();
+        session.endSession();
+        return delete_list;
+    }
+    catch (error) {
+        console.log(error)
+        await session.abortTransaction();
+        session.endSession();
+        return null
+    }
+}
+
+
+module.exports = {connectMongoDB, saveCat, createCats, findCatsByAttribute, findCatById, findIdFromName, addParentAtt, dropAll, updateCat, getAllChildren, getAllCats, deleteCat, deleteCatAndChildren}
