@@ -64,6 +64,7 @@ const cart = require('./modules/cart');
 const order = require('./modules/order');
 const others = require('./modules/others');
 const category = require('./modules/category');
+const warehouse = require('./modules/warehouse');
 
 app.use('/', user)
 app.use('/', product)
@@ -71,6 +72,7 @@ app.use('/my-cart', cart)
 app.use('/order', order)
 app.use('/', others)
 app.use('/', category)
+app.use('/warehouse', warehouse);
 
 // full route to Home page: /
 app.get("/", function (req, res) {

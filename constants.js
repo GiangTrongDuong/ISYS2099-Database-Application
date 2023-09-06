@@ -5,6 +5,11 @@ const CATEGORY_ROUTE = '/category';
 const ORDER_ROUTE = '/order';
 const ORDER_HISTORY_ROUTE = '/history'; //full route: /order/history
 
+const WAREHOUSE_ROUTE = '/warehouse';
+const WAREHOUSE_ID_ROUTE = '/view'; //full route: /warehouse/view?id=123
+const WAREHOUSE_BY_UID_ROUTE = '/by'; //full route: /warehouse/by?uid=123
+const WAREHOUSE_MOVE_PRODUCT = '/move' // full route: /warehouse/move?product=123&quantity=456
+
 const ABOUT_ROUTE = '/about-us';
 const PRIVACY_ROUTE = '/privacy';
 const CONTACT_ROUTE = '/contact-us';

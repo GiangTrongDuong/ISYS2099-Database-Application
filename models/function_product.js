@@ -39,7 +39,7 @@ async function from_category (cat_list, limit) {
 }
 
 // limit is optional, order by created at
-// return list of product id i.e. [1,2,3,4,...] currently string: "1,2,3,4,..."
+// return list of product 
 async function from_seller (query_seller_id, limit) {
     return new Promise ((resolve, reject) => {
         if (limit){
@@ -65,7 +65,7 @@ async function from_seller (query_seller_id, limit) {
 }
 
 // limit is optional, order by created at
-// return list of product id i.e. [1,2,3,4,...] currently string: "1,2,3,4,..."
+// return list of product 
 async function contain_word (query_word, limit) {
     return new Promise ((resolve, reject) => {
         if (limit){
