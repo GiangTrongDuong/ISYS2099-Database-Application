@@ -54,10 +54,7 @@
               <%} else if (role == "warehouse") {%>
               <button onclick="location.href = `<%= navigatePage('warehouse-item', id)%>`;" class="btn btn-outline-dark rounded-3">Warehouse Items</button>
               <%} else if (role == "seller"){%>
-                <form action="<%= navigatePage('my-product')%>" method="post">
-                  <!-- <button onclick="location.href = ``;" class="btn btn-outline-dark rounded-3">View Products</button> -->
-                  <button type="submit" class="btn btn-outline-dark rounded-3">View Products</button>
-                </form>
+                  <a href="my-product">View product</a>
               <%}%>
             </form>
           </article>
@@ -104,5 +101,6 @@
       updateSection.style.display = 'none';
     }
   });
+  
 </script>
 </div>

@@ -1,4 +1,5 @@
-<section id="seller" class="container mt-5 w-100">
+<div class="container-fluid bg-light-subtle text-emphasis-light">
+  <button class="btn btn-outline-dark">Add product</button>
   <table class="table">
     <thead>
       <tr>
@@ -12,20 +13,43 @@
       </tr>
     </thead>
     <tbody>
-      <% productList.forEach(product=> { %>
+      <% for(var product of productList ){ %>
       <tr>
-        <th scope="row"></th>
-        <td>title</td>
-        <td>price</td>
-        <td>desc</td>
-        <td>cat</td>
+        <th scope="row"><%= product.id %></th>
+        <td><%= product.title %></td>
+        <td><%= product.price %></td>
+        <td><%= product.description %></td>
+        <td><%= product.category %></td>
         <td>
-          <button>Update Item</button>
+          <button class="btn btn-outline-success" >Update Item</button>
         </td>
         <td>
-          <button>Delete Item</button>
+          <button class="btn btn-danger">Delete Item</button>
         </td>
       </tr>
-      <% }) %>
+      <% } %>
     </tbody>
-</section>
+  </div>
+
+
+    <section class="update-section col-sm-8 h-100" style="display: none;">
+      <div class="card-body h-100 overflow-scroll">
+        <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Product Information</h6>
+        <form action="/update-user-info" method="POST">
+          <input type="hidden" class="id" name="id" value="">
+          <div class="mb-3">
+            <label for="user_name" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="">
+          </div>
+          <div class="mb-3">
+            <label for="user_name" class="form-label">Price</label>
+            <input type="text" class="form-control" id="price" name="price" value="">
+          </div>
+          <div class="mb-3">
+            <label for="user_name" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" value="">
+          </div>
+            <button type="submit" class="btn btn-dark">Save Changes</button>
+        </form>
+      </div>
+    </section>
