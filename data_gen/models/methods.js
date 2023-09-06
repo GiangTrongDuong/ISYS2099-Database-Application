@@ -16,19 +16,7 @@ const connectMongoDB = () => {
     });
 }
 
-const getAllCats = async() => {
-    try {
-        const allCats = await category.find();
-        return allCats
-    }
-    catch (err) {
-        console.error('Get all category failed: ', err)
-    }
-
-}
-
-
-// save a category to db
+// create a category
 const saveCat = async(newID, newName, newAtt, newPAId) => {
     try {
         var newCat = new category;
@@ -47,6 +35,7 @@ const saveCat = async(newID, newName, newAtt, newPAId) => {
     }
 }
 
+//create list of categories
 const createCats = async(list_cats) => {
     try {
         for (cat of list_cats) {
@@ -59,7 +48,44 @@ const createCats = async(list_cats) => {
 
 }
 
-// findCatsByAttribute takes a pair of attribute name & value, then return a list of category has that attribute
+
+//get all categories in db
+const getAllCats = async() => {
+    try {
+        const allCats = await category.find();
+        return allCats
+    }
+    catch (err) {
+        console.error('Get all category failed: ', err)
+    }
+
+}
+
+//delete all categories in db
+const dropAll = async () =>{
+    await category.deleteMany({});
+}
+
+const findCatById = async(id) => {
+    try {
+        const cat = await category.findOne({_id: id});
+        return cat;
+    } catch (err) {
+        console.log("Failed to find category by id: ", err);
+    }
+}
+
+const findCatByName = async (name) => {
+    try {
+        const cat = await category.findOne({ name: name});
+        return cat
+    }
+    catch (err) {
+        console.log("Failed to find category by name: ", err);
+    }
+}
+
+// findCatsByAttribute() takes a pair of attribute name & value, then return a list of category has that attribute
 const findCatsByAttribute = async(name, value) => {
     try {
         //find all cats that have aName = name & aValue = value
@@ -71,28 +97,16 @@ const findCatsByAttribute = async(name, value) => {
     }
 }
 
-const findCatById = async(id) => {
-    try {
-        const cat = await category.findOne({_id: id});
-        return cat;
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-
 //find by category name and return id (used when creating category)
-const findIdFromName = async (newName) => {
+const findIdFromName = async (name) => {
     try {
-        const sameName = await category.findOne({ name: newName}, function (err, oneCat){
-            if (err) return console.log("Finding category by name: " + err)
-        });
+        const sameName = await category.findOne({ name: name});
         if (sameName != null){
             console.log("Found id: " + sameName._id);
             return sameName._id;
         }
         else{
-            console.log("Cannot find category with name: " + newName);
+            console.log("No category with name: " + newName);
         }
     }
     catch (err) {
@@ -100,53 +114,6 @@ const findIdFromName = async (newName) => {
     }
 }
 
-// add parent's attribute to current object's attribute
-// the data is structured nicely so we only need to go up 1 level
-const addParentAtt = async (catId) => {
-    try{
-        const current = await findCatById(catId);
-        if (current.parent_category){
-            const parent = await findCatById(current.parent_category);
-            if (parent.attribute) {
-                for (const pa of parent.attribute) {
-                    let existed = false;
-                    for (const ca of current.attribute) {
-                        if (ca.aName == pa.aValue || ca._id == pa._id) {
-                            existed = true;
-                            break;
-                        }
-                    }
-                    if (!existed) current.attribute.push(pa);
-                }
-                await current.save();
-                console.log(`${current.name}: added parent's attribute (parent is ${parent.name})`);
-            }
-        }
-        else {
-            console.log(`${current.name}: no parent to inherit attribute`);
-        }
-        return current;
-    }
-    catch (err){
-        console.log("Cannot add parent's attribute" + err);
-        throw(err)
-    }
-}
-
-const dropAll = async () =>{
-    await category.deleteMany({});
-}
-
-
-//find by category id and update
-const updateCat = async (newCat) => {
-    try {
-        const oldCat = await findCatById(newCat._id)
-    } catch (err) {
-        console.log(err)
-        throw (err)
-    }
-}
 
 //find all children
 const getAllChildren = async (id) => {
@@ -208,6 +175,40 @@ const getLowestLevelCats = async () => {
     }
 }
 
+// add parent's attribute to current object's attribute
+// the data is structured nicely so we only need to go up 1 level
+const addParentAtt = async (catId) => {
+    try{
+        const current = await findCatById(catId);
+        if (current.parent_category){
+            const parent = await findCatById(current.parent_category);
+            if (parent.attribute) {
+                for (const pa of parent.attribute) {
+                    let existed = false;
+                    for (const ca of current.attribute) {
+                        if (twoAttsEqual(ca, pa)) {
+                            existed = true;
+                            break;
+                        }
+                    }
+                    if (!existed) current.attribute.push(pa);
+                }
+                await current.save();
+                console.log(`${current.name}: added parent's attribute (parent is ${parent.name})`);
+            }
+        }
+        else {
+            console.log(`${current.name}: no parent to inherit attribute`);
+        }
+        return current;
+    }
+    catch (err){
+        console.log("Cannot add parent's attribute" + err);
+        throw(err)
+    }
+}
+
+
 // deleteCat() delete a category by id
 // then update parent_category of its children to null
 // return the deleted category
@@ -261,5 +262,80 @@ const deleteCatAndChildren = async(id) => {
     }
 }
 
+const twoAttsEqual = (a1, a2) => {
+    return (a1._id == a2._id || (a1.aName == a2.aName && a1.aValue == a2.aValue && a1.aRequired == a2.aRequired));
+}
 
-module.exports = {connectMongoDB, saveCat, createCats, findCatsByAttribute, findCatById, findIdFromName, addParentAtt, dropAll, updateCat, getAllChildren, getAllCats, getLowestLevelCats, deleteCat, deleteCatAndChildren}
+function isEmpty(o){
+    return (o === undefined || o == null || o == "" || o.length ==0);
+}
+
+
+//find by category id and update, if parent_cat is updated, parent's attribute will also be added to this cat 
+//update name & parent_cat is available now
+//still working on update newatt
+const updateCat = async (id, newName, newAtts, newPAId) => {
+    try {
+        const current = await findCatById(id);
+        if (!isEmpty(current)) {
+            if (!isEmpty(newName)) current.name = newName;
+            if (newPAId !== undefined) {
+                current.parent_category = newPAId;
+            }
+            // addAttributesToCat(id, newAtts)
+        }
+        let updated = await current.save();
+        if (current.parent_category != null) {
+            updated = await addParentAtt(id);
+        }
+        return updated;
+    } catch (err) {
+        console.log(err)
+        throw (err)
+    }
+}
+
+
+/*  - addAttributesToCat() find cat by id, then add the list of attributes to that category
+    - if a new attribute already exists in the current attributes, it wont be added again
+    - Example for newAttributes:
+[
+    {
+        "aName": "Test",
+        "aValue": "Test add",
+        "aRequired": false
+    },
+    {
+        "aName": "Test 4",
+        "aValue": "Test add 4",
+        "aRequired": false
+    }
+]
+*/
+const addAttributesToCat = async (catId, newAttributes) => {
+    try {
+        if (newAttributes.length == 0) throw("attribute list is empty");
+        const current = await findCatById(catId);
+        for (newAtt of newAttributes) {
+            let existed = false;
+            for (att of current.attribute) {
+                if (twoAttsEqual(newAtt, att)) {
+                    existed = true;
+                    break;
+                }
+            }
+            if (!existed) current.attribute.push(newAtt);
+        }
+        
+        const updated = await current.save()
+        return updated
+    } catch (err) {
+        console.log(err)
+        throw (err)
+    }
+}
+
+
+
+
+module.exports = {connectMongoDB, saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, findCatsByAttribute, findIdFromName, getAllChildren, getLowestLevelCats, addParentAtt, deleteCat, deleteCatAndChildren, updateCat, addAttributesToCat }
