@@ -115,7 +115,10 @@ async function move_product_to_wh (pid, quantity, src_wid, dst_wid){
             database.query(`CALL wh_move_product(${pid}, ${quantity}, ${src_wid}, ${dst_wid});`, 
             function(error, result){
                 if (error) reject ({"error when moving": error});
-                resolve({"success": result[0].result});
+                else {
+                    console.log(result[0][0].result);
+                    resolve({"success": result[0][0].result});
+                }
             });
         }
         catch (error){

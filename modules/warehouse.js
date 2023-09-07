@@ -1,5 +1,5 @@
 const express = require('express');
-const { WAREHOUSE_ROUTE, WAREHOUSE_ID_ROUTE, WAREHOUSE_BY_UID_ROUTE, WAREHOUSE_MOVE_PRODUCT } = require('../constants');
+const { WAREHOUSE_ROUTE, WAREHOUSE_MOVE_PRODUCT } = require('../constants');
 const { dummyCatList } = require('../dummyData');
 const router = express.Router();
 const db = require('../models/function_warehouse');
@@ -156,18 +156,42 @@ router.get(`/delete`, async (req, res) => {
 
 // route to interface to move products from 1 warehouse to another
 // full route: /warehouse/move?product=123&quantity=456
-router.get(`${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
+// router.get(`${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
+//   // Function move_product_to_wh
+//   const cartItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
+//   // res.render("layout.ejs", {
+//   //   title: "My Cart",
+//   //   bodyFile: `${root}/cart`,
+//   //   // TODO: add real data - categoryList
+//   //   categoryList: dummyCatList,
+//   //   userSession: req?.session?.user,
+//   //   // TODO: add real data
+//   //   cartItems: cartItems,
+//   // });
+//   });
+
+// Handle move products; change to post later
+// full route: /warehouse/move?product=123&quantity=456
+router.get(`${WAREHOUSE_MOVE_PRODUCT}`, async (req, res) => {
   // Function move_product_to_wh
-  const cartItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
-  // res.render("layout.ejs", {
-  //   title: "My Cart",
-  //   bodyFile: `${root}/cart`,
-  //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
-  //   userSession: req?.session?.user,
-  //   // TODO: add real data
-  //   cartItems: cartItems,
-  // });
-  });
+  const info = {"pid":15, "quantity": 1, "src_wid": 15, "dst_wid": 7};
+  const {pid, quantity, src_wid, dst_wid} = info;
+  try{
+    const moving = await db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
+    res.json(moving);
+    // res.render("layout.ejs", {
+    //   title: "My Cart",
+    //   bodyFile: `${root}/cart`,
+    //   // TODO: add real data - categoryList
+    //   categoryList: dummyCatList,
+    //   userSession: req?.session?.user,
+    //   // TODO: add real data
+    //   cartItems: cartItems,
+    // });
+  }
+  catch (error){
+    res.json(error);
+  }
+});
 
 module.exports = router;
