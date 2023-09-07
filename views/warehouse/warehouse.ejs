@@ -16,7 +16,7 @@
         <% warehouses.forEach(wh => { %>
         <tr>
         <td id="whId"><%= wh["id"] %></td>
-          <td id="whname"><a href="" class="link-dark"><%= wh["Warehouse Name"] %></a></td>
+          <td id="whname"><a href="<%= navigatePage("warehouse-item", wh["id"]) %>" class="link-dark"><%= wh["Warehouse Name"] %></a></td>
           <td id="whaddress"><%= wh["Warehouse Address"] %></td>
           <td id="whtotalae"><%= wh["Total Area"] %> m<sup>3</sup></td>
           <td id="whremainingae"><%= wh["Remaining Area"] %> m<sup>3</sup></td>
@@ -30,7 +30,7 @@
         <% }) %>
       </tbody>
       </table>
-  </div>
+</div>
 
   <%- include('../partials/modal', {
     modalId: "createWH",

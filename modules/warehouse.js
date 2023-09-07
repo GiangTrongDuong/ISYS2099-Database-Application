@@ -86,19 +86,19 @@ router.post(`${WAREHOUSE_ROUTE}/create-warehouse`, async (req, res) => {
 
 // Show view: a single warehouse
 //full route: /warehouse/view?id=123
-router.get(`${WAREHOUSE_ROUTE}/view`, async (req, res) => { // tested: ok
+router.get(`${WAREHOUSE_ROUTE}/view`, isAuth.isAuth, async (req, res) => { // tested: ok
   try{
     const single_wh = await db.read_warehouse(req.query.id); //store info to display 
-    res.json(single_wh);
-    // res.render("layout.ejs", {
-    //   title: "My Cart",
-    //   bodyFile: `${root}/cart`,
-    //   // TODO: add real data - categoryList
-    //   categoryList: dummyCatList,
-    //   userSession: req?.session?.user,
-    //   // TODO: add real data
-    //   cartItems: cartItems,
-    // });
+    // res.json(single_wh);
+    res.render("layout.ejs", {
+      title: "My Cart",
+      bodyFile: `${root}/warehouse_item`,
+      // TODO: add real data - categoryList
+      categoryList: dummyCatList,
+      userSession: req?.session?.user,
+      // TODO: add real data
+      warehousesitem: single_wh
+    });
   }
   catch(error){
     res.json(error);
@@ -155,25 +155,43 @@ router.post(`${WAREHOUSE_ROUTE}/delete-warehouse`, async (req, res) => {
     res.redirect(`${WAREHOUSE_ROUTE}/all`);
   }
   catch (error){
-
+    res.json(error);
   }
   
 });
 
 // route to interface to move products from 1 warehouse to another
 // full route: /warehouse/move?product=123&quantity=456
-router.get(`${WAREHOUSE_ROUTE}/${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
+router.post(`${WAREHOUSE_ROUTE}/${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
   // Function move_product_to_wh
-  const cartItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
-  // res.render("layout.ejs", {
-  //   title: "My Cart",
-  //   bodyFile: `${root}/cart`,
-  //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
-  //   userSession: req?.session?.user,
-  //   // TODO: add real data
-  //   cartItems: cartItems,
-  // });
+  const quantity = req.body.quantity;
+  const pid = req.body.pid;
+  const src_wid = req.body.src_id;
+  const dst_wid = req.body.dst_id;
+  const movedItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
+  res.json(movedItems);
   });
+
+router.post(`${WAREHOUSE_ROUTE}/move-warehouse`, isAuth.isAuth, async (req, res) => {
+  try {
+    const pid = req.body.pid;
+    const src_wid = req.body.wid;
+    console.log(src_wid);
+    console.log(pid);
+    const warehouse_data = await db.check_storage(pid);
+    // res.json(warehouse_data);
+    res.render('layout.ejs', {
+      title: "Move product",
+      bodyFile: `${root}/warehouse_move`,
+      warehouselist: warehouse_data,
+      userSession: req?.session?.user,
+      categoryList: dummyCatList,
+      itemID: pid,
+      src_wid: src_wid,
+    })
+  } catch (err) {
+    res.send(err);
+  }
+})
 
 module.exports = router;

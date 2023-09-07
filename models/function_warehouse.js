@@ -55,7 +55,7 @@ async function create_warehouse(info) {
 async function read_warehouse(wid) {
     return new Promise((resolve, reject) => {
         try {
-            database.query(`SELECT wi.warehouse_id as \'Warehouse ID\', w.name AS \'Warehouse Name\', 
+            database.query(`SELECT p.id as \'Product ID\', wi.warehouse_id as \'Warehouse ID\', w.name AS \'Warehouse Name\', 
             p.title AS ProductTitle, wi.quantity AS Quantity, 
             ROUND((length * width * height * quantity), 2) AS \'Load Volume\'
             FROM warehouse_item wi, product p, warehouse w
@@ -160,7 +160,23 @@ async function insert_to_warehouse(pid, quantity) {
     });
 }
 
+async function check_storage(pid){
+    return new Promise ((resolve, reject) => {
+        try {
+            database.query(`SELECT w.id AS WarehouseID, w.name AS WarehouseName, remaining_area AS RemainingArea, 
+            FLOOR(remaining_area / (length * width * height)) AS Copies
+            FROM product p, warehouse w 
+            WHERE p.id = ${pid} ORDER BY w.remaining_area DESC;`, (err, result) => {
+                if(err) reject (err);
+                else resolve(result);
+            })
+        }catch (err){
+            resolve (err);
+        }
+    })
+}
+
 module.exports = {
     warehouse_show_all, create_warehouse, read_warehouse, update_warehouse, delete_warehouse,
-    get_warehouse_to_store, move_product_to_wh, insert_to_warehouse, warehouse_show_admin
+    get_warehouse_to_store, move_product_to_wh, insert_to_warehouse, warehouse_show_admin, check_storage
 }

@@ -7,7 +7,7 @@ const ORDER_ROUTE = '/order';
 const ORDER_HISTORY_ROUTE = '/history'; //full route: /order/history
 
 const WAREHOUSE_ROUTE = '/warehouse';
-const WAREHOUSE_MOVE_PRODUCT = '/move' // full route: /warehouse/move?product=123&quantity=456
+const WAREHOUSE_MOVE_PRODUCT = '/move-product' // full route: /warehouse/move?product=123&quantity=456
 
 const ABOUT_ROUTE = '/about-us';
 const PRIVACY_ROUTE = '/privacy';

@@ -1,0 +1,64 @@
+<div class="container-fluid bg-light-subtle text-emphasis-light">
+  <p data-attri="<%= warehousesitem[0]["Warehouse ID"]  %>" id="src_id"><%= warehousesitem[0]["Warehouse ID"]%></p>
+  <p><%= warehousesitem[0]["Warehouse Name"]%></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product ID</th>
+        <th scope="col">Product Title</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Load Volume</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% warehousesitem.forEach(whi => { %>
+        <tr>
+          <td id="whiid"><%= whi["Product ID"]%></td>
+          <td id="whititle"><%= whi["ProductTitle"] %></td>
+          <td id="whiquanty"><%= whi["Quantity"] %></td>
+          <td id="whivolume"><%= whi["Load Volume"] %> m<sup>3</sup></td>
+          <td>
+            <form action="move-product" method="post">
+              <input type="number" class="form-control" id="pid" name="pid" value="<%= whi["Product ID"] %>" readonly hidden>
+              <input type="number" class="form-control" id="wid" name="wid" value="<%= whi["Warehouse ID"] %>" readonly hidden>
+              <button type="submit" class="btn btn-dark">Move product</button>
+            </form> 
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+      </table>
+</div>
+
+<%- include('../partials/modal', {
+  modalId: "moveWH",
+  heading: "Move Item To Other Warehouse",
+  // render body with message and button
+  body: `
+  <div class="card">
+    <div class="card-body h-100 overflow-scroll">
+      <h6 class="mb-4 pb-3 border-bottom fw-bold">Warehouse Information</h6>
+      <form action="move-warehouse" method="POST">
+        <div class="mb-3">
+          <label for="whname" class="form-label">Quantity</label>
+          <input type="number" class="form-control" id="quantity" name="quantity" value="" min="1">
+        </div>
+        <input type="number" class="form-control" id="pid" name="pid" value="" readonly hidden>
+        <input type="number" class="form-control" id="src_id" name="src_id" value="" readonly hidden>
+        <button type="submit" class="btn btn-dark">Save Changes</button>
+      </form>
+    </div>
+  </div>
+  `,
+  isFullScreenSm: false,
+}) %>
+
+<script>
+    function moveWH(buttonElement) {
+    const id =  $("#src_id").data("attri");
+    const row = buttonElement.closest('tr');
+    const pid = row.querySelector('#whiid').innerText;
+    document.querySelector('#moveWH #pid').value = pid;
+    document.querySelector('#moveWH #src_id').value = id;
+  }
+</script>
