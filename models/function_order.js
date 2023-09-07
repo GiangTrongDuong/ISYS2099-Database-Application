@@ -96,6 +96,25 @@ async function place_order(uid, product_quantity_list){
     });
 }
 
+async function update_status(oid, newStatus){
+    return new Promise ((resolve, reject) =>{
+        try {
+            database.query(`UPDATE order_details SET status = ${newStatus} WHERE id = ${oid};`, function(error, result){
+                if (error) {
+                    console.log("======= " + error);
+                    reject ({"error running update": error});
+                }
+                console.log()
+                resolve(result);
+            });
+        }
+        catch (error){
+            console.log("___________"+ error);
+            reject({"error running query":error});
+        }
+    });
+}
+
 async function simulate_orders(){
     try{
         var o1 = place_order(6, [{"pid":2, "quantity":2}]);
@@ -108,4 +127,4 @@ async function simulate_orders(){
     }
 }
 
-module.exports = { get_orders, get_order_item, place_order }
+module.exports = { get_orders, get_order_item, place_order, update_status }

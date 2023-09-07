@@ -24,6 +24,7 @@ router.use(bodyParser.json());
 
 // full route to order page: /order/order
 //TODO: turn this into POST
+// place an order
 router.get(`${ORDER_ROUTE}/`, async (req, res) => {
   // const order = JSON.parse(req.params.product_quantity_list); //store info to display 
   const order = [{"pid": 1, "quantity": 10}, {"pid": 2, "quantity":4}];
@@ -39,6 +40,7 @@ router.get(`${ORDER_ROUTE}/`, async (req, res) => {
   // });
 });
 
+// view all orders for a customer
 // full route to order-history page: /order/history
 // router.get(`${ORDER_HISTORY_ROUTE}`, function (req, res) { //og
 router.get(`${ORDER_HISTORY_ROUTE}/:uid`, async (req, res) => { //add user id to test
@@ -58,9 +60,36 @@ router.get(`${ORDER_HISTORY_ROUTE}/:uid`, async (req, res) => { //add user id to
   }
 });
 
-// full route to order-detail page: /order/order/:id
+// update order status: /order_status (old: /order/status)
+//TODO: post order_id, 
+router.get(`${ORDER_ROUTE}_status/`, async (req, res) => { // change to post
+  try{
+    // const order_id = req.query.id;
+    console.log("Status");
+    // const newStatus = req.query.newStatus;
+    const order_id = 95;
+    const newStatus = 'Accepted';
+    const message = await db.update_status(order_id, newStatus);
+    res.json(message);
+    // res.render("layout.ejs", {
+    //   title: "Order Detail",
+    //   bodyFile: `${root}/order_detail`,
+    //   // TODO: add real data - categoryList
+    //   categoryList: dummyCatList,
+    //   order: order,
+    //   order_id: req.params.id
+    // });
+  }
+  catch (err) {
+    res.send("Cannot fetch items from oid: " + req.params.oid);
+  }
+});
+
+// view info about a single order
+// full route to order-detail page: /order/:id
 router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
   try{
+    console.log("id");
     const {order_items, total_price} = await db.get_order_item(req.params.id);
     res.json({"order_items": order_items, "total_price": total_price});
     // res.render("layout.ejs", {
@@ -76,6 +105,5 @@ router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
     res.send("Cannot fetch items from oid: " + req.params.oid);
   }
 });
-
 
 module.exports = router;
