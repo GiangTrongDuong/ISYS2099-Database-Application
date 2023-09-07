@@ -28,7 +28,6 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
     res.render('layout.ejs', {
         title: "Product",
         bodyFile: `${root}/product`,
-        formatCurrencyVND: formatCurrencyVND,
         // TODO: add real data - categoryList
         categoryList: dummyCatList,
         userSession: req?.session?.user,
@@ -49,7 +48,6 @@ router.get(`${PRODUCT_ROUTE}/cat/:categories`, async (req, res) => {
     // res.render('layout.ejs', {
     //     title: "Product",
     //     bodyFile: `${root}/product`,
-    //     formatCurrencyVND: formatCurrencyVND,
     //     // TODO: add real data - categoryList
     //     categoryList: dummyCatList,
     //     product_list: product_list
@@ -68,7 +66,6 @@ router.get(`${PRODUCT_ROUTE}/search/:words`, async (req, res) => {
     // res.render('layout.ejs', {
     //     title: "Product",
     //     bodyFile: `${root}/product`,
-    //     formatCurrencyVND: formatCurrencyVND,
     //     // TODO: add real data - categoryList
     //     categoryList: dummyCatList,
     //     product_list: product_list

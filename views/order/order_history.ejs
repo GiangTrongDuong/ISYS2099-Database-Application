@@ -1,26 +1,37 @@
-<div class="container-xl">
-  Order history page
-</div>
-<%
-  if(orders){
-    if(orders.length > 0) {
-      orders.forEach(function(order){
-%>
-        <div>
-            <h2>Order <%= order.id %></h2>
-            <p><%= order.user_name %></p>
-            <p><%= order.display_name %></p>
-            <p><%= order.status %></p>
-            <p><%= order.total_price %></p>
-            <td></td>
+<div class="container-xl mt-5">
+  <h1 class="mb-5 text-center">Order History</h1>
+
+  <% if(orders && orders.length > 0) { %>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <!-- Responsive grid layout for orders -->
+    <% orders.forEach(function(order){ %>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <!-- Shadow for a slightly lifted effect -->
+        <div class="card-header bg-dark text-white">
+          Order ID: <%= order.id %>
         </div>
-  <%
-      });
-    }
-  }
-  else {
-    %>
-      <div>No Data Found</div>
-    <%
-  }
-%>
+        <div class="card-body">
+          <h5 class="card-title"><%= order.display_name %></h5>
+          <p class="card-text"><strong>User:</strong> <%= order.user_name %></p>
+          <p class="card-text">
+            <strong>Status:</strong>
+            <span class="badge <%= order.status === 'Accepted' ? 'bg-success' : order.status === 'Inbound' ? 'bg-warning' : order.status === 'Rejected' ? 'bg-danger' : 'bg-secondary' %>">
+                <%= order.status %>
+            </span>
+        </p>
+          <p class="card-text"><strong>Total Price:</strong> <%= formatCurrencyVND(order.total_price) %></p>
+        </div>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+  <% } else { %>
+  <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+    <!-- Centering the no data alert -->
+    <div class="alert alert-warning" role="alert">
+      No Data Found
+    </div>
+  </div>
+  <% } %>
+</div>

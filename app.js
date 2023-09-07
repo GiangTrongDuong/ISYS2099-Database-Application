@@ -56,6 +56,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // reusable function for all ejs
 app.locals.navigatePage = navigatePage;
+app.locals.formatCurrencyVND = formatCurrencyVND;
 
 // Modules
 const user = require('./modules/user');
@@ -81,7 +82,6 @@ app.get("/", function (req, res) {
     res.render('layout.ejs', {
         title: "Home",
         bodyFile: "home/index.ejs",
-        formatCurrencyVND: formatCurrencyVND,
         // TODO: add real data
         categoryList: dummyCatList,
         // TODO: add real data

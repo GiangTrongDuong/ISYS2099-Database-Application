@@ -18,7 +18,6 @@ router.get(`${SELLER_ROUTE}/:seller_id`, async (req, res) => {
         res.render('layout.ejs', {
             title: "Seller",
             bodyFile: `${root}/seller`,
-            formatCurrencyVND: formatCurrencyVND,
             // TODO: add real data - categoryList
             categoryList: dummyCatList,
             userSession: req?.session?.user,

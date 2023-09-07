@@ -35,7 +35,6 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
         res.render("layout.ejs", {
             title: "Category",
             bodyFile: `${root}/category.ejs`,
-            formatCurrencyVND: formatCurrencyVND,
             // TODO: add real data - categoryList
             categoryList: dummyCatList,
             userSession: req?.session?.user,

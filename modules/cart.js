@@ -39,7 +39,6 @@ router.get(`${CART_ROUTE}`, async (req, res) => {
       title: "Cart",
       bodyFile: `${root}/cart`,
       userSession: info,
-      formatCurrencyVND: formatCurrencyVND,
       // TODO: add real data - categoryList
       categoryList: dummyCatList,
       cartItems: cartItems,
