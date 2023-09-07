@@ -6,7 +6,7 @@ const database = require('./connection/dbSqlConnect');
 async function warehouse_show_all(admin_id) { // tested: ok
     return new Promise((resolve, reject) => {
         try {
-            database.query(`SELECT name AS \'Warehouse Name\', address AS \'Warehouse Address\',
+            database.query(`SELECT id, name AS \'Warehouse Name\', address AS \'Warehouse Address\',
             total_area AS \'Total Area\', remaining_area AS \'Remaining Area\'
             FROM warehouse;`, function (error, result) {
                 if (error) reject({ "error with query result": error });
