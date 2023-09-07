@@ -38,7 +38,6 @@ router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => 
         const id = info.id;
         let renderedSellerProduct = await productDb.from_seller(id);
         const productList = renderedSellerProduct.productList;
-        console.log(productList);
         res.render('layout.ejs',{
             title: "My Product List",
             bodyFile: `${root}/seller_product`,
@@ -53,17 +52,19 @@ router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => 
 
 router.post(`${MY_ACCOUNT_ROUTE}/create-product`, isAuth.isAuth, async (req,res) => {
     try{
-    const title = null;
-    const seller = null;
-    const price = null;
-    const desc = null;
-    const cat = null;
-    const length = null;
-    const width = null;
-    const height = null;
-    const image = null;
-        await productDb.createProduct(title,sellerid,price,desc,cat,length,width,height,image);
-        res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
+    const info = req?.session?.user;
+    const id = info.id;
+    const title = req.body.title;
+    const price = req.body.price;
+    const desc = req.body.description;
+    const cat = req.body.category;
+    const length = req.body.len;
+    const width = req.body.wid;
+    const height = req.body.hei;
+    const image = req.body.image;
+    const remaining = req.body.stock;
+    await productDb.createProduct(title,id,price,desc,cat,length,width,height,image, remaining);
+    res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
     }catch (err){
     res.send(err);
     }
@@ -71,22 +72,24 @@ router.post(`${MY_ACCOUNT_ROUTE}/create-product`, isAuth.isAuth, async (req,res)
 
 router.post(`${MY_ACCOUNT_ROUTE}/update-product`, isAuth.isAuth, async (req, res)=>{
     try{
-    const pid = req.params.id;
-    const title = req.params.title;
-    const price = req.params.price;
-    const description = req.params.description;
-        await productDb.updateDetails(pid,title,price,description);
-        res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
+    const pid = req.body.id;
+    const title = req.body.title;
+    const price = req.body.price;
+    const description = req.body.description;
+    console.log(pid + title + price);
+    await productDb.updateDetails(pid,title,price,description);
+    res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
     }catch (err){
         res.send(err);
+        console.log("err" + err);
     }
 })
 
 router.post(`${MY_ACCOUNT_ROUTE}/delete-product`, isAuth.isAuth, async (req, res)=>{
     try{
-    const pid = null;
-        await productDb.deleteProduct(pid);
-        res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
+    const pid = req.body.id;
+    await productDb.deleteProduct(pid);
+    res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
     }catch (err){
         res.send(err);
     }
