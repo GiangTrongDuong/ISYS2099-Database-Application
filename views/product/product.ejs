@@ -16,22 +16,28 @@
         </div>
 
         <caption class="fst-italic">
-          Created: <%= formatDate(product.created_at) %>
+          Created: <%= formatDate(product.created_at) %> - Updated: <%= formatDate(product.updated_at) %>
         </caption>
+        <h6 class="fst-italic">
+          <span> Remaining: <%= product.remaining %> </span>
+        </h6>
         <p class="lead">
           Product Category:
           <a class="line-clamp-1 link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="<%= navigatePage('category', product.category) %>">Category <%= product.category %>
           </a>
           <br />
           Product Description: <br />
+          <span class="line-clamp-3"><%= product.description %></span>
+        </p>
+        <p class="lead">
+          Product Dimension: <br />
           &emsp; - &ensp; Width: <%= product.width %><br />
           &emsp; - &ensp; Length: <%= product.length %><br />
           &emsp; - &ensp; Height: <%= product.height %><br />
         </p>
         <form class="d-flex cart-form" data-path="<%= navigatePage("add-to-cart", product.id) %>">
           <input class="form-control text-center me-3" min="0" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-          <button class="btn btn-dark flex-shrink-0 add-cart-btn" type="submit"
-          <%= !userSession ? "disabled" : "" %>>
+          <button class="btn btn-dark flex-shrink-0 add-cart-btn" type="submit" <%= !userSession ? "disabled" : "" %>>
             <i class="bi-cart-fill me-1"></i>
             Add to cart
           </button>
