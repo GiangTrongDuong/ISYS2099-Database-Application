@@ -105,7 +105,7 @@ INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (4,
 INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (5, 'West Vicki 30', 'USNV Freeman, FPO AE 37459', 2206.00, 1246.12);
 INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (6, 'Lewisland 95', '3217 Brittany Trafficway, Jacobsmouth, NY 98371', 4183.00, 3778.90);
 INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (7, 'Port Lisa 67', '47036 Donald Ridges, West Courtney, WV 82275', 2231.00, 1863.25);
-INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (8, 'New Stacy 80', '580 Cameron Tunnel, West Gregoryport, SD 57260', 11753.00, -14.51);
+INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (8, 'New Stacy 80', '580 Cameron Tunnel, West Gregoryport, SD 57260', 11753.00, 11347.18);
 INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (9, 'West Sydney 81', '693 Charles Stream Apt. 546, Port Jerryfurt, GA 74892', 2020.00, 1047.47);
 INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (10, 'West Abigail 86', 'PSC 5097, Box 1871, APO AE 60288', 4259.00, 3294.01);
 INSERT INTO warehouse (id, name, address, total_area, remaining_area) VALUES (11, 'Lisahaven 91', 'PSC 7679, Box 7725, APO AE 83282', 2675.00, 2431.63);
