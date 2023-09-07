@@ -42,7 +42,10 @@
     <div class="card-body h-100 overflow-scroll">
       <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Product Information</h6>
       <form action="/update-user-info" method="POST">
-        <input type="hidden" class="id" name="id" value="">
+        <div class="mb-3">
+          <label for="update-id" class="form-label">ID (Cannot be changed)</label> 
+          <input type="text" class="form-control" id="update-id" name="id" value="" disabled readonly>
+        </div>
         <div class="mb-3">
           <label for="user_name" class="form-label">Title</label>
           <input type="text" class="form-control" id="update-title" name="title" value="">

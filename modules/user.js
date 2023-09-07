@@ -18,20 +18,20 @@ var root = './user'; //root folder to pages
 //router dependencies
 router.use(cors({
   origin: ["http://localhost:3000"],
-  method: ["GET","POST"],
+  method: ["GET", "POST"],
   credentials: true
 }));
 
 // full route to login page: /login
 router.get(`${LOGIN_ROUTE}`, function (req, res) {
-    res.render("layout.ejs", {
-      title: "Login",
-      bodyFile: `${root}/login`,
-      // TODO: add real data - categoryList
-      categoryList: dummyCatList,
-      // req,
-      userSession: req?.session?.user
-    })
+  res.render("layout.ejs", {
+    title: "Login",
+    bodyFile: `${root}/login`,
+    // TODO: add real data - categoryList
+    categoryList: dummyCatList,
+    // req,
+    userSession: req?.session?.user
+  })
 });
 
 // Verify log in - might want to move query to models/user_authentication
@@ -40,21 +40,21 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
   var password = req.body.password;
   database.query(`SELECT id, role, user_name, password_hash 
         FROM user 
-        WHERE user_name = "${userName}";`,(error, uresults) => {
-        if(uresults.length > 0){
-            bcrypt.compare(password, uresults[0].password_hash).then(function(result){
-                if(result == true){
-                    req.session.user = {role: uresults[0].role, user_name: uresults[0].user_name, id: uresults[0].id};
-                    req.session.isAuth = true;
-                    res.redirect("/my-account");
-                } else {
-                    res.redirect("/login");
-                }
-            });
-        } else if (uresults.length <= 0){
+        WHERE user_name = "${userName}";`, (error, uresults) => {
+    if (uresults.length > 0) {
+      bcrypt.compare(password, uresults[0].password_hash).then(function (result) {
+        if (result == true) {
+          req.session.user = { role: uresults[0].role, user_name: uresults[0].user_name, id: uresults[0].id };
+          req.session.isAuth = true;
+          res.redirect("/my-account");
+        } else {
           res.redirect("/login");
         }
-    })
+      });
+    } else if (uresults.length <= 0) {
+      res.redirect("/login");
+    }
+  })
 })
 
 // full route to signup page: /signup
@@ -70,7 +70,7 @@ router.get(`${SIGNUP_ROUTE}`, function (req, res) {
 });
 
 //Verify sign up - might want to move the query to models/user_authentication
-router.post(`${SIGNUP_ROUTE}`, async function (req,res){
+router.post(`${SIGNUP_ROUTE}`, async function (req, res) {
   var role = req.body.account;
   var userName = req.body.username;
   var displayName = req.body.displayName;
@@ -79,85 +79,89 @@ router.post(`${SIGNUP_ROUTE}`, async function (req,res){
   const saltRounds = 10;
   database.query(`SELECT * 
         FROM user 
-        WHERE user_name = "${userName}";`,(error, results) => {
-          if(results.length > 0){
-            console.log("Taken username!");
-          } else { 
-              bcrypt.hash(password, saltRounds, function (err, hash){
-                  const result = database.query(`
+        WHERE user_name = "${userName}";`, (error, results) => {
+    if (results.length > 0) {
+      console.log("Taken username!");
+    } else {
+      bcrypt.hash(password, saltRounds, function (err, hash) {
+        const result = database.query(`
                       INSERT INTO user (role, user_name, display_name, details, password_hash)
                       VALUE (?,?,?,?,?)
                       `, [role, userName, displayName, details, hash]);
-                  const User = {role: role, user_name: userName};
-                  res.redirect("/login");
-              });
-          }
-        })
+        const User = { role: role, user_name: userName };
+        res.redirect("/login");
+      });
+    }
+  })
 });
 
 // full route to my-account page: /my-account
 // set UID here just to test
-router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) { 
-  //why dont we check isAuth right here? if false then redirect to log in
-  const userInfo = (req.session.user); //store info to display 
-  const userName = userInfo.user_name;
-  const role = userInfo.role;
-  database.query(`SELECT * 
-  FROM user 
-  WHERE user_name = "${userName}"`,(error,result) => {
-    if(result){
-      const user_name = result[0].user_name;
-      const display_name = result[0].display_name;
-      const details = result[0].details;
-      const id = result[0].id;
-      //req will be changed based on Nhung proposal
+router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
+  try {
+    //why dont we check isAuth right here? if false then redirect to log in
+    const userInfo = (req.session.user); //store info to display 
+    const userName = userInfo.user_name;
+    const role = userInfo.role;
+    database.query(`SELECT * 
+   FROM user 
+   WHERE user_name = "${userName}"`, (error, result) => {
+      if (result) {
+        const user_name = result[0].user_name;
+        const display_name = result[0].display_name;
+        const details = result[0].details;
+        const id = result[0].id;
+        //req will be changed based on Nhung proposal
 
-      if(role == "Customer"){
-        res.render("layout.ejs", {
-          title: "My Account",
-          bodyFile: `${root}/my_account`,
-          // TODO: add real data - categoryList
-          categoryList: dummyCatList,
-          userSession: req?.session?.user,
-          user_name: user_name,
-          display_name: display_name,
-          details: details,
-          role: "user",
-          id: id,
-        });
-      } else if (role == "Warehouse Admin"){
-        res.render("layout.ejs", {
-          title: "My Account",
-          bodyFile: `${root}/my_account`,
-          // TODO: add real data - categoryList
-          categoryList: dummyCatList,
-          userSession: req?.session?.user,
-          user_name: user_name,
-          display_name: display_name,
-          details: details,
-          role: "warehouse",
-          id: id,
-        });
-      } else if (role == "Seller"){
-        res.render("layout.ejs", {
-          title: "My Account",
-          bodyFile: `${root}/my_account`,
-          // TODO: add real data - categoryList
-          categoryList: dummyCatList,
-          userSession: req?.session?.user,
-          user_name: user_name,
-          display_name: display_name,
-          details: details,
-          role: "seller",
-          id: id,
-        });
+        if (role == "Customer") {
+          res.render("layout.ejs", {
+            title: "My Account",
+            bodyFile: `${root}/my_account`,
+            // TODO: add real data - categoryList
+            categoryList: dummyCatList,
+            userSession: req?.session?.user,
+            user_name: user_name,
+            display_name: display_name,
+            details: details,
+            role: "user",
+            id: id,
+          });
+        } else if (role == "Warehouse Admin") {
+          res.render("layout.ejs", {
+            title: "My Account",
+            bodyFile: `${root}/my_account`,
+            // TODO: add real data - categoryList
+            categoryList: dummyCatList,
+            userSession: req?.session?.user,
+            user_name: user_name,
+            display_name: display_name,
+            details: details,
+            role: "warehouse",
+            id: id,
+          });
+        } else if (role == "Seller") {
+          res.render("layout.ejs", {
+            title: "My Account",
+            bodyFile: `${root}/my_account`,
+            // TODO: add real data - categoryList
+            categoryList: dummyCatList,
+            userSession: req?.session?.user,
+            user_name: user_name,
+            display_name: display_name,
+            details: details,
+            role: "seller",
+            id: id,
+          });
+        }
+
+      } else {
+        console.log("error finding user from database");
+        // render error page
       }
-      
-    } else {
-      console.log("error finding user from database");
-      // render error page
-    }
-  });
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 router.post(`/update-user-info`, isAuth.isAuth, async (req, res) => {
