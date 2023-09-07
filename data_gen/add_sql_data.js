@@ -67,7 +67,9 @@ connection.connect(err => {
         // trigger when delete warehouse: if it's storing items, deletion will fail
         await executeSqlFile('./sql_data/trigger_delete_wh.sql');
         // trigger when order status is updated: free wh space or add product stock
-        await executeSqlFile('./sql_data/trigger_update_order');
+        await executeSqlFile('./sql_data/trigger_update_order.sql');
+	// trigger when trying to delete user
+	await executeSqlFile('./sql_data/trigger_delete_user.sql');
 
     // Commit the transaction if everything is successful
         connection.commit((err => {
