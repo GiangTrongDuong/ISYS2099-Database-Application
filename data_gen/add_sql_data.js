@@ -60,12 +60,14 @@ connection.connect(err => {
         await executeSqlFile('./sql_data/procedure_place_order.sql');
         // proc to free product volume from most populated warehouse
         await executeSqlFile('./sql_data/procedure_free_wh_space.sql');
-        // trigger to call the proc above when order status is updated
-        await executeSqlFile('./sql_data/trigger_update_order.sql');
         // proc to move product * quantity from one warehouse to another
         await executeSqlFile('./sql_data/procedure_wh_move.sql');
         // trigger when delete product: check inbound, free wh space, delete from cart and order
         await executeSqlFile('./sql_data/trigger_delete_product.sql');
+        // trigger when delete warehouse: if it's storing items, deletion will fail
+        await executeSqlFile('./sql_data/trigger_delete_wh.sql');
+        // trigger when order status is updated: free wh space or add product stock
+        await executeSqlFile('./sql_data/trigger_update_order');
 
     // Commit the transaction if everything is successful
         connection.commit((err => {

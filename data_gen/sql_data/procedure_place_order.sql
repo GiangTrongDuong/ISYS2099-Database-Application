@@ -34,7 +34,7 @@ BEGIN
         -- Add order items to the order
         INSERT INTO order_item (order_id, product_id, quantity)
         VALUES (oid, pid, quant);
-
+		SELECT 'Product is placed successfully.' as result;
         -- Commit the transaction
         COMMIT;
     ELSE
@@ -43,6 +43,6 @@ BEGIN
 
         -- Return an error message
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Insufficient stock for the requested quantity';
+        SET MESSAGE_TEXT = 'Insufficient stock for the requested quantity.';
     END IF;
 END
