@@ -14,7 +14,7 @@ const cors = require('cors');
 
 router.use(cors({
   origin: ["http://localhost:3000"],
-  method: ["GET","POST"],
+  method: ["GET", "POST"],
   credentials: true
 }));
 
@@ -35,10 +35,10 @@ router.get(`${WAREHOUSE_ROUTE}/all`, async (req, res) => {
     //   warehouses: all_wh,
     // })
   }
-  catch (error){
+  catch (error) {
     res.json(error);
-  }  
-    
+  }
+
   // res.render("layout.ejs", {
   //   title: "My Cart",
   //   bodyFile: `${root}/cart`,
@@ -68,12 +68,12 @@ router.get(`${WAREHOUSE_ROUTE}/all`, async (req, res) => {
 // to test: handle warehouse creation (done)
 router.post(`${WAREHOUSE_ROUTE}/create`, async (req, res) => {
   // parse param instead of dummy
-  const newWarehouse = {"newName": "nw", "newAddress":"123 jjj 123jjjj", "newTotalArea": 123.34}; //store info to display 
-  try{
+  const newWarehouse = { "newName": "nw", "newAddress": "123 jjj 123jjjj", "newTotalArea": 123.34 }; //store info to display 
+  try {
     const message = await db.create_warehouse(newWarehouse);
     res.json(message);
   }
-  catch (error){
+  catch (error) {
     res.json(error);
   }
 });
@@ -84,7 +84,7 @@ router.post(`${WAREHOUSE_ROUTE}/create`, async (req, res) => {
 // Show view: a single warehouse
 //full route: /warehouse/view?id=123
 router.get(`${WAREHOUSE_ROUTE}/view`, async (req, res) => { // tested: ok
-  try{
+  try {
     const single_wh = await db.read_warehouse(req.query.id); //store info to display 
     res.json(single_wh);
     // res.render("layout.ejs", {
@@ -97,7 +97,7 @@ router.get(`${WAREHOUSE_ROUTE}/view`, async (req, res) => { // tested: ok
     //   cartItems: cartItems,
     // });
   }
-  catch(error){
+  catch (error) {
     res.json(error);
   }
 });
@@ -121,12 +121,12 @@ router.get(`${WAREHOUSE_ROUTE}/view`, async (req, res) => { // tested: ok
 // Handle warehouse update, navigate accordingly
 router.post(`${WAREHOUSE_ROUTE}/update`, async (req, res) => { //tested: ok
   // parse actual param instead of dummy below
-  const newInfo = {"newName": "nw", "newAddress":"123 jjj 123jjjj"}; //store info to update
-  try{
+  const newInfo = { "newName": "nw", "newAddress": "123 jjj 123jjjj" }; //store info to update
+  try {
     const message = await db.update_warehouse(req.query.id, newInfo);
     res.json(message);
   }
-  catch (error){
+  catch (error) {
     res.json(error);
   }
   // res.render("layout.ejs", {
@@ -143,7 +143,7 @@ router.post(`${WAREHOUSE_ROUTE}/update`, async (req, res) => { //tested: ok
 // delete warehouse with certain wid
 // full route: /warehouse/delete?id=123
 router.get(`${WAREHOUSE_ROUTE}/delete`, async (req, res) => {
-  try{
+  try {
     //const  = db; //store info to display 
     // res.render("layout.ejs", {
     //     title: "My Cart",
@@ -155,10 +155,29 @@ router.get(`${WAREHOUSE_ROUTE}/delete`, async (req, res) => {
     //     cartItems: cartItems,
     // });
   }
-  catch (error){
+  catch (error) {
 
   }
-  
+
+});
+
+// route to get all admins in warehouses
+router.get(`${WAREHOUSE_ROUTE}/admins`, async (req, res) => {
+  try {
+    const info = req?.session?.user;
+    const adminList = await db.warehouse_show_admin(req.query.id); //store info to display 
+    // res.json(all_admins);
+    res.render("layout.ejs", {
+      title: "Admins",
+      bodyFile: `${root}/warehouse_admins`,
+      userSession: info,
+      // TODO: add real data - categoryList
+      categoryList: dummyCatList,
+      adminList: adminList,
+    });
+  } catch (error) {
+    res.send("Error fetching warehouse admin!" + err);
+  }
 });
 
 // route to interface to move products from 1 warehouse to another
@@ -175,6 +194,6 @@ router.get(`${WAREHOUSE_ROUTE}/${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
   //   // TODO: add real data
   //   cartItems: cartItems,
   // });
-  });
+});
 
 module.exports = router;

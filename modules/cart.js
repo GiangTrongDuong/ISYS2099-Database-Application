@@ -123,9 +123,9 @@ router.post(`${CART_ROUTE}/decrease-cart/:pid`, async (req, res) => {
 });
 
 router.post(`${CART_ROUTE}/place-order`, async (req, res) => {
-  try{
+  try {
 
-  }catch (err){
+  } catch (err) {
     res.send(err);
   }
 })
