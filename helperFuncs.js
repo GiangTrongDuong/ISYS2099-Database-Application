@@ -59,11 +59,11 @@ const navigatePage = (type, id = -1) => {
         case "warehouse":
             return `${WAREHOUSE_ROUTE}/all`;
         case "create-warehouse":
-            return `${WAREHOUSE_ROUTE}/create`
+            return `${WAREHOUSE_ROUTE}/create`;
         case "update-warehouse":
-            return `${WAREHOUSE_ROUTE}/update`
+            return `${WAREHOUSE_ROUTE}/update`;
         case "delete-warehouse":
-            return `${WAREHOUSE_ROUTE}/delete`
+            return `${WAREHOUSE_ROUTE}/delete`;
         case "warehouse-item":
             return `${WAREHOUSE_ROUTE}/${id}`;
         case "warehouse-admin":

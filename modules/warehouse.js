@@ -66,7 +66,7 @@ router.get(`${WAREHOUSE_ROUTE}/all`, isAuth.isAuth, async (req, res) => {
 // });
 
 // to test: handle warehouse creation (done)
-router.post(`${WAREHOUSE_ROUTE}/create`, async (req, res) => {
+router.post(`${WAREHOUSE_ROUTE}/create-warehouse`, async (req, res) => {
   // parse param instead of dummy
   const name = req.body.whname;
   const address = req.body.whaddress;
@@ -74,7 +74,7 @@ router.post(`${WAREHOUSE_ROUTE}/create`, async (req, res) => {
   const newWarehouse = {"newName": name, "newAddress": address, "newTotalArea": area}; //store info to display 
   try{
     const message = await db.create_warehouse(newWarehouse);
-    res.redirect(`${WAREHOUSE_ROUTE}`);
+    res.redirect(`${WAREHOUSE_ROUTE}/all`);
   }
   catch (error) {
     res.json(error);
@@ -122,12 +122,15 @@ router.get(`${WAREHOUSE_ROUTE}/view`, async (req, res) => { // tested: ok
 
 // Full route: /warehouse/update?id=123
 // Handle warehouse update, navigate accordingly
-router.post(`${WAREHOUSE_ROUTE}/update`, async (req, res) => { //tested: ok
+router.post(`${WAREHOUSE_ROUTE}/update-warehouse`, async (req, res) => { //tested: ok
   // parse actual param instead of dummy below
-  const newInfo = { "newName": "nw", "newAddress": "123 jjj 123jjjj" }; //store info to update
-  try {
-    const message = await db.update_warehouse(req.query.id, newInfo);
-    res.json(message);
+  const whid = req.body.whid;
+  const name = req.body.whname;
+  const address = req.body.whaddress;
+  const newInfo = {"newName": name, "newAddress":address}; //store info to update
+  try{
+    const message = await db.update_warehouse(whid, newInfo);
+    res.redirect(`${WAREHOUSE_ROUTE}/all`);
   }
   catch (error) {
     res.json(error);
@@ -145,18 +148,11 @@ router.post(`${WAREHOUSE_ROUTE}/update`, async (req, res) => { //tested: ok
 
 // delete warehouse with certain wid
 // full route: /warehouse/delete?id=123
-router.get(`${WAREHOUSE_ROUTE}/delete`, async (req, res) => {
-  try {
-    //const  = db; //store info to display 
-    // res.render("layout.ejs", {
-    //     title: "My Cart",
-    //     bodyFile: `${root}/cart`,
-    //     // TODO: add real data - categoryList
-    //     categoryList: dummyCatList,
-    //     userSession: req?.session?.user,
-    //     // TODO: add real data
-    //     cartItems: cartItems,
-    // });
+router.post(`${WAREHOUSE_ROUTE}/delete-warehouse`, async (req, res) => {
+  try{
+    const whid = req.body.id;
+    await db.delete_warehouse(whid);
+    res.redirect(`${WAREHOUSE_ROUTE}/all`);
   }
   catch (error) {
 
