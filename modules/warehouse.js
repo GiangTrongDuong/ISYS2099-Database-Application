@@ -167,7 +167,7 @@ router.post(`${WAREHOUSE_ROUTE}${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
   const quantity = req.body.quantity;
   const pid = req.body.pid;
   const src_wid = req.body.src_id;
-  const dst_wid = req.body.d
+  const dst_wid = req.body.dst_wid;
   const movedItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
   res.json(movedItems);
   });
