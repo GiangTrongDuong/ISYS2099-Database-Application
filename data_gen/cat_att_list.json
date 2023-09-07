@@ -4,8 +4,28 @@
   },
   "attribute": [
     {
+      "aName": "Warranty",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Brand",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Materials",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Color",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
       "aName": "Shipping",
-      "aValue": "Free Shipping",
+      "aValue": "text",
       "aRequired": false
     }
   ],
@@ -17,13 +37,7 @@
   "_id": {
     "$oid": "64e9f0dc90cae43934765fc1"
   },
-  "attribute": [
-    {
-      "aName": "Shipping",
-      "aValue": "Free Shipping",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Phone and Accessories",
   "parent_category": {
     "$oid": "64e9f0dc90cae43934765fbd"
@@ -34,13 +48,7 @@
   "_id": {
     "$oid": "64e9f0dc90cae43934765fc7"
   },
-  "attribute": [
-    {
-      "aName": "Shipping",
-      "aValue": "Premium Shipping",
-      "aRequired": true
-    }
-  ],
+  "attribute": [],
   "name": "Computer and Accessories",
   "parent_category": {
     "$oid": "64e9f0dc90cae43934765fbd"
@@ -53,13 +61,13 @@
   },
   "attribute": [
     {
-      "aName": "Warranty",
-      "aValue": "2 year+",
+      "aName": "Storage",
+      "aValue": "number",
       "aRequired": false
     },
     {
-      "aName": "Shipping",
-      "aValue": "Free Shipping",
+      "aName": "Model",
+      "aValue": "text",
       "aRequired": false
     }
   ],
@@ -73,18 +81,7 @@
   "_id": {
     "$oid": "64e9f0dd90cae43934765fd3"
   },
-  "attribute": [
-    {
-      "aName": "return",
-      "aValue": "no return",
-      "aRequired": false
-    },
-    {
-      "aName": "Shipping",
-      "aValue": "Free Shipping",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Phone Accessories",
   "parent_category": {
     "$oid": "64e9f0dc90cae43934765fc1"
@@ -97,14 +94,19 @@
   },
   "attribute": [
     {
-      "aName": "Warranty",
-      "aValue": "2 year+",
+      "aName": "Storage",
+      "aValue": "number",
       "aRequired": false
     },
     {
-      "aName": "Shipping",
-      "aValue": "Premium Shipping",
-      "aRequired": true
+      "aName": "RAM",
+      "aValue": "number",
+      "aRequired": false
+    },
+    {
+      "aName": "Model",
+      "aValue": "text",
+      "aRequired": false
     }
   ],
   "name": "Computer",
@@ -117,7 +119,33 @@
   "_id": {
     "$oid": "64e9f0de90cae43934765fdf"
   },
-  "attribute": [],
+  "attribute": [
+    {
+      "aName": "Warranty",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Brand",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Materials",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Color",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Shipping",
+      "aValue": "text",
+      "aRequired": false
+    }
+  ],
   "name": "Home Appliances",
   "parent_category": null,
   "__v": 0
@@ -126,7 +154,18 @@
   "_id": {
     "$oid": "64e9f0de90cae43934765fe3"
   },
-  "attribute": [],
+  "attribute": [
+    {
+      "aName": "Energy Consumption",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Installation",
+      "aValue": "text",
+      "aRequired": false
+    }
+  ],
   "name": "Kitchen Appliances",
   "parent_category": {
     "$oid": "64e9f0de90cae43934765fdf"
@@ -137,16 +176,7 @@
   "_id": {
     "$oid": "64e9f0de90cae43934765fe9"
   },
-  "attribute": [
-    {
-      "_id": {
-        "$oid": "64ef557c4b1a152d108aa27e"
-      },
-      "aName": "installation",
-      "aValue": "free installation",
-      "aRequired": true
-    }
-  ],
+  "attribute": [],
   "name": "Other Appliances",
   "parent_category": {
     "$oid": "64e9f0de90cae43934765fdf"
@@ -157,13 +187,7 @@
   "_id": {
     "$oid": "64e9f0de90cae43934765fef"
   },
-  "attribute": [
-    {
-      "aName": "Energy Consumption",
-      "aValue": "High",
-      "aRequired": false
-    }
-  ],
+  "attribute":  [],
   "name": "Refridgerator",
   "parent_category": {
     "$oid": "64e9f0de90cae43934765fe3"
@@ -174,13 +198,7 @@
   "_id": {
     "$oid": "64e9f0de90cae43934765ff5"
   },
-  "attribute": [
-    {
-      "aName": "installation",
-      "aValue": "installed with fee",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Cooker and Oven",
   "parent_category": {
     "$oid": "64e9f0de90cae43934765fe3"
@@ -191,18 +209,7 @@
   "_id": {
     "$oid": "64e9f0de90cae43934765ffb"
   },
-  "attribute": [
-    {
-      "aName": "Warranty",
-      "aValue": "1 year",
-      "aRequired": false
-    },
-    {
-      "aName": "installation",
-      "aValue": "free installation",
-      "aRequired": true
-    }
-  ],
+  "attribute": [],
   "name": "TV",
   "parent_category": {
     "$oid": "64e9f0de90cae43934765fe9"
@@ -213,18 +220,7 @@
   "_id": {
     "$oid": "64e9f0df90cae43934766001"
   },
-  "attribute": [
-    {
-      "aName": "Energy Consumption",
-      "aValue": "Low",
-      "aRequired": false
-    },
-    {
-      "aName": "installation",
-      "aValue": "free installation",
-      "aRequired": true
-    }
-  ],
+  "attribute": [],
   "name": "Lamps",
   "parent_category": {
     "$oid": "64e9f0de90cae43934765fe9"
@@ -235,7 +231,38 @@
   "_id": {
     "$oid": "64e9f0df90cae43934766007"
   },
-  "attribute": [],
+  "attribute": [
+    {
+      "aName": "Warranty",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Brand",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Materials",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Color",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Shipping",
+      "aValue": "text",
+      "aRequired": false
+    },
+    {
+      "aName": "Return",
+      "aValue": "text",
+      "aRequired": false
+    }
+  ],
   "name": "Furniture",
   "parent_category": null,
   "__v": 0
@@ -244,13 +271,7 @@
   "_id": {
     "$oid": "64e9f0df90cae4393476600b"
   },
-  "attribute": [
-    {
-      "aName": "Shipping",
-      "aValue": "Free Shipping",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Seating and Bedding",
   "parent_category": {
     "$oid": "64e9f0df90cae43934766007"
@@ -263,8 +284,8 @@
   },
   "attribute": [
     {
-      "aName": "return",
-      "aValue": "3 weeks",
+      "aName": "Style",
+      "aValue": "text",
       "aRequired": false
     }
   ],
@@ -278,18 +299,7 @@
   "_id": {
     "$oid": "64e9f0df90cae43934766017"
   },
-  "attribute": [
-    {
-      "aName": "return",
-      "aValue": "1 month",
-      "aRequired": false
-    },
-    {
-      "aName": "Shipping",
-      "aValue": "Free Shipping",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Chairs and Sofas",
   "parent_category": {
     "$oid": "64e9f0df90cae4393476600b"
@@ -302,13 +312,8 @@
   },
   "attribute": [
     {
-      "aName": "return",
-      "aValue": "no return",
-      "aRequired": false
-    },
-    {
-      "aName": "Shipping",
-      "aValue": "Free Shipping",
+      "aName": "Capacity",
+      "aValue": "text",
       "aRequired": false
     }
   ],
@@ -322,18 +327,7 @@
   "_id": {
     "$oid": "64e9f0e090cae43934766023"
   },
-  "attribute": [
-    {
-      "aName": "Shipping",
-      "aValue": "Same Day Delivery",
-      "aRequired": false
-    },
-    {
-      "aName": "return",
-      "aValue": "3 weeks",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Wall Decor",
   "parent_category": {
     "$oid": "64e9f0df90cae43934766011"
@@ -344,18 +338,7 @@
   "_id": {
     "$oid": "64e9f0e090cae43934766029"
   },
-  "attribute": [
-    {
-      "aName": "Shipping",
-      "aValue": "Free Shipping",
-      "aRequired": false
-    },
-    {
-      "aName": "return",
-      "aValue": "3 weeks",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Floor Decor",
   "parent_category": {
     "$oid": "64e9f0df90cae43934766011"
@@ -366,7 +349,13 @@
   "_id": {
     "$oid": "64e9f0e090cae4393476602f"
   },
-  "attribute": [],
+  "attribute": [
+    {
+      "aName": "Style",
+      "aValue": "text",
+      "aRequired": false
+    }
+  ],
   "name": "Fashion",
   "parent_category": null,
   "__v": 0
@@ -386,13 +375,7 @@
   "_id": {
     "$oid": "64e9f0e090cae43934766039"
   },
-  "attribute": [
-    {
-      "aName": "return",
-      "aValue": "3 days",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Female Fashion",
   "parent_category": {
     "$oid": "64e9f0e090cae4393476602f"
@@ -403,13 +386,7 @@
   "_id": {
     "$oid": "64e9f0e190cae4393476603f"
   },
-  "attribute": [
-    {
-      "aName": "Shipping",
-      "aValue": "Premium Shipping",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Male Clothing",
   "parent_category": {
     "$oid": "64e9f0e090cae43934766033"
@@ -420,13 +397,7 @@
   "_id": {
     "$oid": "64e9f0e190cae43934766045"
   },
-  "attribute": [
-    {
-      "aName": "Return",
-      "aValue": "3 days",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Male Accessories",
   "parent_category": {
     "$oid": "64e9f0e090cae43934766033"
@@ -448,18 +419,7 @@
   "_id": {
     "$oid": "64e9f0e190cae43934766051"
   },
-  "attribute": [
-    {
-      "aName": "Shipping",
-      "aValue": "Same Day Delivery",
-      "aRequired": false
-    },
-    {
-      "aName": "return",
-      "aValue": "3 days",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Female Clothing",
   "parent_category": {
     "$oid": "64e9f0e090cae43934766039"
@@ -470,13 +430,7 @@
   "_id": {
     "$oid": "64e9f0e190cae43934766057"
   },
-  "attribute": [
-    {
-      "aName": "return",
-      "aValue": "3 days",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Female Accessories",
   "parent_category": {
     "$oid": "64e9f0e090cae43934766039"
@@ -487,13 +441,7 @@
   "_id": {
     "$oid": "64e9f0e290cae4393476605d"
   },
-  "attribute": [
-    {
-      "aName": "return",
-      "aValue": "3 days",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Girl Clothing",
   "parent_category": {
     "$oid": "64e9f0e090cae43934766039"
@@ -506,9 +454,9 @@
   },
   "attribute": [
     {
-      "aName": "return",
-      "aValue": "no return",
-      "aRequired": true
+      "aName": "Activity",
+      "aValue": "text",
+      "aRequired": false
     }
   ],
   "name": "Sports",
@@ -519,13 +467,7 @@
   "_id": {
     "$oid": "64e9f0e290cae43934766067"
   },
-  "attribute": [
-    {
-      "aName": "return",
-      "aValue": "no return",
-      "aRequired": true
-    }
-  ],
+  "attribute": [],
   "name": "Sportswear",
   "parent_category": {
     "$oid": "64e9f0e290cae43934766063"
@@ -536,13 +478,7 @@
   "_id": {
     "$oid": "64e9f0e290cae4393476606d"
   },
-  "attribute": [
-    {
-      "aName": "Shipping",
-      "aValue": "Same Day Delivery",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Male Sportswear",
   "parent_category": {
     "$oid": "64e9f0e290cae43934766067"
@@ -553,13 +489,7 @@
   "_id": {
     "$oid": "64e9f0e290cae43934766073"
   },
-  "attribute": [
-    {
-      "aName": "Discount on Next Purchase",
-      "aValue": "0.15",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Female Sportswear",
   "parent_category": {
     "$oid": "64e9f0e290cae43934766067"
@@ -570,13 +500,7 @@
   "_id": {
     "$oid": "64e9f0e390cae43934766079"
   },
-  "attribute": [
-    {
-      "aName": "return",
-      "aValue": "no return",
-      "aRequired": true
-    }
-  ],
+  "attribute": [],
   "name": "Sports Equipment",
   "parent_category": {
     "$oid": "64e9f0e290cae43934766063"
@@ -587,13 +511,7 @@
   "_id": {
     "$oid": "64e9f0e390cae4393476607f"
   },
-  "attribute": [
-    {
-      "aName": "Discount on Next Purchase",
-      "aValue": "0.08",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Racket Sports",
   "parent_category": {
     "$oid": "64e9f0e390cae43934766079"
@@ -604,13 +522,7 @@
   "_id": {
     "$oid": "64e9f0e390cae43934766085"
   },
-  "attribute": [
-    {
-      "aName": "Warranty",
-      "aValue": "1 month",
-      "aRequired": false
-    }
-  ],
+  "attribute": [],
   "name": "Ball Sports",
   "parent_category": {
     "$oid": "64e9f0e390cae43934766079"
