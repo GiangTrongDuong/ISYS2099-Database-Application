@@ -23,10 +23,17 @@ router.use(bodyParser.json());
 //end-of session
 
 // Show all warehouses for admin to check and navigate
-router.get(`/all`, async (req, res) => {
+router.get(`${WAREHOUSE_ROUTE}/all`, async (req, res) => {
   try {
     const all_wh = await db.warehouse_show_all(); //store info to display 
     res.json(all_wh);
+    // res.render('layout.ejs',{
+    //   title: "Warehouse",
+    //   bodyFile: `${root}/warehouse`,
+    //   categoryList: dummyCatList,
+    //   userSession: req?.session?.user,
+    //   warehouses: all_wh,
+    // })
   }
   catch (error){
     res.json(error);
@@ -45,7 +52,7 @@ router.get(`/all`, async (req, res) => {
 
 
 // Show view: create warehouse: pass in info {name, address, uid, total_area}
-// router.get(`/create`, function (req, res) {
+// router.get(`${WAREHOUSE_ROUTE}/create`, function (req, res) {
 //   const cartItems = null; //store info to display 
 //   // res.render("layout.ejs", {
 //   //   title: "My Cart",
@@ -59,7 +66,7 @@ router.get(`/all`, async (req, res) => {
 // });
 
 // to test: handle warehouse creation (done)
-router.post(`/create`, async (req, res) => {
+router.post(`${WAREHOUSE_ROUTE}/create`, async (req, res) => {
   // parse param instead of dummy
   const newWarehouse = {"newName": "nw", "newAddress":"123 jjj 123jjjj", "newTotalArea": 123.34}; //store info to display 
   try{
@@ -76,7 +83,7 @@ router.post(`/create`, async (req, res) => {
 
 // Show view: a single warehouse
 //full route: /warehouse/view?id=123
-router.get(`/view`, async (req, res) => { // tested: ok
+router.get(`${WAREHOUSE_ROUTE}/view`, async (req, res) => { // tested: ok
   try{
     const single_wh = await db.read_warehouse(req.query.id); //store info to display 
     res.json(single_wh);
@@ -97,7 +104,7 @@ router.get(`/view`, async (req, res) => { // tested: ok
 
 // Full route: /warehouse/update?id=123
 // Show view: Update warehouse with info {name, address, uid, total_area}
-// router.get(`/update`, function (req, res) {
+// router.get(`${WAREHOUSE_ROUTE}/update`, function (req, res) {
 //   const cartItems = null; //store info to display 
 //   // res.render("layout.ejs", {
 //   //   title: "My Cart",
@@ -112,7 +119,7 @@ router.get(`/view`, async (req, res) => { // tested: ok
 
 // Full route: /warehouse/update?id=123
 // Handle warehouse update, navigate accordingly
-router.post(`/update`, async (req, res) => { //tested: ok
+router.post(`${WAREHOUSE_ROUTE}/update`, async (req, res) => { //tested: ok
   // parse actual param instead of dummy below
   const newInfo = {"newName": "nw", "newAddress":"123 jjj 123jjjj"}; //store info to update
   try{
@@ -135,7 +142,7 @@ router.post(`/update`, async (req, res) => { //tested: ok
 
 // delete warehouse with certain wid
 // full route: /warehouse/delete?id=123
-router.get(`/delete`, async (req, res) => {
+router.get(`${WAREHOUSE_ROUTE}/delete`, async (req, res) => {
   try{
     //const  = db; //store info to display 
     // res.render("layout.ejs", {
@@ -156,7 +163,7 @@ router.get(`/delete`, async (req, res) => {
 
 // route to interface to move products from 1 warehouse to another
 // full route: /warehouse/move?product=123&quantity=456
-router.get(`${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
+router.get(`${WAREHOUSE_ROUTE}/${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
   // Function move_product_to_wh
   const cartItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
   // res.render("layout.ejs", {

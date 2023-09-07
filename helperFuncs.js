@@ -1,6 +1,6 @@
 // navigate category: href="category.html?category=1"
 const moment = require('moment');
-const { HOME_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE, ABOUT_ROUTE, MY_ACCOUNT_ROUTE, PRIVACY_ROUTE, CONTACT_ROUTE, CATEGORY_ROUTE, PRODUCT_ROUTE, CART_ROUTE, ORDER_ROUTE, ORDER_HISTORY_ROUTE, SELLER_ROUTE } = require("./constants");
+const { HOME_ROUTE, LOGIN_ROUTE, SIGNUP_ROUTE, ABOUT_ROUTE, MY_ACCOUNT_ROUTE, PRIVACY_ROUTE, CONTACT_ROUTE, CATEGORY_ROUTE, PRODUCT_ROUTE, CART_ROUTE, ORDER_ROUTE, ORDER_HISTORY_ROUTE, SELLER_ROUTE, WAREHOUSE_ROUTE } = require("./constants");
 
 /* using
     const urlParams = new URLSearchParams(window.location.search);
@@ -34,9 +34,6 @@ const navigatePage = (type, id = -1) => {
             return `${PRODUCT_ROUTE}/${id}`;
         case "product-list-seller":
             return `${SELLER_ROUTE}/${id}`;
-        case "warehouse-item":
-            // return `${WAREHOUSE_ROUTE}/${id}`;
-            // return `/`;
         case "cart":
             return `${CART_ROUTE}`;
         case "cart-delete":
@@ -60,7 +57,9 @@ const navigatePage = (type, id = -1) => {
         case "my-product":
             return `${MY_ACCOUNT_ROUTE}/my-product`;
         case "warehouse":
-            // return `${MY_ACCOUNT_ROUTE}/warehouse`;
+            return `${WAREHOUSE_ROUTE}/all`;
+        case "warehouse-item":
+            return `${WAREHOUSE_ROUTE}/${id}`;
         case "update-product":
             return `${MY_ACCOUNT_ROUTE}/update-product`;
         case "create-product":

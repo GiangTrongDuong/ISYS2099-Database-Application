@@ -1,0 +1,31 @@
+<div class="container-fluid bg-light-subtle text-emphasis-light">
+    <div class="mx-auto">
+    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createProductModal" onclick="createProduct(this)">Add product</button>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">WH name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Total Area</th>
+          <th scope="col">Remaining Area</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% warehouses.forEach(wh => { %>
+        <tr>
+          <td id="product-title"><a href="" class="link-dark"><%= wh.name %></a></td>
+          <td id="product-price"><%= wh.address %></td>
+          <td id="product-description"><%= wh.total_area %></td>
+          <td id="product-category"><%= wh.remaining_area %></td>
+          <td>
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="" onclick="">Update Item</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="" onclick="">Delete Item</button>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+      </table>
+  </div>
