@@ -1,3 +1,10 @@
+Thu 7/9: Viet Anh
+- SQL procedure to move product * quantity from warehouse
+- SQL procedure to place order
+- SQL procedure to free warehouse space when order is confirmed
+- SQL trigger: after update order, before product delete, before user delete
+- Fix db_inserts where warehouse.remaining_area is negative
+
 Mon 4/9: Viet Anh
 - SQL procedure to insert products into warehouse(s): '''sql_data/db_warehouse_trans.sql'''
 - Replace fake image file names with random image links from Unsplashed API
