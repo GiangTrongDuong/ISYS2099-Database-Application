@@ -122,7 +122,7 @@ async function getVolume(pid){
 
 async function updateDetails(pid, title, price, description){
     return new Promise((resolve, reject) => {
-        database.query(`UPDATE product SET title = "${title}", price = ${price}, description = "${description}", updated_at = ${getCurrentTimeString} npm
+        database.query(`UPDATE product SET title = "${title}", price = ${price}, description = "${description}", updated_at = \'${getCurrentTimeString()}'\ 
         WHERE id = ${pid};`, (err, result) => {
             if(err) reject (err);
             else resolve(result);
@@ -130,15 +130,15 @@ async function updateDetails(pid, title, price, description){
     })
 };
 
-async function createProduct(title, seller_id, price, description, category, length, width, height, image){
+async function createProduct(title, seller_id, price, description, category, length, width, height, image, remaining){
     return new Promise((resolve, reject)=> {
         database.query(`SELECt * FROM product WHERE title = "${title}"`, (err, qresult) => {
             if (qresult.length >= 1){
                 resolve("Taken product title");
             } else {
                 database.query(`
-                INSERT INTO product (title, seller_id, price, description, category, length, width, height, image, created_at, updated_at)
-                VALUE (${title},${seller_id},${price},${description},${category},${length},${width},${image},${getCurrentTimeString()},${getCurrentTimeString()});`,
+                INSERT INTO product (title, seller_id, price, description, category, length, width, height, image, remaining, created_at, updated_at)
+                VALUE ("${title}","${seller_id}","${price}","${description}","${category}",${length},${width}, ${height},"${image}","${remaining}",\'${getCurrentTimeString()}'\,\'${getCurrentTimeString()}'\);`,
                 (err, result) =>{
                     if(err) reject (err);
                     else resolve(result);
@@ -150,7 +150,7 @@ async function createProduct(title, seller_id, price, description, category, len
 
 async function deleteProduct(pid){
     return new Promise((resolve, reject) => {
-        database.query(`DELETE FROM product WHERE id = ${pid}`,(err, result) => {
+        database.query(`DELETE FROM product WHERE id = ${pid};`,(err, result) => {
             if(err){
                 reject(err);
             } else if (result){
