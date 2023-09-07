@@ -4,6 +4,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
       "aName": "Shipping",
       "aValue": "Free Shipping",
       "aRequired": false
@@ -19,6 +22,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
       "aName": "Shipping",
       "aValue": "Free Shipping",
       "aRequired": false
@@ -36,6 +42,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa24f"
+      },
       "aName": "Shipping",
       "aValue": "Premium Shipping",
       "aRequired": true
@@ -53,11 +62,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa256"
+      },
       "aName": "Warranty",
       "aValue": "2 year+",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
       "aName": "Shipping",
       "aValue": "Free Shipping",
       "aRequired": false
@@ -75,11 +90,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557b4b1a152d108aa25f"
+      },
       "aName": "return",
       "aValue": "no return",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
       "aName": "Shipping",
       "aValue": "Free Shipping",
       "aRequired": false
@@ -97,11 +118,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557b4b1a152d108aa268"
+      },
       "aName": "Warranty",
       "aValue": "2 year+",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa24f"
+      },
       "aName": "Shipping",
       "aValue": "Premium Shipping",
       "aRequired": true
@@ -159,6 +186,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa285"
+      },
       "aName": "Energy Consumption",
       "aValue": "High",
       "aRequired": false
@@ -176,6 +206,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa28c"
+      },
       "aName": "installation",
       "aValue": "installed with fee",
       "aRequired": false
@@ -193,11 +226,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557d4b1a152d108aa293"
+      },
       "aName": "Warranty",
       "aValue": "1 year",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa27e"
+      },
       "aName": "installation",
       "aValue": "free installation",
       "aRequired": true
@@ -215,11 +254,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557d4b1a152d108aa29c"
+      },
       "aName": "Energy Consumption",
       "aValue": "Low",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557c4b1a152d108aa27e"
+      },
       "aName": "installation",
       "aValue": "free installation",
       "aRequired": true
@@ -246,6 +291,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
       "aName": "Shipping",
       "aValue": "Free Shipping",
       "aRequired": false
@@ -263,6 +311,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2b2"
+      },
       "aName": "return",
       "aValue": "3 weeks",
       "aRequired": false
@@ -280,11 +331,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2b9"
+      },
       "aName": "return",
       "aValue": "1 month",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
       "aName": "Shipping",
       "aValue": "Free Shipping",
       "aRequired": false
@@ -302,11 +359,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557f4b1a152d108aa2c2"
+      },
       "aName": "return",
       "aValue": "no return",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
       "aName": "Shipping",
       "aValue": "Free Shipping",
       "aRequired": false
@@ -324,11 +387,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557f4b1a152d108aa2cb"
+      },
       "aName": "Shipping",
       "aValue": "Same Day Delivery",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2b2"
+      },
       "aName": "return",
       "aValue": "3 weeks",
       "aRequired": false
@@ -346,11 +415,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef557a4b1a152d108aa248"
+      },
       "aName": "Shipping",
       "aValue": "Free Shipping",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef557e4b1a152d108aa2b2"
+      },
       "aName": "return",
       "aValue": "3 weeks",
       "aRequired": false
@@ -388,6 +463,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2ea"
+      },
       "aName": "return",
       "aValue": "3 days",
       "aRequired": false
@@ -405,6 +483,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55814b1a152d108aa2f1"
+      },
       "aName": "Shipping",
       "aValue": "Premium Shipping",
       "aRequired": false
@@ -422,6 +503,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55814b1a152d108aa2f8"
+      },
       "aName": "Return",
       "aValue": "3 days",
       "aRequired": false
@@ -450,11 +534,17 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55814b1a152d108aa306"
+      },
       "aName": "Shipping",
       "aValue": "Same Day Delivery",
       "aRequired": false
     },
     {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2ea"
+      },
       "aName": "return",
       "aValue": "3 days",
       "aRequired": false
@@ -472,6 +562,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2ea"
+      },
       "aName": "return",
       "aValue": "3 days",
       "aRequired": false
@@ -489,6 +582,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55804b1a152d108aa2ea"
+      },
       "aName": "return",
       "aValue": "3 days",
       "aRequired": false
@@ -506,6 +602,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55824b1a152d108aa321"
+      },
       "aName": "return",
       "aValue": "no return",
       "aRequired": true
@@ -521,6 +620,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55824b1a152d108aa321"
+      },
       "aName": "return",
       "aValue": "no return",
       "aRequired": true
@@ -538,6 +640,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55834b1a152d108aa330"
+      },
       "aName": "Shipping",
       "aValue": "Same Day Delivery",
       "aRequired": false
@@ -555,6 +660,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55834b1a152d108aa337"
+      },
       "aName": "Discount on Next Purchase",
       "aValue": "0.15",
       "aRequired": false
@@ -572,6 +680,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55824b1a152d108aa321"
+      },
       "aName": "return",
       "aValue": "no return",
       "aRequired": true
@@ -589,6 +700,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55844b1a152d108aa347"
+      },
       "aName": "Discount on Next Purchase",
       "aValue": "0.08",
       "aRequired": false
@@ -606,6 +720,9 @@
   },
   "attribute": [
     {
+      "_id": {
+        "$oid": "64ef55844b1a152d108aa34e"
+      },
       "aName": "Warranty",
       "aValue": "1 month",
       "aRequired": false

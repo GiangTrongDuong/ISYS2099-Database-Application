@@ -3,7 +3,6 @@ const fs = require('fs');
 const mg = require('./models/methods');
 const json_fn = './cat_att_list.json';
 
-
 //TODO: Specify collection name to ensure consistency?
 const forLoop = async (clist) => {
     for (const c of clist){
@@ -11,13 +10,7 @@ const forLoop = async (clist) => {
             const checkId = await mg.findCatById(c._id['$oid']);
             if(!checkId){ //if category is not added
                 console.log("\t Saving category: " + c.name);
-                const att_list = c.attribute;
-                let al = []
-                for (const a of att_list) {
-                    let temp = {...a, _id: a._id['$oid'] }
-                    al.push(temp)
-                }
-                const saved = await mg.saveCat(c._id['$oid'], c.name, al, c.parent_category ? c.parent_category['$oid'] : null);
+                const saved = await mg.saveCat(c._id['$oid'], c.name, c.attribute, c.parent_category ? c.parent_category['$oid'] : null);
             }
             else{
                 console.log("This category is already in the database: " + c.name);

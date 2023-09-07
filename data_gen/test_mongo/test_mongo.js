@@ -111,8 +111,10 @@ app.post("/category/update/:id", async (req, res) => {
           "aRequired": false
       },
       {
-          "_id": "64ef55794b1a152d108aa242"
-      }
+          "aName": "Test 2",
+          "aValue": "Test add 2",
+          "aRequired": false
+      },
   ]
 }
 */
@@ -127,6 +129,16 @@ app.post("/category/update/add-attributes/:id", async (req, res) => {
   }
 });
 
+//get all lowest level categories
+app.get("/category/attribute", async (req, res) => {
+  try {
+    const result = await mg.getAttributeGroups();
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 

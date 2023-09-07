@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const category = require('./category.js');
+const {category} = require('./category.js');
 const ObjectId = mongoose.Types.ObjectId;
 
 const connectMongoDB = () => {
@@ -182,7 +182,7 @@ const addParentAtt = async (catId) => {
         const current = await findCatById(catId);
         if (current.parent_category){
             const parent = await findCatById(current.parent_category);
-            if (parent.attribute) {
+            if (!isEmpty(parent.attribute)) {
                 for (const pa of parent.attribute) {
                     let existed = false;
                     for (const ca of current.attribute) {
@@ -263,7 +263,9 @@ const deleteCatAndChildren = async(id) => {
 }
 
 const twoAttsEqual = (a1, a2) => {
-    return (a1._id == a2._id || (a1.aName == a2.aName && a1.aValue == a2.aValue && a1.aRequired == a2.aRequired));
+    // return (a1.aName == a2.aName && a1.aValue == a2.aValue && a1.aRequired == a2.aRequired);
+    return (a1.aName == a2.aName && a1.aValue == a2.aValue);
+
 }
 
 function isEmpty(o){
@@ -285,7 +287,7 @@ const updateCat = async (id, newName, newAtts, newPAId) => {
             // addAttributesToCat(id, newAtts)
         }
         let updated = await current.save();
-        if (current.parent_category != null) {
+        if (!isEmpty(current.parent_category)) {
             updated = await addParentAtt(id);
         }
         return updated;
@@ -335,7 +337,35 @@ const addAttributesToCat = async (catId, newAttributes) => {
     }
 }
 
+const getAttributeGroups = async () => {
+    try {
+        const result = await category.aggregate([
+            {
+                $unwind: '$attribute'
+            },
+            {
+                $group: {
+                    "_id": "$attribute.aName",
+                    "aValues": {
+                        "$addToSet": "$attribute.aValue"
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    "aName": "$_id",
+                    "aValues": 1,
+                }
+            },
+        ])
+        return result
+    } catch (err) {
+        console.log(err)
+        throw (err)
+    }
+}
 
 
 
-module.exports = {connectMongoDB, saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, findCatsByAttribute, findIdFromName, getAllChildren, getLowestLevelCats, addParentAtt, deleteCat, deleteCatAndChildren, updateCat, addAttributesToCat }
+module.exports = {connectMongoDB, saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, findCatsByAttribute, findIdFromName, getAllChildren, getLowestLevelCats, addParentAtt, deleteCat, deleteCatAndChildren, updateCat, addAttributesToCat, getAttributeGroups }
