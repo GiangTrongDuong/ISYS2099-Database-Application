@@ -18,7 +18,7 @@
           <td id="whiquanty"><%= whi["Quantity"] %></td>
           <td id="whivolume"><%= whi["Load Volume"] %> m<sup>3</sup></td>
           <td>
-            <form action="move-product" method="post">
+            <form action="move-warehouse" method="post">
               <input type="number" class="form-control" id="pid" name="pid" value="<%= whi["Product ID"] %>" readonly hidden>
               <input type="number" class="form-control" id="wid" name="wid" value="<%= whi["Warehouse ID"] %>" readonly hidden>
               <button type="submit" class="btn btn-dark">Move product</button>

@@ -162,12 +162,12 @@ router.post(`${WAREHOUSE_ROUTE}/delete-warehouse`, async (req, res) => {
 
 // route to interface to move products from 1 warehouse to another
 // full route: /warehouse/move?product=123&quantity=456
-router.post(`${WAREHOUSE_ROUTE}/${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
+router.post(`${WAREHOUSE_ROUTE}${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
   // Function move_product_to_wh
   const quantity = req.body.quantity;
   const pid = req.body.pid;
   const src_wid = req.body.src_id;
-  const dst_wid = req.body.dst_id;
+  const dst_wid = req.body.d
   const movedItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
   res.json(movedItems);
   });
