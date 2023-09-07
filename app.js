@@ -75,7 +75,7 @@ app.use('/order', order)
 app.use('/', others)
 app.use('/', category)
 app.use('/', seller)
-app.use('/warehouse', warehouse);
+app.use('/', warehouse);
 
 // full route to Home page: /
 app.get("/", function (req, res) {
