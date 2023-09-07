@@ -3,27 +3,12 @@ const database = require('./connection/dbSqlConnect');
 
 // Return the list of all warehouses for admin to check. 
 // Here, they can click on one warehouse to see items 
-async function warehouse_show_all(admin_id) { // tested: ok
+async function warehouse_show_all() { // tested: ok
     return new Promise((resolve, reject) => {
         try {
             database.query(`SELECT id, name AS \'Warehouse Name\', address AS \'Warehouse Address\',
             total_area AS \'Total Area\', remaining_area AS \'Remaining Area\'
             FROM warehouse;`, function (error, result) {
-                if (error) reject({ "error with query result": error });
-                resolve(result);
-            })
-        }
-        catch (error2) {
-            reject({ "error running query": error2 });
-        }
-    });
-}
-
-async function warehouse_show_admin(admin_id) {
-    return new Promise((resolve, reject) => {
-        try {
-            // write query to get all warehouses that admin_id is admin of
-            database.query(`select * from user where user.role = "Warehouse Admin";`, function (error, result) {
                 if (error) reject({ "error with query result": error });
                 resolve(result);
             })
@@ -130,7 +115,8 @@ async function move_product_to_wh(pid, quantity, src_wid, dst_wid) {
             database.query(`CALL wh_move_product(${pid}, ${quantity}, ${src_wid}, ${dst_wid});`,
                 function (error, result) {
                     if (error) reject({ "error when moving": error });
-                    resolve({ "success": result[0].result });
+                    console.log(result[0][0].result);
+                    resolve({ "success": result[0][0].result });
                 });
         }
         catch (error) {
