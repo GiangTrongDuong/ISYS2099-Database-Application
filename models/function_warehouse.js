@@ -6,7 +6,7 @@ const database = require('./connection/dbSqlConnect');
 async function warehouse_show_all(admin_id) { // tested: ok
     return new Promise((resolve, reject) => {
         try {
-            database.query(`SELECT name AS \'Warehouse Name\', address AS \'Warehouse Address\',
+            database.query(`SELECT id, name AS \'Warehouse Name\', address AS \'Warehouse Address\',
             total_area AS \'Total Area\', remaining_area AS \'Remaining Area\'
             FROM warehouse;`, function (error, result) {
                 if (error) reject({ "error with query result": error });
@@ -88,21 +88,6 @@ async function update_warehouse(wid, info) {
     });
 }
 
-// Delete a warehouse. There is a trigger that prevent delete if there are products inside of it
-async function delete_warehouse(wid) {
-    return new Promise((resolve, reject) => {
-        try {
-            database.query(`DELETE FROM warehouse WHERE id = ${wid};`, function (error1, result1) {
-                if (error1) reject({ "error from trigger": error1 });
-                resolve(result1);
-            });
-        }
-        catch (error) {
-            reject({ "error running delete query": error });
-        }
-    });
-}
-
 // Before moving products from one warehouse to another, this function will return the list of warehouses
 // and the number of product_id that it can store. This allows warehouse admin to choose warehouse to move to.
 async function get_warehouse_to_store(pid) {
@@ -161,6 +146,6 @@ async function insert_to_warehouse(pid, quantity) {
 }
 
 module.exports = {
-    warehouse_show_all, create_warehouse, read_warehouse, update_warehouse, delete_warehouse,
+    warehouse_show_all, create_warehouse, read_warehouse, update_warehouse,
     get_warehouse_to_store, move_product_to_wh, insert_to_warehouse, warehouse_show_admin
 }

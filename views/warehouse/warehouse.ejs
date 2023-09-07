@@ -1,11 +1,12 @@
 <div class="container-fluid bg-light-subtle text-emphasis-light">
     <div class="mx-auto">
-    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createProductModal" onclick="createProduct(this)">Add product</button>
+    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createWH" onclick="createWH(this)">Create Warehouse</button>
     </div>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">WH name</th>
+        <th scope="col">Warehouse ID</th>
+          <th scope="col">Warehouse name</th>
           <th scope="col">Address</th>
           <th scope="col">Total Area</th>
           <th scope="col">Remaining Area</th>
@@ -14,18 +15,117 @@
       <tbody>
         <% warehouses.forEach(wh => { %>
         <tr>
-          <td id="product-title"><a href="" class="link-dark"><%= wh.name %></a></td>
-          <td id="product-price"><%= wh.address %></td>
-          <td id="product-description"><%= wh.total_area %></td>
-          <td id="product-category"><%= wh.remaining_area %></td>
+        <td id="whId"><%= wh["id"] %></td>
+          <td id="whname"><a href="" class="link-dark"><%= wh["Warehouse Name"] %></a></td>
+          <td id="whaddress"><%= wh["Warehouse Address"] %></td>
+          <td id="whtotalae"><%= wh["Total Area"] %> m<sup>3</sup></td>
+          <td id="whremainingae"><%= wh["Remaining Area"] %> m<sup>3</sup></td>
           <td>
-            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="" onclick="">Update Item</button>
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#updateWH" onclick="updateWH(this)">Update Warehouse</button>
           </td>
           <td>
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="" onclick="">Delete Item</button>
+            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteWH" onclick="deleteWH(this)">Delete Warehouse</button>
           </td>
         </tr>
         <% }) %>
       </tbody>
       </table>
   </div>
+
+  <%- include('../partials/modal', {
+    modalId: "createWH",
+    heading: "Create new Warehouse",
+    // render body with message and button
+    body: `
+    <div class="card">
+      <div class="card-body h-100 overflow-scroll">
+        <h6 class="mb-4 pb-3 border-bottom fw-bold">Warehouse Information</h6>
+        <form action="/warehouse/create" method="POST">
+          <div class="mb-3">
+            <label for="whname" class="form-label">Warehouse name</label>
+            <input type="text" class="form-control" id="whname" name="whname" value="">
+          </div>
+          <div class="mb-3">
+            <label for="whaddress" class="form-label">Warehouse Address</label>
+            <input type="text" class="form-control" id="whaddress" name="whaddress" value="">
+          </div>
+          <div class="mb-3">
+            <label for="whtotalae" class="form-label">Total Area</label>
+            <input type="number" class="form-control input-lg" id="whtotalae" name="whtotalae" value="">
+          </div>
+          <button type="submit" class="btn btn-dark">Save Changes</button>
+        </form>
+      </div>
+    </div>
+    `,
+    isFullScreenSm: false,
+  }) %>
+
+<%- include('../partials/modal', {
+    modalId: "updateWH",
+    heading: "Update Warehouse",
+    // render body with message and button
+    body: `
+    <div class="card">
+      <div class="card-body h-100 overflow-scroll">
+        <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Warehouse Information</h6>
+        <form action="update-warehouse" method="POST">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="wh-id" name="id" value="" readonly hidden>
+          </div>
+          <div class="mb-3">
+            <label for="wh-name" class="form-label">Warehouse name</label>
+            <input type="text" class="form-control" id="wh-name" name="whname" value="">
+          </div>
+          <div class="mb-3">
+            <label for="wh-address" class="form-label">Warehouse Address</label>
+            <input type="text" class="form-control" id="wh-address" name="whaddress" value="">
+          </div>
+          <button type="submit" class="btn btn-dark">Save Changes</button>
+        </form>
+      </div>
+    </div>
+    `,
+    isFullScreenSm: false,
+  }) %>
+
+<%- include('../partials/modal', {
+    modalId: "deleteWH",
+    heading: "Delete Warehouse",
+    // render body with message and button
+    body: `
+    <div class="card">
+      <div class="card-body h-100 overflow-scroll">
+        <h6 class="mb-4 pb-3 border-bottom fw-bold">Delete Confirmation</h6>
+        <form action="delete-warehouse" method="POST">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="wh-id" name="id" value="" readonly hidden>
+          </div>
+          <button type="submit" class="btn btn-dark">Delete Warehouse</button>
+        </form>
+      </div>
+    </div>
+    `,
+    isFullScreenSm: false,
+  }) %>
+
+  <script>
+    function createWH(buttonElement) {
+  }
+
+  function updateWH(buttonElement) {
+    const row = buttonElement.closest('tr');
+    const whId = row.querySelector('#whId').innerText;
+    const whName = row.querySelector('#whname').innerText;
+    const whAdd = row.querySelector('#whaddress').innerText;
+    document.querySelector('#updateWH #wh-id').value = whId;
+    document.querySelector('#updateWH #wh-name').value = whName;
+    document.querySelector('#updateWH #wh-address').value = whAdd;
+  }
+
+  function deleteWH(buttonElement) {
+    const row = buttonElement.closest('tr');
+    const whId = row.querySelector('#whId').innerText;
+    document.querySelector('#deleteWH #wh-id').value = whId;
+  }
+  </script>

@@ -3,6 +3,7 @@ const { WAREHOUSE_ROUTE, WAREHOUSE_MOVE_PRODUCT } = require('../constants');
 const { dummyCatList } = require('../dummyData');
 const router = express.Router();
 const db = require('../models/function_warehouse');
+const isAuth = require('../models/isAuth');
 
 let root = `.${WAREHOUSE_ROUTE}`;
 
@@ -23,17 +24,16 @@ router.use(bodyParser.json());
 //end-of session
 
 // Show all warehouses for admin to check and navigate
-router.get(`${WAREHOUSE_ROUTE}/all`, async (req, res) => {
+router.get(`${WAREHOUSE_ROUTE}/all`, isAuth.isAuth, async (req, res) => {
   try {
     const all_wh = await db.warehouse_show_all(); //store info to display 
-    res.json(all_wh);
-    // res.render('layout.ejs',{
-    //   title: "Warehouse",
-    //   bodyFile: `${root}/warehouse`,
-    //   categoryList: dummyCatList,
-    //   userSession: req?.session?.user,
-    //   warehouses: all_wh,
-    // })
+    res.render('layout.ejs',{
+      title: "Warehouse",
+      bodyFile: `${root}/warehouse`,
+      categoryList: dummyCatList,
+      userSession: req?.session?.user,
+      warehouses: all_wh,
+    })
   }
   catch (error) {
     res.json(error);
@@ -68,10 +68,13 @@ router.get(`${WAREHOUSE_ROUTE}/all`, async (req, res) => {
 // to test: handle warehouse creation (done)
 router.post(`${WAREHOUSE_ROUTE}/create`, async (req, res) => {
   // parse param instead of dummy
-  const newWarehouse = { "newName": "nw", "newAddress": "123 jjj 123jjjj", "newTotalArea": 123.34 }; //store info to display 
-  try {
+  const name = req.body.whname;
+  const address = req.body.whaddress;
+  const area = req.body.whtotalae;
+  const newWarehouse = {"newName": name, "newAddress": address, "newTotalArea": area}; //store info to display 
+  try{
     const message = await db.create_warehouse(newWarehouse);
-    res.json(message);
+    res.redirect(`${WAREHOUSE_ROUTE}`);
   }
   catch (error) {
     res.json(error);

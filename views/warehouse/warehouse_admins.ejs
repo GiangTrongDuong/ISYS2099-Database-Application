@@ -1,9 +1,6 @@
 <!-- Form: add id to `td` -> add id to `input` inside modal body 
   -> Inside script: get value form id in `td` -> assign value to input `id`  -->
-<div class="container-fluid bg-light-subtle text-emphasis-light">
-  <div class="mx-auto">
-    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createProductModal" onclick="createProduct(this)">Add product</button>
-  </div>
+<div class="container-fluid bg-light-subtle text-emphasis-light p-5">
   <table class="table">
     <thead>
       <tr>
@@ -20,7 +17,9 @@
         <td id="admin-username"><%= admin.user_name %></td>
         <td id="admin-display"><%= admin.display_name %></td>
         <td>
-          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAdminModal" onclick="deleteAdminModal(this)">Delete Admin</button>
+          <button id="admin-<%= admin.id %>" class="delete-submit-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAdminModal" data-path="<%= navigatePage("delete-user", admin.id) %>">
+            Delete Admin
+          </button>
         </td>
       </tr>
       <% }) %>
@@ -29,143 +28,62 @@
 </div>
 
 <%- include('../partials/modal', {
-    modalId: "updateAdminModal",
-    heading: "Update Product Information",
-    // render body with message and button
-    body: `
-    <div class="card">
-      <div class="card-body h-100 overflow-scroll">
-        <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Product Information</h6>
-        <form action="update-product" method="POST">
-          <div class="mb-3">
-            <input type="text" class="form-control" id="update-id" name="id" value="" readonly  hidden>
-          </div>
-          <div class="mb-3">
-            <label for="update-title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="update-title" name="title" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="update-price" name="price" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-description" class="form-label">Description</label>
-            <input type="text" class="form-control input-lg" id="update-description" name="description" value="">
-          </div>
-          <button type="submit" class="btn btn-dark">Save Changes</button>
-        </form>
-      </div>
-    </div>
-    `,
-    isFullScreenSm: false,
-  }) %>
-
-<%- include('../partials/modal', {
-    modalId: "createProductModal",
-    heading: "Create New Product",
-    // render body with message and button
-    body: `
-    <div class="card">
-      <div class="card-body h-100 overflow-scroll">
-        <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Product Information</h6>
-        <form action="create-product" method="POST">
-          <div class="mb-3">
-            <label for="update-title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="update-title" name="title" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-seller" class="form-label">Seller</label>
-            <input type="text" class="form-control" id="update-seller" name="seller" value="" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="update-price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="update-price" name="price" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-description" class="form-label">Description</label>
-            <input type="text" class="form-control input-lg" id="update-description" name="description" value="">
-          </div>
-        <div class="mb-3">
-          <label for="create-category" class="form-label">Category</label>
-          <select class="custom-select" id="create-category" name="category">
-            <option selected>Choose category for your product ... </option>
-             ${categoryList.map(category => {
-              return `<option value="${category["category_name"]}">${category["category_name"]}</option>`
-             }).join(" ")}
-          </select>
-          </div>
-          <div class="mb-3">
-            <label for="update-length" class="form-label">Length</label>
-            <input type="number" class="form-control" id="update-lenght" name="len" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-width" class="form-label">Width</label>
-            <input type="number" class="form-control" id="update-width" name="wid" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-height" class="form-label">Height</label>
-            <input type="number" class="form-control" id="update-height" name="hei" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-image" class="form-label">Image</label>
-            <input type="text" class="form-control" id="update-image" name="image" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-remain" class="form-label">Stock</label>
-            <input type="number" class="form-control" id="update-remain" name="stock" value="">
-          </div>
-          <button type="submit" class="btn btn-dark">Save Changes</button>
-        </form> 
-      </div>
-    </div>
-    `,
-    isFullScreenSm: false,
-  }) %>
-
-
-<%- include('../partials/modal', {
     modalId: "deleteAdminModal",
     heading: "Delete Confirmation",
     // render body with message and button
     body: `
     <div class="card">
-      <div class="card-body h-100 overflow-scroll">
-        <h6 class="mb-4 pb-3 border-bottom fw-bold">Delete Confirmation</h6>
-        <form action="delete-product" method="POST">
-          <div class="mb-3">
-            <input type="number" class="form-control" id="delete" name="id" value="" hidden>
-          </div>
-          <button type="submit" class="btn btn-dark">Delete product</button>
-        </form>
-      </div>
-    </div>
-    `,
+        <div class="card-body h-100 overflow-scroll">
+            <h6 class="mb-4 pb-3 border-bottom fw-bold">Delete Confirmation</h6>
+            <button class="delete-btn btn btn-dark">Delete Admin</button>
+        </div>
+    </div>`,
     isFullScreenSm: false,
-  }) %>
+}) %>
 
 <script>
-//   function showUpdateModal(buttonElement) {
-//     // Find the closest <tr> element which is the parent of the clicked button
-//     const row = buttonElement.closest('tr');
+  $(document).ready(function() {
+    let deletePath = '';
+    // get modal
+    const deleteAdminModal = document.querySelector('#deleteAdminModal');
 
-//     // Get the product data from the td elements
-//     const productTitle = row.querySelector('#product-title').innerText;
-//     const productPrice = row.querySelector('#product-price').innerText;
-//     const productDescription = row.querySelector('#product-description').innerText;
-//     const productId = row.querySelector('#product-id').innerText;
+    $(".delete-submit-btn").on("click", function(event) {
+      // Store the path when the delete button in the table is clicked.
+      deletePath = $(this).data("path");
+    });
 
-//     // Now set this data into the modal fields
-//     document.querySelector('#updateAdminModal #update-title').value = productTitle;
-//     document.querySelector('#updateAdminModal #update-price').value = productPrice;
-//     document.querySelector('#updateAdminModal #update-description').value = productDescription;
-//     document.querySelector('#updateAdminModal #update-id').value = productId;
-//   }
+    $(".delete-btn").on("click", function(event) {
+      event.preventDefault(); // Stop the form from submitting normally
+      $.post(deletePath, {
+        role: "Warehouse Admin"
+      }, function(response) {
+        deleteAdminModal.modal('hide'); 
+        window.location.reload();
+      });
+    });
+  });
+  //   function showUpdateModal(buttonElement) {
+  //     // Find the closest <tr> element which is the parent of the clicked button
+  //     const row = buttonElement.closest('tr');
 
-//   function createProduct(buttonElement) {}
+  //     // Get the product data from the td elements
+  //     const productTitle = row.querySelector('#product-title').innerText;
+  //     const productPrice = row.querySelector('#product-price').innerText;
+  //     const productDescription = row.querySelector('#product-description').innerText;
+  //     const productId = row.querySelector('#product-id').innerText;
 
-//   function deleteAdminModal(buttonElement) {
-//     const row = buttonElement.closest('tr');
-//     const productId = row.querySelector('#product-id').innerText;
-//     document.querySelector('#deleteAdminModal #delete').value = productId;
-//   }
+  //     // Now set this data into the modal fields
+  //     document.querySelector('#updateAdminModal #update-title').value = productTitle;
+  //     document.querySelector('#updateAdminModal #update-price').value = productPrice;
+  //     document.querySelector('#updateAdminModal #update-description').value = productDescription;
+  //     document.querySelector('#updateAdminModal #update-id').value = productId;
+  //   }
+
+  //   function createProduct(buttonElement) {}
+
+  //   function deleteAdminModal(buttonElement) {
+  //     const row = buttonElement.closest('tr');
+  //     const productId = row.querySelector('#product-id').innerText;
+  //     document.querySelector('#deleteAdminModal #delete').value = productId;
+  //   }
 </script>

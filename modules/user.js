@@ -178,4 +178,15 @@ router.post(`/update-user-info`, isAuth.isAuth, async (req, res) => {
   }
 })
 
+router.post(`${MY_ACCOUNT_ROUTE}/delete-user/:id`, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const role = req.body.role;
+    await insertDB.deleteUser(id, role);
+    // res.send("User deleted");
+  } catch (err) {
+    console.log(err);
+  }
+})
+
 module.exports = router;
