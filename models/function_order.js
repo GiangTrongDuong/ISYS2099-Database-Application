@@ -1,6 +1,6 @@
 const { getCurrentTimeString } = require('../helperFuncs');
 const {getPrice} = require('./function_product')
-const database = require('./dbSqlConnect');
+const database = require('./connection/dbSqlConnect');
 
 async function get_orders (uid) {
     return new Promise ((resolve, reject) => {

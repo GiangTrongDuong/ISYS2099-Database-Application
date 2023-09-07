@@ -157,10 +157,12 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
         } else if (user.role == "Seller"){
           return "seller";
         }
-      
-    } else {
-      console.log("error finding user from database");
-      // render error page
+      }
+    }
+      else {
+        console.log("error finding user from database");
+        // render error page
+      }
     }
   });
 });
