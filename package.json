@@ -1,5 +1,30 @@
-{
+{  "name": "isys2099-database-application",
+  "version": "1.0.0",
+  "description": "Database application project for course ISYS2099 by group 2, semester 2 2023",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Group 2",
+  "license": "ISC",
   "dependencies": {
-    "ejs": "^3.1.9"
+    "bcrypt": "^5.1.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-fileupload": "^1.4.0",
+    "express-session": "^1.17.3",
+    "moment": "^2.29.4",
+    "mongodb": "^5.8.0",
+    "mongoose": "^7.4.3",
+    "mysql2": "^3.6.0",
+    "nodemon": "^3.0.1",
+    "path": "^0.12.7"
   }
 }

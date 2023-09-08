@@ -1,0 +1,20 @@
+<section class="mt-5">
+  <h1 class="fs-1 fw-bolder line-clamp-1 text-center text-dark ">
+    Product List
+  </h1>
+  <div class="row mt-3 mb-5
+      gx-4 gx-lg-5 gy-5 w-100
+          row-cols-1 row-cols-sm-2 row-cols-lg-3 
+          justify-content-center">
+    <% if (productList?.length!=0) { %>
+    <% productList.forEach(product=> { %>
+    <%- include('./product-card', {navigatePage, product, formatCurrencyVND}) %>
+    <% }) %>
+    <% } else { %>
+    <h3 class="fs-3 pb-3
+    fw-medium text-center text-secondary ">
+      <%= type %> has no product
+    </h3>
+    <% } %>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+      <a class="navbar-brand me-auto" href="#">
+          <img class="web-logo" src="/resources/image/Group 2 EEET 2099.png" alt="brand logo (our team decide later)" onclick="window.location.href='<%= navigatePage(`home`) %>'";>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          <ul class="navbar-nav ms-auto nav-icons">
+              <li class="nav-item">
+                  <a class="nav-link " href="<%= navigatePage("home") %>"> <i class="fa-solid fa-house"></i> Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="<%= navigatePage("stores") %>"> <i class="fa-solid fa-house-circle-check"></i> Stores</a>
+              </li>
+              <% if (userSession) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= navigatePage("my-account") %>"> <i class="fa-solid fa-user-secret"></i> My Account</a>
+                </li>
+                <% if (userSession.role.toLowerCase().includes("customer") || userSession.role.toLowerCase().includes("user")) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= navigatePage("cart") %>"> <i class="fa-solid fa-cart-shopping"></i> My Cart</a>
+                    </li>
+                <% } %>
+                <% if (userSession.role.toLowerCase().includes("seller")) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= navigatePage("my-product") %>"> <i class="fa-brands fa-sellsy"></i> My Products</a>
+                    </li>
+                <% } %>
+                <% if (userSession.role.toLowerCase().includes("warehouse")) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= navigatePage("warehouse") %>"> <i class="fa-solid fa-warehouse"></i> Warehouse</a>
+                    </li>
+                <% } %>
+                
+              <% } %>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-solid fa-bars"></i> Resources
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                      <li><a class="dropdown-item" href="<%= navigatePage("about") %>">About Us</a></li>
+                      <li><a class="dropdown-item" href="<%= navigatePage("privacy") %>">Privacy</a></li>
+                  </ul>
+              </li>
+
+              <% if (!userSession) {%>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<%= navigatePage("login") %>"> <i class="fa-solid fa-arrow-right-to-bracket"></i> Log in</a>
+                  </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="<%= navigatePage("signup") %>"> <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign up</a>
+              </li>
+              <% } else { %>
+                <li><form action="/logout" method="POST"><button type="submit" class="btn btn-danger">Logout</button></form></li>
+                <% } %>
+          </ul>
+      </div>
+  </div>
+</nav>

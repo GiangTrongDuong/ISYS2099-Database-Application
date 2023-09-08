@@ -1,0 +1,180 @@
+@for $i from 1 through 5 {
+    .line-clamp-#{$i} {
+        -webkit-line-clamp: #{$i};
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+// Object styling
+.obj-center-cover {
+    object-fit: cover;
+    object-position: center;
+}
+
+// height
+.h-sz-80 {
+    height: var(--sz-80);
+}
+
+.h-sz-96 {
+    height: var(--sz-96);
+}
+.h-sz-44 {
+    height: var(--sz-44);
+}
+@media screen and (min-width: 768px) {
+    .h-sz-md-40 {
+        height: var(--sz-40);
+    }
+}
+
+
+// scroll
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #DC761D #ccc;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: var(--sz-2);
+    height: var(--sz-2);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: #79A49C;
+    border-radius: var(--sz-half);
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background-color: #ccc;
+    border-radius: var(--sz-1);
+}
+
+// cards
+.card-custom {
+    &-container {
+        height: var(--sz-96);
+        width: var(--sz-96);
+    }
+
+    &-img {
+        object-position: center;
+        object-fit: cover;
+    }
+}
+
+.card-about {
+    position: relative;
+    padding: 0;
+    margin: 0 !important;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 300px;
+    --height: 400px;
+    max-height: var(--height);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+
+    .card-image {
+        width: 100%;
+        // height: 100%;
+        height: var(--height);
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            max-height: var(--height);
+            object-fit: cover;
+        }
+        // add overlay
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--height);
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.6) 0%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            transition: 0.5s;
+        }
+    }
+
+    .card-content {
+        position: absolute;
+        bottom: -180px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(15px);
+        min-height: 140px;
+        width: 100%;
+        transition: bottom .4s ease-in;
+        box-shadow: 0 -10px 10px rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+        h4,
+        h5 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            transition: 0.8s;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-40px);
+            transition-delay: 0.2s;
+        }
+
+        h5 {
+            transition: 0.5s;
+            font-weight: 200;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            a {
+                transition: 0.5s;
+                transition-delay: calc(0.15s * var(--i));
+                transform: translateY(50px);
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+
+            }
+
+            li a i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    &:hover {
+        .card-content {
+            bottom: 0px;
+
+            h4,
+            h5 {
+                transform: translateY(10px);
+                opacity: 1;
+            }
+            a {
+                transform: translateY(0px);
+            }   
+        }
+    }
+
+}

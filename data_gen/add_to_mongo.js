@@ -1,6 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
-const mg = require('./models/methods');
+const mg = require('./models/function_category');
+const {connectMongoDB} = require('./models/mongodbConnect')
 const json_fn = './cat_att_list.json';
 
 //TODO: Specify collection name to ensure consistency?
@@ -44,6 +45,7 @@ const importData = async () => {
     })
 }
 
-mg.connectMongoDB();
+
+connectMongoDB();
 importData()
 

@@ -1,0 +1,60 @@
+<div class="footer-wrapper">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-12 col-md-6 about-section">
+                <h6>Group name</h6>
+                <p class="text-justify">
+                <ul class="footer-links">
+                    <li>
+                        <h2>Author:</h2>
+                    </li>
+                    <li><a href="">Giang Trong Duong - s3926135</a></li>
+                    <li><a href="">Ngo Viet Anh - 3879954</a></li>
+                    <li><a href="">Tran Mai Nhung - s3879954</a></li>
+                    <li><a href="">Tran Nguyen Ha Khanh - s3877707</a></li>
+                </ul>
+                </p>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <h6 role="button" onclick="location.href = `<%= navigatePage('category-list')%>`;">Categories</h6>
+                <ul class="footer-links">
+                    <% categoryList.slice(0,5).forEach(category=> { %>
+                        <li><a href="<%= navigatePage(" category", category.id) %>">
+                                <%= category["category_name"] %>
+                            </a></li>
+                        <% }) %>
+                            <li><a style="text-decoration: underline;" href="<%= navigatePage(" category-list") %>">
+                                    See More
+                                </a></li>
+                </ul>
+            </div>
+
+
+            <div class="col-xs-6 col-md-3">
+                <h6>Others</h6>
+                <ul class="footer-links">
+                    <li><a href="<%= navigatePage(" about") %>">About Us</a></li>
+                    <li><a href="<%= navigatePage(" contact") %>">Contact Us</a></li>
+                    <li><a href="<%= navigatePage(" privacy") %>">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <hr>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
+                    <a href="#">Group 2 EEET2099 2023 Semester B</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -3,20 +3,6 @@ const {category} = require('./category');
 const {product} = require('./product');
 const ObjectId = mongoose.Types.ObjectId;
 
-const connectMongoDB = () => {
-    console.log('Connecting to MongoDB ...')
-    mongoose.connect(
-        process.env.MONGODB_URI,
-      {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
-    )
-    .then(() => {
-      console.log('MongoDB connection SUCCESS');
-    })
-    .catch((err) => {
-      console.error('MongoDB connection FAIL', err)
-    });
-}
-
 // create a category
 const saveCat = async(newID, newName, newAtt, newPAId) => {
     try {
@@ -323,4 +309,4 @@ const getAttributeGroups = async () => {
 
 
 
-module.exports = {connectMongoDB, saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, findCatsByAttribute, getAllChildren, getLowestLevelCats, addParentAtt, deleteCat, deleteCatAndChildren, updateCat, addAttributesToCat, getAttributeGroups }
+module.exports = {saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, findCatsByAttribute, getAllChildren, getLowestLevelCats, addParentAtt, deleteCat, deleteCatAndChildren, updateCat, addAttributesToCat, getAttributeGroups }

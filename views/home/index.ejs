@@ -1,0 +1,28 @@
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Database Group 2 Shop</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Database Group 2 Shop Homepage</p>
+        </div>
+    </div>
+</header>
+<!-- Js -->
+<section id="home-content-product" class="container mt-5 w-100">
+    <% categoryProductList.forEach(category=> { %>
+        <section class="row my-5 py-5">
+            <a role="button" class="fs-1 pb-3
+            fw-bolder line-clamp-1 text-center text-dark 
+            link-underline link-dark link-underline-opacity-0 link-underline-opacity-75-hover" 
+            href="<%= navigatePage("category", category.id) %>">
+                <%= category["category_name"] %>
+            </a>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3
+                gx-4 gx-lg-10 flex-grow-1 justify-content-center
+                overflow-x-scroll flex-nowrap scrollbar pb-5 px-0">
+                <% category.products.forEach(product=> { %>
+                    <%- include('../partials/product-card', {navigatePage, product, formatCurrencyVND}) %>
+                        <% }) %>
+            </div>
+        </section>
+        <% }) %>
+</section>

@@ -1,16 +1,23 @@
 const mongoose = require('mongoose');
 
-const attributeSchema = new mongoose.Schema(
+const categoryAttributeSchema = new mongoose.Schema(
     {
         aName:{
             type:mongoose.Schema.Types.String,
+            required: [true, "aName is required"]
         },
         aValue:{
             type:mongoose.Schema.Types.String,
-            enum: ['text', 'number', 'bool']
+            enum: {
+                values: ['text', 'number', 'bool'],
+                message: '{VALUE} is not supported'
+            },
+            required: [true, "aValue is required"],
+            default: 'text'
         },
         aRequired:{
-            type: mongoose.Schema.Types.Boolean
+            type: mongoose.Schema.Types.Boolean,
+            required: [true, "aRequired is required"]
         }
     },
     { _id : false }
@@ -20,9 +27,9 @@ const attributeSchema = new mongoose.Schema(
 const categorySchema = new mongoose.Schema({
     name:{
         type: String,
-        required: [true, "Name is required"]
+        required: [true, "Category name is required"]
     },
-    attribute:[attributeSchema],
+    attribute:[categoryAttributeSchema],
     parent_category:{
         type: mongoose.Types.ObjectId, 
         ref: 'Category',
@@ -30,6 +37,6 @@ const categorySchema = new mongoose.Schema({
 });
 
 
-const attribute = mongoose.model('Attribute', attributeSchema);
+const categoryAttribute = mongoose.model('Category Attribute', categoryAttributeSchema);
 const category = mongoose.model('Category', categorySchema);
-module.exports = {attribute,category};
+module.exports = {categoryAttribute, category};
