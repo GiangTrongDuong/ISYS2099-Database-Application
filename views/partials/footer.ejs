@@ -23,8 +23,8 @@
                 <h6 role="button" onclick="location.href = `<%= navigatePage('category-list')%>`;">Categories</h6>
                 <ul class="footer-links">
                     <% categoryList.slice(0,5).forEach(category=> { %>
-                        <li><a href="<%= navigatePage(" category", category.id) %>">
-                                <%= category["category_name"] %>
+                        <li><a href="<%= navigatePage(" category", category["_id"]) %>">
+                                <%= category["name"] %>
                             </a></li>
                         <% }) %>
                             <li><a style="text-decoration: underline;" href="<%= navigatePage(" category-list") %>">

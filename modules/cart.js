@@ -1,6 +1,6 @@
 const express = require('express');
 const { CART_ROUTE } = require('../constants');
-const { dummyCatList } = require('../dummyData');
+const Category = require('../models/mongodb/models/function_category');
 const db = require('../models/function_cart');
 const dorder = require('../models/function_order');
 const router = express.Router();
@@ -34,13 +34,14 @@ router.get(`${CART_ROUTE}`, async (req, res) => {
     const renderedCart = await db.getCartItem(id); //store info to display 
     const cartItems = renderedCart.items;
     const totalPrice = renderedCart.total;
+    const catlist = await Category.getAllCats();
     // console.log(cartItems);
     res.render("layout.ejs", {
       title: "Cart",
       bodyFile: `${root}/cart`,
       userSession: info,
       // TODO: add real data - categoryList
-      categoryList: dummyCatList,
+      categoryList: catlist,
       cartItems: cartItems,
       totalPrice: totalPrice,
     }

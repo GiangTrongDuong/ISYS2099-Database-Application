@@ -13,7 +13,8 @@ const { dummyCatList, dummyProductCatList } = require('./dummyData.js');
 require('dotenv').config();
 const app = express();
 const { default: mongoose } = require('mongoose');
-const {connectMongoDB} = require('./models/connection/mongodbConnect')
+const {connectMongoDB} = require('./models/connection/mongodbConnect');
+const Category = require('./models/mongodb/models/function_category');
 
 async function connect(){
   try{
@@ -80,12 +81,14 @@ app.use('/', seller)
 app.use('/', warehouse);
 
 // full route to Home page: /
-app.get("/", function (req, res) {
+app.get("/", async (req, res) =>{
+    const catlist = await Category.getAllCats();
+    // res.json(catlist);
     res.render('layout.ejs', {
         title: "Home",
         bodyFile: "home/index.ejs",
         // TODO: add real data
-        categoryList: dummyCatList,
+        categoryList: catlist,
         // TODO: add real data
         categoryProductList: dummyProductCatList,
         // res: res,

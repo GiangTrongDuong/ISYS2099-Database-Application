@@ -1,6 +1,6 @@
 const express = require('express'); 
 const router = express.Router(); 
-const { dummyCatList } = require('../dummyData.js');
+const Category = require('../models/mongodb/models/function_category');
 const { formatCurrencyVND, formatDate } = require('../helperFuncs.js');
 const { PRODUCT_ROUTE } = require('../constants.js');
 const db = require('../models/function_product.js');
@@ -24,12 +24,13 @@ router.use(cors({
 router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => { 
   try{
     // get product
+    const catlist = await Category.getAllCats();
     const product = await db.from_id(req.params['id']); //store info to display 
     res.render('layout.ejs', {
         title: "Product",
         bodyFile: `${root}/product`,
         // TODO: add real data - categoryList
-        categoryList: dummyCatList,
+        categoryList: catlist,
         userSession: req?.session?.user,
         product: product[0],
         formatDate: formatDate
@@ -49,7 +50,7 @@ router.get(`${PRODUCT_ROUTE}/cat/:categories`, async (req, res) => {
     //     title: "Product",
     //     bodyFile: `${root}/product`,
     //     // TODO: add real data - categoryList
-    //     categoryList: dummyCatList,
+    //     categoryList: catlist,
     //     product_list: product_list
     // });
   }
@@ -67,7 +68,7 @@ router.get(`${PRODUCT_ROUTE}/search/:words`, async (req, res) => {
     //     title: "Product",
     //     bodyFile: `${root}/product`,
     //     // TODO: add real data - categoryList
-    //     categoryList: dummyCatList,
+    //     categoryList: catlist,
     //     product_list: product_list
     // });
   }

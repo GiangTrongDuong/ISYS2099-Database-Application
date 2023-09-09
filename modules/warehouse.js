@@ -1,6 +1,6 @@
 const express = require('express');
 const { WAREHOUSE_ROUTE, WAREHOUSE_MOVE_PRODUCT } = require('../constants');
-const { dummyCatList } = require('../dummyData');
+const Category = require('../models/mongodb/models/function_category');
 const router = express.Router();
 const db = require('../models/function_warehouse');
 const isAuth = require('../models/isAuth');
@@ -26,11 +26,12 @@ router.use(bodyParser.json());
 // Show all warehouses for admin to check and navigate
 router.get(`${WAREHOUSE_ROUTE}/all`, isAuth.isAuth, async (req, res) => {
   try {
+    const catlist = await Category.getAllCats();
     const all_wh = await db.warehouse_show_all(); //store info to display 
     res.render('layout.ejs',{
       title: "Warehouse",
       bodyFile: `${root}/warehouse`,
-      categoryList: dummyCatList,
+      categoryList: catlist,
       userSession: req?.session?.user,
       warehouses: all_wh,
     })
@@ -89,12 +90,13 @@ router.post(`${WAREHOUSE_ROUTE}/create-warehouse`, async (req, res) => {
 router.get(`${WAREHOUSE_ROUTE}/view`, isAuth.isAuth, async (req, res) => { // tested: ok
   try{
     const single_wh = await db.read_warehouse(req.query.id); //store info to display 
+    const catlist = await Category.getAllCats();
     // res.json(single_wh);
     res.render("layout.ejs", {
       title: "My Cart",
       bodyFile: `${root}/warehouse_item`,
       // TODO: add real data - categoryList
-      categoryList: dummyCatList,
+      categoryList: catlist,
       userSession: req?.session?.user,
       // TODO: add real data
       warehousesitem: single_wh
@@ -178,6 +180,7 @@ router.post(`${WAREHOUSE_ROUTE}/move-warehouse`, isAuth.isAuth, async (req, res)
     const src_wid = req.body.wid;
     console.log(src_wid);
     console.log(pid);
+    const catlist = await Category.getAllCats();
     const warehouse_data = await db.check_storage(pid);
     // res.json(warehouse_data);
     res.render('layout.ejs', {
@@ -185,7 +188,7 @@ router.post(`${WAREHOUSE_ROUTE}/move-warehouse`, isAuth.isAuth, async (req, res)
       bodyFile: `${root}/warehouse_move`,
       warehouselist: warehouse_data,
       userSession: req?.session?.user,
-      categoryList: dummyCatList,
+      categoryList: catlist,
       itemID: pid,
       src_wid: src_wid,
     })

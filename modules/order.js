@@ -1,6 +1,6 @@
 const express = require('express');
 const { ORDER_ROUTE, ORDER_HISTORY_ROUTE } = require('../constants');
-const { dummyCatList } = require('../dummyData');
+const Category = require('../models/mongodb/models/function_category');
 const db = require('../models/function_order');
 const router = express.Router();
 
@@ -34,7 +34,7 @@ router.get(`${ORDER_ROUTE}/`, async (req, res) => {
   //   title: "Place Order",
   //   bodyFile: `${root}/place_order`,
   //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
+  //   categoryList: catlist,
   //   order: order
   // });
 });
@@ -46,11 +46,12 @@ router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test
     const info = req.session.user;
     const id = info.id;
     const orders = await db.get_orders(id);
+    const catlist = await Category.getAllCats();
     res.render("layout.ejs", {
       title: "Order History",
       bodyFile: `${root}/order_history`,
       // TODO: add real data - categoryList
-      categoryList: dummyCatList,
+      categoryList: catlist,
       orders: orders,
       id: id,
       userSession: req.session.user,
@@ -70,7 +71,7 @@ router.get(`/order_update`, async (req, res) => {
     //   title: "Order Detail",
     //   bodyFile: `${root}/order_detail`,
     //   // TODO: add real data - categoryList
-    //   categoryList: dummyCatList,
+    //   categoryList: catlist,
     //   order: order,
     //   order_id: req.params.id
     // });
@@ -89,7 +90,7 @@ router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
     //   title: "Order Detail",
     //   bodyFile: `${root}/order_detail`,
     //   // TODO: add real data - categoryList
-    //   categoryList: dummyCatList,
+    //   categoryList: catlist,
     //   order: order,
     //   order_id: req.params.id
     // });
