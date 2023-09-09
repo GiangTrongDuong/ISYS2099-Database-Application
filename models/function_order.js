@@ -96,6 +96,25 @@ async function place_order(uid, product_quantity_list){
     });
 }
 
+async function update_status(oid, newStatus){
+    // the trigger handles different cases of old status -> just need to update
+    return new Promise((resolve, reject) =>{
+        try{
+            database.query(`UPDATE order_details SET status = \'${newStatus}\' WHERE id = ${oid};`, (error, result) =>{
+                if (error) {
+                    console.log({"error with query update": error});
+                    reject(error); //custom error message set in trigger
+                }
+                resolve ({"success":"Order status updated successfully."});
+            });
+        }
+        catch (error){
+            console.log({"error updating order status":error});
+            reject(error);
+        }
+    });
+}
+
 async function simulate_orders(){
     try{
         var o1 = place_order(6, [{"pid":2, "quantity":2}]);
@@ -108,4 +127,4 @@ async function simulate_orders(){
     }
 }
 
-module.exports = { get_orders, get_order_item, place_order }
+module.exports = { get_orders, get_order_item, place_order, update_status, simulate_orders}

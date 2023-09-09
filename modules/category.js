@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Category = require('../models/category');
+const Category = require('../models/mongodb/models/category');
 const { CATEGORY_ROUTE } = require('../constants');
 const { dummyCatList, dummyClothingProducts } = require('../dummyData');
 const { formatCurrencyVND } = require('../helperFuncs');

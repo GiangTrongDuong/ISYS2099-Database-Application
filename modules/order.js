@@ -61,6 +61,25 @@ router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test
   }
 });
 
+// updating order works
+router.get(`/order_update`, async (req, res) => {
+  try{
+    const message = await db.update_status(106, "Accepted");
+    res.json(message);
+    // res.render("layout.ejs", {
+    //   title: "Order Detail",
+    //   bodyFile: `${root}/order_detail`,
+    //   // TODO: add real data - categoryList
+    //   categoryList: dummyCatList,
+    //   order: order,
+    //   order_id: req.params.id
+    // });
+  }
+  catch (err) {
+    res.send("Status update error: " + err);
+  }
+});
+
 // full route to order-detail page: /order/order/:id
 router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
   try{
@@ -79,6 +98,7 @@ router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
     res.send("Cannot fetch items from oid: " + req.params.oid);
   }
 });
+
 
 
 module.exports = router;
