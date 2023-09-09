@@ -23,7 +23,7 @@
         <td id="product-title"><a href="<%= navigatePage("product", product.id) %>" class="link-dark"><%= product.title %></a></td>
         <td id="product-price"><%= product.price %></td>
         <td id="product-description"><%= product.description %></td>
-        <td id="product-category"><%= product.created_at %></td>
+        <td id="product-category"><%= product.stock %></td>
         <td>
           <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#updateProductModal" onclick="showUpdateModal(this)">Update Item</button>
         </td>
