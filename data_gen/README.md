@@ -14,12 +14,15 @@ You may have to create a new database/schema.
 This ```.env``` file is in ```.gitignore```.
 
 # Run
-## Run add_data.js
-This will execute both sql files.
-
 Get dependencies ```node install```
+Get dependencies ```npm update```
 
+## Add data
+### Add MySQL Data
 Run via ```node .``` or ```node add_sql_data.js```
+### Add MongoDB Data
+- Add category: ```npm run importdata:category_mongodb```
+- Add product: ```npm run importdata:product_mongodb```
 
 ## Run SQL files
 You can also copy the contents of the files to your MySQL console and run these chunks.

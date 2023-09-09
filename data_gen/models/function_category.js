@@ -14,8 +14,6 @@ const saveCat = async(newID, newName, newAtt, newPAId) => {
 
         // add attributes
         saved = await addAttributesToCat(saved, newAtt);
-        // // add parent's attributes
-        // saved = await addParentAtt(newCat._id);
         console.log("=== Category " + saved.name + " saved to DB.");
         return saved;
     }
@@ -248,8 +246,8 @@ function isEmpty(o){
 // check if a cat itself has any product
 const hasProduct = async(id) => {
     try {
-        const hasProduct = await product.exists({category: id});
-        return hasProduct;
+        const catHasProduct = await product.exists({category: id});
+        return catHasProduct;
     } catch (err) {
         console.log(err)
     }
@@ -258,9 +256,9 @@ const hasProduct = async(id) => {
 // check if a category (& its children_cat) is associated with any product
 const isNotAssociatedWithProduct = async(id) => {
     try {
+        let catHasProduct = await hasProduct(id);
         // if the category has product -> is associated
-        if (hasProduct(id)) return false
-
+        if (catHasProduct) return false;
         // if the category has no product -> check if its children is
         const children = getAllChildren(id);
         if (!isEmpty(children.children_categories)) {
@@ -289,12 +287,9 @@ const updateCat = async (id, newName, newAtts, newPAId) => {
             if (newPAId !== undefined && cat.parent_category != newPAId) {
                 cat.parent_category = newPAId;
             }
+            cat = await cat.save();
         }
 
-        cat = await cat.save();
-        if (cat.parent_category) {
-            cat = await addParentAtt(id);
-        }
         return cat;
     } catch (error) {
         console.log(error)
@@ -319,6 +314,10 @@ const addAttributesToCat = async (cat, newAttributes) => {
     try {
         // if attributes list is not empty
         if (!isEmpty(newAttributes)) {
+            for (let i = 0; i< newAttributes.length; i++) {
+                let value = newAttributes[i].aName;
+                newAttributes[i].aName = value[0].toUpperCase() + value.substring(1).toLowerCase(); 
+            }
             const updated = await category.findOneAndUpdate(
                     {_id : cat._id},
                     { $addToSet: { attribute: { $each: newAttributes }}},

@@ -12,7 +12,7 @@
   "main": "add_sql_data.js",
   "scripts": {
     "start": "node add_data.js",
-    "importdata:mongodb": "node add_to_mongo.js",
+    "importdata:category_mongodb": "node add_category_mongo.js",
     "importdata:product_mongodb": "node add_product_mongo.js",
     "importdata:mysql": "node add_sql_data.js",
     "test:mongo": "node test_mongo/test_mongo.js"

@@ -1,7 +1,7 @@
 require('dotenv').config(); 
 const mg_product = require('./models/function_product_mongodb');
 const {connectMongoDB} = require('./models/mongodbConnect')
-const product_json_fn = './product_mongo_list.json';
+const product_json_fn = './mongodb_data/product_mongo_list.json';
 const fs = require('fs');
 
 const importProduct = async () => {
