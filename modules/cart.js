@@ -65,6 +65,7 @@ router.post(`${CART_ROUTE}/add-cart/:pid`, async (req, res) => {
   }
 });
 
+// delete product from cart
 router.post(`${CART_ROUTE}/delete-cart/:pid`, async (req, res) => {
   try {
     const info = req.session.user;
@@ -78,6 +79,7 @@ router.post(`${CART_ROUTE}/delete-cart/:pid`, async (req, res) => {
   }
 });
 
+// change quantity of product in cart
 router.post(`${CART_ROUTE}/change-cart/:pid`, async (req, res) => {
   try {
     const info = req.session.user;
@@ -122,9 +124,10 @@ router.post(`${CART_ROUTE}/decrease-cart/:pid`, async (req, res) => {
   }
 });
 
+// place order with the items in the cart
 router.post(`${CART_ROUTE}/place-order`, async (req, res) => {
   try{
-
+    // Call place order with current cart items
   }catch (err){
     res.send(err);
   }
