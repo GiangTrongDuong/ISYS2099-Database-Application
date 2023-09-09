@@ -139,27 +139,30 @@ async function createProduct(title, seller_id, price, description, category, len
                 database.query(`
                 INSERT INTO product (title, seller_id, price, description, category, length, width, height, image, remaining, created_at, updated_at)
                 VALUE ("${title}","${seller_id}","${price}","${description}","${category}",${length},${width}, ${height},"${image}","${remaining}",\'${getCurrentTimeString()}\',\'${getCurrentTimeString()}\');`,
-                (err, result) =>{
+                async (err, result) =>{
                     if(err) reject (err);
-                    else resolve(result);
+                    else {
+                        const message = await insert_to_warehouse(result.insertId, remaining);
+                        resolve(message);
+                    }
                 }) 
             }
         })
     })
 };
 
-// Call Procedure product_to_wh to insert a brand new product to storage
+// Called when insert new product, or increase existing product's stock
 async function insert_to_warehouse(pid, quantity) {
     return new Promise((resolve, reject) => {
         try {
             database.query(`CALL PROCEDURE(${pid}, ${quantity});`, function (error1, result1) {
                 if (error1) reject({ "error": "Error from procedure: " + error1 });
                 // var msg = result1[0].result;
-                // Show the total number of products inserted
+                // Show the total number of products currently in warehouses
                 database.query(`SELECT SUM(quantity) as ct FROM warehouse_item 
                 WHERE product_id = ${pid};`, function (error2, result2) {
                     if (error2) console.log("Error getting total inserted: " + error2);
-                    resolve({ "success": `Inserted ${result2[0].ct} of product with id ${pid} into warehouses.` });
+                    resolve({ "success": `Product with id ${pid} now have ${result2[0].ct} items in warehouses.` });
                 });
             });
         }
