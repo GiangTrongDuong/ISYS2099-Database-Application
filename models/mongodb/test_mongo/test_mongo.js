@@ -14,6 +14,55 @@ app.use(express.urlencoded({ extended: true }))
 
 connectMongoDB()
 
+
+// get attribute and all values group by attribute's name
+app.get("/attribute_group", async (req, res) => {
+  try {
+    const result = await mg_product.getAttributeGroups();
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
+//create new category
+app.post("/product", async (req, res) => {
+  try {
+    const {mysql_id, category, attribute} = req.body;
+    const result = await mg_product.saveProduct(mysql_id, category, attribute);
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
+//update a category
+app.post("/product/update", async (req, res) => {
+  try {
+    const {mysql_id, category, attribute} = req.body;
+    const result = await mg_product.updateProduct(mysql_id, category, attribute);
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
+//get products by attribute name and value
+//return list of products
+app.get("/product/filter_by_attribute", async (req, res) => {
+  try {
+    const {aName, value} = req.body;
+    const result = await mg_product.findProductsByAttribute(aName, value);
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
 //get all products
 app.get("/product", async (req, res) => {
   try {
@@ -24,6 +73,21 @@ app.get("/product", async (req, res) => {
     sendResponse(res, 500, `Error ${err}`);
   }
 });
+
+
+//delete a product by mysql id
+app.delete("/product/:mysqlid", async (req, res) => {
+  try {
+    const mysqlid = req.params.mysqlid;
+    const result = await mg_product.deleteProductByMysqlId(mysqlid);
+    if (result) sendResponse(res, 200, `Deleted product`);
+    else sendResponse(res, 500, `Delete failed`);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
 
 //get all of children (and below) of a category
 app.get("/category/get-all-children/:id", async (req, res) => {  
@@ -59,6 +123,18 @@ app.post("/category", async (req, res) => {
   try {
     const {_id, name, attribute, parent_category} = req.body;
     const result = await mg_category.saveCat(_id, name, attribute, parent_category);
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
+// this route is to update a category (only when that category & its children dont have any product)
+app.post("/category/update", async (req, res) => {
+  try {
+    const {_id, name, attribute, parent_category} = req.body;
+    const result = await mg_category.updateCat(id, name, attribute, parent_category)
     sendResponse(res, 200, `ok`, result);
   } catch (err) {
     console.log(err)
@@ -117,29 +193,6 @@ app.delete("/category/delete-cat-only/:id", async (req, res) => {
   }
 });
 
-
-// this route is to update a category (only when that category & its children dont have any product)
-app.post("/category/update/:id", async (req, res) => {
-  try {
-    const id = req.params.id
-    const {name, attribute, parent_category} = req.body;
-    const result = await mg_category.updateCat(id, name, attribute, parent_category)
-    sendResponse(res, 200, `ok`, result);
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
-
-app.get("/product/attribute", async (req, res) => {
-  try {
-    const result = await mg_product.getAttributeGroups();
-    sendResponse(res, 200, `ok`, result);
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

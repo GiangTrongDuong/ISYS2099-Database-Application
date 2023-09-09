@@ -8,6 +8,18 @@ const dropAll = async () =>{
   await product.deleteMany({});
 }
 
+const deleteProductByMysqlId = async(mysqlid) => {
+  try {
+    const delelted = await product.findOneAndDelete({mysql_id: mysqlid});
+    if (delelted == null) throw new Error(`No product with id = ${mysqlid}`)
+    return delelted;
+  }
+  catch (err) {
+    throw(err)
+  }
+
+}
+
 /* create a product
   - input: mysqlid, categoryid, attributes
   - attributes is a array of pair {aName, value} to set
@@ -26,6 +38,8 @@ const dropAll = async () =>{
 */
 const saveProduct = async(mysqlid, categoryid, attributes) => {
   try {
+      let exist = await mysqlIDExist(mysqlid);
+      if (exist) throw new Error("Product already exists");
       var newProduct = new product;
       newProduct.mysql_id = mysqlid;
       newProduct.category = ObjectId(categoryid);
@@ -37,7 +51,10 @@ const saveProduct = async(mysqlid, categoryid, attributes) => {
       return saved;
   }
   catch (error) {
-    console.log("Product save error: " + error);
+    if (error.name === "ValidationError") {
+      await product.findOneAndDelete({_id: newProduct._id})
+      throw new Error("Product is not created because of validation failure. Suggestiton: check if product's attribute is valid.")
+    }
     throw(error)
   }
 }
@@ -56,7 +73,9 @@ const updateProduct = async(mysqlid, categoryid, attributes) => {
       return saved;
   }
   catch (error) {
-    console.log("Product update error: " + error);
+    if (error.name === "ValidationError") {
+      throw new Error("Product is not updated because of validation failure. Suggestiton: check if product's attribute is valid.")
+    }
     throw(error)
   }
 }
@@ -68,7 +87,7 @@ const getAllProducts = async() => {
     return all
   }
   catch (err) {
-    console.error('Get all products failed: ', err)
+    throw(err)
   }
 }
 
@@ -80,7 +99,7 @@ const findProductsByAttribute = async(aName, value) => {
       return products
   }
   catch (err) {
-    console.log("Find by attribute error: " + err);
+    throw(err)
   }
 }
 
@@ -143,6 +162,7 @@ const addAttributesToProduct = async (myProduct, newAttributes) => {
       return myProduct
   } catch (err) {
       console.log(err)
+      throw(err)
   }
 }
 
@@ -207,7 +227,13 @@ const setAttributes = async (productid, attribute_name_value_list) => {
 
   } catch (err) {
     console.log(err)
+    throw(err)
   }
+}
+
+const mysqlIDExist = async (mysqlid) => {
+  const exist = await product.exists({mysql_id: mysqlid});
+  return exist;
 }
 
 
@@ -216,4 +242,4 @@ function isEmpty(o){
   return (o === undefined || o == null || o == "" || o.length ==0);
 }
 
-module.exports = {saveProduct, getAllProducts, dropAll, findProductsByAttribute, getAttributeGroups, updateProduct}
+module.exports = {deleteProductByMysqlId, saveProduct, getAllProducts, dropAll, findProductsByAttribute, getAttributeGroups, updateProduct}
