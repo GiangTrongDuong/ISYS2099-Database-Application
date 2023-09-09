@@ -53,11 +53,10 @@ async function from_category (cat_list, limit) {
 async function from_seller (query_seller_id, limit) {
     return new Promise ((resolve, reject) => {
         if (limit){
-            database.query(`SELECT product.*, user.user_name AS seller_username, user.display_name AS seller_display_name
-                FROM product
-                INNER JOIN user ON product.seller_id = user.id 
-                WHERE seller_id = ${query_seller_id}
-                ORDER BY created_at DESC
+            database.query(`SELECT p.*, u.user_name AS seller_username, u.display_name AS seller_display_name
+            FROM (SELECT * FROM product WHERE seller_id = ${query_seller_id}) AS p 
+            JOIN (SELECT id, user_name, display_name FROM user) AS u WHERE p.seller_id = u.id
+            ORDER BY created_at DESC;
                 LIMIT ${limit} ;`, (error, results) => {
                     if (error) reject(error);
                     else resolve({
@@ -68,11 +67,10 @@ async function from_seller (query_seller_id, limit) {
                 });
         }
         else{
-            database.query(`SELECT product.*, user.user_name AS seller_username, user.display_name AS seller_display_name
-                FROM product
-                INNER JOIN user ON product.seller_id = user.id 
-                WHERE seller_id = ${query_seller_id}
-                ORDER BY created_at DESC;`, (error, results) => {
+            database.query(`SELECT p.*, u.user_name AS seller_username, u.display_name AS seller_display_name
+            FROM (SELECT * FROM product WHERE seller_id = ${query_seller_id}) AS p 
+            JOIN (SELECT id, user_name, display_name FROM user) AS u WHERE p.seller_id = u.id
+            ORDER BY created_at DESC;`, (error, results) => {
                     if (error) reject(error);
                     else resolve({
                         sellerName: results[0].seller_display_name,
@@ -144,7 +142,7 @@ async function updateDetails(pid, title, price, description){
 // add a new product; stock is handled by procedure
 async function createProduct(title, seller_id, price, description, category, length, width, height, image, remaining){
     return new Promise((resolve, reject)=> {
-        database.query(`SELECt * FROM product WHERE title = "${title}"`, (err, qresult) => {
+        database.query(`SELECT id FROM product WHERE title = "${title}"`, (err, qresult) => {
             if (qresult.length >= 1){
                 resolve("Taken product title");
             } else {
