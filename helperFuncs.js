@@ -116,6 +116,10 @@ function getCurrentTimeString() {
     return (year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
 }
 
+const sendResponse = (res, statusCode, msg, data) => {
+    res.status(statusCode).json({status: statusCode, message: msg, data: data ? data : null});
+  }
+  
 module.exports = {
     // createElement,
     navigatePage,
@@ -123,5 +127,6 @@ module.exports = {
     formatCurrencyVND,
     formatDate,
     parenthesesString,
-    getCurrentTimeString
+    getCurrentTimeString,
+    sendResponse
 }
