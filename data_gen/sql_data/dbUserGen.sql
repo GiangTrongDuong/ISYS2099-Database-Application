@@ -27,26 +27,43 @@ GRANT SELECT, INSERT, UPDATE
 ON testg2.user
 TO 'customerg2'@'localhost';
 
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON testg2.cart_details
+TO 'customerg2'@'localhost';
+
 GRANT SELECT, INSERT, UPDATE
-ON testg2.user
+ON testg2.order_details
+TO 'customerg2'@'localhost';
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON testg2.order_item
 TO 'customerg2'@'localhost';
 
 -- Seller
 CREATE USER 'sellerg2'@'localhost'
 IDENTIFIED BY 'sellerpass';
 
-GRANT SELECT, INSERT, UPDATE
+GRANT SELECT, INSERT, UPDATE, DELETE
 ON testg2.product
 TO 'sellerg2'@'localhost';
 
-GRANT INSERT, UPDATE
+    -- insert product into warehouse -> change warehouse storage
+GRANT UPDATE
 ON testg2.warehouse
+TO 'sellerg2'@'localhost';
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON testg2.warehouse_item
 TO 'sellerg2'@'localhost';
 
 -- Warehouse
 CREATE USER 'warehouseg2'@'localhost'
 IDENTIFIED BY 'warepass';
 
-GRANT DELETE
+GRANT SELECT, INSERT, UPDATE, DELETE
 ON testg2.warehouse
+TO 'warehouseg2'@'localhost';
+
+GRANT SELECT
+ON testg2.warehouse_item
 TO 'warehouseg2'@'localhost';
