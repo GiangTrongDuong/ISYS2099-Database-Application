@@ -142,8 +142,12 @@ async function createProduct(title, seller_id, price, description, category, len
                 async (err, result) =>{
                     if(err) reject (err);
                     else {
-                        const message = await insert_to_warehouse(result.insertId, remaining);
-                        resolve(message);
+                        try{
+                            const message = await insert_to_warehouse(result.insertId, remaining);
+                            resolve(message);
+                        }catch(err){
+                            resolve(err);
+                        }
                     }
                 }) 
             }
