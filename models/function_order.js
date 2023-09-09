@@ -1,4 +1,3 @@
-const { getCurrentTimeString } = require('../helperFuncs');
 const {getPrice} = require('./function_product')
 const database = require('./connection/dbSqlConnect');
 
@@ -29,7 +28,8 @@ async function get_order_item (oid) {
     });
 }
 
-// move place_order to function_cart
+// place order moved to cart to reuse functions
+
 
 // change status of order
 async function update_status(oid, newStatus){

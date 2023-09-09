@@ -22,23 +22,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 //end-of session  
 
-// full route to order page: /order/order
-//TODO: turn this into POST
-router.get(`${ORDER_ROUTE}/`, async (req, res) => {
-  // const order = JSON.parse(req.params.product_quantity_list); //store info to display 
-  const order = [{"pid": 1, "quantity": 10}, {"pid": 2, "quantity":4}];
-  const message = await db.place_order(1,order);
-  res.json(message);
-  console.log(message);
-  // res.render("layout.ejs", {
-  //   title: "Place Order",
-  //   bodyFile: `${root}/place_order`,
-  //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
-  //   order: order
-  // });
-});
-
 // full route to order-history page: /order/history
 // router.get(`${ORDER_HISTORY_ROUTE}`, function (req, res) { //og
 router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test

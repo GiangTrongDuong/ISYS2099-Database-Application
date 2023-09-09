@@ -125,11 +125,23 @@ router.post(`${CART_ROUTE}/decrease-cart/:pid`, async (req, res) => {
 });
 
 // place order with the items in the cart
-router.post(`${CART_ROUTE}/place-order`, async (req, res) => {
+router.get(`${CART_ROUTE}/place-order`, async (req, res) => {
+  // const order = JSON.parse(req.params.product_quantity_list); //store info to display 
   try{
-    // Call place order with current cart items
-  }catch (err){
-    res.send(err);
+    const message = await db.place_order(req.session.user.id);
+    res.json(message);
+    console.log(message);
   }
-})
+  catch(err){
+    res.json(err);
+  }
+  
+  // res.render("layout.ejs", {
+  //   title: "Place Order",
+  //   bodyFile: `${root}/place_order`,
+  //   // TODO: add real data - categoryList
+  //   categoryList: dummyCatList,
+  //   order: order
+  // });
+});
 module.exports = router;
