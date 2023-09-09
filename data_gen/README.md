@@ -5,7 +5,7 @@ No one is reading yer commit messages (sorry!)
 Find or create a ```.env``` file, copy the following, and insert your own info:
 ```
 HOST=''
-USER=''
+DB_USER=''
 PASSWORD=''
 DATABASE=''
 ```
