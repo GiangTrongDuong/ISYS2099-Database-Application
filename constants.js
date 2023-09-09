@@ -19,7 +19,6 @@ const MY_ACCOUNT_ROUTE = '/my-account';
 
 const HOME_ROUTE = '/';
 
-const CONNECTED_URI = "mongodb+srv://eeet2099group2:eeet2099Pass@databaseapplicationproj.fexqmnq.mongodb.net/?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 3000;
 
 const MEMBERS = [
@@ -62,7 +61,6 @@ module.exports = {
     LOGIN_ROUTE,
     SIGNUP_ROUTE,
     MY_ACCOUNT_ROUTE,
-    CONNECTED_URI,
     PORT,
     MEMBERS
 }

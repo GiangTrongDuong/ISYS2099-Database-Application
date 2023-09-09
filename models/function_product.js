@@ -12,6 +12,16 @@ async function from_id (pid) {
     })
 };
 
+async function all () {
+    return new Promise ((resolve, reject) => {
+        database.query(`SELECT *
+        FROM product;`, (error, results) => {
+            if (error) reject(error);
+            else resolve(results);
+        })
+    })
+};
+
 // limit is optional, order by created_at; return list of product 
 async function from_category (cat_list, limit) {
     //catlist: Bed,Lamp,Computer
@@ -188,5 +198,5 @@ async function deleteProduct(pid){
     })
 }
 module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, 
-    updateDetails, createProduct, insert_to_warehouse, deleteProduct}
+    updateDetails, createProduct, insert_to_warehouse, deleteProduct, all}
 

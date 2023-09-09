@@ -2,7 +2,7 @@
   <!-- Product section-->
   <section id="product-content-product" class="py-5 mb-5">
     <article class="row gx-4 gx-lg-5 align-items-center">
-      <div class="col-md-6 h-sz-96">
+      <div class="col-md-6 h-sz-96 align-self-start mt-5">
         <img class="h-100 w-100 obj-center-cover mb-5 mb-md-0 rounded-1" src="<%= product.image %>" alt="<%= product.title %>" />
       </div>
       <div class="col-md-6">
@@ -29,6 +29,13 @@
           Product Description: <br />
           <span class="line-clamp-3"><%= product.description %></span>
         </p>
+        <!-- Attributes section -->
+        <ul class="lead">
+          <% product.attribute.forEach(attr => { %>
+          <li><strong><%= attr.aName %>:</strong> <%= attr.value %></li>
+          <% }) %>
+        </ul>
+
         <p class="lead">
           Product Dimension: <br />
           &emsp; - &ensp; Width: <%= product.width %><br />
