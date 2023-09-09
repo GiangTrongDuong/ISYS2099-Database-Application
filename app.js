@@ -13,6 +13,7 @@ const { dummyCatList, dummyProductCatList } = require('./dummyData.js');
 require('dotenv').config();
 const app = express();
 const { default: mongoose } = require('mongoose');
+const {connectMongoDB} = require('./models/connection/mongodbConnect')
 
 async function connect(){
   try{
@@ -24,6 +25,7 @@ async function connect(){
 };
 
 connect();
+connectMongoDB()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
