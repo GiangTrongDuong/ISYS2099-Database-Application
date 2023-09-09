@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 
 connectMongoDB()
 
-//get all categories
+//get all products
 app.get("/product", async (req, res) => {
   try {
     const result = await mg_product.getAllProducts();
@@ -89,6 +89,7 @@ app.get("/category/lowestlevel", async (req, res) => {
 });
 
 //delete a category and all of its children (and below)
+// (only when that category & its children dont have any product)
 app.delete("/category/delete-cat-and-children/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -103,6 +104,7 @@ app.delete("/category/delete-cat-and-children/:id", async (req, res) => {
 });
 
 //delete a category, then set parent_category of its direct children to null
+// (only when that category & its children dont have any product)
 app.delete("/category/delete-cat-only/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -116,7 +118,7 @@ app.delete("/category/delete-cat-only/:id", async (req, res) => {
 });
 
 
-// this route is to update category (now only available to update name & parent_cat)
+// this route is to update a category (only when that category & its children dont have any product)
 app.post("/category/update/:id", async (req, res) => {
   try {
     const id = req.params.id
@@ -128,35 +130,6 @@ app.post("/category/update/:id", async (req, res) => {
     sendResponse(res, 500, `Error ${err}`);
   }
 });
-
-/*  - add attributes to a category - NOT AVAILABLE YET
-    - example for body:
-{
-  "attributes": [
-      {
-          "aName": "Test",
-          "aValue": "Test add",
-          "aRequired": false
-      },
-      {
-          "aName": "Test 2",
-          "aValue": "Test add 2",
-          "aRequired": false
-      },
-  ]
-}
-*/
-app.post("/category/update/add-attributes/:id", async (req, res) => {
-  try {
-    const {attributes} = req.body;
-    const result = await mg_category.addAttributesToCat(req.params.id, attributes);
-    sendResponse(res, 200, `ok`, result);
-  } catch (err) {
-    console.log(err)
-    sendResponse(res, 500, `Error ${err}`);
-  }
-});
-
 
 app.get("/product/attribute", async (req, res) => {
   try {
