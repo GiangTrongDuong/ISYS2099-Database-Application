@@ -23,7 +23,8 @@ router.use(cors({
 }));
 
 // full route to login page: /login
-router.get(`${LOGIN_ROUTE}`, function (req, res) {
+router.get(`${LOGIN_ROUTE}`, async function (req, res) {
+  const catlist = await Category.getAllCats();
   res.render("layout.ejs", {
     title: "Login",
     bodyFile: `${root}/login`,
