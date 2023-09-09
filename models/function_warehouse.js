@@ -125,27 +125,6 @@ async function move_product_to_wh(pid, quantity, src_wid, dst_wid) {
     });
 }
 
-// Call Procedure product_to_wh to insert a brand new product to storage
-async function insert_to_warehouse(pid, quantity) {
-    return new Promise((resolve, reject) => {
-        try {
-            database.query(`CALL PROCEDURE(${pid}, ${quantity});`, function (error1, result1) {
-                if (error1) reject({ "error": "Error from procedure: " + error1 });
-                // var msg = result1[0].result;
-                // Show the total number of products inserted
-                database.query(`SELECT SUM(quantity) as ct FROM warehouse_item 
-                WHERE product_id = ${pid};`, function (error2, result2) {
-                    if (error2) console.log("Error getting total inserted: " + error2);
-                    resolve({ "success": `Inserted ${result2[0].ct} of product with id ${pid} into warehouses.` });
-                });
-            });
-        }
-        catch (error3) {
-            reject({ "error": "Error running procedure: " + error3 });
-        }
-    });
-}
-
 async function check_storage(pid){
     return new Promise ((resolve, reject) => {
         try {
@@ -164,5 +143,5 @@ async function check_storage(pid){
 
 module.exports = {
     warehouse_show_all, create_warehouse, read_warehouse, update_warehouse, delete_warehouse,
-    get_warehouse_to_store, move_product_to_wh, insert_to_warehouse, warehouse_show_admin, check_storage
+    get_warehouse_to_store, move_product_to_wh, check_storage
 }

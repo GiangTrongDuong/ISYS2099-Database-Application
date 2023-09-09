@@ -148,6 +148,27 @@ async function createProduct(title, seller_id, price, description, category, len
     })
 };
 
+// Call Procedure product_to_wh to insert a brand new product to storage
+async function insert_to_warehouse(pid, quantity) {
+    return new Promise((resolve, reject) => {
+        try {
+            database.query(`CALL PROCEDURE(${pid}, ${quantity});`, function (error1, result1) {
+                if (error1) reject({ "error": "Error from procedure: " + error1 });
+                // var msg = result1[0].result;
+                // Show the total number of products inserted
+                database.query(`SELECT SUM(quantity) as ct FROM warehouse_item 
+                WHERE product_id = ${pid};`, function (error2, result2) {
+                    if (error2) console.log("Error getting total inserted: " + error2);
+                    resolve({ "success": `Inserted ${result2[0].ct} of product with id ${pid} into warehouses.` });
+                });
+            });
+        }
+        catch (error3) {
+            reject({ "error": "Error running procedure: " + error3 });
+        }
+    });
+}
+
 async function deleteProduct(pid){
     return new Promise((resolve, reject) => {
         database.query(`DELETE FROM product WHERE id = ${pid};`,(err, result) => {
@@ -159,5 +180,6 @@ async function deleteProduct(pid){
         })
     })
 }
-module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, updateDetails, createProduct, deleteProduct}
+module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, 
+    updateDetails, createProduct, insert_to_warehouse, deleteProduct}
 
