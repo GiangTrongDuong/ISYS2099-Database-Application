@@ -12,7 +12,7 @@
                         <h2>Author:</h2>
                     </li>
                     <li><a href="">Giang Trong Duong - s3926135</a></li>
-                    <li><a href="">Ngo Viet Anh - 3879954</a></li>
+                    <li><a href="">Ngo Viet Anh - 3928859</a></li>
                     <li><a href="">Tran Mai Nhung - s3879954</a></li>
                     <li><a href="">Tran Nguyen Ha Khanh - s3877707</a></li>
                 </ul>
@@ -23,8 +23,8 @@
                 <h6 role="button" onclick="location.href = `<%= navigatePage('category-list')%>`;">Categories</h6>
                 <ul class="footer-links">
                     <% categoryList.slice(0,5).forEach(category=> { %>
-                        <li><a href="<%= navigatePage(" category", category.id) %>">
-                                <%= category["category_name"] %>
+                        <li><a href="<%= navigatePage(" category", category["_id"]) %>">
+                                <%= category["name"] %>
                             </a></li>
                         <% }) %>
                             <li><a style="text-decoration: underline;" href="<%= navigatePage(" category-list") %>">

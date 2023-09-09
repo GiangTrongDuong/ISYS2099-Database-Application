@@ -122,7 +122,7 @@ async function getVolume(pid){
 
 async function updateDetails(pid, title, price, description){
     return new Promise((resolve, reject) => {
-        database.query(`UPDATE product SET title = "${title}", price = ${price}, description = "${description}", updated_at = \'${getCurrentTimeString()}'\ 
+        database.query(`UPDATE product SET title = "${title}", price = ${price}, description = "${description}", updated_at = \'${getCurrentTimeString()}\' 
         WHERE id = ${pid};`, (err, result) => {
             if(err) reject (err);
             else resolve(result);
@@ -138,15 +138,39 @@ async function createProduct(title, seller_id, price, description, category, len
             } else {
                 database.query(`
                 INSERT INTO product (title, seller_id, price, description, category, length, width, height, image, remaining, created_at, updated_at)
-                VALUE ("${title}","${seller_id}","${price}","${description}","${category}",${length},${width}, ${height},"${image}","${remaining}",\'${getCurrentTimeString()}'\,\'${getCurrentTimeString()}'\);`,
-                (err, result) =>{
+                VALUE ("${title}","${seller_id}","${price}","${description}","${category}",${length},${width}, ${height},"${image}","${remaining}",\'${getCurrentTimeString()}\',\'${getCurrentTimeString()}\');`,
+                async (err, result) =>{
                     if(err) reject (err);
-                    else resolve(result);
+                    else {
+                        const message = await insert_to_warehouse(result.insertId, remaining);
+                        resolve(message);
+                    }
                 }) 
             }
         })
     })
 };
+
+// Called when insert new product, or increase existing product's stock
+async function insert_to_warehouse(pid, quantity) {
+    return new Promise((resolve, reject) => {
+        try {
+            database.query(`CALL PROCEDURE(${pid}, ${quantity});`, function (error1, result1) {
+                if (error1) reject({ "error": "Error from procedure: " + error1 });
+                // var msg = result1[0].result;
+                // Show the total number of products currently in warehouses
+                database.query(`SELECT SUM(quantity) as ct FROM warehouse_item 
+                WHERE product_id = ${pid};`, function (error2, result2) {
+                    if (error2) console.log("Error getting total inserted: " + error2);
+                    resolve({ "success": `Product with id ${pid} now have ${result2[0].ct} items in warehouses.` });
+                });
+            });
+        }
+        catch (error3) {
+            reject({ "error": "Error running procedure: " + error3 });
+        }
+    });
+}
 
 async function deleteProduct(pid){
     return new Promise((resolve, reject) => {
@@ -159,5 +183,6 @@ async function deleteProduct(pid){
         })
     })
 }
-module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, updateDetails, createProduct, deleteProduct}
+module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, 
+    updateDetails, createProduct, insert_to_warehouse, deleteProduct}
 

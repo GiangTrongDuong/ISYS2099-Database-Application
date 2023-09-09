@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { dummyCatList } = require('../dummyData.js');
+const Category = require('../models/mongodb/models/function_category');
 const { formatCurrencyVND } = require('../helperFuncs.js');
 const productDb = require('../models/function_product.js');
 const { SELLER_ROUTE, MY_ACCOUNT_ROUTE } = require('../constants.js');
@@ -15,11 +15,12 @@ router.get(`${SELLER_ROUTE}/:seller_id`, async (req, res) => {
         const sellerDisplayName = renderedSellerProduct.sellerDisplayName;
         const sellerUsername = renderedSellerProduct.sellerUsername;
         const productList = renderedSellerProduct.productList;
+        const catlist = await Category.getAllCats();
         res.render('layout.ejs', {
             title: "Seller",
             bodyFile: `${root}/seller`,
             // TODO: add real data - categoryList
-            categoryList: dummyCatList,
+            categoryList: catlist,
             userSession: req?.session?.user,
             productList: productList,
             sellerDisplayName: sellerDisplayName,
@@ -37,11 +38,12 @@ router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => 
         const info = req?.session?.user;
         const id = info.id;
         let renderedSellerProduct = await productDb.from_seller(id);
+        const catlist = await Category.getAllCats();
         const productList = renderedSellerProduct.productList;
         res.render('layout.ejs',{
             title: "My Product List",
             bodyFile: `${root}/seller_product`,
-            categoryList: dummyCatList,
+            categoryList: catlist,
             userSession: req?.session?.user,
             productList: productList
         })

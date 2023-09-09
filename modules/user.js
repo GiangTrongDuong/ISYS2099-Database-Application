@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const { LOGIN_ROUTE, SIGNUP_ROUTE, MY_ACCOUNT_ROUTE } = require('../constants');
 const database = require('../models/connection/dbSqlConnect');
-const { dummyCatList } = require('../dummyData');
+const Category = require('../models/mongodb/models/function_category');
 const router = express.Router();
 const isAuth = require("../models/isAuth");
 const insertDB = require('../models/function_user');
@@ -28,7 +28,7 @@ router.get(`${LOGIN_ROUTE}`, function (req, res) {
     title: "Login",
     bodyFile: `${root}/login`,
     // TODO: add real data - categoryList
-    categoryList: dummyCatList,
+    categoryList: catlist,
     // req,
     userSession: req?.session?.user
   })
@@ -58,12 +58,13 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
 })
 
 // full route to signup page: /signup
-router.get(`${SIGNUP_ROUTE}`, function (req, res) {
+router.get(`${SIGNUP_ROUTE}`, async (req, res) => {
+  const catlist = await Category.getAllCats();
   res.render("layout.ejs", {
     title: "Signup",
     bodyFile: `${root}/signup`,
     // TODO: add real data - categoryList
-    categoryList: dummyCatList,
+    categoryList: catlist,
     // req: req,
     userSession: req?.session?.user
   });
@@ -105,12 +106,13 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
     const role = userInfo.role;
     database.query(`SELECT * 
    FROM user 
-   WHERE user_name = "${userName}"`, (error, result) => {
+   WHERE user_name = "${userName}"`, async (error, result) => {
       if (result) {
         const user_name = result[0].user_name;
         const display_name = result[0].display_name;
         const details = result[0].details;
         const id = result[0].id;
+        const catlist = await Category.getAllCats();
         //req will be changed based on Nhung proposal
 
         if (role == "Customer") {
@@ -118,7 +120,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
             title: "My Account",
             bodyFile: `${root}/my_account`,
             // TODO: add real data - categoryList
-            categoryList: dummyCatList,
+            categoryList: catlist,
             userSession: req?.session?.user,
             user_name: user_name,
             display_name: display_name,
@@ -131,7 +133,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
             title: "My Account",
             bodyFile: `${root}/my_account`,
             // TODO: add real data - categoryList
-            categoryList: dummyCatList,
+            categoryList: catlist,
             userSession: req?.session?.user,
             user_name: user_name,
             display_name: display_name,
@@ -144,7 +146,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
             title: "My Account",
             bodyFile: `${root}/my_account`,
             // TODO: add real data - categoryList
-            categoryList: dummyCatList,
+            categoryList: catlist,
             userSession: req?.session?.user,
             user_name: user_name,
             display_name: display_name,

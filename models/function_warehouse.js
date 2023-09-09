@@ -3,27 +3,12 @@ const database = require('./connection/dbSqlConnect');
 
 // Return the list of all warehouses for admin to check. 
 // Here, they can click on one warehouse to see items 
-async function warehouse_show_all(admin_id) { // tested: ok
+async function warehouse_show_all() { // tested: ok
     return new Promise((resolve, reject) => {
         try {
             database.query(`SELECT id, name AS \'Warehouse Name\', address AS \'Warehouse Address\',
             total_area AS \'Total Area\', remaining_area AS \'Remaining Area\'
             FROM warehouse;`, function (error, result) {
-                if (error) reject({ "error with query result": error });
-                resolve(result);
-            })
-        }
-        catch (error2) {
-            reject({ "error running query": error2 });
-        }
-    });
-}
-
-async function warehouse_show_admin(admin_id) {
-    return new Promise((resolve, reject) => {
-        try {
-            // write query to get all warehouses that admin_id is admin of
-            database.query(`select * from user where user.role = "Warehouse Admin";`, function (error, result) {
                 if (error) reject({ "error with query result": error });
                 resolve(result);
             })
@@ -55,7 +40,7 @@ async function create_warehouse(info) {
 async function read_warehouse(wid) {
     return new Promise((resolve, reject) => {
         try {
-            database.query(`SELECT wi.warehouse_id as \'Warehouse ID\', w.name AS \'Warehouse Name\', 
+            database.query(`SELECT p.id as \'Product ID\', wi.warehouse_id as \'Warehouse ID\', w.name AS \'Warehouse Name\', 
             p.title AS ProductTitle, wi.quantity AS Quantity, 
             ROUND((length * width * height * quantity), 2) AS \'Load Volume\'
             FROM warehouse_item wi, product p, warehouse w
@@ -115,7 +100,8 @@ async function move_product_to_wh(pid, quantity, src_wid, dst_wid) {
             database.query(`CALL wh_move_product(${pid}, ${quantity}, ${src_wid}, ${dst_wid});`,
                 function (error, result) {
                     if (error) reject({ "error when moving": error });
-                    resolve({ "success": result[0].result });
+                    console.log(result[0][0].result);
+                    resolve({ "success": result[0][0].result });
                 });
         }
         catch (error) {
@@ -124,28 +110,23 @@ async function move_product_to_wh(pid, quantity, src_wid, dst_wid) {
     });
 }
 
-// Call Procedure product_to_wh to insert a brand new product to storage
-async function insert_to_warehouse(pid, quantity) {
-    return new Promise((resolve, reject) => {
+async function check_storage(pid){
+    return new Promise ((resolve, reject) => {
         try {
-            database.query(`CALL PROCEDURE(${pid}, ${quantity});`, function (error1, result1) {
-                if (error1) reject({ "error": "Error from procedure: " + error1 });
-                // var msg = result1[0].result;
-                // Show the total number of products inserted
-                database.query(`SELECT SUM(quantity) as ct FROM warehouse_item 
-                WHERE product_id = ${pid};`, function (error2, result2) {
-                    if (error2) console.log("Error getting total inserted: " + error2);
-                    resolve({ "success": `Inserted ${result2[0].ct} of product with id ${pid} into warehouses.` });
-                });
-            });
+            database.query(`SELECT w.id AS WarehouseID, w.name AS WarehouseName, remaining_area AS RemainingArea, 
+            FLOOR(remaining_area / (length * width * height)) AS Copies
+            FROM product p, warehouse w 
+            WHERE p.id = ${pid} ORDER BY w.remaining_area DESC;`, (err, result) => {
+                if(err) reject (err);
+                else resolve(result);
+            })
+        }catch (err){
+            resolve (err);
         }
-        catch (error3) {
-            reject({ "error": "Error running procedure: " + error3 });
-        }
-    });
+    })
 }
 
 module.exports = {
-    warehouse_show_all, create_warehouse, read_warehouse, update_warehouse,
-    get_warehouse_to_store, move_product_to_wh, insert_to_warehouse, warehouse_show_admin
+    warehouse_show_all, create_warehouse, read_warehouse, update_warehouse, delete_warehouse,
+    get_warehouse_to_store, move_product_to_wh, check_storage
 }

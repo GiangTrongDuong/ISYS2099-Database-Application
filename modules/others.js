@@ -1,6 +1,6 @@
 const express = require('express'); 
 const { ABOUT_ROUTE, PRIVACY_ROUTE, CONTACT_ROUTE, MEMBERS } = require('../constants');
-const { dummyCatList } = require('../dummyData');
+const Category = require('../models/mongodb/models/function_category');
 const router = express.Router(); 
 const isAuth = require('../models/isAuth');
 
@@ -20,34 +20,37 @@ router.use(cors({
 
 //end-of session
 
-router.get(`${ABOUT_ROUTE}`, function(req, res) { 
+router.get(`${ABOUT_ROUTE}`, async function(req, res) { 
+  const catlist = await Category.getAllCats();
   res.render("layout.ejs", {
     title: "About Us",
     bodyFile: `${root}/about`,
     // TODO: add real data - categoryList
-    categoryList: dummyCatList,
+    categoryList: catlist,
     userSession: req?.session?.user,
     members: MEMBERS,
 
   });
 }); 
 
-router.get(`${PRIVACY_ROUTE}`, function(req, res) { 
+router.get(`${PRIVACY_ROUTE}`, async function(req, res) { 
+  const catlist = await Category.getAllCats();
   res.render("layout.ejs", {
     title: "Privacy Policy",
     bodyFile: `${root}/policy`,
     // TODO: add real data - categoryList
-    categoryList: dummyCatList,
+    categoryList: catlist,
     userSession: req?.session?.user,
   }); 
 }); 
 
-router.get(`${CONTACT_ROUTE}`, function(req, res) { 
+router.get(`${CONTACT_ROUTE}`, async function(req, res) { 
+  const catlist = await Category.getAllCats();
   res.render("layout.ejs", {
     title: "Contact Us",
     bodyFile: `${root}/contact`,
     // TODO: add real data - categoryList
-    categoryList: dummyCatList,
+    categoryList: catlist,
     userSession: req?.session?.user,
     members: MEMBERS,
   }); 

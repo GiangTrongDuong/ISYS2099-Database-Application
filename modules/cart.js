@@ -1,6 +1,6 @@
 const express = require('express');
 const { CART_ROUTE } = require('../constants');
-const { dummyCatList } = require('../dummyData');
+const Category = require('../models/mongodb/models/function_category');
 const db = require('../models/function_cart');
 const dorder = require('../models/function_order');
 const router = express.Router();
@@ -34,13 +34,14 @@ router.get(`${CART_ROUTE}`, async (req, res) => {
     const renderedCart = await db.getCartItem(id); //store info to display 
     const cartItems = renderedCart.items;
     const totalPrice = renderedCart.total;
+    const catlist = await Category.getAllCats();
     // console.log(cartItems);
     res.render("layout.ejs", {
       title: "Cart",
       bodyFile: `${root}/cart`,
       userSession: info,
       // TODO: add real data - categoryList
-      categoryList: dummyCatList,
+      categoryList: catlist,
       cartItems: cartItems,
       totalPrice: totalPrice,
     }
@@ -65,6 +66,7 @@ router.post(`${CART_ROUTE}/add-cart/:pid`, async (req, res) => {
   }
 });
 
+// delete product from cart
 router.post(`${CART_ROUTE}/delete-cart/:pid`, async (req, res) => {
   try {
     const info = req.session.user;
@@ -78,6 +80,7 @@ router.post(`${CART_ROUTE}/delete-cart/:pid`, async (req, res) => {
   }
 });
 
+// change quantity of product in cart
 router.post(`${CART_ROUTE}/change-cart/:pid`, async (req, res) => {
   try {
     const info = req.session.user;
@@ -122,11 +125,24 @@ router.post(`${CART_ROUTE}/decrease-cart/:pid`, async (req, res) => {
   }
 });
 
-router.post(`${CART_ROUTE}/place-order`, async (req, res) => {
-  try {
-
-  } catch (err) {
-    res.send(err);
+// place order with the items in the cart
+router.get(`${CART_ROUTE}/place-order`, async (req, res) => {
+  // const order = JSON.parse(req.params.product_quantity_list); //store info to display 
+  try{
+    const message = await db.place_order(req.session.user.id);
+    res.json(message);
+    console.log(message);
   }
-})
+  catch(err){
+    res.json(err);
+  }
+  
+  // res.render("layout.ejs", {
+  //   title: "Place Order",
+  //   bodyFile: `${root}/place_order`,
+  //   // TODO: add real data - categoryList
+  //   categoryList: dummyCatList,
+  //   order: order
+  // });
+});
 module.exports = router;
