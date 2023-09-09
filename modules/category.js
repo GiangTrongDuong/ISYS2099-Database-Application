@@ -28,20 +28,21 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
             Child categories
             Products */
         // const renderedCategory = await Category.findById(id).exec();
-        const catlist = Category.getAllCats();
-        const renderedCategory = catlist.find((category) => category[_id] == id);
-        renderedCategory.products = dummyClothingProducts;
-        renderedCategory.childCategories = catlist.filter((category) => category["parent_category_id"] == id);
+        const renderedCategory = Category.findCatById(id);
+        console.log(renderedCategory);
+        res.json(renderedCategory);
+        // renderedCategory.products = dummyClothingProducts;
+        // renderedCategory.childCategories = catlist.filter((category) => category["parent_category_id"] == id);
 
-        res.render("layout.ejs", {
-            title: "Category",
-            bodyFile: `${root}/category.ejs`,
-            // TODO: add real data - categoryList
-            categoryList: catlist,
-            userSession: req?.session?.user,
-            // TODO: add real data - category
-            category: renderedCategory,
-        });
+        // res.render("layout.ejs", {
+        //     title: "Category",
+        //     bodyFile: `${root}/category.ejs`,
+        //     // TODO: add real data - categoryList
+        //     categoryList: catlist,
+        //     userSession: req?.session?.user,
+        //     // TODO: add real data - category
+        //     category: renderedCategory,
+        // });
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
     }
