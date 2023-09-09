@@ -19,7 +19,7 @@ BEGIN
     -- Check the available stock for the product
     SELECT remaining INTO availableStock
     FROM product
-    WHERE id = pid;
+    WHERE id = pid FOR UPDATE;
 
     -- If there is sufficient stock, proceed with the order
     IF availableStock >= quant THEN

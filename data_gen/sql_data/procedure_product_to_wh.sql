@@ -32,7 +32,7 @@ BEGIN
         -- Find a warehouse with sufficient remaining_area - pick the ones with most remaining_area first
         SELECT w.id, w.remaining_area INTO wid, rem_area 
         FROM warehouse w WHERE w.remaining_area >= total_inserted
-        ORDER BY remaining_area DESC LIMIT 1;
+        ORDER BY remaining_area DESC LIMIT 1 FOR UPDATE;
 
 		-- found a warehouse to store all the load
         IF wid IS NOT NULL THEN

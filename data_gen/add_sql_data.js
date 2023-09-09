@@ -53,13 +53,13 @@ connection.connect(err => {
         // Procedures file, like ./sql_data/procedure_warehouse_trans.sql
         // These files must not specify delimiter; but if you want to copy them in dbms, then you need delimiter
         // proc with transaction to insert product into warehouse
-        await executeSqlFile('./sql_data/procedure_warehouse_trans.sql');
+        await executeSqlFile('./sql_data/procedure_product_to_wh.sql');
         // proc with transaction to place order
         await executeSqlFile('./sql_data/procedure_place_order.sql');
         // proc to free product volume from most populated warehouse
         await executeSqlFile('./sql_data/procedure_free_wh_space.sql');
         // proc to move product * quantity from one warehouse to another
-        await executeSqlFile('./sql_data/procedure_wh_move.sql');
+        await executeSqlFile('./sql_data/procedure_wh_move_product.sql');
         // trigger when delete product: check inbound, free wh space, delete from cart and order
         await executeSqlFile('./sql_data/trigger_delete_product.sql');
         // trigger when delete warehouse: if it's storing items, deletion will fail

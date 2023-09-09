@@ -29,7 +29,7 @@ BEGIN
     SELECT quantity INTO src_quantity FROM warehouse_item 
     WHERE warehouse_id = src_wid AND product_id = pid;
     -- Check if there is enough space in destination warehouse
-    SELECT remaining_area INTO dst_remaining FROM warehouse WHERE id = dst_wid;
+    SELECT remaining_area INTO dst_remaining FROM warehouse WHERE id = dst_wid FOR UPDATE;
 
     IF (dst_remaining >= volume_moved) AND (src_quantity >= quant) THEN
         -- Decrease the volume in the destination warehouse
