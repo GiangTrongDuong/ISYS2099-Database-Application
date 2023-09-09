@@ -4,6 +4,7 @@ const mg = require('./models/function_category');
 const {connectMongoDB} = require('./models/mongodbConnect')
 const json_fn = './cat_att_list.json';
 
+
 //TODO: Specify collection name to ensure consistency?
 const forLoop = async (clist) => {
     for (const c of clist){
@@ -36,10 +37,10 @@ const importData = async () => {
             }
             const json_data = JSON.parse(data);
             await forLoop(json_data);
-            console.log('Data Import Success')
+            console.log('Import Category Success')
             process.exit()
         } catch (error) {
-            console.error('Error with data import', error)
+            console.error('Error with Import Category', error)
             process.exit(1)
         }
     })
@@ -47,5 +48,4 @@ const importData = async () => {
 
 
 connectMongoDB();
-importData()
-
+importData();

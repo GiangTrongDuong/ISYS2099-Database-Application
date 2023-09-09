@@ -9,7 +9,7 @@ const dropAll = async () =>{
 }
 
 // create a category
-const saveProduct = async(mysqlid, categoryid) => {
+const saveProduct = async(mysqlid, categoryid, attributes) => {
   try {
       var newProduct = new product;
       newProduct.mysql_id = mysqlid;
@@ -17,22 +17,44 @@ const saveProduct = async(mysqlid, categoryid) => {
       let saved = await newProduct.save();
 
       saved = await initAttributesForProduct(newProduct)
+      saved = await setAttributes(newProduct._id, attributes)
       console.log("=== Product " + newProduct.mysql_id + " saved to DB.");
       return saved;
   }
   catch (error) {
-      console.log("Product save error: " + error);
+    console.log("Product save error: " + error);
+    throw(error)
+  }
+}
+
+
+// create a category
+const updateProduct = async(mysqlid, categoryid, attributes) => {
+  try {
+      var newProduct = new product;
+      newProduct.mysql_id = mysqlid;
+      newProduct.category = ObjectId(categoryid);
+      let saved = await newProduct.save();
+
+      saved = await initAttributesForProduct(newProduct)
+      saved = await setAttributes(newProduct._id, attributes)
+      console.log("=== Product " + newProduct.mysql_id + " saved to DB.");
+      return saved;
+  }
+  catch (error) {
+    console.log("Product save error: " + error);
+    throw(error)
   }
 }
 
 //get all products in db
 const getAllProducts = async() => {
   try {
-      const all = await product.find();
-      return all
+    const all = await product.find();
+    return all
   }
   catch (err) {
-      console.error('Get all products failed: ', err)
+    console.error('Get all products failed: ', err)
   }
 }
 
@@ -44,17 +66,28 @@ const findProductsByAttribute = async(aName, value) => {
       return products
   }
   catch (err) {
-      console.log("Find by attribute error: " + err);
+    console.log("Find by attribute error: " + err);
   }
 }
 
-// find a cat by id
-const findProductByMysqlD = async(mysqlid) => {
+// find a prodcut by mongodb id
+const findProductByID = async(id) => {
   try {
-      const product = await product.findOne({mysql_id: mysqlid});
-      return product;
+    const myproduct = await product.findOne({_id: id});
+    return myproduct;
   } catch (err) {
-      console.log("Failed to find category by id: ", err);
+    console.log("Failed to find category by id: ", err);
+  }
+}
+
+// find a prodcut by mongodb id
+
+const findProductByMysqlID = async(mysqlid) => {
+  try {
+    const myproduct = await product.findOne({mysql_id: mysqlid});
+    return myproduct;
+  } catch (err) {
+    console.log("Failed to find category by id: ", err);
   }
 }
 
@@ -105,28 +138,63 @@ const getAttributeGroups = async () => {
   try {
       const result = await product.aggregate([
           {
-              $unwind: '$attribute'
+            $unwind: '$attribute'
           },
           {
-              $group: {
-                  "_id": "$attribute.aName",
-                  "values": {
-                      "$addToSet": "$attribute.value"
-                  }
+            $group: {
+              "_id": "$attribute.aName",
+              "values": {
+                "$addToSet": "$attribute.value"
               }
+            }
           },
           {
-              $project: {
-                  _id: 0,
-                  "aName": "$_id",
-                  "values": 1,
+            $project: {
+              _id: 0,
+              "aName": "$_id",
+              "values":  {
+                $filter: {
+                  input: "$values",
+                  as: "value",
+                  cond: {
+                    $ne: [
+                      "$$value",
+                      null
+                    ]
+                  },
+                },
               }
+            }
           },
       ])
       return result
   } catch (err) {
       console.log(err)
       throw (err)
+  }
+}
+
+const setAttributes = async (productid, attribute_name_value_list) => {
+  try {
+    const myproduct = await findProductByID(productid);
+    let update_attribute = myproduct.attribute;
+    if (!isEmpty(update_attribute) && !isEmpty(attribute_name_value_list)) {
+      for (a_pair of attribute_name_value_list) {
+        for (let i = 0; i < update_attribute.length; i++) {
+          if (update_attribute[i].aName.toLowerCase() == a_pair.aName.toLowerCase()) {
+            if (typeof a_pair.value === "string") a_pair.value = a_pair.value[0].toUpperCase() + a_pair.value.substring(1).toLowerCase(); 
+            update_attribute[i].value = a_pair.value;
+            break;
+          }
+        }
+      }
+    }
+    myproduct.attribute = update_attribute;
+    const updated = await myproduct.save();
+    return updated
+
+  } catch (err) {
+    console.log(err)
   }
 }
 

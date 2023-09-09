@@ -62,7 +62,7 @@
   "attribute": [
     {
       "aName": "Storage",
-      "aValue": "number",
+      "aValue": "text",
       "aRequired": false
     },
     {
@@ -95,12 +95,12 @@
   "attribute": [
     {
       "aName": "Storage",
-      "aValue": "number",
+      "aValue": "text",
       "aRequired": false
     },
     {
       "aName": "RAM",
-      "aValue": "number",
+      "aValue": "text",
       "aRequired": false
     },
     {
@@ -312,7 +312,7 @@
   },
   "attribute": [
     {
-      "aName": "Capacity",
+      "aName": "Bed size",
       "aValue": "text",
       "aRequired": false
     }

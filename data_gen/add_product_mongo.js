@@ -1,32 +1,29 @@
-const mysql = require('mysql2');
 require('dotenv').config(); 
-const mg_category = require('./models/function_category');
 const mg_product = require('./models/function_product_mongodb');
 const {connectMongoDB} = require('./models/mongodbConnect')
-const database = require('./models/dbSqlConnect');
+const product_json_fn = './product_mongo_list.json';
+const fs = require('fs');
 
-connectMongoDB();
-
-const getAllProducts = async () => {
-  return new Promise ((resolve, reject) => {
-    database.query(`SELECT * FROM product`, 
-    (error, results) => {
-        if (error) reject(error);
-        else resolve(results);
-    })
+const importProduct = async () => {
+  fs.readFile(product_json_fn, 'utf-8', async (readErr, data) => {
+      try {
+          await mg_product.dropAll();
+          if (readErr) {
+              console.log("Error reading file: " + readErr);
+              return;
+          }
+          const json_data = JSON.parse(data);
+          for (product of json_data) {
+            await mg_product.saveProduct(product.mysql_id, product.category, product.attribute)
+          }
+          console.log('Product Import Success')
+          process.exit()
+      } catch (error) {
+          console.error('Error with product import', error)
+          process.exit(1)
+      }
   })
 }
 
-const importProduct = async () => {
-  try {
-    await mg_product.dropAll();
-    products = await getAllProducts();
-    for (product of products) {
-      await mg_product.saveProduct(product.id, product.category)
-    }
-  } catch (error) {
-    console.error('Error with product import', error)
-  }
-}
-
+connectMongoDB();
 importProduct();
