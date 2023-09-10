@@ -152,7 +152,7 @@ async function place_order(uid){
                                             console.log("Update after insert "+ err4);
                                         }
                                         console.log("Order placed. oid: " + newOrderId);
-                                        resolve ({"message": `Order placed successful! Go to localhost:3000/order/${newOrderId} to check!`});
+                                        resolve ({"orderId": newOrderId});
                                     });
                             }
                             catch (err25){

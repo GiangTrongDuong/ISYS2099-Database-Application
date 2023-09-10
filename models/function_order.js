@@ -19,9 +19,9 @@ async function get_order_item (oid) {
         FROM (SELECT product_id, quantity FROM order_item WHERE order_id = ?) AS o 
         JOIN (SELECT id, title FROM product) AS p ON o.product_id = p.id;`,[oid], (error1, results1) => {
             if (error1) reject(error1);
-            database.query(`SELECT total_price FROM order_details WHERE id = ?;`,[oid], (error2, results2) => {
+            database.query(`SELECT total_price, status, id FROM order_details WHERE id = ?;`,[oid], (error2, results2) => {
                 if (error2) reject (error2);
-                else resolve({"order_items": results1, "total_price": results2});
+                else resolve({"order_items": results1, "order": results2});
             })
         });
     });

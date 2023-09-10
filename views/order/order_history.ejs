@@ -1,4 +1,4 @@
-<div class="container-xl mt-5">
+<div class="container-xl my-5 py-5">
   <h1 class="mb-5 text-center">Order History</h1>
 
   <% if(orders && orders.length > 0) { %>
@@ -6,23 +6,26 @@
     <!-- Responsive grid layout for orders -->
     <% orders.forEach(function(order){ %>
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <!-- Shadow for a slightly lifted effect -->
-        <div class="card-header bg-dark text-white">
-          Order ID: <%= order.id %>
+      <a href="<%= navigatePage("order-detail", order.id) %>" class="text-decoration-none">
+        <!-- Link to order details -->
+        <div class="card h-100 shadow-sm">
+          <!-- Shadow for a slightly lifted effect -->
+          <div class="card-header bg-dark text-white">
+            Order ID: <%= order.id %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= order.display_name %></h5>
+            <p class="card-text"><strong>User:</strong> <%= order.user_name %></p>
+            <p class="card-text">
+              <strong>Status:</strong>
+              <span class="badge <%= order.status === 'Accepted' ? 'bg-success' : order.status === 'Inbound' ? 'bg-warning' : order.status === 'Rejected' ? 'bg-danger' : 'bg-secondary' %>">
+                  <%= order.status %>
+              </span>
+            </p>
+            <p class="card-text"><strong>Total Price:</strong> <%= formatCurrencyVND(order.total_price) %></p>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title"><%= order.display_name %></h5>
-          <p class="card-text"><strong>User:</strong> <%= order.user_name %></p>
-          <p class="card-text">
-            <strong>Status:</strong>
-            <span class="badge <%= order.status === 'Accepted' ? 'bg-success' : order.status === 'Inbound' ? 'bg-warning' : order.status === 'Rejected' ? 'bg-danger' : 'bg-secondary' %>">
-                <%= order.status %>
-            </span>
-        </p>
-          <p class="card-text"><strong>Total Price:</strong> <%= formatCurrencyVND(order.total_price) %></p>
-        </div>
-      </div>
+      </a>
     </div>
     <% }); %>
   </div>

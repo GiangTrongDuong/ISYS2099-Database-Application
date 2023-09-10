@@ -53,3 +53,4 @@ Run db_create first, then db_inserts
     - Run `npm run start` to start running the program again
 
 - Delete category -> its children also disappear
+- If logout ?? -> back to homepage
