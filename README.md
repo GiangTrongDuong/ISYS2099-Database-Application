@@ -51,3 +51,5 @@ Run db_create first, then db_inserts
     - Make sure the `DB_USER`, `PASSWORD`, `HOST` match your database connection, and the `MONGODB_URI` exists
     - Run `npm install` to install node modules
     - Run `npm run start` to start running the program again
+
+- Delete category -> its children also disappear

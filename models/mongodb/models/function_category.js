@@ -291,7 +291,9 @@ function isEmpty(o){
 // check if a cat itself has any product
 const hasProduct = async(id) => {
     try {
+        console.log("before checking");
         const catHasProduct = await product.exists({category: id});
+        console.log("Cat has product: ", catHasProduct);
         return catHasProduct;
     } catch (err) {
         console.log(err)

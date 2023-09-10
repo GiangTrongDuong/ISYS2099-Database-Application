@@ -141,11 +141,11 @@ isFullScreenSm: false,
     <div class="card">
       <div class="card-body h-100 overflow-scroll">
         <h6 class="mb-4 pb-3 border-bottom fw-bold">Delete Confirmation</h6>
-        <form action="delete-product" method="POST">
+        <form action="/category/delete" method="POST" id="deleteCategoryForm">
           <div class="mb-3">
-            <input type="number" class="form-control" id="delete" name="id" value="" hidden>
+            <input type="text" class="form-control" id="delete-modal-input" name="id" value="" hidden>
           </div>
-          <button type="submit" class="btn btn-dark">Delete product</button>
+          <button type="submit" class="btn btn-dark">Delete category</button>
         </form>
       </div>
     </div>
@@ -154,6 +154,11 @@ isFullScreenSm: false,
   }) %>
 
 <script>
+  document.addEventListener('click', function(event) {
+    if (event.target.matches('.remove-attribute')) {
+      deleteAttributeClick(event);
+    }
+  });
   const getAttributes = (id) => {
     return JSON.parse(document.getElementById(`category-container-${id}`).getAttribute('data-attributes'));
   }
@@ -184,9 +189,14 @@ isFullScreenSm: false,
 
   }
 
+  function findAncestorWithClass(el, cls) {
+    while (el && (el = el.parentElement) && !el.classList.contains(cls));
+    return el;
+  }
+
   function deleteAttributeClick(event) {
     const buttonElement = event.target;
-    const attributeField = buttonElement.closest('.attribute-field');
+    const attributeField = findAncestorWithClass(buttonElement, 'attribute-field');
     if (attributeField) {
       attributeField.remove();
     }
@@ -213,38 +223,31 @@ isFullScreenSm: false,
 
   }
 
+  function renderAttributeElement(index, type, attr = null) {
+    return `
+            <div class="attribute-field mb-4">
+                <input type="text" class="form-control my-2" placeholder="Attribute Name" name="attribute[${index}][aName]" value="${attr?.aName ?? ""}" required>
+                <select class="form-control my-2" name="attribute[${index}][aValue]">
+                    <option value="text" ${attr?.aValue === 'text' ? 'selected' : ''}>Text</option>
+                    <option value="number" ${attr?.aValue === 'number' ? 'selected' : ''}>Number</option>
+                </select>
+                <input type="hidden" name="attribute[${index}][aRequired]" id="hiddenInput-${type}-${index}" value="${attr?.aRequired ? 'true' : 'false' ?? 'false'}">
+                <input type="checkbox" id="checkbox-${type}-${index}" onchange="updateHiddenInput('${type}-' + ${index})" ${attr?.aRequired ? 'checked' : ''}> <label htmlfor="checkbox-${type}-${index}">Required</label>
+                <br><button type="button" class="my-2 btn btn-outline-danger remove-attribute" onclick="deleteAttributeClick(this)">Remove</button>
+            </div>
+        `;
+  }
   function addAttributeClick(buttonElement) {
     const attributesContainer = document.querySelector('#updateCategoryForm #categoryAttributesContainer');
     const newIndex = attributesContainer.querySelectorAll('.attribute-field').length;
-    const newAttributeHTML = `
-            <div class="attribute-field mb-4">
-                <input type="text" class="form-control my-2" placeholder="Attribute Name" name="attributes[${newIndex}][aName]" required>
-                <select class="form-control my-2" name="attributes[${newIndex}][aValue]">
-                    <option value="text">Text</option>
-                    <option value="number">Number</option>
-                </select>
-                <input type="checkbox" name="attributes[${newIndex}][aRequired]"> Required
-                <br><button type="button" class="my-2 btn btn-outline-danger remove-attribute">Remove</button>
-            </div>
-        `;
+    const newAttributeHTML = renderAttributeElement(newIndex, 'update');
     document.querySelector('#updateCategoryForm #categoryAttributesContainer #addAttribute').insertAdjacentHTML("afterend", newAttributeHTML);
   }
 
   function addCreateAttributeClick() {
     const attributesContainer = document.querySelector('#createCategoryForm #createCategoryAttributesContainer');
     const newIndex = attributesContainer.querySelectorAll('.attribute-field').length;
-    const newAttributeHTML = `
-            <div class="attribute-field mb-4">
-                <input type="text" class="form-control my-2" placeholder="Attribute Name" name="attributes[${newIndex}][aName]" required>
-                <select class="form-control my-2" name="attributes[${newIndex}][aValue]">
-                    <option value="text">Text</option>
-                    <option value="number">Number</option>
-                </select>
-                <input type="hidden" name="attributes[${newIndex}][aRequired]" id="hiddenInput-create-${newIndex}" value="false">
-                <input type="checkbox" id="checkbox-create-${newIndex}" onchange="updateHiddenInput('create-' + ${newIndex})"> <label htmlfor="checkbox-create-${newIndex}">Required</label>
-                <br><button type="button" class="my-2 btn btn-outline-danger remove-attribute" onclick="deleteAttributeClick(this)">Remove</button>
-            </div>
-        `;
+    const newAttributeHTML = renderAttributeElement(newIndex, 'create');
     document.querySelector('#createCategoryForm #createCategoryAttributesContainer #addCreateAttribute').insertAdjacentHTML("afterend", newAttributeHTML);
   }
 
@@ -253,7 +256,7 @@ isFullScreenSm: false,
     const row = buttonElement.closest('tr');
     const id = buttonElement.getAttribute('data-id');
     const parentId = buttonElement.getAttribute('data-parentId');
-    document.querySelector('#updateCategoryForm').action = `/category/${id}`;
+    document.querySelector('#updateCategoryForm').action = `/category/update/${id}`;
 
     // Get the product data from the td elements
     const categoryTitle = row.querySelector('#category-title').innerText;
@@ -264,23 +267,7 @@ isFullScreenSm: false,
     const categoryAttributes = getAttributes(id);
     let attributesHTML = "";
     categoryAttributes.forEach((attr, index) => {
-      attributesHTML += `
-                <div class="attribute-field mb-4">
-                    <input type="text" class="form-control my-2" placeholder="Attribute Name" name="attributes[${index}][aName]" value="${attr.aName}" required>
-                    <select class="form-control my-2" name="attributes[${index}][aValue]">
-                        <option value="text" ${attr.aValue === 'text' ? 'selected' : ''}>Text</option>
-                        <option value="number" ${attr.aValue === 'number' ? 'selected' : ''}>Number</option>
-                    </select>
-                    <input type="hidden" name="attributes[${index}][aRequired]" id="hiddenInput-${index}" value="${attr.aRequired ? 'true' : 'false'}">
-                    <input type="checkbox" id="checkbox-${index}" ${attr.aRequired ? 'checked' : ''} onchange="updateHiddenInput(${index})"> <label htmlfor="checkbox-${index}">Required</label>
-                    <br><button type="button" class="my-2 btn btn-outline-danger remove-attribute" onclick="deleteAttributeClick(this)">Remove</button>
-                </div>
-            `;
-    });
-    document.addEventListener('click', function(event) {
-      if (event.target.matches('.remove-attribute')) {
-        deleteAttributeClick(event);
-      }
+        attributesHTML += renderAttributeElement(index, 'update', attr);
     });
 
     // delete the old attributes
@@ -296,13 +283,20 @@ isFullScreenSm: false,
   }
 
   function createCategory(buttonElement) {
+    // Clear any pre-existing data in the modal
+    document.querySelector('#createCategoryForm #createCategoryName').value = "";
+    document.querySelector('#createCategoryForm #createParentCategory').selectedIndex = 0;
+
+    // Remove any old attribute fields
+    document.querySelectorAll('#createCategoryForm #createCategoryAttributesContainer .attribute-field').forEach(el => el.remove());
+
 
 
   }
 
   function deleteCategoryModal(buttonElement) {
     const row = buttonElement.closest('tr');
-    const productId = row.querySelector('#product-id').innerText;
-    document.querySelector('#deleteCategoryModal #delete').value = productId;
+    const catId = buttonElement.getAttribute('data-id');
+    document.querySelector('#deleteCategoryForm #delete-modal-input').value = catId;
   }
 </script>
