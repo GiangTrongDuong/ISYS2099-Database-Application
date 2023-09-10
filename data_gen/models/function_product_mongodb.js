@@ -41,19 +41,16 @@ const saveProduct = async(mysqlid, categoryid, attributes) => {
 
       // get attribute list for product
       let attribute = await mg_category.getAttributesOfCategory(categoryid)
+      // set value for attribute
       attribute = await setAttributes(attribute, attributes)
 
       // create product
       var newProduct = await product.create({mysql_id: mysqlid, category: categoryid, attribute: attribute});
-      // set value for attribute
-      // newProduct = await setAttributes(attribute, attributes)
       console.log("=== Product " + newProduct.mysql_id + " saved to DB.");
       return newProduct;
   }
   catch (error) {
-    console.log("HUUUUUUUUUUUUUU: ", error)
     if (error.name === "ValidationError") {
-      // await product.findOneAndDelete({_id: newProduct._id})
       throw new Error("Product is not created because of validation failure. Suggestiton: check if product's attribute is valid.")
     }
     throw(error)
