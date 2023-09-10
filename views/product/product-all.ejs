@@ -65,3 +65,27 @@
 `,
 isFullScreenSm: false,
 }) %>
+<script>
+  function debounce(func, wait) {
+    let timeout;
+
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+  const performSearch = debounce(function() {
+    const query = document.getElementById('productNameSearch').value;
+
+    if (query.trim() === '') return;
+
+    // call query to server
+    
+  }, 300); // 300ms debounce time
+  document.getElementById('productNameSearch').addEventListener('input', performSearch);
+</script>

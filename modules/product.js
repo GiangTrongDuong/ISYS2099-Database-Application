@@ -76,7 +76,6 @@ router.post(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
     // {categoryId, attributes: [{name, value}]}
     const attributes = [];
     for (let aName in attributeList) {
-      console.log(aName);
       // Iterate over each array of values for the given attribute name
       // if value is not array
       if (!Array.isArray(attributeList[aName])) {
@@ -126,18 +125,22 @@ router.post(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
 router.get(`${PRODUCT_ROUTE}/search/:words`, async (req, res) => {
   try {
     const productList = await db.contain_word(req.params.words);
-    // res.json({ "Products": product_list });
-    res.render('layout.ejs', {
-      title: "Products",
-      bodyFile: `${root}/product-all`,
-      categoryList: catlist,
-      userSession: req?.session?.user,
-      productList: productList,
-      productAttributes: ATTRIBUTES,
-    });
+    console.log("Calleddd", productList);
+    res.json({ "Products": productList });
+    // res.render('layout.ejs', {
+    //   title: "Products",
+    //   bodyFile: `${root}/product-all`,
+    //   categoryList: catlist,
+    //   userSession: req?.session?.user,
+    //   productList: productList,
+    //   productAttributes: ATTRIBUTES,
+    // });
   }
   catch (err) {
-    res.send("Cannot fetch item with id " + req.params.id);
+    res.send({
+      // message: "Error retrieving categories",
+      error: err.message ?? "Error retrieving data"
+    });
   }
 });
 
