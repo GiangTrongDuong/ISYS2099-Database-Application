@@ -14,7 +14,7 @@ const cors = require('cors');
 
 router.use(cors({
   origin: ["http://localhost:3000"],
-  method: ["GET","POST"],
+  method: ["GET", "POST"],
   credentials: true
 }));
 
@@ -25,7 +25,7 @@ router.use(bodyParser.json());
 // full route to order-history page: /order/history
 // router.get(`${ORDER_HISTORY_ROUTE}`, function (req, res) { //og
 router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test
-  try{
+  try {
     const info = req.session.user;
     const id = info.id;
     const orders = await db.get_orders(id);
@@ -47,7 +47,7 @@ router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test
 
 // updating order works
 router.get(`/order_update`, async (req, res) => {
-  try{
+  try {
     const message = await db.update_status(106, "Accepted");
     res.json(message);
     // res.render("layout.ejs", {
@@ -66,20 +66,26 @@ router.get(`/order_update`, async (req, res) => {
 
 // full route to order-detail page: /order/order/:id
 router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
-  try{
-    const {order_items, total_price} = await db.get_order_item(req.params.id);
-    res.json({"order_items": order_items, "total_price": total_price});
-    // res.render("layout.ejs", {
-    //   title: "Order Detail",
-    //   bodyFile: `${root}/order_detail`,
-    //   // TODO: add real data - categoryList
-    //   categoryList: catlist,
-    //   order: order,
-    //   order_id: req.params.id
-    // });
+  try {
+    const catlist = await Category.getAllCats(6);
+    const orderId = req.params.id;
+    const {order_items, total_price} = await db.get_order_item(orderId);
+    console.log("ORder", order_items, "Total", total_price);
+
+    // res.json(result);
+    res.render("layout.ejs", {
+      title: "Order Details",
+      bodyFile: `${root}/order_detail.ejs`,
+      // TODO: add real data - categoryList
+      categoryList: catlist,
+      orderItems: order_items,
+      totalPrice: total_price,
+      userSession: req.session.user,
+    });
   }
   catch (err) {
-    res.send("Cannot fetch items from oid: " + req.params.oid);
+    console.log(err);
+    res.send(err);
   }
 });
 

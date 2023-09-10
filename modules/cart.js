@@ -126,23 +126,20 @@ router.post(`${CART_ROUTE}/decrease-cart/:pid`, async (req, res) => {
 });
 
 // place order with the items in the cart
-router.get(`${CART_ROUTE}/place-order`, async (req, res) => {
+router.post(`${CART_ROUTE}/place-order`, async (req, res) => {
   // const order = JSON.parse(req.params.product_quantity_list); //store info to display 
-  try{
-    const message = await db.place_order(req.session.user.id);
-    res.json(message);
-    console.log(message);
+  try {
+    const result = await db.place_order(req.session.user.id);
+    if (result.orderId) {
+      res.redirect(`/order/order/${result.order_id}`);
+    } else {
+      // TODO: snackbar
+      res.redirect(`/`);
+    }
   }
-  catch(err){
+  catch (err) {
     res.json(err);
   }
-  
-  // res.render("layout.ejs", {
-  //   title: "Place Order",
-  //   bodyFile: `${root}/place_order`,
-  //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
-  //   order: order
-  // });
+
 });
 module.exports = router;
