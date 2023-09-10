@@ -95,3 +95,5 @@ create table if not exists warehouse_item
     constraint warehouse_item_product_id_fk
         foreign key (product_id) references product (id)
 );
+
+alter table user partition by key(role);
