@@ -109,7 +109,7 @@ function parenthesesString(inputString) {
     const items = inputString.split(',');
     const formattedItems = items.map(item => `"${item.trim()}"`).join(', ');
     return `(${formattedItems})`;
-  }
+}
 
 function getCurrentTimeString() {
     let date_ob = new Date();
@@ -123,9 +123,22 @@ function getCurrentTimeString() {
 }
 
 const sendResponse = (res, statusCode, msg, data) => {
-    res.status(statusCode).json({status: statusCode, message: msg, data: data ? data : null});
-  }
-  
+    res.status(statusCode).json({ status: statusCode, message: msg, data: data ? data : null });
+}
+
+function getRandomColor() {
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+    return {red, green, blue};
+}
+
+function isColorDark({red, green, blue}) {
+    // Calculate the luminance of the color
+    const luminance = 0.299 * red + 0.587 * green + 0.114 * blue;
+    return luminance < 128;  // 128 is mid-point in 256 color scale
+}
+
 module.exports = {
     // createElement,
     navigatePage,
@@ -134,5 +147,7 @@ module.exports = {
     formatDate,
     parenthesesString,
     getCurrentTimeString,
-    sendResponse
+    sendResponse,
+    getRandomColor,
+    isColorDark,
 }

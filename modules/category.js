@@ -3,7 +3,7 @@ const router = express.Router();
 const Category = require('../models/mongodb/models/function_category');
 const { CATEGORY_ROUTE, WAREHOUSE_ROUTE } = require('../constants');
 const ProductDb = require('../models/function_product');
-const { formatCurrencyVND } = require('../helperFuncs');
+const { formatCurrencyVND, getCurrentTimeString, getRandomColor, isColorDark } = require('../helperFuncs');
 
 let root = './category/'; //root folder to pages
 
@@ -15,6 +15,8 @@ router.get(`${CATEGORY_ROUTE}`, async (req, res) => {
             bodyFile: `${root}/categories.ejs`,
             categoryList: catlist,
             userSession: req?.session?.user,
+            getRandomColor: getRandomColor,
+            isColorDark: isColorDark,
         });
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
@@ -53,10 +55,10 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
         res.render("layout.ejs", {
             title: "Category",
             bodyFile: `${root}/category.ejs`,
-            // TODO: add real data - categoryList
+            getRandomColor: getRandomColor,
+            isColorDark: isColorDark,
             categoryList: catlist,
             userSession: req?.session?.user,
-            // TODO: add real data - category
             category: renderedCategory,
             childCategories: renderedChildrenResult,
             productList: productList,
@@ -82,7 +84,8 @@ router.post(`${CATEGORY_ROUTE}/delete`, async (req, res) => {
     try {
         const id = req.body.id;
         // console.log("ID to delete", id);
-        const deletedCat = await Category.deleteCat(id);
+        // const deletedCat = await Category.deleteCat(id);
+        const deletedCat = await Category.deleteCatAndChildren(id);
         res.redirect(`${WAREHOUSE_ROUTE}/categories`);
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
