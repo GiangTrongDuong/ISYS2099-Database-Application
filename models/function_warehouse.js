@@ -95,9 +95,9 @@ async function get_warehouse_to_store(pid) {
         try {
             database.query(`SELECT w.id AS WarehouseID, w.name AS WarehouseName, 
             remaining_area AS RemainingArea, 
-            FLOOR(remaining_area / (length * width * height)) as Copies, 
-            FROM product p, warehouse w 
-            WHERE p.id = ? ORDER BY w.remaining_area DESC;`,[pid], function (error, result) {
+            FLOOR(remaining_area / (length * width * height)) as Copies
+            FROM (SELECT id, length, width, height FROM product WHERE id = ?) AS p JOIN warehouse w 
+            ORDER BY w.remaining_area DESC;`,[pid], function (error, result) {
                 if (error) reject(error);
                 resolve(result);
             });
