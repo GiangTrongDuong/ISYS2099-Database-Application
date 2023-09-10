@@ -15,7 +15,7 @@ const cors = require('cors');
 
 router.use(cors({
   origin: ["http://localhost:3000"],
-  method: ["GET","POST"],
+  method: ["GET", "POST"],
   credentials: true
 }));
 
@@ -26,7 +26,7 @@ router.use(bodyParser.json());
 // Show all warehouses for admin to check and navigate
 router.get(`${WAREHOUSE_ROUTE}/all`, isAuth.isAuth, async (req, res) => {
   try {
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     const all_wh = await db.warehouse_show_all(); //store info to display 
     res.render('layout.ejs',{
       title: "Warehouse",
@@ -36,10 +36,10 @@ router.get(`${WAREHOUSE_ROUTE}/all`, isAuth.isAuth, async (req, res) => {
       warehouses: all_wh,
     })
   }
-  catch (error){
+  catch (error) {
     res.json(error);
-  }  
-    
+  }
+
   // res.render("layout.ejs", {
   //   title: "My Cart",
   //   bodyFile: `${root}/cart`,
@@ -77,7 +77,7 @@ router.post(`${WAREHOUSE_ROUTE}/create-warehouse`, async (req, res) => {
     const message = await db.create_warehouse(newWarehouse);
     res.redirect(`${WAREHOUSE_ROUTE}/all`);
   }
-  catch (error){
+  catch (error) {
     res.json(error);
   }
 });
@@ -90,7 +90,7 @@ router.post(`${WAREHOUSE_ROUTE}/create-warehouse`, async (req, res) => {
 router.get(`${WAREHOUSE_ROUTE}/view`, isAuth.isAuth, async (req, res) => { // tested: ok
   try{
     const single_wh = await db.read_warehouse(req.query.id); //store info to display 
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     // res.json(single_wh);
     res.render("layout.ejs", {
       title: "My Cart",
@@ -102,7 +102,7 @@ router.get(`${WAREHOUSE_ROUTE}/view`, isAuth.isAuth, async (req, res) => { // te
       warehousesitem: single_wh
     });
   }
-  catch(error){
+  catch (error) {
     res.json(error);
   }
 });
@@ -134,7 +134,7 @@ router.post(`${WAREHOUSE_ROUTE}/update-warehouse`, async (req, res) => { //teste
     const message = await db.update_warehouse(whid, newInfo);
     res.redirect(`${WAREHOUSE_ROUTE}/all`);
   }
-  catch (error){
+  catch (error) {
     res.json(error);
   }
   // res.render("layout.ejs", {
@@ -159,7 +159,26 @@ router.post(`${WAREHOUSE_ROUTE}/delete-warehouse`, async (req, res) => {
   catch (error){
     res.json(error);
   }
-  
+
+});
+
+// route to get all admins in warehouses
+router.get(`${WAREHOUSE_ROUTE}/admins`, async (req, res) => {
+  try {
+    const info = req?.session?.user;
+    const adminList = await db.warehouse_show_admin(req.query.id); //store info to display 
+    // res.json(all_admins);
+    res.render("layout.ejs", {
+      title: "Admins",
+      bodyFile: `${root}/warehouse_admins`,
+      userSession: info,
+      // TODO: add real data - categoryList
+      categoryList: dummyCatList,
+      adminList: adminList,
+    });
+  } catch (error) {
+    res.send("Error fetching warehouse admin!" + err);
+  }
 });
 
 // route to interface to move products from 1 warehouse to another
@@ -180,7 +199,7 @@ router.post(`${WAREHOUSE_ROUTE}/move-warehouse`, isAuth.isAuth, async (req, res)
     const src_wid = req.body.wid;
     console.log(src_wid);
     console.log(pid);
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     const warehouse_data = await db.check_storage(pid);
     // res.json(warehouse_data);
     res.render('layout.ejs', {

@@ -29,7 +29,7 @@ router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test
     const info = req.session.user;
     const id = info.id;
     const orders = await db.get_orders(id);
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     res.render("layout.ejs", {
       title: "Order History",
       bodyFile: `${root}/order_history`,

@@ -6,4 +6,5 @@ package-lock.json
 
 # Ignore all log files
 *.log
->>>>>>> origin/front-all
+
+.env

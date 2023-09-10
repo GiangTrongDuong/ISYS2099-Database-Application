@@ -242,4 +242,4 @@ function isEmpty(o){
   return (o === undefined || o == null || o == "" || o.length ==0);
 }
 
-module.exports = {deleteProductByMysqlId, saveProduct, getAllProducts, dropAll, findProductsByAttribute, getAttributeGroups, updateProduct}
+module.exports = {deleteProductByMysqlId, saveProduct, getAllProducts, dropAll, findProductsByAttribute, getAttributeGroups, updateProduct, findProductByMysqlID}

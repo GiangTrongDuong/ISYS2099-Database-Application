@@ -125,20 +125,22 @@ async function move_product_to_wh(pid, quantity, src_wid, dst_wid) {
     });
 }
 
+// check to see how many copies of product can be stored. return warehouses and their capabilities
 async function check_storage(pid){
     return new Promise ((resolve, reject) => {
         try {
-            database.query(`SELECT w.id AS WarehouseID, w.name AS WarehouseName, remaining_area AS RemainingArea, 
-            FLOOR(remaining_area / (length * width * height)) AS Copies
-            FROM product p, warehouse w 
-            WHERE p.id = ${pid} ORDER BY w.remaining_area DESC;`, (err, result) => {
+            database.query(`SELECT w.id AS WarehouseID, w.name AS WarehouseName, w.remaining_area AS RemainingArea, 
+            FLOOR(w.remaining_area / (p.length * p.width * p.height)) AS Copies
+            FROM (SELECT id, name, remaining_area FROM warehouse) AS w 
+            JOIN (SELECT length, width, height FROM product WHERE id = ${pid}) AS p
+            ORDER BY w.remaining_area DESC;`, (err, result) => {
                 if(err) reject (err);
                 else resolve(result);
             })
         }catch (err){
             resolve (err);
         }
-    })
+    });
 }
 
 module.exports = {

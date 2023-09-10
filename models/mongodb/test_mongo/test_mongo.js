@@ -145,7 +145,7 @@ app.post("/category/update", async (req, res) => {
 //get all categories
 app.get("/category", async (req, res) => {
   try {
-    const result = await mg_category.getAllCats();
+    const result = await mg_category.getAllCats(6);
     sendResponse(res, 200, `ok`, result);
   } catch (err) {
     console.log(err)

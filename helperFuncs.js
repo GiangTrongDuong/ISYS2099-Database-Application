@@ -76,6 +76,8 @@ const navigatePage = (type, id = -1) => {
             return `${MY_ACCOUNT_ROUTE}/create-product`;
         case "delete-product":
             return `${MY_ACCOUNT_ROUTE}/delete-product`;
+        case "delete-user":
+            return `${MY_ACCOUNT_ROUTE}/delete-user/${id}`;
         default:
             return `${HOME_ROUTE}`;
     }

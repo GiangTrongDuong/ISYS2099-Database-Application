@@ -36,8 +36,12 @@ const createCats = async(list_cats) => {
 }
 
 //get all categories in db
-const getAllCats = async() => {
+const getAllCats = async(limit) => {
     try {
+        if (limit) {
+            const allCats = await category.find().limit(limit);
+            return allCats
+        }
         const allCats = await category.find();
         return allCats
     }

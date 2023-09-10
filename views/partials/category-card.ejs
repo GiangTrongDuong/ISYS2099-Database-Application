@@ -1,11 +1,11 @@
 <a role="button" class="card-custom-container col d-inline-block " href="<%= navigatePage('category', category.id) %>">
     <div class="card card-custom text-light border-0 w-100 h-100 overflow-hidden">
-        <img src="<%= `https://source.unsplash.com/random/${category['category_name']}` %>"
+        <img src="<%= `https://source.unsplash.com/random/${category.name}` %>"
             class="card-custom-img w-100 h-100" alt="<%= category['category_name'] %>">
         <div class="card-img-overlay bg-dark 
     d-flex justify-content-center align-items-center flex-column " style="--bs-bg-opacity: .5">
             <h4 class="card-title line-clamp-2 text-center">
-                <%= category["category_name"] %>
+                <%= category.name %>
             </h4>
             <h5>Id: <%= category.id %>
             </h5>

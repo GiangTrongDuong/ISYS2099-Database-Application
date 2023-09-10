@@ -8,24 +8,13 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const { navigatePage, formatCurrencyVND } = require('./helperFuncs.js');
-const { CONNECTED_URI, PORT } = require('./constants.js');
+const { PORT } = require('./constants.js');
 const { dummyCatList, dummyProductCatList } = require('./dummyData.js');
 require('dotenv').config();
 const app = express();
-const { default: mongoose } = require('mongoose');
 const {connectMongoDB} = require('./models/connection/mongodbConnect');
 const Category = require('./models/mongodb/models/function_category');
 
-async function connect(){
-  try{
-    await mongoose.connect(CONNECTED_URI);
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-connect();
 connectMongoDB()
 
 // view engine setup
@@ -82,7 +71,7 @@ app.use('/', warehouse);
 
 // full route to Home page: /
 app.get("/", async (req, res) =>{
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     // res.json(catlist);
     res.render('layout.ejs', {
         title: "Home",
