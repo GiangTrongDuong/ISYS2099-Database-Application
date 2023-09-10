@@ -7,7 +7,8 @@ create index name_idx on warehouse (name); -- use when search warehouse by name
 create index remaining_area_idx on warehouse (remaining_area); -- use when select warehouse to put product to -> prioritize area that have more remaining area (use "order by remaining_area")
 
 -- table product
-create index title_idx on product (title); -- use when search product by name
+create fulltext index title_ft_idx on product (title); -- use when search product by name
+create fulltext index description_ft_idx on product (description); -- use when search product by name
 create index seller_id_idx on product (seller_id); -- use when query join 2 tables product and user
 create index price_idx on product (price); -- use when filter products by price range
 create index created_at_idx on product (created_at); -- use when prioritize to display new product
