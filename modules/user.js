@@ -41,7 +41,7 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
   var password = req.body.password;
   database.query(`SELECT id, role, user_name, password_hash 
         FROM user 
-        WHERE user_name = "${userName}";`, (error, uresults) => {
+        WHERE user_name = ?;`,[userName], (error, uresults) => {
     if (uresults.length > 0) {
       bcrypt.compare(password, uresults[0].password_hash).then(function (result) {
         if (result == true) {
@@ -81,7 +81,7 @@ router.post(`${SIGNUP_ROUTE}`, async function (req, res) {
   const saltRounds = 10;
   database.query(`SELECT * 
         FROM user 
-        WHERE user_name = "${userName}";`, (error, results) => {
+        WHERE user_name = ?;`,[userName], (error, results) => {
     if (results.length > 0) {
       console.log("Taken username!");
     } else {
@@ -107,7 +107,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
     const role = userInfo.role;
     database.query(`SELECT * 
    FROM user 
-   WHERE user_name = "${userName}"`, async (error, result) => {
+   WHERE user_name = ?`,[userName], async (error, result) => {
       if (result) {
         const user_name = result[0].user_name;
         const display_name = result[0].display_name;
