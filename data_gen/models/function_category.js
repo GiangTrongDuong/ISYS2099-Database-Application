@@ -36,8 +36,12 @@ const createCats = async(list_cats) => {
 }
 
 //get all categories in db
-const getAllCats = async() => {
+const getAllCats = async(limit) => {
     try {
+        if (limit) {
+            const allCats = await category.find().limit(limit);
+            return allCats
+        }
         const allCats = await category.find();
         return allCats
     }
@@ -72,7 +76,7 @@ const findCatByName = async (name) => {
     }
 }
 
-//find all children
+//get all children (and below) of a category
 const getAllChildren = async (id) => {
     try {
         const children_cats = await category.aggregate( [
@@ -102,7 +106,7 @@ const getAllChildren = async (id) => {
     }
 }
 
-//find all children
+//get all parents (and above) of a category
 const getAllParents = async (id) => {
     try {
         const parents = await category.aggregate( [
@@ -132,7 +136,7 @@ const getAllParents = async (id) => {
     }
 }
 
-// get lowest level categories (cats that are not a parent of any category)
+// get lowest level categories (categories that are not a parent of any category)
 const getLowestLevelCats = async () => {
     try {
         const cats = await category.aggregate( [
@@ -160,29 +164,10 @@ const getLowestLevelCats = async () => {
     }
 }
 
-// add parent's attribute to current object's attribute
-// the data is structured nicely so we only need to go up 1 level
-const addParentAtt = async (catId) => {
-    try{
-        const current = await findCatById(catId);
-        if (current.parent_category){ // if has parent_category
-            // find parent
-            const parent = await findCatById(current.parent_category);
-            // add parent's attributes
-            await addAttributesToCat(current, parent.attribute)
-            console.log(`${current.name}: added parent's attributes`);
-        }
-        return current;
-    }
-    catch (err){
-        console.log("Cannot add parent's attribute" + err);
-    }
-}
-
-
 // deleteCat() delete a category by id
 // then update parent_category of its children to null
 // return the deleted category
+// (only when that category & its children dont have any product)
 const deleteCat = async(id) => {
     const session = await category.startSession();
     session.startTransaction();
@@ -207,8 +192,7 @@ const deleteCat = async(id) => {
 
 // deleteCat() delete a category by id and all of its children tree
 // return a list of delelted cats
-// return empty list if no cat found
-// return null on error
+// (only when that category & its children dont have any product)
 const deleteCatAndChildren = async(id) => {
     const session = await category.startSession();
     session.startTransaction();
@@ -238,44 +222,8 @@ const deleteCatAndChildren = async(id) => {
     }
 }
 
-// check if an object is empty
-function isEmpty(o){
-    return (o === undefined || o == null || o == "" || o.length ==0);
-}
-
-// check if a cat itself has any product
-const hasProduct = async(id) => {
-    try {
-        const catHasProduct = await product.exists({category: id});
-        return catHasProduct;
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-// check if a category (& its children_cat) is associated with any product
-const isNotAssociatedWithProduct = async(id) => {
-    try {
-        let catHasProduct = await hasProduct(id);
-        // if the category has product -> is associated
-        if (catHasProduct) return false;
-        // if the category has no product -> check if its children is
-        const children = getAllChildren(id);
-        if (!isEmpty(children.children_categories)) {
-            for (catid of children.children_categories) {
-                if (hasProduct(id)) return false
-            }
-        }
-
-        return true;
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-//find by category id and update, if parent_cat is updated, parent's attribute will also be added to this cat 
-//update name & parent_cat is available now
-//still working on update newatt
+// updateCat() updates a category (name, parent category, attribute)
+// (only when that category & its children dont have any product)
 const updateCat = async (id, newName, newAtts, newPAId) => {
     try {
         const notAssociated = await isNotAssociatedWithProduct(id);
@@ -298,8 +246,7 @@ const updateCat = async (id, newName, newAtts, newPAId) => {
 }
 
 
-/*  - addAttributesToCat() find and update a cat (add the list of NEW attributes to that category)
-    - 
+/*  - addAttributesToCat() add the list of NEW attributes to a category
     - if a new attribute already exists in the current attributes, it wont be added again
     - Example for newAttributes:
 [
@@ -332,35 +279,91 @@ const addAttributesToCat = async (cat, newAttributes) => {
     }
 }
 
-const getAttributeGroups = async () => {
+
+// check if an object is empty
+function isEmpty(o){
+    return (o === undefined || o == null || o == "" || o.length ==0);
+}
+
+// check if a cat itself has any product
+const hasProduct = async(id) => {
     try {
-        const result = await category.aggregate([
-            {
-                $unwind: '$attribute'
-            },
-            {
-                $group: {
-                    "_id": "$attribute.aName",
-                    "aValues": {
-                        "$addToSet": "$attribute.aValue"
-                    }
-                }
-            },
-            {
-                $project: {
-                    _id: 0,
-                    "aName": "$_id",
-                    "aValues": 1,
-                }
-            },
-        ])
-        return result
+        const catHasProduct = await product.exists({category: id});
+        return catHasProduct;
     } catch (err) {
         console.log(err)
-        throw (err)
+    }
+}
+
+// check if a category (& its children) is associated with any product
+const isNotAssociatedWithProduct = async(id) => {
+    try {
+        let catHasProduct = await hasProduct(id);
+        // if the category has product -> is associated
+        if (catHasProduct) return false;
+        // if the category has no product -> check if its children is
+        const children = getAllChildren(id);
+        if (!isEmpty(children.children_categories)) {
+            for (catid of children.children_categories) {
+                if (hasProduct(id)) return false
+            }
+        }
+
+        return true;
+    } catch (err) {
+        console.log(err)
     }
 }
 
 
+// const getAttributeGroups = async () => {
+//     try {
+//         const result = await category.aggregate([
+//             {
+//                 $unwind: '$attribute'
+//             },
+//             {
+//                 $group: {
+//                     "_id": "$attribute.aName",
+//                     "aValues": {
+//                         "$addToSet": "$attribute.aValue"
+//                     }
+//                 }
+//             },
+//             {
+//                 $project: {
+//                     _id: 0,
+//                     "aName": "$_id",
+//                     "aValues": 1,
+//                 }
+//             },
+//         ])
+//         return result
+//     } catch (err) {
+//         console.log(err)
+//         throw (err)
+//     }
+// }
 
-module.exports = {saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, addParentAtt, deleteCat, deleteCatAndChildren, updateCat, addAttributesToCat, getAttributeGroups }
+
+// // add parent's attribute to current object's attribute
+// // the data is structured nicely so we only need to go up 1 level
+// const addParentAtt = async (catId) => {
+//     try{
+//         const current = await findCatById(catId);
+//         if (current.parent_category){ // if has parent_category
+//             // find parent
+//             const parent = await findCatById(current.parent_category);
+//             // add parent's attributes
+//             await addAttributesToCat(current, parent.attribute)
+//             console.log(`${current.name}: added parent's attributes`);
+//         }
+//         return current;
+//     }
+//     catch (err){
+//         console.log("Cannot add parent's attribute" + err);
+//     }
+// }
+
+
+module.exports = {saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat}

@@ -8,9 +8,38 @@ const dropAll = async () =>{
   await product.deleteMany({});
 }
 
-// create a category
+const deleteProductByMysqlId = async(mysqlid) => {
+  try {
+    const delelted = await product.findOneAndDelete({mysql_id: mysqlid});
+    if (delelted == null) throw new Error(`No product with id = ${mysqlid}`)
+    return delelted;
+  }
+  catch (err) {
+    throw(err)
+  }
+
+}
+
+/* create a product
+  - input: mysqlid, categoryid, attributes
+  - attributes is a array of pair {aName, value} to set
+  - example of attribute list:
+  [
+    {
+      "aName": "Warranty",
+      "value": "3 months"
+    },
+    {
+      "aName": "Color",
+      "value": "Blue"
+    }
+  ]
+  - note: please put attributes to an array as above (even if you only set 1 attribute)
+*/
 const saveProduct = async(mysqlid, categoryid, attributes) => {
   try {
+      let exist = await mysqlIDExist(mysqlid);
+      if (exist) throw new Error("Product already exists");
       var newProduct = new product;
       newProduct.mysql_id = mysqlid;
       newProduct.category = ObjectId(categoryid);
@@ -22,27 +51,31 @@ const saveProduct = async(mysqlid, categoryid, attributes) => {
       return saved;
   }
   catch (error) {
-    console.log("Product save error: " + error);
+    if (error.name === "ValidationError") {
+      await product.findOneAndDelete({_id: newProduct._id})
+      throw new Error("Product is not created because of validation failure. Suggestiton: check if product's attribute is valid.")
+    }
     throw(error)
   }
 }
 
 
-// create a category
+// update a product: same input as saveProduct
 const updateProduct = async(mysqlid, categoryid, attributes) => {
   try {
-      var newProduct = new product;
-      newProduct.mysql_id = mysqlid;
-      newProduct.category = ObjectId(categoryid);
-      let saved = await newProduct.save();
-
-      saved = await initAttributesForProduct(newProduct)
-      saved = await setAttributes(newProduct._id, attributes)
-      console.log("=== Product " + newProduct.mysql_id + " saved to DB.");
+      let prod = await findProductByMysqlID(mysqlid);
+      if (prod.category != categoryid && !isEmpty(categoryid)) {
+        prod.category = ObjectId(categoryid);
+        prod = await prod.save();
+        prod = await initAttributesForProduct(prod)
+      }
+      prod = await setAttributes(prod._id, attributes)
       return saved;
   }
   catch (error) {
-    console.log("Product save error: " + error);
+    if (error.name === "ValidationError") {
+      throw new Error("Product is not updated because of validation failure. Suggestiton: check if product's attribute is valid.")
+    }
     throw(error)
   }
 }
@@ -54,19 +87,19 @@ const getAllProducts = async() => {
     return all
   }
   catch (err) {
-    console.error('Get all products failed: ', err)
+    throw(err)
   }
 }
 
-// findByAttribute() takes a pair of attribute name & value, then return a list of category has that attribute
+// findProductsByAttribute() takes a pair of attribute aname & value, then return a list of products having that attribute
 const findProductsByAttribute = async(aName, value) => {
   try {
-      //find all cats that have aName = aName & aValue = value
+      //find all products that have aName = aName & aValue = value
       const products = await product.find({attribute: {$elemMatch: {aName: aName, value: value}}})
       return products
   }
   catch (err) {
-    console.log("Find by attribute error: " + err);
+    throw(err)
   }
 }
 
@@ -80,8 +113,7 @@ const findProductByID = async(id) => {
   }
 }
 
-// find a prodcut by mongodb id
-
+// find a prodcut by mysql id
 const findProductByMysqlID = async(mysqlid) => {
   try {
     const myproduct = await product.findOne({mysql_id: mysqlid});
@@ -91,8 +123,7 @@ const findProductByMysqlID = async(mysqlid) => {
   }
 }
 
-// add parent's attribute to current object's attribute
-// the data is structured nicely so we only need to go up 1 level
+// initialize attribute list for product
 const initAttributesForProduct = async (newProduct) => {
   try{
       const cat = await mg_category.findCatById(newProduct.category)
@@ -115,7 +146,7 @@ const initAttributesForProduct = async (newProduct) => {
   }
 }
 
-
+// addAttributesToProduct() set attributes for product
 const addAttributesToProduct = async (myProduct, newAttributes) => {
   try {
       // if attributes list is not empty
@@ -131,6 +162,7 @@ const addAttributesToProduct = async (myProduct, newAttributes) => {
       return myProduct
   } catch (err) {
       console.log(err)
+      throw(err)
   }
 }
 
@@ -195,7 +227,13 @@ const setAttributes = async (productid, attribute_name_value_list) => {
 
   } catch (err) {
     console.log(err)
+    throw(err)
   }
+}
+
+const mysqlIDExist = async (mysqlid) => {
+  const exist = await product.exists({mysql_id: mysqlid});
+  return exist;
 }
 
 
@@ -204,4 +242,4 @@ function isEmpty(o){
   return (o === undefined || o == null || o == "" || o.length ==0);
 }
 
-module.exports = {saveProduct, getAllProducts, dropAll, findProductsByAttribute, getAttributeGroups}
+module.exports = {deleteProductByMysqlId, saveProduct, getAllProducts, dropAll, findProductsByAttribute, getAttributeGroups, updateProduct, findProductByMysqlID}
