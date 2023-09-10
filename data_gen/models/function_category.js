@@ -316,54 +316,33 @@ const isNotAssociatedWithProduct = async(id) => {
 }
 
 
-// const getAttributeGroups = async () => {
-//     try {
-//         const result = await category.aggregate([
-//             {
-//                 $unwind: '$attribute'
-//             },
-//             {
-//                 $group: {
-//                     "_id": "$attribute.aName",
-//                     "aValues": {
-//                         "$addToSet": "$attribute.aValue"
-//                     }
-//                 }
-//             },
-//             {
-//                 $project: {
-//                     _id: 0,
-//                     "aName": "$_id",
-//                     "aValues": 1,
-//                 }
-//             },
-//         ])
-//         return result
-//     } catch (err) {
-//         console.log(err)
-//         throw (err)
-//     }
-// }
+// retrieve all attributes of a category (itself' and its parents')
+// return array
+const getAttributesOfCategory = async (catid) => {
+    try{
+        const cat = await findCatById(catid)
+        // let updated = [];
+        let set = new Set()
+        if (!isEmpty(cat.attribute))
+            for (a of cat.attribute) 
+                set.add(a);
 
+        const findParents = await getAllParents(catid)
+        if (!isEmpty(findParents.parent_categories)) { // if have parents
+          for (pid of findParents.parent_categories) {
+            let parent = await findCatById(pid);
+            if (!isEmpty(parent.attribute)) { // if parent has attribute
+                for (a of parent.attribute) 
+                    set.add(a);
+            }
+          }
+        }
 
-// // add parent's attribute to current object's attribute
-// // the data is structured nicely so we only need to go up 1 level
-// const addParentAtt = async (catId) => {
-//     try{
-//         const current = await findCatById(catId);
-//         if (current.parent_category){ // if has parent_category
-//             // find parent
-//             const parent = await findCatById(current.parent_category);
-//             // add parent's attributes
-//             await addAttributesToCat(current, parent.attribute)
-//             console.log(`${current.name}: added parent's attributes`);
-//         }
-//         return current;
-//     }
-//     catch (err){
-//         console.log("Cannot add parent's attribute" + err);
-//     }
-// }
+        return Array.from(set);;
+    }
+    catch (err){
+        console.log("Cannot inti attributes" + err);
+    }
+}
 
-
-module.exports = {saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat}
+module.exports = {saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat, getAttributesOfCategory}

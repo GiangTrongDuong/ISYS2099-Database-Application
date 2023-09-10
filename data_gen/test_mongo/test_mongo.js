@@ -14,6 +14,16 @@ app.use(express.urlencoded({ extended: true }))
 
 connectMongoDB()
 
+// get attributes (from itself and its parents) of a category
+app.get("/category/all-attributes/:catid", async (req, res) => {
+  try {
+    const result = await mg_category.getAttributesOfCategory(req.params.catid);
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
 
 // get attribute and all values group by attribute's name
 app.get("/attribute_group", async (req, res) => {
@@ -63,6 +73,19 @@ app.get("/product/filter_by_attribute", async (req, res) => {
   }
 });
 
+//get products by attribute name and value
+//return list of products
+app.get("/product/filter_by_attributes", async (req, res) => {
+  try {
+    const attributes = req.body;
+    const result = await mg_product.findProductsByAttributes(attributes);
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
 //get all products
 app.get("/product", async (req, res) => {
   try {
@@ -80,7 +103,7 @@ app.delete("/product/:mysqlid", async (req, res) => {
   try {
     const mysqlid = req.params.mysqlid;
     const result = await mg_product.deleteProductByMysqlId(mysqlid);
-    if (result) sendResponse(res, 200, `Deleted product`);
+    if (result) sendResponse(res, 200, `Deleted product`, result);
     else sendResponse(res, 500, `Delete failed`);
   } catch (err) {
     console.log(err)
