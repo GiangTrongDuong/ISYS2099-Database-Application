@@ -8,9 +8,9 @@ const dropAll = async () =>{
 
 const deleteProductByMysqlId = async(mysqlid) => {
   try {
-    const delelted = await product.findOneAndDelete({mysql_id: mysqlid});
-    if (delelted == null) throw new Error(`No product with id = ${mysqlid}`)
-    return delelted;
+    const deleted = await product.findOneAndDelete({mysql_id: mysqlid});
+    if (deleted == null) throw new Error(`No product with id = ${mysqlid}`)
+    return deleted;
   }
   catch (err) {
     throw(err)
@@ -41,16 +41,19 @@ const saveProduct = async(mysqlid, categoryid, attributes) => {
 
       // get attribute list for product
       let attribute = await mg_category.getAttributesOfCategory(categoryid)
+      attribute = await setAttributes(attribute, attributes)
+
       // create product
       var newProduct = await product.create({mysql_id: mysqlid, category: categoryid, attribute: attribute});
       // set value for attribute
-      newProduct = await setAttributes(newProduct._id, attributes)
+      // newProduct = await setAttributes(attribute, attributes)
       console.log("=== Product " + newProduct.mysql_id + " saved to DB.");
       return newProduct;
   }
   catch (error) {
+    console.log("HUUUUUUUUUUUUUU: ", error)
     if (error.name === "ValidationError") {
-      await product.findOneAndDelete({_id: newProduct._id})
+      // await product.findOneAndDelete({_id: newProduct._id})
       throw new Error("Product is not created because of validation failure. Suggestiton: check if product's attribute is valid.")
     }
     throw(error)
@@ -61,7 +64,8 @@ const saveProduct = async(mysqlid, categoryid, attributes) => {
 const updateProduct = async(mysqlid, attributes) => {
   try {
       let prod = await findProductByMysqlID(mysqlid);
-      prod = await setAttributes(prod._id, attributes)
+      prod.attribute = await setAttributes(prod.attribute, attributes)
+      let saved = await prod.save()
       return saved;
   }
   catch (error) {
@@ -139,25 +143,52 @@ const findProductByMysqlID = async(mysqlid) => {
   }
 }
 
+// // set values for atttributes
+// const setAttributes = async (productid, attribute_name_value_list) => {
+//   try {
+//     const myproduct = await findProductByID(productid);
+//     let update_attribute = myproduct.attribute;
+//     if (!isEmpty(update_attribute) && !isEmpty(attribute_name_value_list)) {
+//       for (a_pair of attribute_name_value_list) {
+//         for (let i = 0; i < update_attribute.length; i++) {
+//           if (update_attribute[i].aName.toLowerCase() == a_pair.aName.toLowerCase()) {
+//             a_pair.value = transformWordCase(a_pair.value)
+//             update_attribute[i].value = a_pair.value;
+//             break;
+//           }
+//         }
+//       }
+//     }
+//     myproduct.attribute = update_attribute;
+//     const updated = await myproduct.save();
+//     return updated
+//   } catch (err) {
+//     console.log(err)
+//     throw(err)
+//   }
+// }
+
+
 // set values for atttributes
-const setAttributes = async (productid, attribute_name_value_list) => {
+const setAttributes = async (product_atts, a_set_list) => {
   try {
-    const myproduct = await findProductByID(productid);
-    let update_attribute = myproduct.attribute;
-    if (!isEmpty(update_attribute) && !isEmpty(attribute_name_value_list)) {
-      for (a_pair of attribute_name_value_list) {
-        for (let i = 0; i < update_attribute.length; i++) {
-          if (update_attribute[i].aName.toLowerCase() == a_pair.aName.toLowerCase()) {
-            a_pair.value = transformWordCase(a_pair.value)
-            update_attribute[i].value = a_pair.value;
+    if (!isEmpty(product_atts) && !isEmpty(a_set_list)) {
+      for (a_pair of a_set_list) {
+        for (let i = 0; i < product_atts.length; i++) {
+          if (product_atts[i].aName.toLowerCase() == a_pair.aName.toLowerCase()) {
+            let temp = {
+              aName: product_atts[i].aName, 
+              aValue: product_atts[i].aValue, 
+              aRequired: product_atts[i].aRequired, 
+              value: transformWordCase(a_pair.value)
+            }
+            product_atts[i] = temp
             break;
           }
         }
       }
     }
-    myproduct.attribute = update_attribute;
-    const updated = await myproduct.save();
-    return updated
+    return product_atts
   } catch (err) {
     console.log(err)
     throw(err)

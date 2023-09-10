@@ -19,6 +19,7 @@ const saveCat = async(newID, newName, newAtt, newPAId) => {
     }
     catch (error) {
         console.log("Category save error: " + error);
+        throw(err)
     }
 }
 
@@ -47,6 +48,7 @@ const getAllCats = async(limit) => {
     }
     catch (err) {
         console.error('Get all category failed: ', err)
+        throw(err)
     }
 }
 
@@ -175,6 +177,7 @@ const deleteCat = async(id) => {
         const notAssociated = await isNotAssociatedWithProduct(id);
         if (!notAssociated) throw new Error("cannot delete category that has product");
         const deleted = await category.findOneAndDelete({ _id : id });
+        if (deleted == null) throw new Error(`No category with id = ${id}`)
         await category.updateMany(  {parent_category: id},
                                     {$set: {parent_category: null}}
                                 );
@@ -203,12 +206,11 @@ const deleteCatAndChildren = async(id) => {
         const delete_list = [];
         const children = await getAllChildren(id);
         let deleted = await category.findOneAndDelete({ _id : id });
-        if (deleted) {
+        if (deleted == null) throw new Error(`No category with id = ${id}`)
+        delete_list.push(deleted._id);
+        for (cat_id of children.children_categories) {
+            deleted = await category.findOneAndDelete({ _id : cat_id });
             delete_list.push(deleted._id);
-            for (cat_id of children.children_categories) {
-                deleted = await category.findOneAndDelete({ _id : cat_id });
-                delete_list.push(deleted._id);
-            }
         }
         await session.commitTransaction();
         session.endSession();
@@ -276,6 +278,7 @@ const addAttributesToCat = async (cat, newAttributes) => {
         return cat
     } catch (err) {
         console.log(err)
+        throw(err)
     }
 }
 
@@ -337,7 +340,6 @@ const getAttributesOfCategory = async (catid) => {
             }
           }
         }
-
         return Array.from(set);;
     }
     catch (err){

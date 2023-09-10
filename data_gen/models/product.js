@@ -14,9 +14,9 @@ const productAttributeSchema = new mongoose.Schema(
         },
         value:{
             type: mongoose.Schema.Types.Mixed,
-            required: [function() {
+            required: function() {
                 return this.aRequired;
-            }, "This attribute value is required"],
+            },
             validate: function(v) {
                 let type = typeof v;
                 if (type == "string") type = "text";

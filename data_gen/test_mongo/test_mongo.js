@@ -168,7 +168,7 @@ app.post("/category/update", async (req, res) => {
 //get all categories
 app.get("/category", async (req, res) => {
   try {
-    const result = await mg_category.getAllCats(6);
+    const result = await mg_category.getAllCats();
     sendResponse(res, 200, `ok`, result);
   } catch (err) {
     console.log(err)
@@ -193,8 +193,7 @@ app.delete("/category/delete-cat-and-children/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const result = await mg_category.deleteCatAndChildren(id);
-    if (result.length != 0) sendResponse(res, 200, `Category and its children are deleted.`, result);
-    if (result.length == 0) sendResponse(res, 404, `No category with ID ${id} is found.`, result);
+    if (result) sendResponse(res, 200, `Transaction succeeded. Category and its children are deleted.`, result);
     else sendResponse(res, 500, `Transaction failed. Category and its children are not deleted.`);
   } catch (err) {
     console.log(err)
@@ -208,7 +207,7 @@ app.delete("/category/delete-cat-only/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const result = await mg_category.deleteCat(id);
-    if (result) sendResponse(res, 200, `Transaction succeeded. Category is deleted.`);
+    if (result) sendResponse(res, 200, `Transaction succeeded. Category is deleted.`, result);
     else sendResponse(res, 500, `Transaction failed. Category is not deleted.`);
   } catch (err) {
     console.log(err)
