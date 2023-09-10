@@ -267,12 +267,13 @@ const updateCat = async (id, newName, newAtts, newPAId) => {
         if (!notAssociated) throw new Error("cannot update category that has product");
         let cat = await findCatById(id);
         if (cat) {
-            cat = await addAttributesToCat(cat, newAtts)
             if (!isEmpty(newName)) cat.name = newName;
             if (newPAId !== undefined && cat.parent_category != newPAId) {
                 cat.parent_category = newPAId;
             }
+            cat.attribute = [] // reset attribute list to set with the updated list
             cat = await cat.save();
+            cat = await addAttributesToCat(cat, newAtts) // set with the updated list
         }
 
         return cat;
@@ -298,10 +299,13 @@ const addAttributesToCat = async (cat, newAttributes) => {
     try {
         // if attributes list is not empty
         if (!isEmpty(newAttributes)) {
+            // correct word case
             for (let i = 0; i < newAttributes.length; i++) {
                 let value = newAttributes[i].aName;
                 newAttributes[i].aName = value[0].toUpperCase() + value.substring(1).toLowerCase();
+                newAttributes[i].aValue = newAttributes[i].aValue.toLowerCase(); 
             }
+            // add attributes
             const updated = await category.findOneAndUpdate(
                 { _id: cat._id },
                 { $addToSet: { attribute: { $each: newAttributes } } },
