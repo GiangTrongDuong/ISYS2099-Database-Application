@@ -38,7 +38,7 @@ router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => 
         const info = req?.session?.user;
         const id = info.id;
         let renderedSellerProduct = await productDb.from_seller(id);
-        const catlist = await Category.getAllCats(6);
+        const catlist = await Category.getAllCats();
         const productList = renderedSellerProduct.productList;
         res.render('layout.ejs',{
             title: "My Product List",

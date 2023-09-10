@@ -25,7 +25,7 @@ async function create_warehouse(info) {
         const { newName, newAddress, newTotalArea } = info;
         try {
             database.query(`INSERT INTO warehouse (name, address, total_area, remaining_area)
-            VALUES (\'${newName}\', \'${newAddress}\', ${newTotalArea}, ${newTotalArea});`, function (error, result) {
+            VALUES (?,?,?,?);`,[newName,newAddress,newTotalArea,newTotalArea], function (error, result) {
                 if (error) reject({ "error insert": error });
                 resolve({ "new warehouse id": result.insertId });
             });
@@ -44,7 +44,7 @@ async function read_warehouse(wid) {
             p.title AS ProductTitle, wi.quantity AS Quantity, 
             ROUND((length * width * height * quantity), 2) AS \'Load Volume\'
             FROM warehouse_item wi, product p, warehouse w
-            WHERE wi.product_id = p.id AND wi.warehouse_id = w.id AND w.id = ${wid};`, function (error, result) {
+            WHERE wi.product_id = p.id AND wi.warehouse_id = w.id AND w.id = ?;`,[wid], function (error, result) {
                 if (error) reject({ "error with query result": error });
                 resolve(result);
             })
@@ -61,8 +61,8 @@ async function update_warehouse(wid, info) {
     const { newName, newAddress } = info;
     return new Promise((resolve, reject) => {
         try {
-            database.query(`UPDATE warehouse SET name = \'${newName}\', address = \'${newAddress}\'
-            WHERE id = ${wid};`, function (error, result) {
+            database.query(`UPDATE warehouse SET name = ?, address = ?
+            WHERE id = ?;`,[newName,newAddress,wid], function (error, result) {
                 if (error) reject({ "error updating values": error });
                 resolve(result);
             });
@@ -77,7 +77,7 @@ async function update_warehouse(wid, info) {
 async function delete_warehouse(wid) {
     return new Promise((resolve, reject) => {
         try {
-            database.query(`DELETE FROM warehouse WHERE id = ${wid};`, function (error1, result1) {
+            database.query(`DELETE FROM warehouse WHERE id = ?;`,[wid], function (error1, result1) {
                 if (error1) reject({ "error from trigger": error1 });
                 resolve(result1);
             });
@@ -97,7 +97,7 @@ async function get_warehouse_to_store(pid) {
             remaining_area AS RemainingArea, 
             FLOOR(remaining_area / (length * width * height)) as Copies, 
             FROM product p, warehouse w 
-            WHERE p.id = ${pid} ORDER BY w.remaining_area DESC;`, function (error, result) {
+            WHERE p.id = ? ORDER BY w.remaining_area DESC;`,[pid], function (error, result) {
                 if (error) reject(error);
                 resolve(result);
             });
@@ -112,7 +112,7 @@ async function get_warehouse_to_store(pid) {
 async function move_product_to_wh(pid, quantity, src_wid, dst_wid) {
     return new Promise((resolve, reject) => {
         try {
-            database.query(`CALL wh_move_product(${pid}, ${quantity}, ${src_wid}, ${dst_wid});`,
+            database.query(`CALL wh_move_product(?,?,?,?);`,[pid, quantity, src_wid,dst_wid],
                 function (error, result) {
                     if (error) reject({ "error when moving": error });
                     console.log(result[0][0].result);
