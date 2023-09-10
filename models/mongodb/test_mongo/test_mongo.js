@@ -86,6 +86,19 @@ app.get("/product/filter_by_attributes", async (req, res) => {
   }
 });
 
+//get products by attribute name and value
+//return list of products
+app.get("/product/filter", async (req, res) => {
+  try {
+    const {category, attribute} = req.body;
+    const result = await mg_product.filterProducts(category, attribute);
+    sendResponse(res, 200, `ok`, result);
+  } catch (err) {
+    console.log(err)
+    sendResponse(res, 500, `Error ${err}`);
+  }
+});
+
 //get all products
 app.get("/product", async (req, res) => {
   try {
@@ -157,7 +170,7 @@ app.post("/category", async (req, res) => {
 app.post("/category/update", async (req, res) => {
   try {
     const {_id, name, attribute, parent_category} = req.body;
-    const result = await mg_category.updateCat(id, name, attribute, parent_category)
+    const result = await mg_category.updateCat(_id, name, attribute, parent_category)
     sendResponse(res, 200, `ok`, result);
   } catch (err) {
     console.log(err)

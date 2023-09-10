@@ -3,6 +3,8 @@ const router = express.Router();
 const Category = require('../models/mongodb/models/function_category');
 const { formatCurrencyVND } = require('../helperFuncs.js');
 const productDb = require('../models/function_product.js');
+const productMongoP = require('../models/mongodb/models/function_product_mongodb');
+const productMongo = require('../models/mongodb/models/function_category');
 const { SELLER_ROUTE, MY_ACCOUNT_ROUTE } = require('../constants.js');
 const isAuth = require('../models/isAuth.js');
 
@@ -38,7 +40,7 @@ router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => 
         const info = req?.session?.user;
         const id = info.id;
         let renderedSellerProduct = await productDb.from_seller(id);
-        const catlist = await Category.getAllCats();
+        const catlist = await Category.getLowestLevelCats();
         const productList = renderedSellerProduct.productList;
         res.render('layout.ejs',{
             title: "My Product List",
@@ -65,11 +67,47 @@ router.post(`${MY_ACCOUNT_ROUTE}/create-product`, isAuth.isAuth, async (req,res)
     const height = req.body.hei;
     const image = req.body.image;
     const remaining = req.body.stock;
-    await productDb.createProduct(title,id,price,desc,cat,length,width,height,image, remaining);
-    res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
+    productDb
+    const pid = await productDb.createProduct(title,id,price,desc,cat,length,width,height,image,remaining);
+    res.redirect(`${MY_ACCOUNT_ROUTE}/select-attribute/${cat}/${pid}`);
     }catch (err){
     res.send(err);
     }
+})
+
+router.get(`${MY_ACCOUNT_ROUTE}/select-attribute/:cat/:id`, async (req,res) => {
+    const pid = req.params.id;
+    const catID = req.params.cat;
+    const catlist = await Category.getAllCats(6);
+    const attribute = await productMongo.getAttributesOfCategory(catID);
+    // res.json(attribute);
+    res.render('layout.ejs',{
+        title: "My Product List",
+        bodyFile: `${root}/selectAttSeller`,
+        categoryList: catlist,
+        userSession: req?.session?.user,
+        attList: attribute,
+        catID: catID,
+        productID: pid, 
+    })
+})
+
+router.post(`${MY_ACCOUNT_ROUTE}/select-attribute/submit-att-select`, async (req,res)=>{
+    const cid = req.body.cid;
+    const pid = req.body.pid;
+    const aName = req.body.aName;
+    const value = req.body.value;
+    var i;
+    var newCatValue = [];
+    if (typeof aName == "string" || aName instanceof String){
+        newCatValue.push({aName: aName, value: value});
+    } else {
+        for(i= 0; i<aName.length; i++){
+            newCatValue.push({aName: aName[i], value: value[i]});
+        }
+    }
+    const message = await productMongoP.saveProduct(pid,cid,newCatValue);
+    res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
 })
 
 router.post(`${MY_ACCOUNT_ROUTE}/update-product`, isAuth.isAuth, async (req, res)=>{

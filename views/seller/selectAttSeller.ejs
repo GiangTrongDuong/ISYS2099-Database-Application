@@ -1,0 +1,16 @@
+<form action="<%= navigatePage("add-att")%>" method="POST">
+    <input type="text" class="form-control" id="cid" name="cid" value="<%=catID%>" readonly hidden>
+    <input type="text" class="form-control" id="pid" name="pid" value="<%=productID%>" readonly hidden>
+<% attList.forEach(att => {%>
+    <% if(att["aRequired"] == true){%>
+    <label for="value" class="form-label"><%=att.aName%></label>
+    <input type="text" class="form-control" value="<%=att.aName%>" name="aName" readonly>
+    <input type="text" class="form-control"  value="" name="value" required>
+    <%} else if (att["aRequired"] == false){%>
+    <label for="value" class="form-label"><%=att.aName%></label>
+    <input type="text" class="form-control" value="<%=att.aName%>" name="aName" readonly>
+    <input type="text" class="form-control"  value="" name="value">
+    <%}}) %>
+    <button class="submit">Submit Category</button>
+</form>
+
