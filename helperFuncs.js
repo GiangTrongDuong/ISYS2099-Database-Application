@@ -78,6 +78,8 @@ const navigatePage = (type, id = -1) => {
             return `${MY_ACCOUNT_ROUTE}/update-product`;
         case "create-product":
             return `${MY_ACCOUNT_ROUTE}/create-product`;
+        case "add-att":
+            return `${MY_ACCOUNT_ROUTE}/select-attribute/submit-att-select`;
         case "delete-product":
             return `${MY_ACCOUNT_ROUTE}/delete-product`;
         case "delete-user":

@@ -163,14 +163,14 @@ async function createProduct(title, seller_id, price, description, category, len
             } else {
                 database.query(`INSERT INTO product (title, seller_id, price, description, category, length, width, height, image, remaining, created_at, updated_at) VALUE (?,?,?,?,?,?,?,?,?,?,"${getCurrentTimeString()}","${getCurrentTimeString()}");`,
                 [title, seller_id, price, description, category, length, width, height, image, remaining],
-                async (err, result) =>{
+                async (err, result2) =>{
                     if(err) reject (err);
                     else {
                         try{
-                            const message = await insert_to_warehouse(result.insertId, remaining);
-                            resolve(message);
+                            const message = await insert_to_warehouse(result2.insertId, parseInt(remaining));
+                            resolve(result2.insertId);
                         }catch(err){
-                            resolve(err);
+                            reject(err);
                         }
                     }
                 }) 
@@ -183,7 +183,7 @@ async function createProduct(title, seller_id, price, description, category, len
 async function insert_to_warehouse(pid, quantity) {
     return new Promise((resolve, reject) => {
         try {
-            database.query(`CALL PROCEDURE(?, ?);`,[pid,quantity], function (error1, result1) {
+            database.query(`CALL product_to_wh (?, ?);`,[pid,quantity], function (error1, result1) {
                 if (error1) reject({ "error": "Error from procedure: " + error1 });
                 // var msg = result1[0].result;
                 // Show the total number of products currently in warehouses
