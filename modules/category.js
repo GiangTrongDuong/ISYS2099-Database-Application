@@ -23,32 +23,33 @@ router.get(`${CATEGORY_ROUTE}`, async (req, res) => {
 });
 router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
     try {
-        const catlist = await Category.getAllCats();
+        const catlist = Category.getAllCats(6);
         const id = req.params.id;
-        /* TODO: rendered real category, include:
-            Child categories
-            Products */
+        // get category
         const renderedCategory = await Category.findCatById(id);
+        // get all children
+        const children = await Category.getAllChildren(id);
+        console.log("child category",children);
         // get products from category
         const productList = await ProductDb.from_category(id);
-        console.log(category);
+        // console.log(category);
         // convert to object to assign attribute
         let category = {
-            ...renderedCategory,
-            products: productList
+            ...renderedCategory.toObject(),
+            products: productList,
+            childCategories: children[children_categories],
         }
-        // const category = renderedCategory.toObject();
-        res.json(category);
+        // res.json(category);
 
-        // res.render("layout.ejs", {
-        //     title: "Category",
-        //     bodyFile: `${root}/category.ejs`,
-        //     // TODO: add real data - categoryList
-        //     categoryList: catlist,
-        //     userSession: req?.session?.user,
-        //     // TODO: add real data - category
-        //     category: category,
-        // });
+        res.render("layout.ejs", {
+            title: "Category",
+            bodyFile: `${root}/category.ejs`,
+            // TODO: add real data - categoryList
+            categoryList: catlist,
+            userSession: req?.session?.user,
+            // TODO: add real data - category
+            category: category,
+        });
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
     }

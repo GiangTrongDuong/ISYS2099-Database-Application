@@ -15,7 +15,7 @@ router.get(`${SELLER_ROUTE}/:seller_id`, async (req, res) => {
         const sellerDisplayName = renderedSellerProduct.sellerDisplayName;
         const sellerUsername = renderedSellerProduct.sellerUsername;
         const productList = renderedSellerProduct.productList;
-        const catlist = await Category.getAllCats();
+        const catlist = await Category.getAllCats(6);
         res.render('layout.ejs', {
             title: "Seller",
             bodyFile: `${root}/seller`,
@@ -38,7 +38,7 @@ router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => 
         const info = req?.session?.user;
         const id = info.id;
         let renderedSellerProduct = await productDb.from_seller(id);
-        const catlist = await Category.getAllCats();
+        const catlist = await Category.getAllCats(6);
         const productList = renderedSellerProduct.productList;
         res.render('layout.ejs',{
             title: "My Product List",

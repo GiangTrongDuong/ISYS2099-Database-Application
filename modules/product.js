@@ -38,7 +38,7 @@ router.use(cors({
 router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
   try {
     // get product
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     const result = await db.from_id(req.params['id']); //store info to display 
     const product = result[0];
     const productMongo = await productDbMongo.findProductByMysqlID(req.params['id']);
@@ -63,7 +63,7 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
 router.get(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
   try {
     // render category
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     const aName = req.query.aName;
     const value = req.query.value;
     const result = await productDbMongo.findProductsByAttribute(aName, value);

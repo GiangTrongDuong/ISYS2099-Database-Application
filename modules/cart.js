@@ -34,7 +34,7 @@ router.get(`${CART_ROUTE}`, async (req, res) => {
     const renderedCart = await db.getCartItem(id); //store info to display 
     const cartItems = renderedCart.items;
     const totalPrice = renderedCart.total;
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     // console.log(cartItems);
     res.render("layout.ejs", {
       title: "Cart",

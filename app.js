@@ -71,7 +71,7 @@ app.use('/', warehouse);
 
 // full route to Home page: /
 app.get("/", async (req, res) =>{
-    const catlist = await Category.getAllCats();
+    const catlist = await Category.getAllCats(6);
     // res.json(catlist);
     res.render('layout.ejs', {
         title: "Home",

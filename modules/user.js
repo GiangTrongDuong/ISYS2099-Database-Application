@@ -24,7 +24,7 @@ router.use(cors({
 
 // full route to login page: /login
 router.get(`${LOGIN_ROUTE}`, async function (req, res) {
-  const catlist = await Category.getAllCats();
+  const catlist = await Category.getAllCats(6);
   res.render("layout.ejs", {
     title: "Login",
     bodyFile: `${root}/login`,
@@ -60,7 +60,7 @@ router.post(`${LOGIN_ROUTE}`, async function (req, res) {
 
 // full route to signup page: /signup
 router.get(`${SIGNUP_ROUTE}`, async (req, res) => {
-  const catlist = await Category.getAllCats();
+  const catlist = await Category.getAllCats(6);
   res.render("layout.ejs", {
     title: "Signup",
     bodyFile: `${root}/signup`,
@@ -113,7 +113,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
         const display_name = result[0].display_name;
         const details = result[0].details;
         const id = result[0].id;
-        const catlist = await Category.getAllCats();
+        const catlist = await Category.getAllCats(6);
         //req will be changed based on Nhung proposal
 
         if (role == "Customer") {

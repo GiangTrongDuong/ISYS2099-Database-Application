@@ -21,7 +21,7 @@ router.use(cors({
 //end-of session
 
 router.get(`${ABOUT_ROUTE}`, async function(req, res) { 
-  const catlist = await Category.getAllCats();
+  const catlist = await Category.getAllCats(6);
   res.render("layout.ejs", {
     title: "About Us",
     bodyFile: `${root}/about`,
@@ -34,7 +34,7 @@ router.get(`${ABOUT_ROUTE}`, async function(req, res) {
 }); 
 
 router.get(`${PRIVACY_ROUTE}`, async function(req, res) { 
-  const catlist = await Category.getAllCats();
+  const catlist = await Category.getAllCats(6);
   res.render("layout.ejs", {
     title: "Privacy Policy",
     bodyFile: `${root}/policy`,
@@ -45,7 +45,7 @@ router.get(`${PRIVACY_ROUTE}`, async function(req, res) {
 }); 
 
 router.get(`${CONTACT_ROUTE}`, async function(req, res) { 
-  const catlist = await Category.getAllCats();
+  const catlist = await Category.getAllCats(6);
   res.render("layout.ejs", {
     title: "Contact Us",
     bodyFile: `${root}/contact`,
