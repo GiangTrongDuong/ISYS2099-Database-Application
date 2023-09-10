@@ -9,7 +9,7 @@ const categoryAttributeSchema = new mongoose.Schema(
         aValue:{
             type:mongoose.Schema.Types.String,
             enum: {
-                values: ['text', 'number', 'bool'],
+                values: ['text', 'number'],
                 message: '{VALUE} is not supported'
             },
             required: [true, "aValue is required"],
