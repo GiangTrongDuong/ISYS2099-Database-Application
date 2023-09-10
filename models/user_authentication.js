@@ -1,4 +1,4 @@
-const database = require('./connection/dbSqlConnect');
+const {connection: database} = require('./connection/dbSqlConnect');
 const bcrypt = require('bcrypt');
 
 async function signUp(role, userName, displayName, details, password){

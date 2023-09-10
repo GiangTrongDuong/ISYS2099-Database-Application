@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { LOGIN_ROUTE, SIGNUP_ROUTE, MY_ACCOUNT_ROUTE } = require('../constants');
-const database = require('../models/connection/dbSqlConnect');
+const {connection: database} = require('../models/connection/dbSqlConnect');
 const Category = require('../models/mongodb/models/function_category');
 const router = express.Router();
 const isAuth = require("../models/isAuth");

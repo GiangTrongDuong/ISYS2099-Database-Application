@@ -44,6 +44,27 @@ const MEMBERS = [
         github: "https://github.com/hakhanhne"
     }
 ]
+const ATTRIBUTES = [
+    {
+        aName: "Brand",
+        valueList: ["Samsung", "Lg", "No brand"],
+    }, {
+        aName: "Color",
+        valueList: ["Black", "White", "Blue", "Red", "Green", "Yellow", "Pink", "Purple", "Orange", "Brown", "Gray"],
+    }, {
+        aName: "Shipping",
+        valueList: ["Instant shipping", "Premium shipping", "Free shipping"],
+    }, {
+        aName: "Materials",
+        valueList: ["Cotton", "Polyester", "Silk", "Mixed"],
+    }, {
+        aName: "Installation",
+        valueList: ["Free installtion", "Not support", "Support with fee",],
+    }, {
+        aName: "Storage",
+        valueList: ["512gb", "256gb", "1tb"]
+    }
+]
 
 module.exports = {
     PRODUCT_ROUTE,
@@ -62,5 +83,6 @@ module.exports = {
     SIGNUP_ROUTE,
     MY_ACCOUNT_ROUTE,
     PORT,
-    MEMBERS
+    MEMBERS,
+    ATTRIBUTES
 }

@@ -1,4 +1,4 @@
-const database = require('./connection/dbSqlConnect');
+const {connection: database} = require('./connection/dbSqlConnect');
 // This file gets warehouse data and calculates how to insert products
 
 // Return the list of all warehouses for admin to check. 

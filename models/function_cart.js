@@ -1,4 +1,4 @@
-const database = require('./connection/dbSqlConnect');
+const {connection: database} = require('./connection/dbSqlConnect');
 const { getCurrentTimeString } = require('../helperFuncs');
 
 async function getCartItem(uid) {

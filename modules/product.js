@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Category = require('../models/mongodb/models/function_category');
 const { formatCurrencyVND, formatDate } = require('../helperFuncs.js');
-const { PRODUCT_ROUTE } = require('../constants.js');
+const { PRODUCT_ROUTE, ATTRIBUTES } = require('../constants.js');
 const db = require('../models/function_product.js');
 const productDbMongo = require('../models/mongodb/models/function_product_mongodb');
 
@@ -24,23 +24,18 @@ router.use(cors({
 // get all products
 router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
   try {
-    const catlist = await Category.getAllCats(6);
-    console.log("catlisr", catlist);
+    const catlist = await Category.getAllCats();
     const productList = await db.all();
-    console.log("Product list", productList);
-    const productAttributes = await Category.getAllAttributes();
-    console.log("results", result);
-    // console.log("get all products", product_list);
-    // res.json({"Products": product_list, "ProductsMongo": product_list_mongo});
     res.render('layout.ejs', {
       title: "Products",
       bodyFile: `${root}/product-all`,
       categoryList: catlist,
       userSession: req?.session?.user,
       productList: productList,
-      productAttributes: productAttributes,
+      productAttributes: ATTRIBUTES,
     });
   } catch (err) {
+    console.log(err);
     res.send({
       // message: "Error retrieving categories",
       error: err.message ?? "Error retrieving data"
@@ -74,21 +69,53 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
 });
 
 // filter products by attribute
-router.get(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
+router.post(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
   try {
-    // render category
-    const catlist = await Category.getAllCats(6);
-    const aName = req.query.aName;
-    const value = req.query.value;
-    const result = await productDbMongo.findProductsByAttribute(aName, value);
+    const catlist = await Category.getAllCats();
+    const { category, ...attributeList } = req.body;
+    // {categoryId, attributes: [{name, value}]}
+    const attributes = [];
+    for (let aName in attributeList) {
+      console.log(aName);
+      // Iterate over each array of values for the given attribute name
+      // if value is not array
+      if (!Array.isArray(attributeList[aName])) {
+        attributes.push({
+          aName: aName,
+          value: attributeList[aName]
+        });
+      }
+      else {
+        for (let value of attributeList[aName]) {
+          attributes.push({
+            aName: aName,
+            value: value
+          });
+        }
+      }
+    }
 
-    // TODO:
-    res.json(result);
+    const newFilter = {
+      category: category,
+      attribute: attributes
+    };
+    const result = await productDbMongo.filterProducts(newFilter.category, newFilter.attribute);
+    const ids = result.map(product => {
+      return product.mysql_id;
+    })
+    const productList = await db.from_ids(ids);
 
+
+    // res.json(result);
     res.render('layout.ejs', {
-      title: "Product",
-      bodyFile: `${root}/product`,
+      title: "Products",
+      bodyFile: `${root}/product-all`,
+      categoryList: catlist,
+      userSession: req?.session?.user,
+      productList: productList,
+      productAttributes: ATTRIBUTES,
     });
+
   }
   catch (err) {
     res.send("Cannot fetch item " + err);
@@ -98,15 +125,16 @@ router.get(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
 // Show products containing keywords
 router.get(`${PRODUCT_ROUTE}/search/:words`, async (req, res) => {
   try {
-    const product_list = await db.contain_word(req.params.words);
-    res.json({ "Products": product_list });
-    // res.render('layout.ejs', {
-    //     title: "Product",
-    //     bodyFile: `${root}/product`,
-    //     // TODO: add real data - categoryList
-    //     categoryList: catlist,
-    //     product_list: product_list
-    // });
+    const productList = await db.contain_word(req.params.words);
+    // res.json({ "Products": product_list });
+    res.render('layout.ejs', {
+      title: "Products",
+      bodyFile: `${root}/product-all`,
+      categoryList: catlist,
+      userSession: req?.session?.user,
+      productList: productList,
+      productAttributes: ATTRIBUTES,
+    });
   }
   catch (err) {
     res.send("Cannot fetch item with id " + req.params.id);

@@ -386,25 +386,4 @@ const getAttributesOfCategory = async (catid) => {
     }
 }
 
-const getAllAttributes = async () => {
-    try {
-        const allAttributes = await category.aggregate([
-            {
-                $unwind: "$attribute"
-            },
-            {
-                $group: {
-                    _id: null,
-                    attributes: { $addToSet: "$attribute.aName" }
-                }
-            }
-        ])
-        return allAttributes[0].attributes;
-
-    } catch (err) {
-        console.log(err)
-        throw (err);
-    }
-}
-
-module.exports = { saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat, getAttributesOfCategory, getAllChildrenAndName, getAllAttributes }
+module.exports = { saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat, getAttributesOfCategory, getAllChildrenAndName }

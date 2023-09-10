@@ -8,17 +8,19 @@
   </div>
 </header>
 <div>
-  <!-- Search bar -->
-  <div class="input-group mb-3 mt-4">
-    <input type="text" class="form-control" placeholder="Search by product name" id="productNameSearch">
-    <button class="btn btn-outline-light" id="searchButton">Search</button>
-  </div>
+  <div class="d-flex justify-content-between align-items-start px-4 pt-4">
+    <!-- Search bar -->
+    <div class="input-group mb-3 w-75">
+      <input type="text" class="form-control" placeholder="Search by product name" id="productNameSearch">
+      <button class="btn btn-outline-secondary" id="searchButton">Search</button>
+    </div>
 
-  <!-- Filter bar based on product attributes -->
-  <!-- Button to open Filter modal -->
-  <button type="button" class="btn btn-outline-light mb-4" data-bs-toggle="modal" data-bs-target="#filterModal">
-    Filtruj według atrybutów
-  </button>
+    <!-- Filter bar based on product attributes -->
+    <!-- Button to open Filter modal -->
+    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#filterModal">
+      <i class="fa-solid fa-filter"></i> Filter
+    </button>
+  </div>
 
   <!-- js -->
   <section id="category" class="container mt-5 w-100">
@@ -26,23 +28,40 @@
     <%- include('../partials/product-list', {productList: productList, type: "This website"}) %>
 
   </section>
+</div>
 
-  <!-- Filter Modal -->
-  <%- include('../partials/modal', {
+<!-- Filter Modal -->
+<%- include('../partials/modal', {
     modalId: "filterModal",
-    heading: "Filtruj według atrybutów",
+    heading: "Filter Products",
     body: `
-      <div class="d-flex flex-wrap justify-content-start align-items-center">
-        <% productAttributes.forEach(attribute => { %>
-  <div class="me-3 mb-2">
-    <label for="<%= attribute.aName %>" class="form-label"><%= attribute.aName %>:</label>
-    <input type="<%= attribute.aValue === 'number' ? 'number' : 'text' %>" class="form-control" id="<%= attribute.aName %>">
-  </div>
-  <% }); %>
-</div>
-<div class="mt-4">
-  <button class="btn btn-outline-light" id="filterButton">Filtruj</button>
-</div>
+    <div class="card">
+        <div class=""card-body h-100 overflow-scroll>
+            <form action="/product/filter" method="POST" id="filterForm" class="m-4" style="height: 50vh; overflow-y: auto;">
+                <div class="mb-3">
+                    <label for="categorySelect" class="form-label">Category</label>
+                    <select class="form-select" id="categorySelect" name="category">
+                        <option value="">Choose a category...</option>
+                        ${categoryList.map(category => `<option value="${category.id}">${category.name}</option>`).join('')}
+                    </select>
+                </div>
+                ${productAttributes.map(attribute => `
+                        <fieldset class="mb-3">
+                            <legend>${attribute.aName}</legend>
+                            ${attribute.valueList.map(value => `
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="${attribute.aName}" value="${value}" id="${value}">
+                                    <label class="form-check-label" for="${value}">
+                                        ${value}
+                                    </label>
+                                </div>
+                            `).join('')}
+                        </fieldset>
+                    `).join('')}
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </form>
+        </div>
+    </div>
 `,
 isFullScreenSm: false,
 }) %>
