@@ -1,38 +1,39 @@
-<div class="container-fluid bg-light-subtle text-emphasis-light">
-    <div class="mx-auto">
+<div class="container-fluid bg-light-subtle text-emphasis-light p-5">
+  <div class="d-flex justify-content-between mb-5">
     <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createWH" onclick="createWH(this)">Create Warehouse</button>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
+    <a role="button" class="btn btn-dark" href="<%= navigatePage("warehouse-admins") %>">View Admins</a>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
         <th scope="col">Warehouse ID</th>
-          <th scope="col">Warehouse name</th>
-          <th scope="col">Address</th>
-          <th scope="col">Total Area</th>
-          <th scope="col">Remaining Area</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% warehouses.forEach(wh => { %>
-        <tr>
+        <th scope="col">Warehouse name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Total Area</th>
+        <th scope="col">Remaining Area</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% warehouses.forEach(wh => { %>
+      <tr>
         <td id="whId"><%= wh["id"] %></td>
-          <td id="whname"><a href="<%= navigatePage("warehouse-item", wh["id"]) %>" class="link-dark"><%= wh["Warehouse Name"] %></a></td>
-          <td id="whaddress"><%= wh["Warehouse Address"] %></td>
-          <td id="whtotalae"><%= wh["Total Area"] %> m<sup>3</sup></td>
-          <td id="whremainingae"><%= wh["Remaining Area"] %> m<sup>3</sup></td>
-          <td>
-            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#updateWH" onclick="updateWH(this)">Update Warehouse</button>
-          </td>
-          <td>
-            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteWH" onclick="deleteWH(this)">Delete Warehouse</button>
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-      </table>
+        <td id="whname"><a href="<%= navigatePage("warehouse-item", wh["id"]) %>" class="link-dark"><%= wh["Warehouse Name"] %></a></td>
+        <td id="whaddress"><%= wh["Warehouse Address"] %></td>
+        <td id="whtotalae"><%= wh["Total Area"] %> m<sup>3</sup></td>
+        <td id="whremainingae"><%= wh["Remaining Area"] %> m<sup>3</sup></td>
+        <td>
+          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#updateWH" onclick="updateWH(this)">Update Warehouse</button>
+        </td>
+        <td>
+          <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteWH" onclick="deleteWH(this)">Delete Warehouse</button>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </div>
 
-  <%- include('../partials/modal', {
+<%- include('../partials/modal', {
     modalId: "createWH",
     heading: "Create new Warehouse",
     // render body with message and button
@@ -109,9 +110,8 @@
     isFullScreenSm: false,
   }) %>
 
-  <script>
-    function createWH(buttonElement) {
-  }
+<script>
+  function createWH(buttonElement) {}
 
   function updateWH(buttonElement) {
     const row = buttonElement.closest('tr');
@@ -128,4 +128,4 @@
     const whId = row.querySelector('#whId').innerText;
     document.querySelector('#deleteWH #wh-id').value = whId;
   }
-  </script>
+</script>
