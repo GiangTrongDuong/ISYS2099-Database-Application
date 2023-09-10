@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const {category} = require('./category');
-const {product} = require('./product');
+const { category } = require('./category');
+const { product } = require('./product');
 const ObjectId = mongoose.Types.ObjectId;
 
 // create a category
-const saveCat = async(newID, newName, newAtt, newPAId) => {
+const saveCat = async (newID, newName, newAtt, newPAId) => {
     try {
         var newCat = new category;
         if (newID) newCat._id = newID
@@ -23,7 +23,7 @@ const saveCat = async(newID, newName, newAtt, newPAId) => {
 }
 
 //create list of categories
-const createCats = async(list_cats) => {
+const createCats = async (list_cats) => {
     try {
         for (cat of list_cats) {
             saveCat(cat._id, cat.name, cat.attribute, cat.parent_category);
@@ -36,7 +36,7 @@ const createCats = async(list_cats) => {
 }
 
 //get all categories in db
-const getAllCats = async(limit) => {
+const getAllCats = async (limit) => {
     try {
         if (limit) {
             const allCats = await category.find().limit(limit);
@@ -51,14 +51,14 @@ const getAllCats = async(limit) => {
 }
 
 //delete all categories in db
-const dropAll = async () =>{
+const dropAll = async () => {
     await category.deleteMany({});
 }
 
 // find a cat by id
-const findCatById = async(id) => {
+const findCatById = async (id) => {
     try {
-        const cat = await category.findOne({_id: id});
+        const cat = await category.findOne({ _id: id });
         return cat;
     } catch (err) {
         console.log("Failed to find category by id: ", err);
@@ -68,7 +68,7 @@ const findCatById = async(id) => {
 // find a cat by name
 const findCatByName = async (name) => {
     try {
-        const cat = await category.findOne({ name: name});
+        const cat = await category.findOne({ name: name });
         return cat
     }
     catch (err) {
@@ -79,22 +79,24 @@ const findCatByName = async (name) => {
 //get all children (and below) of a category
 const getAllChildren = async (id) => {
     try {
-        const children_cats = await category.aggregate( [
+        const children_cats = await category.aggregate([
             { $match: { _id: ObjectId(id) } },
-            { $graphLookup: {
-                  from: "categories",
-                  startWith: "$_id",
-                  connectFromField: "_id",
-                  connectToField: "parent_category",
-                  as: "children"
-               }
+            {
+                $graphLookup: {
+                    from: "categories",
+                    startWith: "$_id",
+                    connectFromField: "_id",
+                    connectToField: "parent_category",
+                    as: "children"
+                }
             },
-            { $project: { // each record will show category _id and list of its children's ids
-                _id: 1,
-                "children_categories": "$children._id"
-              }
+            {
+                $project: { // each record will show category _id and list of its children's ids
+                    _id: 1,
+                    "children_categories": "$children._id"
+                }
             }
-        ] )
+        ])
 
         // aggregation will return an array
         // however, we search by id, so we know that the array will have only one element
@@ -106,25 +108,56 @@ const getAllChildren = async (id) => {
     }
 }
 
+// get all children and its name (and below) of a category
+const getAllChildrenAndName = async (id) => {
+    try {
+        const children_cats = await category.aggregate([
+            { $match: { _id: ObjectId(id) } },
+            {
+                $graphLookup: {
+                    from: "categories",
+                    startWith: "$_id",
+                    connectFromField: "_id",
+                    connectToField: "parent_category",
+                    as: "children"
+                }
+            },
+            { $unwind: { path: "$children", preserveNullAndEmptyArrays: true } },
+            {
+                $project: {
+                    id: "$children._id",
+                    name: "$children.name"
+                }
+            }
+        ]);
+        // This will already be in the desired format: [{id: <id1>, name: <name1>}, {id: <id2>, name: <name2>}, ...]
+        return children_cats;
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 //get all parents (and above) of a category
 const getAllParents = async (id) => {
     try {
-        const parents = await category.aggregate( [
+        const parents = await category.aggregate([
             { $match: { _id: ObjectId(id) } },
-            { $graphLookup: {
-                  from: "categories",
-                  startWith: "$parent_category",
-                  connectFromField: "parent_category",
-                  connectToField: "_id",
-                  as: "parents"
-               }
+            {
+                $graphLookup: {
+                    from: "categories",
+                    startWith: "$parent_category",
+                    connectFromField: "parent_category",
+                    connectToField: "_id",
+                    as: "parents"
+                }
             },
-            { $project: { // each record will show category _id and list of its children's ids
-                _id: 1,
-                "parent_categories": "$parents._id"
-              }
+            {
+                $project: { // each record will show category _id and list of its children's ids
+                    _id: 1,
+                    "parent_categories": "$parents._id"
+                }
             }
-        ] )
+        ])
 
         // aggregation will return an array
         // however, we search by id, so we know that the array will have only one element
@@ -139,20 +172,23 @@ const getAllParents = async (id) => {
 // get lowest level categories (categories that are not a parent of any category)
 const getLowestLevelCats = async () => {
     try {
-        const cats = await category.aggregate( [
-            { $lookup: {
-                  from: "categories",
-                  localField: "_id",
-                  foreignField: "parent_category",
-                  as: "child"
+        const cats = await category.aggregate([
+            {
+                $lookup: {
+                    from: "categories",
+                    localField: "_id",
+                    foreignField: "parent_category",
+                    as: "child"
                 }
             },
-            { $match: {child: {$size: 0}} // select record that has no child 
+            {
+                $match: { child: { $size: 0 } } // select record that has no child 
             },
-            { $project: { // show only _id and name for each record
-                _id: 1,
-                name: 1
-              }
+            {
+                $project: { // show only _id and name for each record
+                    _id: 1,
+                    name: 1
+                }
             }
         ])
 
@@ -168,16 +204,16 @@ const getLowestLevelCats = async () => {
 // then update parent_category of its children to null
 // return the deleted category
 // (only when that category & its children dont have any product)
-const deleteCat = async(id) => {
+const deleteCat = async (id) => {
     const session = await category.startSession();
     session.startTransaction();
     try {
         const notAssociated = await isNotAssociatedWithProduct(id);
         if (!notAssociated) throw new Error("cannot delete category that has product");
-        const deleted = await category.findOneAndDelete({ _id : id });
-        await category.updateMany(  {parent_category: id},
-                                    {$set: {parent_category: null}}
-                                );
+        const deleted = await category.findOneAndDelete({ _id: id });
+        await category.updateMany({ parent_category: id },
+            { $set: { parent_category: null } }
+        );
         await session.commitTransaction();
         session.endSession();
         return deleted;
@@ -186,14 +222,14 @@ const deleteCat = async(id) => {
         console.log(error)
         await session.abortTransaction();
         session.endSession();
-        throw(error)
+        throw (error)
     }
 }
 
 // deleteCat() delete a category by id and all of its children tree
 // return a list of delelted cats
 // (only when that category & its children dont have any product)
-const deleteCatAndChildren = async(id) => {
+const deleteCatAndChildren = async (id) => {
     const session = await category.startSession();
     session.startTransaction();
     try {
@@ -202,11 +238,11 @@ const deleteCatAndChildren = async(id) => {
 
         const delete_list = [];
         const children = await getAllChildren(id);
-        let deleted = await category.findOneAndDelete({ _id : id });
+        let deleted = await category.findOneAndDelete({ _id: id });
         if (deleted) {
             delete_list.push(deleted._id);
             for (cat_id of children.children_categories) {
-                deleted = await category.findOneAndDelete({ _id : cat_id });
+                deleted = await category.findOneAndDelete({ _id: cat_id });
                 delete_list.push(deleted._id);
             }
         }
@@ -218,7 +254,7 @@ const deleteCatAndChildren = async(id) => {
         console.log(error)
         await session.abortTransaction();
         session.endSession();
-        throw(error);
+        throw (error);
     }
 }
 
@@ -241,7 +277,7 @@ const updateCat = async (id, newName, newAtts, newPAId) => {
         return cat;
     } catch (error) {
         console.log(error)
-        throw(error)
+        throw (error)
     }
 }
 
@@ -261,15 +297,15 @@ const addAttributesToCat = async (cat, newAttributes) => {
     try {
         // if attributes list is not empty
         if (!isEmpty(newAttributes)) {
-            for (let i = 0; i< newAttributes.length; i++) {
+            for (let i = 0; i < newAttributes.length; i++) {
                 let value = newAttributes[i].aName;
-                newAttributes[i].aName = value[0].toUpperCase() + value.substring(1).toLowerCase(); 
+                newAttributes[i].aName = value[0].toUpperCase() + value.substring(1).toLowerCase();
             }
             const updated = await category.findOneAndUpdate(
-                    {_id : cat._id},
-                    { $addToSet: { attribute: { $each: newAttributes }}},
-                    { returnOriginal: false }
-                );
+                { _id: cat._id },
+                { $addToSet: { attribute: { $each: newAttributes } } },
+                { returnOriginal: false }
+            );
             return updated
         }
 
@@ -281,14 +317,14 @@ const addAttributesToCat = async (cat, newAttributes) => {
 
 
 // check if an object is empty
-function isEmpty(o){
-    return (o === undefined || o == null || o == "" || o.length ==0);
+function isEmpty(o) {
+    return (o === undefined || o == null || o == "" || o.length == 0);
 }
 
 // check if a cat itself has any product
-const hasProduct = async(id) => {
+const hasProduct = async (id) => {
     try {
-        const catHasProduct = await product.exists({category: id});
+        const catHasProduct = await product.exists({ category: id });
         return catHasProduct;
     } catch (err) {
         console.log(err)
@@ -296,7 +332,7 @@ const hasProduct = async(id) => {
 }
 
 // check if a category (& its children) is associated with any product
-const isNotAssociatedWithProduct = async(id) => {
+const isNotAssociatedWithProduct = async (id) => {
     try {
         let catHasProduct = await hasProduct(id);
         // if the category has product -> is associated
@@ -366,4 +402,4 @@ const isNotAssociatedWithProduct = async(id) => {
 // }
 
 
-module.exports = {saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat}
+module.exports = { saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat, getAllChildrenAndName }
