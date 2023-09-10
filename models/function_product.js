@@ -22,16 +22,19 @@ async function all () {
     })
 };
 
-// get products from a category
-async function get_from_a_category(id) {
-    return new Promise ((resolve, reject) => {
+// get products from multiple categories
+async function get_from_multiple_categories(ids) {
+    return new Promise((resolve, reject) => {
+        // Create a string with multiple "?" depending on the number of ids
+        const placeholders = ids.map(() => '?').join(',');
+
         database.query(`SELECT *
-        FROM product
-        WHERE category = ?`, [id], (error, results) => {
+                        FROM product
+                        WHERE category IN (${placeholders})`, ids, (error, results) => {
             if (error) reject(error);
-            else resolve(results)
-        })
-    })
+            else resolve(results);
+        });
+    });
 }
 
 // limit is optional, order by created_at; return list of product 
@@ -210,5 +213,5 @@ async function deleteProduct(pid){
     })
 }
 module.exports = { from_category, from_seller, from_id, contain_word, getPrice, getVolume, 
-    updateDetails, createProduct, insert_to_warehouse, deleteProduct, all, get_from_a_category}
+    updateDetails, createProduct, insert_to_warehouse, deleteProduct, all, get_from_multiple_categories}
 

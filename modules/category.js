@@ -45,15 +45,16 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
         // res.json(catlist)
         // get category
         const renderedCategory = await Category.findCatById(id);
-        console.log("Rendered", renderedCategory);
+        // console.log("Rendered", renderedCategory);
 
         // get all children
         const renderedChildrenResult = await Category.getAllChildrenAndName(id);
         console.log("Children", renderedChildrenResult);
-
+        const renderedChildrenIdList = renderedChildrenResult.map(cat => {
+            return cat.id;
+        })
         // get products from category
-        const productList = await ProductDb.get_from_a_category(id);
-        console.log("Products", productList);
+        const productList = await ProductDb.get_from_multiple_categories([renderedChildrenIdList]);
 
         // convert to object to assign attribute
         res.render("layout.ejs", {
