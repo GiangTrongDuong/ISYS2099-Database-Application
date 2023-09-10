@@ -157,7 +157,7 @@ app.post("/category", async (req, res) => {
 app.post("/category/update", async (req, res) => {
   try {
     const {_id, name, attribute, parent_category} = req.body;
-    const result = await mg_category.updateCat(id, name, attribute, parent_category)
+    const result = await mg_category.updateCat(_id, name, attribute, parent_category)
     sendResponse(res, 200, `ok`, result);
   } catch (err) {
     console.log(err)
