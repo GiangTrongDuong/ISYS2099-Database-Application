@@ -15,22 +15,34 @@
   </div>
 
   <!-- Filter bar based on product attributes -->
-  <div class="my-3">
-    <h4 class="text-white">Filter by Attributes:</h4>
-    <div class="d-flex justify-content-start align-items-center">
-      <% productAttributes.forEach(attribute => { %>
-      <div class="me-3">
-        <label for="<%= attribute.aName %>" class="form-label text-white"><%= attribute.aName %>:</label>
-        <input type="<%= attribute.aValue === 'number' ? 'number' : 'text' %>" class="form-control" id="<%= attribute.aName %>">
-      </div>
-      <% }); %>
-    </div>
-    <button class="btn btn-outline-light mt-2" id="filterButton">Filter</button>
-  </div>
-</div>
-<!-- js -->
-<section id="category" class="container mt-5 w-100">
-  <!-- Product List -->
-  <%- include('../partials/product-list', {productList: productList, type: "This website"}) %>
+  <!-- Button to open Filter modal -->
+  <button type="button" class="btn btn-outline-light mb-4" data-bs-toggle="modal" data-bs-target="#filterModal">
+    Filtruj według atrybutów
+  </button>
 
-</section>
+  <!-- js -->
+  <section id="category" class="container mt-5 w-100">
+    <!-- Product List -->
+    <%- include('../partials/product-list', {productList: productList, type: "This website"}) %>
+
+  </section>
+
+  <!-- Filter Modal -->
+  <%- include('../partials/modal', {
+    modalId: "filterModal",
+    heading: "Filtruj według atrybutów",
+    body: `
+      <div class="d-flex flex-wrap justify-content-start align-items-center">
+        <% productAttributes.forEach(attribute => { %>
+  <div class="me-3 mb-2">
+    <label for="<%= attribute.aName %>" class="form-label"><%= attribute.aName %>:</label>
+    <input type="<%= attribute.aValue === 'number' ? 'number' : 'text' %>" class="form-control" id="<%= attribute.aName %>">
+  </div>
+  <% }); %>
+</div>
+<div class="mt-4">
+  <button class="btn btn-outline-light" id="filterButton">Filtruj</button>
+</div>
+`,
+isFullScreenSm: false,
+}) %>

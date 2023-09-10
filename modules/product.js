@@ -25,9 +25,11 @@ router.use(cors({
 router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
   try {
     const catlist = await Category.getAllCats(6);
+    console.log("catlisr", catlist);
     const productList = await db.all();
+    console.log("Product list", productList);
     const productAttributes = await Category.getAllAttributes();
-    // console.log("results", result);
+    console.log("results", result);
     // console.log("get all products", product_list);
     // res.json({"Products": product_list, "ProductsMongo": product_list_mongo});
     res.render('layout.ejs', {
@@ -39,7 +41,10 @@ router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
       productAttributes: productAttributes,
     });
   } catch (err) {
-    res.send("Cannot fetch all products");
+    res.send({
+      // message: "Error retrieving categories",
+      error: err.message ?? "Error retrieving data"
+    });
   }
 });
 
