@@ -46,18 +46,15 @@ router.get(`${ORDER_HISTORY_ROUTE}`, async (req, res) => { //add user id to test
 });
 
 // updating order works
-router.get(`/order_update`, async (req, res) => {
+router.post(`/order_update`, async (req, res) => {
   try {
-    const message = await db.update_status(106, "Accepted");
-    res.json(message);
-    // res.render("layout.ejs", {
-    //   title: "Order Detail",
-    //   bodyFile: `${root}/order_detail`,
-    //   // TODO: add real data - categoryList
-    //   categoryList: catlist,
-    //   order: order,
-    //   order_id: req.params.id
-    // });
+    const status = req.body.status;
+    const id = req.body.id;
+    // console.log("Update", status, id);
+    const message = await db.update_status(id, status);
+    res.redirect(`/order${ORDER_ROUTE}/${id}`);
+    // const message = await db.update_status(106, "Accepted");
+    // res.json(message);
   }
   catch (err) {
     res.send("Status update error: " + err);
@@ -69,8 +66,8 @@ router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
   try {
     const catlist = await Category.getAllCats(6);
     const orderId = req.params.id;
-    const {order_items, total_price} = await db.get_order_item(orderId);
-    console.log("ORder", order_items, "Total", total_price);
+    const {order_items, order} = await db.get_order_item(orderId);
+    // console.log("ORder", order_items, "Total", order);
 
     // res.json(result);
     res.render("layout.ejs", {
@@ -79,7 +76,7 @@ router.get(`${ORDER_ROUTE}/:id`, async (req, res) => {
       // TODO: add real data - categoryList
       categoryList: catlist,
       orderItems: order_items,
-      totalPrice: total_price,
+      order: order,
       userSession: req.session.user,
     });
   }

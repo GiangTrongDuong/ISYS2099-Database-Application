@@ -53,7 +53,7 @@ const navigatePage = (type, id = -1) => {
         case "order-history":
             return `order${ORDER_HISTORY_ROUTE}`;
         case "order-detail":
-            return `${ORDER_ROUTE}/${id}`;
+            return `/order${ORDER_ROUTE}/${id}`;
         case "my-product":
             return `${MY_ACCOUNT_ROUTE}/my-product`;
         case "warehouse":
