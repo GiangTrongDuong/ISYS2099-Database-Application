@@ -3,6 +3,7 @@ const { WAREHOUSE_ROUTE, WAREHOUSE_MOVE_PRODUCT } = require('../constants');
 const Category = require('../models/mongodb/models/function_category');
 const router = express.Router();
 const db = require('../models/function_warehouse');
+const userDb = require('../models/function_user');
 const isAuth = require('../models/isAuth');
 
 let root = `.${WAREHOUSE_ROUTE}`;
@@ -40,15 +41,6 @@ router.get(`${WAREHOUSE_ROUTE}/all`, isAuth.isAuth, async (req, res) => {
     res.json(error);
   }
 
-  // res.render("layout.ejs", {
-  //   title: "My Cart",
-  //   bodyFile: `${root}/cart`,
-  //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
-  //   userSession: req?.session?.user,
-  //   // TODO: add real data
-  //   cartItems: cartItems,
-  // });
 });
 
 
@@ -137,15 +129,6 @@ router.post(`${WAREHOUSE_ROUTE}/update-warehouse`, async (req, res) => { //teste
   catch (error) {
     res.json(error);
   }
-  // res.render("layout.ejs", {
-  //   title: "My Cart",
-  //   bodyFile: `${root}/cart`,
-  //   // TODO: add real data - categoryList
-  //   categoryList: dummyCatList,
-  //   userSession: req?.session?.user,
-  //   // TODO: add real data
-  //   cartItems: cartItems,
-  // });
 });
 
 // delete warehouse with certain wid
@@ -165,15 +148,16 @@ router.post(`${WAREHOUSE_ROUTE}/delete-warehouse`, async (req, res) => {
 // route to get all admins in warehouses
 router.get(`${WAREHOUSE_ROUTE}/admins`, async (req, res) => {
   try {
+    const catlist = await Category.getAllCats(6);
     const info = req?.session?.user;
-    const adminList = await db.warehouse_show_admin(req.query.id); //store info to display 
+    const adminList = await userDb.getUserByRole("Warehouse admin"); //store info to display 
     // res.json(all_admins);
     res.render("layout.ejs", {
       title: "Admins",
       bodyFile: `${root}/warehouse_admins`,
       userSession: info,
       // TODO: add real data - categoryList
-      categoryList: dummyCatList,
+      categoryList: catlist,
       adminList: adminList,
     });
   } catch (error) {

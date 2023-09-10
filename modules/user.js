@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { navigatePage } = require('../helperFuncs');
 
 var root = './user'; //root folder to pages
 
@@ -186,7 +187,12 @@ router.post(`${MY_ACCOUNT_ROUTE}/delete-user/:id`, async (req, res) => {
     const id = req.params.id;
     const role = req.body.role;
     await insertDB.deleteUser(id, role);
-    // res.send("User deleted");
+    if (role == "Warehouse Admin") {
+      res.redirect(navigatePage("warehouse-admins"));
+    }
+    else {
+      res.redirect(navigatePage("my-account", id));
+    }
   } catch (err) {
     console.log(err);
   }

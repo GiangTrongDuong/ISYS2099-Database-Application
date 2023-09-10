@@ -68,6 +68,8 @@ const navigatePage = (type, id = -1) => {
             return `${WAREHOUSE_ROUTE}/move-warehouse`;
         case "warehouse-item":
             return `${WAREHOUSE_ROUTE}/view?id=${id}`;
+        case "warehouse-admins":
+            return `${WAREHOUSE_ROUTE}/admins`;
         case "move-product":
             return `${WAREHOUSE_ROUTE}/${WAREHOUSE_MOVE_PRODUCT}`;
         case "update-product":
