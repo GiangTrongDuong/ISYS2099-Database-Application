@@ -117,18 +117,18 @@ async function contain_word(query_word, limit) {
         if (limit) {
             // order by relevance, and then by last created
             database.query(`SELECT * FROM product 
-                WHERE MATCH(title, description) AGAINST(\'"?"\' IN BOOLEAN MODE)
-                ORDER BY MATCH(title, description) AGAINST(\'"?"\' IN BOOLEAN MODE),
-                created_at DESC LIMIT ?;`, [query_word, query_word, limit], (error, results) => {
+                WHERE MATCH(title, description) AGAINST(\'"${query_word}"\' IN BOOLEAN MODE)
+                ORDER BY MATCH(title, description) AGAINST(\'"${query_word}"\' IN BOOLEAN MODE),
+                created_at DESC LIMIT ?;`, [limit], (error, results) => {
                 if (error) reject(error);
                 else resolve(results);
             });
         }
         else {
             database.query(`SELECT * FROM product 
-                WHERE MATCH(title, description) AGAINST(\'"?"\' IN BOOLEAN MODE)
-                ORDER BY MATCH(title, description) AGAINST(\'"?"\' IN BOOLEAN MODE),
-                created_at DESC;`, [query_word, query_word], (error, results) => {
+                WHERE MATCH(title, description) AGAINST(\'"${query_word}"\' IN BOOLEAN MODE)
+                ORDER BY MATCH(title, description) AGAINST(\'"${query_word}"\' IN BOOLEAN MODE),
+                created_at DESC;`, (error, results) => {
                 if (error) reject(error);
                 else resolve(results);
             });
