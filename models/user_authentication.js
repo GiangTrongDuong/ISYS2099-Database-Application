@@ -5,7 +5,7 @@ async function signUp(role, userName, displayName, details, password){
     const saltRounds = 10;
     await database.query(`SELECT * 
         FROM user 
-        WHERE user_name = "${userName}";`,(error, results) => {
+        WHERE user_name = "?";`,[userName],(error, results) => {
         if(results.length > 0){
         console.log("Taken username!");
         } else {
@@ -24,7 +24,7 @@ async function signUp(role, userName, displayName, details, password){
 async function login(userName,password) {
     database.query(`SELECT password_hash 
         FROM user 
-        WHERE user_name = "${userName}";`,(error, results, fields) => {
+        WHERE user_name = ?;`,[userName],(error, results, fields) => {
         if(results.length > 0){
             console.log('User found, checking password');
             bcrypt.compare(password, results[0].password_hash).then(function(result){

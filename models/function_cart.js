@@ -4,8 +4,8 @@ const { getCurrentTimeString } = require('../helperFuncs');
 async function getCartItem(uid) {
     return new Promise((resolve, reject) => {
         database.query(`SELECT cd.product_id, cd.quantity, p.title, p.price, cd.quantity*p.price AS totalp, p.image
-        FROM  product p JOIN (SELECT * FROM cart_details cd WHERE cd.customer_id = ${uid}) AS cd
-        ON cd.product_id = p.id;`, (error, results) => {
+        FROM  product p JOIN (SELECT * FROM cart_details cd WHERE cd.customer_id = ?) AS cd
+        ON cd.product_id = p.id;`, [uid],(error, results) => {
             if (error) reject(error);
             else {
                 const total = results.reduce((acc, curr) => acc + curr.totalp, 0);
@@ -21,17 +21,17 @@ async function getCartItem(uid) {
 
 async function addToCart(uid, pid, additionalQuantity = 1){
     return new Promise((resolve, reject) => {
-        database.query(`SELECT * FROM cart_details WHERE customer_id = ${uid} AND product_id = ${pid}`, (err, uresult) =>{
+        database.query(`SELECT * FROM cart_details WHERE customer_id = ? AND product_id = ?`,[uid, pid], (err, uresult) =>{
             if(uresult.length >= 1){
                 // if product already in cart, increase quantity
-                database.query(`UPDATE cart_details SET quantity = quantity + ${additionalQuantity}
-                WHERE customer_id = ${uid} AND product_id = ${pid};`, (err, result) => {
+                database.query(`UPDATE cart_details SET quantity = quantity + ?
+                WHERE customer_id = ? AND product_id = ?;`,[additionalQuantity, uid, pid], (err, result) => {
                     if(err) reject (err);
                     else resolve (result);
                 })
             } else {
                 // if product not in cart, add to cart
-                database.query(`INSERT INTO cart_details VALUE (${uid}, ${pid}, ${additionalQuantity})`, (err, result) =>{
+                database.query(`INSERT INTO cart_details VALUE (?,?,?)`,[uid, pid, additionalQuantity], (err, result) =>{
                     if (err) reject (err);
                     else resolve(result);
                 })
@@ -44,7 +44,7 @@ async function addToCart(uid, pid, additionalQuantity = 1){
 async function removeCartItem(uid, pid) {
     return new Promise((resolve, reject) => {
         database.query(`DELETE FROM cart_details 
-        WHERE customer_id = ${uid} and product_id = ${pid};`, (error, result) => {
+        WHERE customer_id = ? and product_id = ?;`,[uid, pid], (error, result) => {
             if (error) reject(error);
             else resolve(result);
         })
@@ -54,7 +54,7 @@ async function removeCartItem(uid, pid) {
 async function increaseQuantity(uid, pid) {
     return new Promise((resolve, reject) => {
         database.query(`UPDATE cart_details SET quantity = quantity + 1 
-        WHERE customer_id = ${uid} AND product_id = ${pid};`, (error, result) => {
+        WHERE customer_id = ? AND product_id = ?;`,[uid, pid], (error, result) => {
             if (error) reject(error);
             else resolve(result);
         });
@@ -63,16 +63,16 @@ async function increaseQuantity(uid, pid) {
 
 async function decreaseQuantity(uid, pid) {
     return new Promise((resolve, reject) => {
-        database.query(`SELECT quantity FROM cart_details WHERE customer_id = ${uid} AND product_id = ${pid}`, (error, result) => {
+        database.query(`SELECT quantity FROM cart_details WHERE customer_id = ? AND product_id = ?`,[uid, pid], (error, result) => {
             if (result[0].quantity == 1) {
                 database.query(`DELETE FROM cart_details
-            WHERE customer_id = ${uid} and product_id = ${pid};`, (error, result) => {
+            WHERE customer_id = ? and product_id = ?;`,[uid, pid], (error, result) => {
                     if (error) reject(error);
                     else resolve(result);
                 });
             } else {
                 database.query(`UPDATE cart_details SET quantity = quantity - 1 
-            WHERE customer_id = ${uid} AND product_id = ${pid};`, (error, result) => {
+            WHERE customer_id = ? AND product_id = ?;`,[uid, pid], (error, result) => {
                     if (error) reject(error);
                     else resolve(result);
                 })
@@ -84,14 +84,14 @@ async function changeQuantity(uid, pid, newQuantity) {
     return new Promise((resolve, reject) => {
         if (newQuantity == 0) {
             database.query(`DELETE FROM cart_details
-            WHERE customer_id = ${uid} and product_id = ${pid};`, (error, result) => {
+            WHERE customer_id = ? and product_id = ?;`,[uid, pid], (error, result) => {
                 if (error) reject(error);
                 else resolve(result);
             });
         }
         else {
             database.query(`UPDATE cart_details SET quantity = ${newQuantity}
-        WHERE customer_id = ${uid} AND product_id = ${pid};`, (error, result) => {
+        WHERE customer_id = ? AND product_id = ?;`,[uid, pid], (error, result) => {
                 if (error) reject(error);
                 else resolve(result);
             })
@@ -106,7 +106,7 @@ async function place_order(uid){
             //Update this line later with the total price!
                 //Do not add order_id in - it's auto increment!
             database.query(`INSERT INTO order_details (customer_id, status,total_price, created_at)
-                VALUES (${uid}, \'Inbound\', 0, \'${getCurrentTimeString()}\');`, async (err, result) => {
+                VALUES (?, \'Inbound\', 0, \'${getCurrentTimeString()}\');`,[uid], async (err, result) => {
                     if (err) {
                         console.log("Insert order_details error" + err)
                         reject ({"Insert order_details error" : err});
@@ -115,7 +115,7 @@ async function place_order(uid){
                     console.log("New order created: " + newOrderId);
 
                     // get all items in cart
-                    database.query(`SELECT product_id, quantity FROM cart_details WHERE customer_id = ${uid};`, async(error0, result) =>{
+                    database.query(`SELECT product_id, quantity FROM cart_details WHERE customer_id = ?;`,[uid], async(error0, result) =>{
                         if (error0){
                             console.log("get cart details error: " + error0);
                             reject(error0);
