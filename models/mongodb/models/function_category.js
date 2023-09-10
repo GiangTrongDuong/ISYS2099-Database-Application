@@ -326,9 +326,7 @@ function isEmpty(o) {
 // check if a cat itself has any product
 const hasProduct = async (id) => {
     try {
-        console.log("before checking");
         const catHasProduct = await product.exists({ category: id });
-        console.log("Cat has product: ", catHasProduct);
         return catHasProduct;
     } catch (err) {
         console.log(err)
@@ -384,4 +382,25 @@ const getAttributesOfCategory = async (catid) => {
     }
 }
 
-module.exports = { saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat, getAttributesOfCategory, getAllChildrenAndName }
+const getAllAttributes = async () => {
+    try {
+        const allAttributes = await category.aggregate([
+            {
+                $unwind: "$attribute"
+            },
+            {
+                $group: {
+                    _id: null,
+                    attributes: { $addToSet: "$attribute.aName" }
+                }
+            }
+        ])
+        return allAttributes[0].attributes;
+
+    } catch (err) {
+        console.log(err)
+        throw (err);
+    }
+}
+
+module.exports = { saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat, getAttributesOfCategory, getAllChildrenAndName, getAllAttributes }

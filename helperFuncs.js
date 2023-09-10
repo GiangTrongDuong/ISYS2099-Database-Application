@@ -30,6 +30,8 @@ const navigatePage = (type, id = -1) => {
             return `${CATEGORY_ROUTE}/${id}`;
         case "category-list":
             return `${CATEGORY_ROUTE}`;
+        case "product-list":
+            return `${PRODUCT_ROUTE}`;
         case "product":
             return `${PRODUCT_ROUTE}/${id}`;
         case "product-list-seller":

@@ -1,0 +1,36 @@
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">
+        Our Products
+      </h1>
+    </div>
+  </div>
+</header>
+<div>
+  <!-- Search bar -->
+  <div class="input-group mb-3 mt-4">
+    <input type="text" class="form-control" placeholder="Search by product name" id="productNameSearch">
+    <button class="btn btn-outline-light" id="searchButton">Search</button>
+  </div>
+
+  <!-- Filter bar based on product attributes -->
+  <div class="my-3">
+    <h4 class="text-white">Filter by Attributes:</h4>
+    <div class="d-flex justify-content-start align-items-center">
+      <% productAttributes.forEach(attribute => { %>
+      <div class="me-3">
+        <label for="<%= attribute.aName %>" class="form-label text-white"><%= attribute.aName %>:</label>
+        <input type="<%= attribute.aValue === 'number' ? 'number' : 'text' %>" class="form-control" id="<%= attribute.aName %>">
+      </div>
+      <% }); %>
+    </div>
+    <button class="btn btn-outline-light mt-2" id="filterButton">Filter</button>
+  </div>
+</div>
+<!-- js -->
+<section id="category" class="container mt-5 w-100">
+  <!-- Product List -->
+  <%- include('../partials/product-list', {productList: productList, type: "This website"}) %>
+
+</section>

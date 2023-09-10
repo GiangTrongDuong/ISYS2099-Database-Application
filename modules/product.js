@@ -22,17 +22,26 @@ router.use(cors({
 //end-of session
 
 // get all products
-// router.get(`${PRODUCT_ROUTE}/all`, async (req, res) => {
-//   try{
-//     const product_list = await db.all();
-//     console.log("get all products", product_list);
-//     const product_list_mongo = await productDbMongo.getAllProducts();
-//     console.log("get all products mongo", product_list_mongo);
-//     res.json({"Products": product_list, "ProductsMongo": product_list_mongo});
-//   } catch (err) {
-//     res.send("Cannot fetch all products");
-//   }
-// });
+router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
+  try {
+    const catlist = await Category.getAllCats(6);
+    const productList = await db.all();
+    const productAttributes = await Category.getAllAttributes();
+    // console.log("results", result);
+    // console.log("get all products", product_list);
+    // res.json({"Products": product_list, "ProductsMongo": product_list_mongo});
+    res.render('layout.ejs', {
+      title: "Products",
+      bodyFile: `${root}/product-all`,
+      categoryList: catlist,
+      userSession: req?.session?.user,
+      productList: productList,
+      productAttributes: productAttributes,
+    });
+  } catch (err) {
+    res.send("Cannot fetch all products");
+  }
+});
 
 // full route to product-detail page: /product/:id
 router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
