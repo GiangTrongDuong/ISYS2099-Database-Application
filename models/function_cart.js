@@ -4,8 +4,8 @@ const { getCurrentTimeString } = require('../helperFuncs');
 async function getCartItem(uid) {
     return new Promise((resolve, reject) => {
         database.query(`SELECT cd.product_id, cd.quantity, p.title, p.price, cd.quantity*p.price AS totalp, p.image
-        FROM cart_details cd JOIN product p
-        WHERE cd.product_id = p.id AND cd.customer_id = ${uid};`, (error, results) => {
+        FROM  product p JOIN (SELECT * FROM cart_details cd WHERE cd.customer_id = ${uid}) AS cd
+        ON cd.product_id = p.id;`, (error, results) => {
             if (error) reject(error);
             else {
                 const total = results.reduce((acc, curr) => acc + curr.totalp, 0);

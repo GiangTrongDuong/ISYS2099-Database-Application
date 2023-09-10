@@ -3,22 +3,21 @@ const database = require('./connection/dbSqlConnect');
 
 async function get_orders (uid) {
     return new Promise ((resolve, reject) => {
-        database.query(`SELECT o.id, u.user_name, 
-            u.display_name, o.status, o.total_price 
-        FROM order_details o JOIN user u ON o.customer_id = u.id
-        WHERE u.id = ${uid};`, (error, results) => {
+        database.query(`SELECT o.id, u.user_name, u.display_name, o.status, o.total_price 
+        FROM order_details o JOIN (SELECT * FROM user WHERE id = ${uid}) AS u
+        ON o.customer_id = u.id;`, (error, results) => {
             if (error) reject(error);
             else resolve(results);
         })
     })
 }
 
-//sample output: [{product_id: 94, product_name: "abc", quantity:6}, {...}]
+// show product id, title, quantity for an order
 async function get_order_item (oid) {
     return new Promise((resolve, reject) =>{
         database.query(`SELECT o.product_id, p.title AS product_name, o.quantity 
-        FROM order_item o JOIN product p ON o.product_id = p.id
-        WHERE order_id = ${oid};`, (error1, results1) => {
+        FROM (SELECT product_id, quantity FROM order_item WHERE order_id = ${oid}) AS o 
+        JOIN (SELECT id, title FROM product) AS p ON o.product_id = p.id;`, (error1, results1) => {
             if (error1) reject(error1);
             database.query(`SELECT total_price FROM order_details WHERE id = ${oid};`, (error2, results2) => {
                 if (error2) reject (error2);

@@ -77,7 +77,7 @@ router.get(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
     });
   }
   catch (err) {
-    res.send("Cannot fetch item with id " + req.params.id);
+    res.send("Cannot fetch item " + err);
   }
 });
 
