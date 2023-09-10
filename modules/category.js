@@ -72,8 +72,9 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
 router.post(`${CATEGORY_ROUTE}`, async (req, res) => {
     try {
         const newCat = req.body;
+        // console.log("Created", newCat);
         const createdCat = await Category.saveCat(null, newCat.name, newCat.attribute, newCat.parent_category);
-        // res.redirect(`${CATEGORY_ROUTE}`);
+        res.redirect(`${WAREHOUSE_ROUTE}/categories`);
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
     }

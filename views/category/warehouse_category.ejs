@@ -6,7 +6,7 @@
   -> Inside script: get value form id in `td` -> assign value to input `id`  -->
 <div class="container-fluid bg-light-subtle text-emphasis-light">
   <div class="mx-auto">
-    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createProductModal" onclick="createProduct(this)">Add product</button>
+    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createCategoryModal" onclick="createCategory(this)">Add category</button>
   </div>
   <table class="table">
     <thead>
@@ -93,67 +93,44 @@
     `,
     isFullScreenSm: false,
   }) %>
-
 <%- include('../partials/modal', {
-    modalId: "createProductModal",
-    heading: "Create New Product",
-    // render body with message and button
+    modalId: "createCategoryModal",
+    heading: "Create New Category",
     body: `
     <div class="card">
       <div class="card-body h-100 overflow-scroll">
-        <h6 class="mb-4 pb-3 border-bottom fw-bold">Update Product Information</h6>
-        <form action="create-product" method="POST">
-          <div class="mb-3">
-            <label for="update-title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="update-title" name="title" value="">
-          </div>
-          <div class="mb-3">
-            <input type="text" class="form-control" id="update-seller" name="seller" value="" readonly hidden>
-          </div>
-          <div class="mb-3">
-            <label for="update-price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="update-price" name="price" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-description" class="form-label">Description</label>
-            <input type="text" class="form-control input-lg" id="update-description" name="description" value="">
-          </div>
-        <div class="mb-3">
-          <label for="create-category" class="form-label">Category</label>
-          <select class="custom-select" id="create-category" name="category">
-            <option selected>Choose category for your product ... </option>
-             ${categoryList.map(category => {
-              return `<option value="${category["_id"]}">${category["name"]}</option>`
-             }).join(" ")}
-          </select>
-          </div>
-          <div class="mb-3">
-            <label for="update-length" class="form-label">Length</label>
-            <input type="number" class="form-control" id="update-lenght" name="len" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-width" class="form-label">Width</label>
-            <input type="number" class="form-control" id="update-width" name="wid" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-height" class="form-label">Height</label>
-            <input type="number" class="form-control" id="update-height" name="hei" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-image" class="form-label">Image</label>
-            <input type="text" class="form-control" id="update-image" name="image" value="">
-          </div>
-          <div class="mb-3">
-            <label for="update-remain" class="form-label">Stock</label>
-            <input type="number" class="form-control" id="update-remain" name="stock" value="">
-          </div>
-          <button type="submit" class="btn btn-dark">Save Changes</button>
-        </form> 
+        <form id="createCategoryForm" action="/category" method="POST" style="height: 50vh; overflow-y: auto;">
+            <div class="mb-3">
+                <label for="createCategoryName" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="createCategoryName" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="createParentCategory" class="form-label">Parent Category</label>
+                <select class="form-control" id="createParentCategory" name="parent_category">
+                    <option value="">None</option>
+                    ${categoryList.map(category => {
+                      return `<option value="${category._id}">${category.name}</option>`
+                    }).join("\n")}
+                </select>
+            </div>
+            <div class="text-dark mt-5">
+                <hr>
+            </div>
+            <div id="createCategoryAttributesContainer" class="">
+                <label class="form-label">Category Attributes</label>
+                <br><button type="button" id="addCreateAttribute" class="btn btn-dark mb-4" onclick="addCreateAttributeClick()">Add New Attribute</button>
+            </div>
+            <div class="text-dark mb-5">
+                <hr>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Create Category</button>
+        </form>
       </div>
     </div>
-    `,
-    isFullScreenSm: false,
-  }) %>
+`,
+isFullScreenSm: false,
+}) %>
+
 
 
 <%- include('../partials/modal', {
@@ -214,12 +191,27 @@
       attributeField.remove();
     }
   }
+
   function updateHiddenInput(index) {
     const checkbox = document.getElementById(`checkbox-${index}`);
     const hiddenInput = document.getElementById(`hiddenInput-${index}`);
-    
+
     hiddenInput.value = checkbox.checked ? 'true' : 'false';
-}
+  }
+
+  function getParentCategoryOptions(parentId, id) {
+    // parent category options
+    let categoriesOptions = `
+                    <option value="" ${!!parentId ? 'selected' : ''}>None</option>
+                `;
+    categoriesOptions += categoryList.map(category => {
+      if (category._id === id) return "";
+      return `<option value="${category._id}" ${parentId === category._id ? 'selected' : ''}>${category.name}</option>`
+    }).join("\n");
+    return categoriesOptions;
+
+
+  }
 
   function addAttributeClick(buttonElement) {
     const attributesContainer = document.querySelector('#updateCategoryForm #categoryAttributesContainer');
@@ -238,6 +230,24 @@
     document.querySelector('#updateCategoryForm #categoryAttributesContainer #addAttribute').insertAdjacentHTML("afterend", newAttributeHTML);
   }
 
+  function addCreateAttributeClick() {
+    const attributesContainer = document.querySelector('#createCategoryForm #createCategoryAttributesContainer');
+    const newIndex = attributesContainer.querySelectorAll('.attribute-field').length;
+    const newAttributeHTML = `
+            <div class="attribute-field mb-4">
+                <input type="text" class="form-control my-2" placeholder="Attribute Name" name="attributes[${newIndex}][aName]" required>
+                <select class="form-control my-2" name="attributes[${newIndex}][aValue]">
+                    <option value="text">Text</option>
+                    <option value="number">Number</option>
+                </select>
+                <input type="hidden" name="attributes[${newIndex}][aRequired]" id="hiddenInput-create-${newIndex}" value="false">
+                <input type="checkbox" id="checkbox-create-${newIndex}" onchange="updateHiddenInput('create-' + ${newIndex})"> <label htmlfor="checkbox-create-${newIndex}">Required</label>
+                <br><button type="button" class="my-2 btn btn-outline-danger remove-attribute" onclick="deleteAttributeClick(this)">Remove</button>
+            </div>
+        `;
+    document.querySelector('#createCategoryForm #createCategoryAttributesContainer #addCreateAttribute').insertAdjacentHTML("afterend", newAttributeHTML);
+  }
+
   function showUpdateModal(buttonElement) {
     // Find the closest <tr> element which is the parent of the clicked button
     const row = buttonElement.closest('tr');
@@ -248,6 +258,7 @@
     // Get the product data from the td elements
     const categoryTitle = row.querySelector('#category-title').innerText;
     const categoryParenCategory = row.querySelector('#category-parent-category').innerText;
+    const categoriesOptions = getParentCategoryOptions(parentId, id);
 
     // Get the attributes data from the button element
     const categoryAttributes = getAttributes(id);
@@ -272,15 +283,6 @@
       }
     });
 
-    // parent category options
-    let categoriesOptions = `
-            <option value="" ${!!parentId ? 'selected' : ''}>None</option>
-        `;
-    categoriesOptions += categoryList.map(category => {
-      if (category._id === id) return "";
-      return `<option value="${category._id}" ${parentId === category._id ? 'selected' : ''}>${category.name}</option>`
-    }).join("\n");
-
     // delete the old attributes
     document.querySelectorAll('#updateCategoryForm #categoryAttributesContainer .attribute-field').forEach(el => el.remove());
 
@@ -293,7 +295,10 @@
 
   }
 
-  function createProduct(buttonElement) {}
+  function createCategory(buttonElement) {
+
+
+  }
 
   function deleteCategoryModal(buttonElement) {
     const row = buttonElement.closest('tr');
