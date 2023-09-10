@@ -14,9 +14,9 @@ create table if not exists user
     display_name  varchar(100) not null,
     details       text         not null,
     password_hash varchar(200) not null,
-    primary key (id, role),
+    primary key (id),
     constraint user_user_name_uindex
-        unique (user_name, role)
+        unique (user_name)
 );
 create table if not exists warehouse
 (
@@ -95,5 +95,3 @@ create table if not exists warehouse_item
     constraint warehouse_item_product_id_fk
         foreign key (product_id) references product (id)
 );
-
-alter table user partition by key(role);
