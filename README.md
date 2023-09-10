@@ -6,7 +6,8 @@ Steps to run:
 2. Run `npm install`
 3. Follow the [Instruction](#instruction)
 4. If having any bug, please follow [Bugs](#bugs) section.
-5. Routes:
+** Caution: ** To have the best experience, please use Desktop has `width` is ***1090px***
+1. Routes:
 - Home: http://localhost:3000/
 - Login: http://localhost:3000/login
 - Signup: http://localhost:3000/signup

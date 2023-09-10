@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Category = require('../models/mongodb/models/function_category');
-const { CATEGORY_ROUTE } = require('../constants');
+const { CATEGORY_ROUTE, WAREHOUSE_ROUTE } = require('../constants');
 const ProductDb = require('../models/function_product');
 const { formatCurrencyVND } = require('../helperFuncs');
 
@@ -13,6 +13,22 @@ router.get(`${CATEGORY_ROUTE}`, async (req, res) => {
         res.render("layout.ejs", {
             title: "Category List",
             bodyFile: `${root}/categories.ejs`,
+            // TODO: add real data - categoryList
+            categoryList: catlist,
+            userSession: req?.session?.user,
+        });
+    } catch (error) {
+        // res.status(500).send({ message: "Error retrieving categories", error: error.message });
+    }
+});
+
+router.get(`${WAREHOUSE_ROUTE}/categories`, async (req, res) => {
+    try {
+        const catlist = await Category.getAllCats();
+        console.log("Categories", catlist);
+        res.render("layout.ejs", {
+            title: "Warehouse Category List",
+            bodyFile: `${root}/warehouse_category.ejs`,
             // TODO: add real data - categoryList
             categoryList: catlist,
             userSession: req?.session?.user,
@@ -64,12 +80,13 @@ router.post(`${CATEGORY_ROUTE}`, async (req, res) => {
 });
 
 // update category
-router.put(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
+router.post(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
     try {
         const id = req.params.id;
         const newCat = req.body;
+        // console.log("UPdated", newCat);
         const updatedCat = await Category.updateCat(id, newCat.name, newCat.attribute, newCat.parent_category);
-        // res.redirect(`${CATEGORY_ROUTE}`);
+        res.redirect(`${WAREHOUSE_ROUTE}/categories`);
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
     }
