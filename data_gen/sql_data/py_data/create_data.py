@@ -51,10 +51,10 @@ EXPORT = {
     }
 }
 
-IMAGE_FILE = './product_image/random_image_urls.txt' # should have 200 lines of image urls
-IMG_ARRAY = []
-with open (IMAGE_FILE, 'r') as f:
-    IMG_ARRAY = f.readlines()
+# IMAGE_FILE = './product_image/random_image_urls.txt' # should have 200 lines of image urls
+# IMG_ARRAY = []
+# with open (IMAGE_FILE, 'r') as f:
+#     IMG_ARRAY = f.readlines()
 
 def user(num_rows, start_from = 1):
     # doesn't specify that 1 admin - 1 wh; the below is not tested
@@ -252,15 +252,22 @@ def warehouse_item(num_warehouse, start_from=1):
                 # write to csv
                 csvw.writerow([warehouse_id, pid, quantity])
 
+def getWAData():
+    tf = open("./whadata.txt", 'w')
+    for i in range (0,50):
+        tf.write(f"Contact information - Phone number: {FAKER.phone_number()} - Email: {FAKER.email()}\n")
+    tf.close()
+
 def main():
     # user(100)
-    product(200)
+    # product(200)
     # category()
     # warehouse(20)
     # cart_details()
     # order_details(100)
     # order_item(100)
     # warehouse_item(20)
+    getWAData()
     return 0
 
 main()

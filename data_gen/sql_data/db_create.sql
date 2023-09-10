@@ -8,15 +8,15 @@ DROP TABLE IF EXISTS user;
 
 create table if not exists user
 (
-    id            int auto_increment
-        primary key,
+    id            int auto_increment,
     role          varchar(50)  not null,
     user_name     varchar(50)  not null,
     display_name  varchar(100) not null,
     details       text         not null,
     password_hash varchar(200) not null,
+    primary key (id, role),
     constraint user_user_name_uindex
-        unique (user_name)
+        unique (user_name, role)
 );
 create table if not exists warehouse
 (

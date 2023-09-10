@@ -1,3 +1,2 @@
 *.env
-./sql_data/py_data/
 ./node_modules/
