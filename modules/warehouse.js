@@ -150,7 +150,7 @@ router.get(`${WAREHOUSE_ROUTE}/admins`, async (req, res) => {
   try {
     const catlist = await Category.getAllCats(6);
     const info = req?.session?.user;
-    const adminList = await userDb.getUserByRole("Warehouse admin"); //store info to display 
+    const adminList = await userDb.getUserByRole("Warehouse Admin"); //store info to display 
     // res.json(all_admins);
     res.render("layout.ejs", {
       title: "Admins",
