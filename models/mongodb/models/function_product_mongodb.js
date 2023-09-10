@@ -96,16 +96,15 @@ const findProductsByAttribute = async(aName, value) => {
   }
 }
 
-// findProductsByAttribute() takes a pair of attribute aname & value, then return a list of products having that attribute
+// findProductsByAttribute() find products that have one of the attributes in the given attributes list 
 const findProductsByAttributes = async(attributes) => {
   try {
     let query = []
     for (a of attributes) {
-      // query.push({aName: a.aName, value: {$in: a.value}})
       query.push({aName: transformWordCase(a.aName), value: transformWordCase(a.value)});
     }
     
-    //find all products that have aName = aName & aValue = value
+    //find all products that have one of the attributes in the given attributes list 
     const products = await product.find({
         attribute : {
           $elemMatch: {
@@ -113,6 +112,32 @@ const findProductsByAttributes = async(attributes) => {
           }
         }
       })
+    return products
+  }
+  catch (err) {
+    throw(err)
+  }
+}
+
+// filterProducts() find products having the categoryid (if categoryid is specified (not null)) 
+// and have one of the attributes in the given attributes list 
+const filterProducts = async(catid, attributes) => {
+  try {
+    let query = {}
+    if (!isEmpty(catid)) query['category'] = catid; 
+    if (!isEmpty(attributes)) {
+      let query_att = []
+      for (a of attributes) {
+        query_att.push({aName: transformWordCase(a.aName), value: transformWordCase(a.value)});
+      }
+      query['attribute'] = {
+        $elemMatch: {
+          $or: query_att
+        }
+      }
+    }
+    
+    const products = await product.find(query)
     return products
   }
   catch (err) {
@@ -166,25 +191,6 @@ const setAttributes = async (product_atts, a_set_list) => {
   }
 }
 
-// addAttributesToProduct() add attributes to product
-const addAttributesToProduct = async (myProduct, newAttributes) => {
-  try {
-      // if attributes list is not empty
-      if (!isEmpty(newAttributes)) {
-          const updated = await product.findOneAndUpdate(
-                  {_id : myProduct._id},
-                  { $addToSet: { attribute: { $each: newAttributes }}},
-                  { returnOriginal: false }
-              );
-          return updated
-      }
-
-      return myProduct
-  } catch (err) {
-      console.log(err)
-      throw(err)
-  }
-}
 
 const getAttributeGroups = async () => {
   try {
@@ -243,4 +249,4 @@ const transformWordCase = (word) => {
   return word
 }
 
-module.exports = {deleteProductByMysqlId, saveProduct, getAllProducts, dropAll, findProductsByAttribute, findProductsByAttributes, getAttributeGroups, updateProduct, findProductByMysqlID}
+module.exports = {deleteProductByMysqlId, saveProduct, getAllProducts, dropAll, findProductsByAttribute, findProductsByAttributes, getAttributeGroups, updateProduct, findProductByMysqlID, filterProducts}
