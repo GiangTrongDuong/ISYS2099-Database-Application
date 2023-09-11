@@ -67,3 +67,7 @@ TO 'warehouseg2'@'localhost';
 GRANT SELECT
 ON testg2.warehouse_item
 TO 'warehouseg2'@'localhost';
+
+GRANT SELECT
+ON testg2.product
+TO 'warehouseg2'@'localhost';
