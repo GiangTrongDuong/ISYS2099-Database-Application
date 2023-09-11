@@ -51,6 +51,17 @@ async function get_from_multiple_categories(ids) {
     });
 }
 
+async function get_from_a_category(id) {
+    return new Promise((resolve, reject) => {
+        database.query(`SELECT *
+        FROM product
+        WHERE category = ?;`, [id], (error, results) => {
+            if (error) reject(error);
+            else resolve(results);
+        })
+    })
+};
+
 // limit is optional, order by created_at; return list of product 
 async function from_category(cat_list, limit) {
     //catlist: Bed,Lamp,Computer
@@ -228,6 +239,6 @@ async function deleteProduct(pid) {
 }
 module.exports = {
     from_category, from_seller, from_id, from_ids, contain_word, getPrice, getVolume,
-    updateDetails, createProduct, insert_to_warehouse, deleteProduct, all, get_from_multiple_categories
+    updateDetails, createProduct, insert_to_warehouse, deleteProduct, all, get_from_multiple_categories, get_from_a_category
 }
 
