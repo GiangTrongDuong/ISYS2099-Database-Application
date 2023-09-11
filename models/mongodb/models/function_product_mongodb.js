@@ -137,8 +137,17 @@ const filterProducts = async(catid, attributes) => {
       }
     }
     
-    const products = await product.find(query)
-    return products
+    const products = await product.find(
+      query
+    )
+
+    let mysqlids = []
+    if (!isEmpty(products)) {
+      for (p of products)
+        mysqlids.push(p.mysql_id)
+    }
+
+    return mysqlids
   }
   catch (err) {
     throw(err)
