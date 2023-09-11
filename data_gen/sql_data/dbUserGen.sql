@@ -23,6 +23,9 @@ GRANT SELECT
 ON testg2.product
 TO 'customerg2'@'localhost';
 
+GRANT EXECUTE ON PROCEDURE testg2.order_trans TO 'customerg2'@'localhost';
+GRANT EXECUTE ON PROCEDURE testg2.free_wh_space TO 'customerg2'@'localhost';
+
 GRANT SELECT, INSERT, UPDATE
 ON testg2.user
 TO 'customerg2'@'localhost';
@@ -43,6 +46,7 @@ TO 'customerg2'@'localhost';
 CREATE USER 'sellerg2'@'localhost'
 IDENTIFIED BY 'sellerpass';
 
+GRANT EXECUTE ON PROCEDURE testg2.product_to_wh TO 'sellerg2'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE
 ON testg2.product
 TO 'sellerg2'@'localhost';
@@ -64,10 +68,12 @@ GRANT SELECT, INSERT, UPDATE, DELETE
 ON testg2.warehouse
 TO 'warehouseg2'@'localhost';
 
-GRANT SELECT
+GRANT SELECT, UPDATE, DELETE
 ON testg2.warehouse_item
 TO 'warehouseg2'@'localhost';
 
 GRANT SELECT
 ON testg2.product
 TO 'warehouseg2'@'localhost';
+
+GRANT EXECUTE ON PROCEDURE testg2.wh_move_product TO 'warehouseg2'@'localhost';
