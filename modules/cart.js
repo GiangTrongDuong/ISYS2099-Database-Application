@@ -131,7 +131,7 @@ router.post(`${CART_ROUTE}/place-order`, async (req, res) => {
   try {
     const result = await db.place_order(req.session.user.id);
     if (result.orderId) {
-      res.redirect(`/order/order/${result.order_id}`);
+      res.redirect(`/order/order/${result.orderId}`);
     } else {
       // TODO: snackbar
       res.redirect(`/`);
