@@ -321,6 +321,9 @@ const addAttributesToCat = async (cat, newAttributes) => {
     }
 }
 
+function getCatByIds(ids) {
+    return category.find({ _id: { $in: ids } });
+}
 
 // check if an object is empty
 function isEmpty(o) {
@@ -386,4 +389,4 @@ const getAttributesOfCategory = async (catid) => {
     }
 }
 
-module.exports = { saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat, getAttributesOfCategory, getAllChildrenAndName }
+module.exports = { saveCat, createCats, getAllCats, dropAll, findCatById, findCatByName, getAllChildren, getAllParents, getLowestLevelCats, deleteCat, deleteCatAndChildren, updateCat, getAttributesOfCategory, getAllChildrenAndName, getCatByIds }

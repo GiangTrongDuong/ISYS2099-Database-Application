@@ -1,4 +1,4 @@
-const { connectionSeller: database } = require('./connection/dbSqlConnect');
+const { connectionSeller: database, connection: guestDb } = require('./connection/dbSqlConnect');
 const { parenthesesString, getCurrentTimeString } = require('../helperFuncs');
 
 async function from_id(pid) {
@@ -73,20 +73,20 @@ async function from_ids(pids) {
 async function get_from_multiple_categories(ids) {
     return new Promise((resolve, reject) => {
         // Create a string with multiple "?" depending on the number of ids
-        const placeholders = ids.map(() => '?').join(',');
-
-        database.query(`SELECT *
-                        FROM product
-                        WHERE category IN (${placeholders})`, ids, (error, results) => {
+        // const placeholders = ids.map(() => '?').join(',');
+        guestDb.query(`SELECT * FROM product WHERE category IN (?)`, [ids], (error, results) => {
             if (error) reject(error);
-            else resolve(results);
+            else {
+                console.log("Reultlngrekdsngfdkl");
+                resolve(results);
+            }
         });
     });
 }
 
 async function get_from_a_category(id) {
     return new Promise((resolve, reject) => {
-        database.query(`SELECT *
+        guestDb.query(`SELECT *
         FROM product
         WHERE category = ?;`, [id], (error, results) => {
             if (error) reject(error);

@@ -48,13 +48,21 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
         // console.log("Rendered", renderedCategory);
 
         // get all children
-        const renderedChildrenResult = await Category.getAllChildrenAndName(id);
-        console.log("Children", renderedChildrenResult);
-        const renderedChildrenIdList = renderedChildrenResult.map(cat => {
-            return cat.id;
-        })
+        const renderedChildrenResult = await Category.getAllChildren(id);
+        // console.log("Children", renderedChildrenResult);
+        // const renderedChildrenIdList = renderedChildrenResult.map(cat => {
+        //     return cat.id;
+        // })
+        const renderedChildrenIdList = renderedChildrenResult.children_categories;
+        const renderChildrenCategoryList = await Category.getCatByIds(renderedChildrenIdList);
         // get products from category
-        const productList = await ProductDb.get_from_multiple_categories([renderedChildrenIdList]);
+        let productList = []
+        if (renderedChildrenIdList.length > 0) {
+            productList = await ProductDb.get_from_multiple_categories([id, ...renderedChildrenIdList]);
+        } else {
+            console.log("Non multiple");
+            productList = await ProductDb.get_from_a_category(id);
+        }
 
         // convert to object to assign attribute
         res.render("layout.ejs", {
@@ -65,7 +73,7 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
             categoryList: catlist,
             userSession: req?.session?.user,
             category: renderedCategory,
-            childCategories: renderedChildrenResult,
+            childCategories: renderChildrenCategoryList,
             productList: productList,
         });
     } catch (error) {
