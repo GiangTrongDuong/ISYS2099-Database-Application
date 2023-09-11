@@ -52,6 +52,8 @@ BEGIN
 
             -- Update remaining_area in the warehouse
             UPDATE warehouse SET remaining_area = remaining_area - total_inserted WHERE id = wid;
+            -- Update product stock
+            UPDATE product SET remaining = remaining + quant;
 
             SET quant = 0; -- All space allocated
             SELECT 'All of the products are allocated.' AS result;
@@ -87,6 +89,8 @@ BEGIN
 
                 -- Update remaining_area in the warehouse
                 UPDATE warehouse SET remaining_area = remaining_area - volume_inserted WHERE id = wid;
+                -- Add product stock
+                UPDATE product SET remaining = remaining + quantity_inserted;
             ELSE
                 -- No warehouse available with any space, exit loop
                 SELECT 'No more items of this product can be allocated.' AS result;
