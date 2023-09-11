@@ -2,6 +2,7 @@
 Database application project for course ISYS2099 by group 2, semester 2 2023
 
 View the team members contribution [Here](#contribution)
+View the demo link here [Here](#demo-link)
 
 Steps to run:
 1. Open terminal in root folder
@@ -86,3 +87,6 @@ Because there are some frontend features the team has not implemented
   - Security, Integration
 - Tran Nguyen Ha Khanh: 5pts:
   - MongoDB
+
+# Demo Link
+[Demo Link](https://rmiteduau.sharepoint.com/:v:/s/DatabaseApplicationProjectGroup2/EfaEdboBvZJHjMSBR7DlBbsBdfUOpWyyc0yMau1IApQteA?e=FhAx5P)
