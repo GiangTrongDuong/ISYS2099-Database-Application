@@ -15,20 +15,6 @@ Steps to run:
 # Instruction
 
 ## Set up
-### To run to generate data
-- Find or create a ```.env``` file in `data_gen` folder, copy the following, and insert your own info:
-``` env
-HOST='localhost'
-DB_USER='root'
-PASSWORD='password'
-DATABASE='testg2'
-MONGODB_URI='mongodb+srv://eeet2099group2:eeet2099Pass@databaseapplicationproj.fexqmnq.mongodb.net/?retryWrites=true&w=majority'
-```
-- Inside .env file:
-  - Make sure the `DB_USER`, `PASSWORD`, `HOST` match your root connection in your local. 
-  - If you want use another database, make sure change the database name `DATABASE`.
-  - You may have to create a new database/schema.
-  
 ### To run whole project
 - Find or create a ```.env``` file in root, copy the following, and insert your own info:
 ``` env
@@ -58,24 +44,27 @@ SELLERPASSWORD='sellerpass'
   
 
 ## Run
+### Generate Data
 Move to `data_gen` folder by typing `cd data_gen` in terminal from root folder.
-### Run add_data.js
+#### Run add_data.js
 This will execute both sql files.
 
 Get dependencies ```node install```
 
 Run via ```node .``` or ```node add_sql_data.js```
 
-### Run SQL files
+#### Run SQL files
 You can also copy the contents of the files to your MySQL console and run these chunks.
 
 Run db_create first, then db_inserts
 
-### Other files
+#### Other files
 - ```create_data.py``` generates CSV files to be used as data
     - ITF: skip CSV altogether and create SQL inserts right away?
 - These CSV files are stored in ```py_data/```
-
+### Run Whole System
+- In the root folder, run `npm install`
+- Next, run `npm run start`
 # Bugs
 - If cannot run due to this error message in terminal `buffering timed out after 10000ms`:
     - Remove `node_moudules`, and `package-lock.json`

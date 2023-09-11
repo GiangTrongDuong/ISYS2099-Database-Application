@@ -5,8 +5,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "test:mongo": "node models/mongodb/test_mongo/test_mongo.js"
-  
+    "test:mongo": "node models/mongodb/test_mongo/test_mongo.js",
+    "importdata:category_mongodb": "node add_category_mongo.js",
+    "importdata:product_mongodb": "node add_product_mongo.js",
+    "importdata:mysql": "node add_sql_data.js"
+
   },
   "keywords": [],
   "author": "Group 2",
