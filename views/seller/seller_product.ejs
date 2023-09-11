@@ -11,9 +11,10 @@
         <th scope="col">Title</th>
         <th scope="col">Price</th>
         <th scope="col">Description</th>
-        <th scope="col">Stock</th>
-        <th scope="col">Update</th>
-        <th scope="col">Delete</th>
+        <th scope="col">Remaining Stock</th>
+        <th scope="col">Update Stock</th>
+        <th scope="col">Update Info</th>
+        <th scope="col">Delete Product</th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +24,10 @@
         <td id="product-title"><a href="<%= navigatePage("product", product.id) %>" class="link-dark"><%= product.title %></a></td>
         <td id="product-price"><%= product.price %></td>
         <td id="product-description"><%= product.description %></td>
-        <td id="product-category"><%= product.stock %></td>
+        <td id="product-category"><%= product.remaining %></td>
+        <td>
+          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#updateStockModal" onclick="updateStockModal(this)">Increase stock</button>
+        </td>
         <td>
           <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#updateProductModal" onclick="showUpdateModal(this)">Update Item</button>
         </td>
@@ -35,6 +39,29 @@
     </tbody>
     </table>
 </div>
+<%- include('../partials/modal', {
+  modalId: "updateStockModal",
+  heading: "Update Stock Quantity",
+  // render body with message and button
+  body: `
+  <div class="card">
+    <div class="card-body h-100 overflow-scroll">
+      <h6 class="mb-4 pb-3 border-bottom fw-bold">Updating stock</h6>
+      <form action="update-stock" method="POST">
+        <div class="mb-3">
+          <input type="text" class="form-control" id="update-id" name="id" value="" readonly hidden>
+        </div>
+        <div class="mb-3">
+          <label for="update-quantity" class="form-label">Insert quantites to increase by</label>
+          <input type="text" class="form-control" id="update-quantyt" name="quantity" value="">
+        </div>
+        <button type="submit" class="btn btn-dark">Save Changes</button>
+      </form>
+    </div>
+  </div>
+  `,
+  isFullScreenSm: false,
+}) %>
 
 <%- include('../partials/modal', {
   modalId: "updateProductModal",
@@ -175,6 +202,12 @@
     const row = buttonElement.closest('tr');
     const productId = row.querySelector('#product-id').innerText;
     document.querySelector('#deleteProductModal #delete').value = productId;
+  }
+
+  function updateStockModal(buttonElement) {
+    const row = buttonElement.closest('tr');
+    const productId = row.querySelector('#product-id').innerText;
+    document.querySelector('#updateStockModal #update-id').value = productId;
   }
 </script>
 
