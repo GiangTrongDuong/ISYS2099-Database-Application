@@ -1,0 +1,531 @@
+[{
+    "_id": {
+      "$oid": "64e9f0dc90cae43934765fbd"
+    },
+    "attribute": [
+      {
+        "aName": "Warranty",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Brand",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Materials",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Color",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Shipping",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Electronics",
+    "parent_category": null,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0dc90cae43934765fc1"
+    },
+    "attribute": [],
+    "name": "Phone and Accessories",
+    "parent_category": {
+      "$oid": "64e9f0dc90cae43934765fbd"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0dc90cae43934765fc7"
+    },
+    "attribute": [],
+    "name": "Computer and Accessories",
+    "parent_category": {
+      "$oid": "64e9f0dc90cae43934765fbd"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0dd90cae43934765fcd"
+    },
+    "attribute": [
+      {
+        "aName": "Storage",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Model",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Phone",
+    "parent_category": {
+      "$oid": "64e9f0dc90cae43934765fc1"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0dd90cae43934765fd3"
+    },
+    "attribute": [],
+    "name": "Phone Accessories",
+    "parent_category": {
+      "$oid": "64e9f0dc90cae43934765fc1"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0dd90cae43934765fd9"
+    },
+    "attribute": [
+      {
+        "aName": "Storage",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "RAM",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Model",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Computer",
+    "parent_category": {
+      "$oid": "64e9f0dc90cae43934765fc7"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0de90cae43934765fdf"
+    },
+    "attribute": [
+      {
+        "aName": "Warranty",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Brand",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Materials",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Color",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Shipping",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Home Appliances",
+    "parent_category": null,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0de90cae43934765fe3"
+    },
+    "attribute": [
+      {
+        "aName": "Energy Consumption",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Installation",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Kitchen Appliances",
+    "parent_category": {
+      "$oid": "64e9f0de90cae43934765fdf"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0de90cae43934765fe9"
+    },
+    "attribute": [],
+    "name": "Other Appliances",
+    "parent_category": {
+      "$oid": "64e9f0de90cae43934765fdf"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0de90cae43934765fef"
+    },
+    "attribute":  [],
+    "name": "Refridgerator",
+    "parent_category": {
+      "$oid": "64e9f0de90cae43934765fe3"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0de90cae43934765ff5"
+    },
+    "attribute": [],
+    "name": "Cooker and Oven",
+    "parent_category": {
+      "$oid": "64e9f0de90cae43934765fe3"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0de90cae43934765ffb"
+    },
+    "attribute": [],
+    "name": "TV",
+    "parent_category": {
+      "$oid": "64e9f0de90cae43934765fe9"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0df90cae43934766001"
+    },
+    "attribute": [],
+    "name": "Lamps",
+    "parent_category": {
+      "$oid": "64e9f0de90cae43934765fe9"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0df90cae43934766007"
+    },
+    "attribute": [
+      {
+        "aName": "Warranty",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Brand",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Materials",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Color",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Shipping",
+        "aValue": "text",
+        "aRequired": false
+      },
+      {
+        "aName": "Return",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Furniture",
+    "parent_category": null,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0df90cae4393476600b"
+    },
+    "attribute": [],
+    "name": "Seating and Bedding",
+    "parent_category": {
+      "$oid": "64e9f0df90cae43934766007"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0df90cae43934766011"
+    },
+    "attribute": [
+      {
+        "aName": "Style",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Decor",
+    "parent_category": {
+      "$oid": "64e9f0df90cae43934766007"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0df90cae43934766017"
+    },
+    "attribute": [],
+    "name": "Chairs and Sofas",
+    "parent_category": {
+      "$oid": "64e9f0df90cae4393476600b"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e090cae4393476601d"
+    },
+    "attribute": [
+      {
+        "aName": "Bed size",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Bed",
+    "parent_category": {
+      "$oid": "64e9f0df90cae4393476600b"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e090cae43934766023"
+    },
+    "attribute": [],
+    "name": "Wall Decor",
+    "parent_category": {
+      "$oid": "64e9f0df90cae43934766011"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e090cae43934766029"
+    },
+    "attribute": [],
+    "name": "Floor Decor",
+    "parent_category": {
+      "$oid": "64e9f0df90cae43934766011"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e090cae4393476602f"
+    },
+    "attribute": [
+      {
+        "aName": "Style",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Fashion",
+    "parent_category": null,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e090cae43934766033"
+    },
+    "attribute": [],
+    "name": "Male Fashion",
+    "parent_category": {
+      "$oid": "64e9f0e090cae4393476602f"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e090cae43934766039"
+    },
+    "attribute": [],
+    "name": "Female Fashion",
+    "parent_category": {
+      "$oid": "64e9f0e090cae4393476602f"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e190cae4393476603f"
+    },
+    "attribute": [],
+    "name": "Male Clothing",
+    "parent_category": {
+      "$oid": "64e9f0e090cae43934766033"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e190cae43934766045"
+    },
+    "attribute": [],
+    "name": "Male Accessories",
+    "parent_category": {
+      "$oid": "64e9f0e090cae43934766033"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e190cae4393476604b"
+    },
+    "attribute": [],
+    "name": "Boy Clothing",
+    "parent_category": {
+      "$oid": "64e9f0e090cae43934766033"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e190cae43934766051"
+    },
+    "attribute": [],
+    "name": "Female Clothing",
+    "parent_category": {
+      "$oid": "64e9f0e090cae43934766039"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e190cae43934766057"
+    },
+    "attribute": [],
+    "name": "Female Accessories",
+    "parent_category": {
+      "$oid": "64e9f0e090cae43934766039"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e290cae4393476605d"
+    },
+    "attribute": [],
+    "name": "Girl Clothing",
+    "parent_category": {
+      "$oid": "64e9f0e090cae43934766039"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e290cae43934766063"
+    },
+    "attribute": [
+      {
+        "aName": "Activity",
+        "aValue": "text",
+        "aRequired": false
+      }
+    ],
+    "name": "Sports",
+    "parent_category": null,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e290cae43934766067"
+    },
+    "attribute": [],
+    "name": "Sportswear",
+    "parent_category": {
+      "$oid": "64e9f0e290cae43934766063"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e290cae4393476606d"
+    },
+    "attribute": [],
+    "name": "Male Sportswear",
+    "parent_category": {
+      "$oid": "64e9f0e290cae43934766067"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e290cae43934766073"
+    },
+    "attribute": [],
+    "name": "Female Sportswear",
+    "parent_category": {
+      "$oid": "64e9f0e290cae43934766067"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e390cae43934766079"
+    },
+    "attribute": [],
+    "name": "Sports Equipment",
+    "parent_category": {
+      "$oid": "64e9f0e290cae43934766063"
+    },
+    "__v": 1
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e390cae4393476607f"
+    },
+    "attribute": [],
+    "name": "Racket Sports",
+    "parent_category": {
+      "$oid": "64e9f0e390cae43934766079"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64e9f0e390cae43934766085"
+    },
+    "attribute": [],
+    "name": "Ball Sports",
+    "parent_category": {
+      "$oid": "64e9f0e390cae43934766079"
+    },
+    "__v": 0
+  }]

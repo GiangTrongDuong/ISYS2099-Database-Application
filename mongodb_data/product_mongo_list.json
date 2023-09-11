@@ -1,0 +1,4606 @@
+[
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 1,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "4gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 2,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 3,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 4,
+        "category": "64e9f0e290cae43934766073"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 5,
+        "category": "64e9f0e190cae43934766057"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 6,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Not support",
+                "aName": "Installation"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 7,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 8,
+        "category": "64e9f0e390cae43934766085"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 9,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 10,
+        "category": "64e9f0e090cae43934766029"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Not support",
+                "aName": "Installation"
+            }
+        ],
+        "mysql_id": 11,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 12,
+        "category": "64e9f0e290cae43934766073"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 13,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 14,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 15,
+        "category": "64e9f0e190cae4393476603f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 16,
+        "category": "64e9f0e190cae4393476603f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 17,
+        "category": "64e9f0e090cae43934766029"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 18,
+        "category": "64e9f0e190cae4393476603f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 19,
+        "category": "64e9f0df90cae43934766017"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 20,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 21,
+        "category": "64e9f0df90cae43934766017"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 22,
+        "category": "64e9f0e190cae4393476604b"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Not support",
+                "aName": "Installation"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 23,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 24,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 25,
+        "category": "64e9f0e390cae43934766085"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Free installtion",
+                "aName": "Installation"
+            }
+        ],
+        "mysql_id": 26,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 27,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "8gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 28,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 29,
+        "category": "64e9f0e390cae4393476607f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Free installtion",
+                "aName": "Installation"
+            }
+        ],
+        "mysql_id": 30,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 31,
+        "category": "64e9f0e190cae43934766057"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 32,
+        "category": "64e9f0e190cae4393476604b"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 33,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 34,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 35,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Free installtion",
+                "aName": "Installation"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 36,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 37,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 38,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "1tb",
+                "aName": "Storage"
+            },
+            {
+                "value": "4gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 39,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 40,
+        "category": "64e9f0e290cae43934766073"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 41,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 42,
+        "category": "64e9f0dd90cae43934765fcd"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            },
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 43,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 44,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 45,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 46,
+        "category": "64e9f0e390cae4393476607f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 47,
+        "category": "64e9f0e290cae4393476605d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 48,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Free installtion",
+                "aName": "Installation"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 49,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 50,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 51,
+        "category": "64e9f0dd90cae43934765fcd"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 52,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "1tb",
+                "aName": "Storage"
+            },
+            {
+                "value": "8gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 53,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 54,
+        "category": "64e9f0e190cae43934766057"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 55,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "4gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 56,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 57,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "8gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 58,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 59,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 60,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 61,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 62,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 63,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 64,
+        "category": "64e9f0dd90cae43934765fcd"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 65,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Free installtion",
+                "aName": "Installation"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 66,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 67,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Not support",
+                "aName": "Installation"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 68,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 69,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 70,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 71,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 72,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 73,
+        "category": "64e9f0e390cae4393476607f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 74,
+        "category": "64e9f0e190cae4393476603f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 75,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 76,
+        "category": "64e9f0dd90cae43934765fcd"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 77,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 78,
+        "category": "64e9f0e390cae43934766085"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 79,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Not support",
+                "aName": "Installation"
+            }
+        ],
+        "mysql_id": 80,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Support with fee",
+                "aName": "Installation"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 81,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 82,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 83,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            },
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 84,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 85,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 86,
+        "category": "64e9f0e390cae4393476607f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 87,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 88,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 89,
+        "category": "64e9f0e390cae43934766085"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 90,
+        "category": "64e9f0e390cae4393476607f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 91,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Support with fee",
+                "aName": "Installation"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 92,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 93,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "1tb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 94,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            },
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 95,
+        "category": "64e9f0e090cae43934766029"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 96,
+        "category": "64e9f0e190cae4393476603f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 97,
+        "category": "64e9f0df90cae43934766017"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 98,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 99,
+        "category": "64e9f0e290cae43934766073"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 100,
+        "category": "64e9f0e390cae43934766085"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 101,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 102,
+        "category": "64e9f0e190cae4393476604b"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 103,
+        "category": "64e9f0e390cae4393476607f"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Free installtion",
+                "aName": "Installation"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 104,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 105,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 106,
+        "category": "64e9f0df90cae43934766017"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 107,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 108,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 109,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "1tb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 110,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 111,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 112,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 113,
+        "category": "64e9f0e190cae4393476604b"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 114,
+        "category": "64e9f0e190cae4393476604b"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 115,
+        "category": "64e9f0e290cae4393476605d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 116,
+        "category": "64e9f0dd90cae43934765fcd"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "4gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 117,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 118,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 119,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 120,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 121,
+        "category": "64e9f0e390cae43934766085"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Large size",
+                "aName": "Bed size"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 122,
+        "category": "64e9f0e090cae4393476601d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 123,
+        "category": "64e9f0df90cae43934766017"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 124,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 125,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            },
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 126,
+        "category": "64e9f0e090cae43934766029"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 127,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 128,
+        "category": "64e9f0e290cae4393476605d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 129,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 130,
+        "category": "64e9f0e190cae4393476603f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 131,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 132,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 133,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 134,
+        "category": "64e9f0e190cae4393476604b"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 135,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 136,
+        "category": "64e9f0e390cae4393476607f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 137,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            },
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 138,
+        "category": "64e9f0e090cae43934766029"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 139,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Large size",
+                "aName": "Bed size"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 140,
+        "category": "64e9f0e090cae4393476601d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 141,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 142,
+        "category": "64e9f0df90cae43934766017"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 143,
+        "category": "64e9f0e390cae4393476607f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 144,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 145,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 146,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Support with fee",
+                "aName": "Installation"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 147,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 148,
+        "category": "64e9f0e190cae4393476603f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 149,
+        "category": "64e9f0e090cae43934766029"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 150,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 151,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 152,
+        "category": "64e9f0e190cae4393476603f"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "4gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 153,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 154,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            },
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 155,
+        "category": "64e9f0e090cae43934766029"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 156,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 157,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 158,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 159,
+        "category": "64e9f0e090cae43934766029"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 160,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 161,
+        "category": "64e9f0e290cae43934766073"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Not support",
+                "aName": "Installation"
+            }
+        ],
+        "mysql_id": 162,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Not support",
+                "aName": "Installation"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "White",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 163,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 164,
+        "category": "64e9f0e290cae4393476605d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 165,
+        "category": "64e9f0e190cae43934766057"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 166,
+        "category": "64e9f0df90cae43934766017"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 167,
+        "category": "64e9f0e390cae43934766085"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Support with fee",
+                "aName": "Installation"
+            }
+        ],
+        "mysql_id": 168,
+        "category": "64e9f0de90cae43934765fef"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 169,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 170,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 171,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 172,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Casual",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 173,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Free installtion",
+                "aName": "Installation"
+            }
+        ],
+        "mysql_id": 174,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "1tb",
+                "aName": "Storage"
+            },
+            {
+                "value": "8gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 175,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 176,
+        "category": "64e9f0dd90cae43934765fcd"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Support with fee",
+                "aName": "Installation"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 177,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 178,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 179,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 180,
+        "category": "64e9f0de90cae43934765ffb"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "4gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "6 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 181,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "512gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "8gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 182,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 183,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 184,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Indoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 185,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 186,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Outdoor",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 187,
+        "category": "64e9f0e290cae43934766073"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Trending",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 188,
+        "category": "64e9f0e190cae43934766045"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": "16gb",
+                "aName": "RAM"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 189,
+        "category": "64e9f0dd90cae43934765fd9"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 190,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Daily",
+                "aName": "Activity"
+            }
+        ],
+        "mysql_id": 191,
+        "category": "64e9f0e290cae4393476606d"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            }
+        ],
+        "mysql_id": 192,
+        "category": "64e9f0e190cae43934766051"
+    },
+    {
+        "attribute": [
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Gray",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 193,
+        "category": "64e9f0dd90cae43934765fd3"
+    },
+    {
+        "attribute": [
+            {
+                "value": "256gb",
+                "aName": "Storage"
+            },
+            {
+                "value": null,
+                "aName": "Model"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 194,
+        "category": "64e9f0dd90cae43934765fcd"
+    },
+    {
+        "attribute": [
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 195,
+        "category": "64e9f0df90cae43934766001"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Single size",
+                "aName": "Bed size"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Samsung",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Free shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 196,
+        "category": "64e9f0e090cae4393476601d"
+    },
+    {
+        "attribute": [
+            {
+                "value": null,
+                "aName": "Energy Consumption"
+            },
+            {
+                "value": "Not support",
+                "aName": "Installation"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Black",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            }
+        ],
+        "mysql_id": 197,
+        "category": "64e9f0de90cae43934765ff5"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Formal",
+                "aName": "Style"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 198,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Elegent",
+                "aName": "Style"
+            },
+            {
+                "value": "3 months",
+                "aName": "Warranty"
+            },
+            {
+                "value": "No brand",
+                "aName": "Brand"
+            },
+            {
+                "value": null,
+                "aName": "Materials"
+            },
+            {
+                "value": "Red",
+                "aName": "Color"
+            },
+            {
+                "value": "Instant shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 199,
+        "category": "64e9f0e090cae43934766023"
+    },
+    {
+        "attribute": [
+            {
+                "value": "Single size",
+                "aName": "Bed size"
+            },
+            {
+                "value": "No wanrranty",
+                "aName": "Warranty"
+            },
+            {
+                "value": "Lg",
+                "aName": "Brand"
+            },
+            {
+                "value": "Mixed",
+                "aName": "Materials"
+            },
+            {
+                "value": "Colorful",
+                "aName": "Color"
+            },
+            {
+                "value": "Premium shipping",
+                "aName": "Shipping"
+            },
+            {
+                "value": "Not returnable",
+                "aName": "Return"
+            }
+        ],
+        "mysql_id": 200,
+        "category": "64e9f0e090cae4393476601d"
+    }
+]

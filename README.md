@@ -6,11 +6,7 @@ Steps to run:
 2. Run `npm install`
 3. Follow the [Instruction](#instruction)
 4. If having any bug, please follow [Bugs](#bugs) section.
-** Caution: ** To have the best experience, please use Desktop has `width` is ***1090px***
-1. Routes:
-- Home: http://localhost:3000/
-- Login: http://localhost:3000/login
-- Signup: http://localhost:3000/signup
+** Caution: ** To have the best experience, please use Desktop has `width` is at least ***1090px***
 
 # Instruction
 
@@ -46,13 +42,15 @@ SELLERPASSWORD='sellerpass'
 ## Run
 ### Generate Data
 Move to `data_gen` folder by typing `cd data_gen` in terminal from root folder.
-#### Run add_data.js
+#### Run MySQL add_sql_data.js
 This will execute both sql files.
 
 Get dependencies ```node install```
 
 Run via ```node .``` or ```node add_sql_data.js```
-
+#### Run to add data to Mongo
+- To add categories: ```npm run importdata:category_mongodb```
+- To add products in MongoDB: ```npm run importdata:product_mongodb```
 #### Run SQL files
 You can also copy the contents of the files to your MySQL console and run these chunks.
 
@@ -65,12 +63,12 @@ Run db_create first, then db_inserts
 ### Run Whole System
 - In the root folder, run `npm install`
 - Next, run `npm run start`
+
+# Unhandled In Frontend
+- If the product list does not exist when filtering, instead of displaying detailed message, it will displays none
 # Bugs
 - If cannot run due to this error message in terminal `buffering timed out after 10000ms`:
     - Remove `node_moudules`, and `package-lock.json`
     - Make sure the `DB_USER`, `PASSWORD`, `HOST` match your database connection, and the `MONGODB_URI` exists
     - Run `npm install` to install node modules
     - Run `npm run start` to start running the program again
-
-- Delete category -> its children also disappear
-- If logout ?? -> back to homepage

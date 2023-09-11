@@ -104,7 +104,7 @@ router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
       }
 
       const newFilter = {
-        category: category,
+        category: category == "" ? null : category,
         attribute: attributes
       };
       const result = await productDbMongo.filterProducts(newFilter.category, newFilter.attribute);
