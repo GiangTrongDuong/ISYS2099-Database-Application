@@ -123,7 +123,6 @@ const findProductsByAttributes = async(attributes) => {
 // and have one of the attributes in the given attributes list 
 const filterProducts = async(catid, attributes) => {
   try {
-    // create query
     let query = {}
     if (!isEmpty(catid)) query['category'] = catid; 
     if (!isEmpty(attributes)) {
@@ -138,9 +137,15 @@ const filterProducts = async(catid, attributes) => {
       }
     }
     
-    // find with the query 
     const products = await product.find(query)
-    return products
+
+    let mysqlids = []
+    if (!isEmpty(products)) {
+      for (p of products)
+        mysqlids.push(p.mysql_id)
+    }
+
+    return mysqlids
   }
   catch (err) {
     throw(err)
@@ -167,7 +172,33 @@ const findProductByMysqlID = async(mysqlid) => {
   }
 }
 
-// get attributes and values group by attribute names
+// set values for atttributes
+const setAttributes = async (product_atts, a_set_list) => {
+  try {
+    if (!isEmpty(product_atts) && !isEmpty(a_set_list)) {
+      for (a_pair of a_set_list) {
+        for (let i = 0; i < product_atts.length; i++) {
+          if (product_atts[i].aName.toLowerCase() == a_pair.aName.toLowerCase()) {
+            let temp = {
+              aName: product_atts[i].aName, 
+              aValue: product_atts[i].aValue, 
+              aRequired: product_atts[i].aRequired, 
+              value: transformWordCase(a_pair.value)
+            }
+            product_atts[i] = temp
+            break;
+          }
+        }
+      }
+    }
+    return product_atts
+  } catch (err) {
+    console.log(err)
+    throw(err)
+  }
+}
+
+
 const getAttributeGroups = async () => {
   try {
       const result = await product.aggregate([
@@ -208,69 +239,17 @@ const getAttributeGroups = async () => {
   }
 }
 
-// set values for atttributes
-const setAttributes = async (product_atts, a_set_list) => {
-  try {
-    if (!isEmpty(product_atts) && !isEmpty(a_set_list)) {
-      for (a_pair of a_set_list) {
-        for (let i = 0; i < product_atts.length; i++) {
-          if (product_atts[i].aName.toLowerCase() == a_pair.aName.toLowerCase()) {
-            let temp = {
-              aName: product_atts[i].aName, 
-              aValue: product_atts[i].aValue, 
-              aRequired: product_atts[i].aRequired, 
-              value: transformWordCase(a_pair.value)
-            }
-            product_atts[i] = temp
-            break;
-          }
-        }
-      }
-    }
-    return product_atts
-  } catch (err) {
-    console.log(err)
-    throw(err)
-  }
-}
-
-// // set values for atttributes
-// const setAttributes = async (productid, attribute_name_value_list) => {
-//   try {
-//     const myproduct = await findProductByID(productid);
-//     let update_attribute = myproduct.attribute;
-//     if (!isEmpty(update_attribute) && !isEmpty(attribute_name_value_list)) {
-//       for (a_pair of attribute_name_value_list) {
-//         for (let i = 0; i < update_attribute.length; i++) {
-//           if (update_attribute[i].aName.toLowerCase() == a_pair.aName.toLowerCase()) {
-//             a_pair.value = transformWordCase(a_pair.value)
-//             update_attribute[i].value = a_pair.value;
-//             break;
-//           }
-//         }
-//       }
-//     }
-//     myproduct.attribute = update_attribute;
-//     const updated = await myproduct.save();
-//     return updated
-//   } catch (err) {
-//     console.log(err)
-//     throw(err)
-//   }
-// }
-
-// check if there's any product with the same mysqlid already exists
 const mysqlIDExist = async (mysqlid) => {
   const exist = await product.exists({mysql_id: mysqlid});
   return exist;
 }
+
 
 // check if an object is empty
 function isEmpty(o){
   return (o === undefined || o == null || o == "" || o.length ==0);
 }
 
-// capitalize the first character in an string: e.g., "brand" => "Brand"
 const transformWordCase = (word) => {
   if (typeof word === "string") 
     word = word[0].toUpperCase() + word.substring(1).toLowerCase(); 
