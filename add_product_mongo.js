@@ -1,6 +1,6 @@
 require('dotenv').config(); 
-const mg_product = require('./models/function_product_mongodb');
-const {connectMongoDB} = require('./models/mongodbConnect')
+const mg_product = require('./models/mongodb/models/function_product_mongodb.js');
+const {connectMongoDB} = require('./models/connection/mongodbConnect')
 const product_json_fn = './mongodb_data/product_mongo_list.json';
 const fs = require('fs');
 

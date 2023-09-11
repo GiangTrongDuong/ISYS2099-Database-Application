@@ -1,7 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
-const mg_category = require('./models/function_category');
-const {connectMongoDB} = require('./models/mongodbConnect')
+const mg_category = require('./models/mongodb/models/function_category');
+const {connectMongoDB} = require('./models/connection/mongodbConnect')
 const json_fn = './mongodb_data/cat_att_list.json';
 
 
