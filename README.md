@@ -5,7 +5,8 @@ Steps to run:
 1. Open terminal in root folder
 2. Run `npm install`
 3. Follow the [Instruction](#instruction)
-4. If having any bug, please follow [Bugs](#bugs) section.
+4. Read some cautions about frontend [Unhandled In Frontend](#unhandledinfrontend)
+5. If having any bug, please follow [Bugs](#bugs) section.
 ** Caution: ** To have the best experience, please use Desktop has `width` is at least ***1090px***
 
 # Instruction
@@ -65,7 +66,9 @@ Run db_create first, then db_inserts
 - Next, run `npm run start`
 
 # Unhandled In Frontend
+Because there are some frontend features the team has not implemented
 - If the product list does not exist when filtering, instead of displaying detailed message, it will displays none
+- If the frontend page does not word, please check in the terminal or the console to validate the behavior.
 # Bugs
 - If cannot run due to this error message in terminal `buffering timed out after 10000ms`:
     - Remove `node_moudules`, and `package-lock.json`
