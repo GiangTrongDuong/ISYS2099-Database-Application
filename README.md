@@ -15,16 +15,47 @@ Steps to run:
 # Instruction
 
 ## Set up
-Find or create a ```.env``` file in root, copy the following, and insert your own info:
+### To run to generate data
+- Find or create a ```.env``` file in `data_gen` folder, copy the following, and insert your own info:
+``` env
+HOST='localhost'
+DB_USER='root'
+PASSWORD='password'
+DATABASE='testg2'
+MONGODB_URI='mongodb+srv://eeet2099group2:eeet2099Pass@databaseapplicationproj.fexqmnq.mongodb.net/?retryWrites=true&w=majority'
 ```
-HOST=''
-DB_USER=''
-PASSWORD=''
-DATABASE=''
-```
-You may have to create a new database/schema.
+- Inside .env file:
+  - Make sure the `DB_USER`, `PASSWORD`, `HOST` match your root connection in your local. 
+  - If you want use another database, make sure change the database name `DATABASE`.
+  - You may have to create a new database/schema.
+  
+### To run whole project
+- Find or create a ```.env``` file in root, copy the following, and insert your own info:
+``` env
+HOST='localhost'
+DATABASE='testg2'
+MONGODB_URI='mongodb+srv://eeet2099group2:eeet2099Pass@databaseapplicationproj.fexqmnq.mongodb.net/?retryWrites=true&w=majority'
 
-This ```.env``` file is in ```.gitignore```.
+DB_USER='root'
+PASSWORD='password'
+
+GUEST='guestg2'
+GUESTPASSWORD='guestpass'
+
+CUSTOMER='customerg2'
+CUSTOMERPASSWORD='userpass'
+
+WAREHOUSE='warehouseg2'
+WAREHOUSEPASSWORD='warepass'
+
+SELLER='sellerg2'
+SELLERPASSWORD='sellerpass'
+```
+- Inside .env file:
+  - Make sure the `DB_USER`, `PASSWORD`, `HOST` match your root connection in your local. 
+  - If you want use another database, make sure change the database name `DATABASE`.
+  - You may have to create a new database/schema.
+  
 
 ## Run
 Move to `data_gen` folder by typing `cd data_gen` in terminal from root folder.
