@@ -17,7 +17,7 @@ async function fromListID(pidList, sortPrice, sortTime, minPrice = 0) {
         try {
             if (sortTime) { // ASC or DESC
                 guestDb.query(`SELECT * FROM product WHERE id IN (${pidList})
-                WHERE price > ${minPrice} ORDER BY created_at ${sortTime};`, function (error, result) {
+                AND price > ${minPrice} ORDER BY created_at ${sortTime};`, function (error, result) {
                     if (error) reject({ "cannot get matching product": error });
                     resolve(result);
                 });
