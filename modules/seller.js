@@ -54,6 +54,13 @@ router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => 
     }
 })
 
+router.post(`${MY_ACCOUNT_ROUTE}/update-stock`, isAuth.isAuth, async (req,res) => {
+    const id = req.body.id;
+    const quantity = req.body.quantity;
+    await productDb.insert_to_warehouse(id, quantity);
+    res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
+})
+
 router.post(`${MY_ACCOUNT_ROUTE}/create-product`, isAuth.isAuth, async (req,res) => {
     try{
     const info = req?.session?.user;

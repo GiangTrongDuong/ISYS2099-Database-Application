@@ -5,6 +5,7 @@ const { formatCurrencyVND, formatDate } = require('../helperFuncs.js');
 const { PRODUCT_ROUTE, ATTRIBUTES } = require('../constants.js');
 const db = require('../models/function_product.js');
 const productDbMongo = require('../models/mongodb/models/function_product_mongodb');
+const sqlString = require('sqlstring');
 
 let root = `.${PRODUCT_ROUTE}`
 
@@ -51,6 +52,10 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
     const result = await db.from_id(req.params['id']); //store info to display 
     const product = result[0];
     const productMongo = await productDbMongo.findProductByMysqlID(req.params['id']);
+    //Get user role
+    const userInfo = (req.session.user); //store info to display 
+    const userName = userInfo.user_name;
+    const role = userInfo.role;
     // combine productMongo with product
     product.attribute = productMongo.attribute;
     res.render('layout.ejs', {
@@ -60,7 +65,8 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
       categoryList: catlist,
       userSession: req?.session?.user,
       product: product,
-      formatDate: formatDate
+      formatDate: formatDate,
+      role: role
     });
   }
   catch (err) {
@@ -124,7 +130,9 @@ router.post(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
 // Show products containing keywords
 router.get(`${PRODUCT_ROUTE}/search/:words`, async (req, res) => {
   try {
-    const productList = await db.contain_word(req.params.words);
+    const onlyWord = sqlString.escape(req.params.words).replace('\'', '').replace('\'', '');
+    const productList = await db.contain_word(onlyWord);
+    console.log("===="+onlyWord);
     console.log("Calleddd", productList);
     res.json({ "Products": productList });
     // res.render('layout.ejs', {
