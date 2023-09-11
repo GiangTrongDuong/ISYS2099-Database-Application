@@ -135,6 +135,7 @@ router.post(`${MY_ACCOUNT_ROUTE}/update-product`, isAuth.isAuth, async (req, res
 router.post(`${MY_ACCOUNT_ROUTE}/delete-product`, isAuth.isAuth, async (req, res)=>{
     try{
     const pid = req.body.id;
+    await productMongoP.deleteProductByMysqlId(pid);
     await productDb.deleteProduct(pid);
     res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
     }catch (err){

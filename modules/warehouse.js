@@ -59,7 +59,7 @@ router.get(`${WAREHOUSE_ROUTE}/all`, isAuth.isAuth, async (req, res) => {
 // });
 
 // to test: handle warehouse creation (done)
-router.post(`${WAREHOUSE_ROUTE}/create-warehouse`, async (req, res) => {
+router.post(`${WAREHOUSE_ROUTE}/create-warehouse`,isAuth.isAuth, async (req, res) => {
   // parse param instead of dummy
   const name = req.body.whname;
   const address = req.body.whaddress;
@@ -116,7 +116,7 @@ router.get(`${WAREHOUSE_ROUTE}/view`, isAuth.isAuth, async (req, res) => { // te
 
 // Full route: /warehouse/update?id=123
 // Handle warehouse update, navigate accordingly
-router.post(`${WAREHOUSE_ROUTE}/update-warehouse`, async (req, res) => { //tested: ok
+router.post(`${WAREHOUSE_ROUTE}/update-warehouse`,isAuth.isAuth, async (req, res) => { //tested: ok
   // parse actual param instead of dummy below
   const whid = req.body.whid;
   const name = req.body.whname;
@@ -133,7 +133,7 @@ router.post(`${WAREHOUSE_ROUTE}/update-warehouse`, async (req, res) => { //teste
 
 // delete warehouse with certain wid
 // full route: /warehouse/delete?id=123
-router.post(`${WAREHOUSE_ROUTE}/delete-warehouse`, async (req, res) => {
+router.post(`${WAREHOUSE_ROUTE}/delete-warehouse`,isAuth.isAuth, async (req, res) => {
   try{
     const whid = req.body.id;
     await db.delete_warehouse(whid);
@@ -146,7 +146,7 @@ router.post(`${WAREHOUSE_ROUTE}/delete-warehouse`, async (req, res) => {
 });
 
 // route to get all admins in warehouses
-router.get(`${WAREHOUSE_ROUTE}/admins`, async (req, res) => {
+router.get(`${WAREHOUSE_ROUTE}/admins`,isAuth.isAuth, async (req, res) => {
   try {
     const catlist = await Category.getAllCats(6);
     const info = req?.session?.user;
@@ -167,20 +167,36 @@ router.get(`${WAREHOUSE_ROUTE}/admins`, async (req, res) => {
 
 // route to interface to move products from 1 warehouse to another
 // full route: /warehouse/move?product=123&quantity=456
-router.post(`${WAREHOUSE_ROUTE}${WAREHOUSE_MOVE_PRODUCT}`, function (req, res) {
+router.post(`${WAREHOUSE_ROUTE}${WAREHOUSE_MOVE_PRODUCT}`,isAuth.isAuth, async function (req, res) {
   // Function move_product_to_wh
   const quantity = req.body.quantity;
   const pid = req.body.pid;
   const src_wid = req.body.src_id;
   const dst_wid = req.body.dst_wid;
-  const movedItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
-  res.json(movedItems);
+  const src_quantity = req.body.src_quantity;
+  console.log(quantity, pid, src_wid, dst_wid, src_quantity);
+  try{
+  const movedItems = await db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
+  console.log(movedItems);
+  res.redirect(`${WAREHOUSE_ROUTE}/all`);
+  }catch (err){
+    res.send("Insufficient quantity in the source warehouse, please resubmit the form!");
+  }
+  
+  
+  // if(quantity <= src_quantity){
+  //   const movedItems = db.move_product_to_wh(pid, quantity, src_wid, dst_wid); //store info to display 
+  //   res.redirect(`${WAREHOUSE_ROUTE}/all`);
+  // } else {
+  //   res.send("Error, invalid quantity number! Quantity number must not exceed remaining stock in source Warehouse! please resubmit form");
+  // }
   });
 
 router.post(`${WAREHOUSE_ROUTE}/move-warehouse`, isAuth.isAuth, async (req, res) => {
   try {
     const pid = req.body.pid;
     const src_wid = req.body.wid;
+    const quantity = req.body.quantity;
     console.log(src_wid);
     console.log(pid);
     const catlist = await Category.getAllCats(6);
@@ -194,6 +210,7 @@ router.post(`${WAREHOUSE_ROUTE}/move-warehouse`, isAuth.isAuth, async (req, res)
       categoryList: catlist,
       itemID: pid,
       src_wid: src_wid,
+      src_quantity: quantity,
     })
   } catch (err) {
     res.send(err);

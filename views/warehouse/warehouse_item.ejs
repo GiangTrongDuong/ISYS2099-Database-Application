@@ -1,6 +1,4 @@
 <div class="container-fluid bg-light-subtle text-emphasis-light">
-  <p data-attri="<%= warehousesitem[0]["Warehouse ID"]  %>" id="src_id"><%= warehousesitem[0]["Warehouse ID"]%></p>
-  <p><%= warehousesitem[0]["Warehouse Name"]%></p>
     <table class="table">
       <thead>
         <tr>
@@ -21,6 +19,7 @@
             <form action="move-warehouse" method="post">
               <input type="number" class="form-control" id="pid" name="pid" value="<%= whi["Product ID"] %>" readonly hidden>
               <input type="number" class="form-control" id="wid" name="wid" value="<%= whi["Warehouse ID"] %>" readonly hidden>
+              <input type="number" class="form-control" id="quantity" name="quantity" value="<%= whi["Quantity"] %>" readonly hidden>
               <button type="submit" class="btn btn-dark">Move product</button>
             </form> 
           </td>
