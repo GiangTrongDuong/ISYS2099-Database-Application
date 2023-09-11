@@ -46,24 +46,19 @@ SELLERPASSWORD='sellerpass'
 ## Run
 - Open terminal in `root`
 ### Generate Data
+- Make sure running Mongo first before adding to MySQL
+#### Run to add data to Mongo
+- To add categories: ```npm run importdata:category_mongodb```
+- To add products in MongoDB: ```npm run importdata:product_mongodb```
 #### Run MySQL add_sql_data.js
 This will execute both sql files.
 
 Get dependencies ```node install```
 
-Run via ```node .``` or ```node add_sql_data.js```
-#### Run to add data to Mongo
-- To add categories: ```npm run importdata:category_mongodb```
-- To add products in MongoDB: ```npm run importdata:product_mongodb```
+Run via ```node add_sql_data.js```
 #### Run SQL files
 You can also copy the contents of the files to your MySQL console and run these chunks.
 
-Run db_create first, then db_inserts
-
-#### Other files
-- ```create_data.py``` generates CSV files to be used as data
-    - ITF: skip CSV altogether and create SQL inserts right away?
-- These CSV files are stored in ```py_data/```
 ### Run Whole System
 - In the root folder, run `npm install`
 - Next, run `npm run start`

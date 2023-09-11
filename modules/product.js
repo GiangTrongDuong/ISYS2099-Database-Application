@@ -151,6 +151,7 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
     const result = await db.from_id(req.params['id']); //store info to display 
     const product = result[0];
     const productMongo = await productDbMongo.findProductByMysqlID(req.params['id']);
+    console.log("Product", product);
 
     // combine productMongo with product
     product.attribute = productMongo.attribute;
