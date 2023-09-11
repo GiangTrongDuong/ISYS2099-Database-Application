@@ -134,15 +134,14 @@ function getRandomColor() {
     const red = Math.floor(Math.random() * 256);
     const green = Math.floor(Math.random() * 256);
     const blue = Math.floor(Math.random() * 256);
-    return {red, green, blue};
+    return { red, green, blue };
 }
 
-function isColorDark({red, green, blue}) {
+function isColorDark({ red, green, blue }) {
     // Calculate the luminance of the color
     const luminance = 0.299 * red + 0.587 * green + 0.114 * blue;
     return luminance < 128;  // 128 is mid-point in 256 color scale
 }
-
 module.exports = {
     // createElement,
     navigatePage,
