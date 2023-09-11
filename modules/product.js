@@ -5,6 +5,7 @@ const { formatCurrencyVND, formatDate } = require('../helperFuncs.js');
 const { PRODUCT_ROUTE, ATTRIBUTES } = require('../constants.js');
 const db = require('../models/function_product.js');
 const productDbMongo = require('../models/mongodb/models/function_product_mongodb');
+const sqlString = require('sqlstring');
 
 let root = `.${PRODUCT_ROUTE}`
 
@@ -20,6 +21,33 @@ router.use(cors({
   credentials: true
 }));
 //end-of session
+
+// Show products containing keywords
+router.get(`${PRODUCT_ROUTE}/search`, async (req, res) => {
+  try {
+    const catlist = await Category.getAllCats();
+    const word = req.query.searchContent;
+
+    const onlyWord = sqlString.escape(word).replace('\'', '').replace('\'', '');
+    const productList = await db.contain_word(onlyWord);
+    // res.json({ "Products": productList });
+    res.render('layout.ejs', {
+      title: "Products",
+      bodyFile: `${root}/product-all`,
+      categoryList: catlist,
+      userSession: req?.session?.user,
+      productList: productList,
+      productAttributes: ATTRIBUTES,
+    });
+  }
+  catch (err) {
+    // res.send({
+    //   // message: "Error retrieving categories",
+    //   error: err.message ?? "Error retrieving data"
+    // });
+    console.log(err);
+  }
+});
 
 // get all products
 router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
@@ -51,6 +79,7 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
     const result = await db.from_id(req.params['id']); //store info to display 
     const product = result[0];
     const productMongo = await productDbMongo.findProductByMysqlID(req.params['id']);
+
     // combine productMongo with product
     product.attribute = productMongo.attribute;
     res.render('layout.ejs', {
@@ -118,29 +147,6 @@ router.post(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
   }
   catch (err) {
     res.send("Cannot fetch item " + err);
-  }
-});
-
-// Show products containing keywords
-router.get(`${PRODUCT_ROUTE}/search/:words`, async (req, res) => {
-  try {
-    const productList = await db.contain_word(req.params.words);
-    console.log("Calleddd", productList);
-    res.json({ "Products": productList });
-    // res.render('layout.ejs', {
-    //   title: "Products",
-    //   bodyFile: `${root}/product-all`,
-    //   categoryList: catlist,
-    //   userSession: req?.session?.user,
-    //   productList: productList,
-    //   productAttributes: ATTRIBUTES,
-    // });
-  }
-  catch (err) {
-    res.send({
-      // message: "Error retrieving categories",
-      error: err.message ?? "Error retrieving data"
-    });
   }
 });
 

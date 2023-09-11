@@ -9,11 +9,11 @@ const session = require('express-session');
 
 const { navigatePage, formatCurrencyVND } = require('./helperFuncs.js');
 const { PORT } = require('./constants.js');
-const { dummyCatList, dummyProductCatList } = require('./dummyData.js');
 require('dotenv').config();
 const app = express();
 const { connectMongoDB } = require('./models/connection/mongodbConnect');
 const Category = require('./models/mongodb/models/function_category');
+const ProductDb = require('./models/function_product');
 
 connectMongoDB()
 
@@ -73,26 +73,41 @@ app.use('/', warehouse);
 // full route to Home page: /
 app.get("/", async (req, res) => {
   try {
-    const catlist = await Category.getAllCats(6);
-    // res.json(catlist);
+    const catlist = await Category.getAllCats();
+    let productList = [];
+    let currentCategoryIndex = 0;
+
+    while (productList.length < 1 && currentCategoryIndex < catlist.length) {
+      productList = await ProductDb.get_from_a_category(catlist[currentCategoryIndex].id);
+      if (productList.length === 0) {
+        currentCategoryIndex++;
+      }
+    }
+
+    const categoryProductList = [
+      {
+        content: catlist[currentCategoryIndex],
+        products: productList
+      },
+    ];
+
+    // console.log("Category", catlist[currentCategoryIndex]);
+    // console.log("Category Product List", categoryProductList);
     res.render('layout.ejs', {
       title: "Home",
       bodyFile: "home/index.ejs",
-      // TODO: add real data
       categoryList: catlist,
-      // TODO: add real data
-      categoryProductList: dummyProductCatList,
-      // res: res,
-      // req: req, // => session: req.session.user
+      categoryProductList: categoryProductList,
       userSession: req?.session?.user
-    })
-  } catch(err) {
+    });
+  } catch (err) {
     res.send({
       message: "Error retrieving categories",
       error: err.message ?? "Error retrieving data"
     });
   }
 });
+
 
 app.listen(PORT, function () {
   console.log("Server started on port 3000");

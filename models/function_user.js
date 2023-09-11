@@ -1,4 +1,4 @@
-const {connection: database} = require('./connection/dbSqlConnect');
+const {connectionCustomer: database} = require('./connection/dbSqlConnect');
 
 // For now, this file is for fetching user data.
 

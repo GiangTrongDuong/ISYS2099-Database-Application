@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { LOGIN_ROUTE, SIGNUP_ROUTE, MY_ACCOUNT_ROUTE } = require('../constants');
-const {connection: database} = require('../models/connection/dbSqlConnect');
+const { connectionGuest: database } = require('../models/connection/dbSqlConnect');
 const Category = require('../models/mongodb/models/function_category');
 const router = express.Router();
 const isAuth = require("../models/isAuth");
@@ -23,40 +23,50 @@ router.use(cors({
   credentials: true
 }));
 
+
 // full route to login page: /login
 router.get(`${LOGIN_ROUTE}`, async function (req, res) {
-  const catlist = await Category.getAllCats(6);
-  res.render("layout.ejs", {
-    title: "Login",
-    bodyFile: `${root}/login`,
-    // TODO: add real data - categoryList
-    categoryList: catlist,
-    // req,
-    userSession: req?.session?.user
-  })
+  try {
+    const catlist = await Category.getAllCats(6);
+    res.render("layout.ejs", {
+      title: "Login",
+      bodyFile: `${root}/login`,
+      categoryList: catlist,
+      // req,
+      userSession: req?.session?.user
+    })
+  } catch (err) {
+    console.log("login", err);
+  }
 });
 
 // Verify log in - might want to move query to models/user_authentication
 router.post(`${LOGIN_ROUTE}`, async function (req, res) {
-  var userName = req.body.username;
-  var password = req.body.password;
-  database.query(`SELECT id, role, user_name, password_hash 
+  try {
+    var userName = req.body.username;
+    var password = req.body.password;
+    database.query(`SELECT id, role, user_name, password_hash 
         FROM user 
-        WHERE user_name = ?;`,[userName], (error, uresults) => {
-    if (uresults.length > 0) {
-      bcrypt.compare(password, uresults[0].password_hash).then(function (result) {
-        if (result == true) {
-          req.session.user = { role: uresults[0].role, user_name: uresults[0].user_name, id: uresults[0].id };
-          req.session.isAuth = true;
-          res.redirect("/my-account");
-        } else {
-          res.redirect("/login");
-        }
-      });
-    } else if (uresults.length <= 0) {
-      res.redirect("/login");
-    }
-  })
+        WHERE user_name = ?;`, [userName], (error, uresults) => {
+      if (uresults.length > 0) {
+        bcrypt.compare(password, uresults[0].password_hash).then(function (result) {
+          if (result == true) {
+            // login success
+            req.session.user = { role: uresults[0].role, user_name: uresults[0].user_name, id: uresults[0].id };
+            req.session.isAuth = true;
+            res.redirect("/my-account");
+          } else {
+            // login unsuccessful
+            res.redirect("/login");
+          }
+        });
+      } else if (uresults.length <= 0) {
+        res.redirect("/login");
+      }
+    })
+  } catch (err) {
+    console.log(err);
+  }
 })
 
 // full route to signup page: /signup
@@ -82,7 +92,7 @@ router.post(`${SIGNUP_ROUTE}`, async function (req, res) {
   const saltRounds = 10;
   database.query(`SELECT * 
         FROM user 
-        WHERE user_name = ?;`,[userName], (error, results) => {
+        WHERE user_name = ?;`, [userName], (error, results) => {
     if (results.length > 0) {
       console.log("Taken username!");
     } else {
@@ -108,7 +118,7 @@ router.get(`${MY_ACCOUNT_ROUTE}`, isAuth.isAuth, function (req, res) {
     const role = userInfo.role;
     database.query(`SELECT * 
    FROM user 
-   WHERE user_name = ?`,[userName], async (error, result) => {
+   WHERE user_name = ?`, [userName], async (error, result) => {
       if (result) {
         const user_name = result[0].user_name;
         const display_name = result[0].display_name;

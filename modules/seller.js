@@ -54,6 +54,18 @@ router.get(`${MY_ACCOUNT_ROUTE}/my-product`, isAuth.isAuth, async (req, res) => 
     }
 })
 
+router.post(`${MY_ACCOUNT_ROUTE}/update-stock`, isAuth.isAuth, async (req,res) => {
+    const id = req.body.id;
+    const quantity = req.body.quantity;
+    try{
+    await productDb.insert_to_warehouse(id, quantity);
+    res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
+    }catch(err){
+        res.send(err);
+    }
+    
+})
+
 router.post(`${MY_ACCOUNT_ROUTE}/create-product`, isAuth.isAuth, async (req,res) => {
     try{
     const info = req?.session?.user;
@@ -128,6 +140,7 @@ router.post(`${MY_ACCOUNT_ROUTE}/update-product`, isAuth.isAuth, async (req, res
 router.post(`${MY_ACCOUNT_ROUTE}/delete-product`, isAuth.isAuth, async (req, res)=>{
     try{
     const pid = req.body.id;
+    await productMongoP.deleteProductByMysqlId(pid);
     await productDb.deleteProduct(pid);
     res.redirect(`${MY_ACCOUNT_ROUTE}/my-product`);
     }catch (err){

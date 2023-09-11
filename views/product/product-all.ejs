@@ -10,10 +10,10 @@
 <div>
   <div class="d-flex justify-content-between align-items-start px-4 pt-4">
     <!-- Search bar -->
-    <div class="input-group mb-3 w-75">
-      <input type="text" class="form-control" placeholder="Search by product name" id="productNameSearch">
-      <button class="btn btn-outline-secondary" id="searchButton">Search</button>
-    </div>
+    <form id="searchForm" class="input-group mb-3 w-75" method="GET" action="/product/search">
+      <input type="text" class="form-control" placeholder="Search by product name" name="searchContent">
+      <input type="submit" class="btn btn-outline-secondary" value="Search">
+    </form>
 
     <!-- Filter bar based on product attributes -->
     <!-- Button to open Filter modal -->
@@ -65,27 +65,12 @@
 `,
 isFullScreenSm: false,
 }) %>
-<script>
-  function debounce(func, wait) {
-    let timeout;
-
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  };
-  const performSearch = debounce(function() {
-    const query = document.getElementById('productNameSearch').value;
-
-    if (query.trim() === '') return;
-
-    // call query to server
-    
-  }, 300); // 300ms debounce time
-  document.getElementById('productNameSearch').addEventListener('input', performSearch);
-</script>
+<!-- <script>
+  $(document).ready(function() {
+    $("#searchForm").on("submit", function(event) {
+      event.preventDefault();
+      const productName = $("#productNameSearch").val();
+      this.action = `/product/search/${productName}`;
+    });
+  });
+</script> -->
