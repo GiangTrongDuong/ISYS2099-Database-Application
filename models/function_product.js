@@ -1,4 +1,4 @@
-const { connection: database } = require('./connection/dbSqlConnect');
+const { connectionSeller: database } = require('./connection/dbSqlConnect');
 const { parenthesesString, getCurrentTimeString } = require('../helperFuncs');
 
 async function from_id(pid) {
