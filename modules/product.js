@@ -50,58 +50,35 @@ router.get(`${PRODUCT_ROUTE}/search`, async (req, res) => {
 });
 
 // get all products
+// router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
+//   try {
+//     console.log("Called Product Router");
+//     const catlist = await Category.getAllCats();
+//     const productList = await db.all();
+//     res.render('layout.ejs', {
+//       title: "Products",
+//       bodyFile: `${root}/product-all`,
+//       categoryList: catlist,
+//       userSession: req?.session?.user,
+//       productList: productList,
+//       productAttributes: ATTRIBUTES,
+//     });
+//     // res.json(productList);
+//   } catch (err) {
+//     console.log(err);
+//     res.send({
+//       // message: "Error retrieving categories",
+//       error: err.message ?? "Error retrieving data"
+//     });
+//   }
+// });
+
+// filter products by attribute
 router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
   try {
     const catlist = await Category.getAllCats();
-    const productList = await db.all();
-    res.render('layout.ejs', {
-      title: "Products",
-      bodyFile: `${root}/product-all`,
-      categoryList: catlist,
-      userSession: req?.session?.user,
-      productList: productList,
-      productAttributes: ATTRIBUTES,
-    });
-  } catch (err) {
-    console.log(err);
-    res.send({
-      // message: "Error retrieving categories",
-      error: err.message ?? "Error retrieving data"
-    });
-  }
-});
+    const { category, ...attributeList } = req.query;
 
-// full route to product-detail page: /product/:id
-router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
-  try {
-    // get product
-    const catlist = await Category.getAllCats(6);
-    const result = await db.from_id(req.params['id']); //store info to display 
-    const product = result[0];
-    const productMongo = await productDbMongo.findProductByMysqlID(req.params['id']);
-
-    // combine productMongo with product
-    product.attribute = productMongo.attribute;
-    res.render('layout.ejs', {
-      title: "Product",
-      bodyFile: `${root}/product`,
-      // TODO: add real data - categoryList
-      categoryList: catlist,
-      userSession: req?.session?.user,
-      product: product,
-      formatDate: formatDate
-    });
-  }
-  catch (err) {
-    res.json(err);
-  }
-});
-
-// filter products by attribute
-router.post(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
-  try {
-    const catlist = await Category.getAllCats();
-    const { category, ...attributeList } = req.body;
     // {categoryId, attributes: [{name, value}]}
     const attributes = [];
     for (let aName in attributeList) {
@@ -147,6 +124,32 @@ router.post(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
   }
   catch (err) {
     res.send("Cannot fetch item " + err);
+  }
+});
+
+// full route to product-detail page: /product/:id
+router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
+  try {
+    // get product
+    const catlist = await Category.getAllCats(6);
+    const result = await db.from_id(req.params['id']); //store info to display 
+    const product = result[0];
+    const productMongo = await productDbMongo.findProductByMysqlID(req.params['id']);
+
+    // combine productMongo with product
+    product.attribute = productMongo.attribute;
+    res.render('layout.ejs', {
+      title: "Product",
+      bodyFile: `${root}/product`,
+      // TODO: add real data - categoryList
+      categoryList: catlist,
+      userSession: req?.session?.user,
+      product: product,
+      formatDate: formatDate
+    });
+  }
+  catch (err) {
+    res.json(err);
   }
 });
 

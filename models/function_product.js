@@ -12,6 +12,31 @@ async function from_id(pid) {
     })
 };
 
+async function fromListID(pidList, sortPrice, sortTime, minPrice = 0) {
+    return new Promise((resolve, reject) => {
+        try {
+            if (sortPrice) { // ASC or DESC
+                database.query(`SELECT * FROM product WHERE id IN ${pidList}
+                WHERE price > ${minPrice} ORDER BY price ${sortPrice};`, function (error, result) {
+                    if (error) reject({ "cannot get matching product": error });
+                    resolve(result);
+                });
+            }
+            if (sortTime) { // ASC or DESC
+                database.query(`SELECT * FROM product WHERE id IN ${pidList}
+                WHERE price > ${minPrice} ORDER BY created_at ${sortTime};`, function (error, result) {
+                    if (error) reject({ "cannot get matching product": error });
+                    resolve(result);
+                });
+            }
+
+        }
+        catch (error) {
+            reject({ "cannot execute query: ": error });
+        }
+    });
+}
+
 async function all() {
     return new Promise((resolve, reject) => {
         database.query(`SELECT *
@@ -239,6 +264,7 @@ async function deleteProduct(pid) {
 }
 module.exports = {
     from_category, from_seller, from_id, from_ids, contain_word, getPrice, getVolume,
-    updateDetails, createProduct, insert_to_warehouse, deleteProduct, all, get_from_multiple_categories, get_from_a_category
+    updateDetails, createProduct, insert_to_warehouse, deleteProduct, all, get_from_multiple_categories, get_from_a_category,
+    fromListID
 }
 

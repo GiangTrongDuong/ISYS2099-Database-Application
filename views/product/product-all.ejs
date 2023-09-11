@@ -29,15 +29,29 @@
 
   </section>
 </div>
-
 <!-- Filter Modal -->
 <%- include('../partials/modal', {
     modalId: "filterModal",
     heading: "Filter Products",
     body: `
     <div class="card">
-        <div class=""card-body h-100 overflow-scroll>
-            <form action="/product/filter" method="POST" id="filterForm" class="m-4" style="height: 50vh; overflow-y: auto;">
+        <div class="card-body h-100 overflow-scroll">
+            <form action="/product" method="GET" id="filterForm" class="m-4" style="height: 50vh; overflow-y: auto;"> 
+              <!-- Sorting Section -->
+                <div class="mb-3">
+                    <label for="sortBySelect" class="form-label fs-4r">Sort By</label>
+                    <select class="form-select" id="sortBySelect" name="sortBy">
+                      <option value="priceAsc">Price (Low to High)</option>
+                      <option value="priceDesc">Price (High to Low)</option>
+                      <option value="dateAsc">Creation Date (Oldest First)</option>
+                      <option value="dateDesc">Creation Date (Newest First)</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Min Price</label>
+                    <input type="number" name="price" id="price">
+                </div>
                 <div class="mb-3">
                     <label for="categorySelect" class="form-label">Category</label>
                     <select class="form-select" id="categorySelect" name="category">
@@ -58,6 +72,7 @@
                             `).join('')}
                         </fieldset>
                     `).join('')}
+
                 <button type="submit" class="btn btn-primary">Apply Filters</button>
             </form>
         </div>
@@ -65,12 +80,3 @@
 `,
 isFullScreenSm: false,
 }) %>
-<!-- <script>
-  $(document).ready(function() {
-    $("#searchForm").on("submit", function(event) {
-      event.preventDefault();
-      const productName = $("#productNameSearch").val();
-      this.action = `/product/search/${productName}`;
-    });
-  });
-</script> -->
