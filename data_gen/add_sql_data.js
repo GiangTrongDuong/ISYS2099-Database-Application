@@ -44,6 +44,8 @@ connection.connect(err => {
 
     connection.beginTransaction(async (err) => {
         if (err) console.log(err);
+        //Execute: creater Database user
+        await executeSqlFile('./sql_data/dbUserGen.sql');
         // Execute: create tables
         await executeSqlFile('./sql_data/db_create.sql');
         // Execute: add indexes on tables
