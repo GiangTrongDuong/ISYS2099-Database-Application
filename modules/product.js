@@ -77,7 +77,8 @@ router.get(`${PRODUCT_ROUTE}/search`, async (req, res) => {
 router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
   try {
     const catlist = await Category.getAllCats();
-    const { category, ...attributeList } = req.query;
+    // console.log("Queryrr", req.query);
+    const { category, price, sortBy, ...attributeList } = req.query;
 
     // {categoryId, attributes: [{name, value}]}
     const attributes = [];
@@ -105,11 +106,19 @@ router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
       attribute: attributes
     };
     const result = await productDbMongo.filterProducts(newFilter.category, newFilter.attribute);
-    const ids = result.map(product => {
-      return product.mysql_id;
-    })
-    const productList = await db.from_ids(ids);
-
+    // convert sortBy to sortPrice and sortTime
+    let sortPrice = "";
+    let sortTime = "";
+    if (sortBy === "priceAsc") {
+      sortPrice = "ASC";
+    } else if (sortBy === "priceDesc") {
+      sortPrice = "DESC";
+    } else if (sortBy === "dateAsc") {
+      sortTime = "ASC";
+    } else {
+      sortTime = "DESC";
+    }
+    const productList = await db.fromListID(result, sortPrice, sortTime, price ? price : 0);
 
     // res.json(result);
     res.render('layout.ejs', {
