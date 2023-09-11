@@ -1,5 +1,5 @@
 const {getPrice} = require('./function_product')
-const {connection: database} = require('./connection/dbSqlConnect');
+const {connectionCustomer: database} = require('./connection/dbSqlConnect');
 
 async function get_orders (uid) {
     return new Promise ((resolve, reject) => {

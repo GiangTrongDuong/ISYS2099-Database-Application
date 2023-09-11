@@ -52,10 +52,7 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
     const result = await db.from_id(req.params['id']); //store info to display 
     const product = result[0];
     const productMongo = await productDbMongo.findProductByMysqlID(req.params['id']);
-    //Get user role
-    const userInfo = (req.session.user); //store info to display 
-    const userName = userInfo.user_name;
-    const role = userInfo.role;
+
     // combine productMongo with product
     product.attribute = productMongo.attribute;
     res.render('layout.ejs', {
@@ -65,8 +62,7 @@ router.get(`${PRODUCT_ROUTE}/:id`, async (req, res) => {
       categoryList: catlist,
       userSession: req?.session?.user,
       product: product,
-      formatDate: formatDate,
-      role: role
+      formatDate: formatDate
     });
   }
   catch (err) {

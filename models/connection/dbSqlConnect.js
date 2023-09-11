@@ -37,17 +37,7 @@ connection.connect(err =>{
     console.log('Connected to the database as Root Admin');
 });
 
-connectionGuest.connect(err =>{
-    if (err){
-        fs.appendFile('error.log',  `Start Connection ${err}\n'`, (fileErr) =>{
-            if(fileErr) {
-                console.error('Error writing error.log', fileErr);
-            }
-        });
-        return;
-    }
-    console.log('Connected to the database as Guest');
-});
+
 
 const connectionSeller = mysql.createConnection({
     multipleStatements: true,
@@ -110,6 +100,18 @@ connectionCustomer.connect(err =>{
         return;
     }
     console.log('Connected to the database as Customer');
+});
+
+connectionGuest.connect(err =>{
+    if (err){
+        fs.appendFile('error.log',  `Start Connection ${err}\n'`, (fileErr) =>{
+            if(fileErr) {
+                console.error('Error writing error.log', fileErr);
+            }
+        });
+        return;
+    }
+    console.log('Connected to the database as Guest');
 });
 
 module.exports = {connection, connectionGuest, connectionSeller, connectionWare, connectionCustomer};
