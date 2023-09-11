@@ -9,7 +9,6 @@ create index remaining_area_idx on warehouse (remaining_area); -- use when selec
 -- table product
 create fulltext index ft_idx on product (title, description); -- use when search product by name
 create index seller_id_idx on product (seller_id); -- use when query join 2 tables product and user
-create index price_idx on product (price); -- use when filter products by price range
 create index created_at_idx on product (created_at); -- use when prioritize to display new product
 
 -- table cart_details
