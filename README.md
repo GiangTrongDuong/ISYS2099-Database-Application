@@ -78,7 +78,11 @@ Because there are some frontend features the team has not implemented
     - Run `npm install` to install node modules
     - Run `npm run start` to start running the program again
 # Contribution
-- Ngo Viet Anh: 5pts
-- Tran Mai Nhung: 5pts
-- Giang Trong Duong: 5pts
-- Tran Nguyen Ha Khanh: 5pts
+- Ngo Viet Anh: 5pts:
+  - SQL Backend
+- Tran Mai Nhung: 5pts:
+  - Integration
+- Giang Trong Duong: 5pts:
+  - Security, Integration
+- Tran Nguyen Ha Khanh: 5pts:
+  - MongoDB
