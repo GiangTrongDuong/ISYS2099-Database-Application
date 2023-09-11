@@ -81,6 +81,7 @@ connection_init.connect((err_init) =>{
                 await executeSqlFile('./sql_data/trigger_update_order.sql');
             // trigger when trying to delete user
             await executeSqlFile('./sql_data/trigger_delete_user.sql');
+            await executeSqlFile('./sql_data/db_grant.sql');
         
             // Commit the transaction if everything is successful
                 connection.commit((err => {

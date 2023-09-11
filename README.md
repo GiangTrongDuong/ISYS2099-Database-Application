@@ -44,8 +44,8 @@ SELLERPASSWORD='sellerpass'
   
 
 ## Run
+- Open terminal in `root`
 ### Generate Data
-Move to `data_gen` folder by typing `cd data_gen` in terminal from root folder.
 #### Run MySQL add_sql_data.js
 This will execute both sql files.
 
