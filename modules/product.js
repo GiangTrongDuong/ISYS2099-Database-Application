@@ -22,6 +22,33 @@ router.use(cors({
 }));
 //end-of session
 
+// Show products containing keywords
+router.get(`${PRODUCT_ROUTE}/search`, async (req, res) => {
+  try {
+    const catlist = await Category.getAllCats();
+    const word = req.query.searchContent;
+
+    const onlyWord = sqlString.escape(word).replace('\'', '').replace('\'', '');
+    const productList = await db.contain_word(onlyWord);
+    // res.json({ "Products": productList });
+    res.render('layout.ejs', {
+      title: "Products",
+      bodyFile: `${root}/product-all`,
+      categoryList: catlist,
+      userSession: req?.session?.user,
+      productList: productList,
+      productAttributes: ATTRIBUTES,
+    });
+  }
+  catch (err) {
+    // res.send({
+    //   // message: "Error retrieving categories",
+    //   error: err.message ?? "Error retrieving data"
+    // });
+    console.log(err);
+  }
+});
+
 // get all products
 router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
   try {
@@ -120,31 +147,6 @@ router.post(`${PRODUCT_ROUTE}/filter`, async (req, res) => {
   }
   catch (err) {
     res.send("Cannot fetch item " + err);
-  }
-});
-
-// Show products containing keywords
-router.get(`${PRODUCT_ROUTE}/search/:words`, async (req, res) => {
-  try {
-    const onlyWord = sqlString.escape(req.params.words).replace('\'', '').replace('\'', '');
-    const productList = await db.contain_word(onlyWord);
-    console.log("===="+onlyWord);
-    console.log("Calleddd", productList);
-    res.json({ "Products": productList });
-    // res.render('layout.ejs', {
-    //   title: "Products",
-    //   bodyFile: `${root}/product-all`,
-    //   categoryList: catlist,
-    //   userSession: req?.session?.user,
-    //   productList: productList,
-    //   productAttributes: ATTRIBUTES,
-    // });
-  }
-  catch (err) {
-    res.send({
-      // message: "Error retrieving categories",
-      error: err.message ?? "Error retrieving data"
-    });
   }
 });
 
