@@ -1,11 +1,13 @@
 # ISYS2099-Database-Application
 Database application project for course ISYS2099 by group 2, semester 2 2023
 
+View the team members contribution [Here](#contribution)
+
 Steps to run:
 1. Open terminal in root folder
 2. Run `npm install`
 3. Follow the [Instruction](#instruction)
-4. Read some cautions about frontend [Unhandled In Frontend](#unhandledinfrontend)
+4. Read some cautions about frontend [Unhandled In Frontend](#unhandled-in-frontend)
 5. If having any bug, please follow [Bugs](#bugs) section.
 ** Caution: ** To have the best experience, please use Desktop has `width` is at least ***1090px***
 
@@ -75,3 +77,8 @@ Because there are some frontend features the team has not implemented
     - Make sure the `DB_USER`, `PASSWORD`, `HOST` match your database connection, and the `MONGODB_URI` exists
     - Run `npm install` to install node modules
     - Run `npm run start` to start running the program again
+# Contribution
+- Ngo Viet Anh: 5pts
+- Tran Mai Nhung: 5pts
+- Giang Trong Duong: 5pts
+- Tran Nguyen Ha Khanh: 5pts
