@@ -1,0 +1,67 @@
+<!-- Form: add id to `td` -> add id to `input` inside modal body 
+  -> Inside script: get value form id in `td` -> assign value to input `id`  -->
+<div class="container-fluid bg-light-subtle text-emphasis-light p-5">
+  <div class="d-flex justify-content-between mb-5">
+    <a role="button" class="btn btn-outline-dark" href="<%= navigatePage("warehouse") %>"><i class="fa-solid fa-backward"></i>&ensp; Back Warehouse</a>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Display Name</th>
+        <th scope="col">Delete Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% adminList.forEach(admin => { %>
+      <tr>
+        <td id="admin-id" scope="row"><%= admin.id %></td>
+        <td id="admin-username"><%= admin.user_name %></td>
+        <td id="admin-display"><%= admin.display_name %></td>
+        <td>
+          <button id="admin-<%= admin.id %>" class="delete-submit-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAdminModal" data-path="<%= navigatePage("delete-user", admin.id) %>">
+            Delete Admin
+          </button>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/modal', {
+    modalId: "deleteAdminModal",
+    heading: "Delete Confirmation",
+    // render body with message and button
+    body: `
+    <div class="card">
+        <div class="card-body h-100 overflow-scroll">
+            <h6 class="mb-4 pb-3 border-bottom fw-bold">Delete Confirmation</h6>
+            <button class="delete-btn btn btn-dark">Delete Admin</button>
+        </div>
+    </div>`,
+    isFullScreenSm: false,
+}) %>
+
+<script>
+  $(document).ready(function() {
+    let deletePath = '';
+    // get modal
+    const deleteAdminModal = document.querySelector('#deleteAdminModal');
+
+    $(".delete-submit-btn").on("click", function(event) {
+      // Store the path when the delete button in the table is clicked.
+      deletePath = $(this).data("path");
+    });
+
+    $(".delete-btn").on("click", function(event) {
+      event.preventDefault(); // Stop the form from submitting normally
+      $.post(deletePath, {
+        role: "Warehouse Admin"
+      }, function(response) {
+        $('#deleteAdminModal').modal('hide');
+      });
+    });
+  });
+</script>

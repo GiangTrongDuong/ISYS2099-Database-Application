@@ -1,0 +1,302 @@
+<script type="text/javascript">
+  // this is how you pass data from ejs to js
+  var categoryList = <%-JSON.stringify(categoryList)%>;
+</script>
+<!-- Form: add id to `td` -> add id to `input` inside modal body 
+  -> Inside script: get value form id in `td` -> assign value to input `id`  -->
+<div class="container-fluid bg-light-subtle text-emphasis-light">
+  <div class="mx-auto">
+    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createCategoryModal" onclick="createCategory(this)">Add category</button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Parent Category</th>
+        <th scope="col">Attributes</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% categoryList.forEach(category => { %>
+      <tr id="category-container-<%= category.id %>" data-attributes='<%= JSON.stringify(category.attribute) %>'>
+        <td id="category-id" scope="row"><%= category.id %></td>
+        <td id="category-title"><a href="<%= navigatePage("category", category.id) %>" class="link-dark line-clamp-1"><%= category.name %></a></td>
+        <td id="category-parent-category"><%= category.parent_category ?? "None" %></td>
+        <td>
+          <button data-id="<%= category.id %>" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#getCategoryAttributes" onclick="showCategoryAttributes(this)">Attributes</button>
+        </td>
+        <td>
+          <button data-id="<%= category.id %>" data-parentId="<%= category.parent_category %>" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#updateCategoryModal" onclick="showUpdateModal(this)">Update Item</button>
+        </td>
+        <td>
+          <button data-id="<%= category.id %>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" onclick="deleteCategoryModal(this)">Delete Item</button>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/modal', {
+    modalId: "getCategoryAttributes",
+    heading: "Category Attributes",
+    // render body with message and button
+    body: `
+    <div class="card">
+      <div class="card-body h-100 overflow-scroll">
+        <h6 class="mb-4 pb-3 border-bottom fw-bold">Category Attributes List</h6>
+        <p id="emptyMessage" class="text-muted" style="display: none;">There is no attribute.</p>
+        <ul id="attributesList" style="height: 40vh; overflow-y: auto;"></ul>
+      </div>
+    </div>
+    `,
+    isFullScreenSm: false,
+  }) %>
+<%- include('../partials/modal', {
+    modalId: "updateCategoryModal",
+    heading: "Update Category Information",
+    // render body with message and button
+    body: `
+    <div class="card">
+      <div class="card-body h-100 overflow-scroll">
+        <form id="updateCategoryForm" method="POST" style="height: 50vh; overflow-y: auto;">
+            <div class="mb-3">
+                <label for="categoryId" class="form-label">Category ID</label>
+                <input type="text" class="form-control" id="categoryId" name="id" value="" disabled readonly>
+            </div>
+            <div class="mb-3">
+                <label for="categoryName" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="categoryName" name="name" required value="">
+            </div>
+            <div class="mb-3">
+                <label for="parentCategory" class="form-label">Parent Category</label>
+                <select class="form-control" id="parentCategory" name="parent_category">
+                </select>
+            </div>
+            <div class="text-dark mt-5">
+                <hr>
+            </div>
+            <div id="categoryAttributesContainer" class="">
+                <label class="form-label">Category Attributes</label>
+                <br><button type="button" id="addAttribute" class="btn btn-dark mb-4" onclick="addAttributeClick(this)">Add New Attribute</button>
+            </div>
+            <div class="text-dark mb-5">
+                <hr>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Update Category</button>
+        </form>
+      </div>
+    </div>
+    `,
+    isFullScreenSm: false,
+  }) %>
+<%- include('../partials/modal', {
+    modalId: "createCategoryModal",
+    heading: "Create New Category",
+    body: `
+    <div class="card">
+      <div class="card-body h-100 overflow-scroll">
+        <form id="createCategoryForm" action="/category" method="POST" style="height: 50vh; overflow-y: auto;">
+            <div class="mb-3">
+                <label for="createCategoryName" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="createCategoryName" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="createParentCategory" class="form-label">Parent Category</label>
+                <select class="form-control" id="createParentCategory" name="parent_category">
+                    <option value="">None</option>
+                    ${categoryList.map(category => {
+                      return `<option value="${category._id}">${category.name}</option>`
+                    }).join("\n")}
+                </select>
+            </div>
+            <div class="text-dark mt-5">
+                <hr>
+            </div>
+            <div id="createCategoryAttributesContainer" class="">
+                <label class="form-label">Category Attributes</label>
+                <br><button type="button" id="addCreateAttribute" class="btn btn-dark mb-4" onclick="addCreateAttributeClick()">Add New Attribute</button>
+            </div>
+            <div class="text-dark mb-5">
+                <hr>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Create Category</button>
+        </form>
+      </div>
+    </div>
+`,
+isFullScreenSm: false,
+}) %>
+
+
+
+<%- include('../partials/modal', {
+    modalId: "deleteCategoryModal",
+    heading: "Delete Confirmation",
+    // render body with message and button
+    body: `
+    <div class="card">
+      <div class="card-body h-100 overflow-scroll">
+        <h6 class="mb-4 pb-3 border-bottom fw-bold">Delete Confirmation</h6>
+        <form action="/category/delete" method="POST" id="deleteCategoryForm">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="delete-modal-input" name="id" value="" hidden>
+          </div>
+          <button type="submit" class="btn btn-dark">Delete category</button>
+        </form>
+      </div>
+    </div>
+    `,
+    isFullScreenSm: false,
+  }) %>
+
+<script>
+  document.addEventListener('click', function(event) {
+    if (event.target.matches('.remove-attribute')) {
+      deleteAttributeClick(event);
+    }
+  });
+  const getAttributes = (id) => {
+    return JSON.parse(document.getElementById(`category-container-${id}`).getAttribute('data-attributes'));
+  }
+
+  function showCategoryAttributes(buttonElement) {
+    const id = buttonElement.getAttribute('data-id');
+    const attributes = getAttributes(id);
+    const ul = document.getElementById('attributesList');
+    const emptyMessage = document.getElementById('emptyMessage');
+    ul.innerHTML = ""; // Clear any previous items
+
+    if (attributes.length === 0) {
+      emptyMessage.style.display = 'block';
+    } else {
+      emptyMessage.style.display = 'none';
+
+      attributes.forEach(attr => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            Name: ${attr.aName} <br>
+            Value Type: ${attr.aValue} <br>
+            Required: ${attr.aRequired ? "Yes" : "No"}
+            <hr>
+            `;
+        ul.appendChild(li);
+      });
+    }
+
+  }
+
+  function findAncestorWithClass(el, cls) {
+    while (el && (el = el.parentElement) && !el.classList.contains(cls));
+    return el;
+  }
+
+  function deleteAttributeClick(event) {
+    const buttonElement = event.target;
+    const attributeField = findAncestorWithClass(buttonElement, 'attribute-field');
+    if (attributeField) {
+      attributeField.remove();
+    }
+  }
+
+  function updateHiddenInput(index) {
+    const checkbox = document.getElementById(`checkbox-${index}`);
+    const hiddenInput = document.getElementById(`hiddenInput-${index}`);
+
+    hiddenInput.value = checkbox.checked ? 'true' : 'false';
+  }
+
+  function getParentCategoryOptions(parentId, id) {
+    // parent category options
+    let categoriesOptions = `
+                    <option value="" ${!!parentId ? 'selected' : ''}>None</option>
+                `;
+    categoriesOptions += categoryList.map(category => {
+      if (category._id === id) return "";
+      return `<option value="${category._id}" ${parentId === category._id ? 'selected' : ''}>${category.name}</option>`
+    }).join("\n");
+    return categoriesOptions;
+
+
+  }
+
+  function renderAttributeElement(index, type, attr = null) {
+    return `
+            <div class="attribute-field mb-4">
+                <input type="text" class="form-control my-2" placeholder="Attribute Name" name="attribute[${index}][aName]" value="${attr?.aName ?? ""}" required>
+                <select class="form-control my-2" name="attribute[${index}][aValue]">
+                    <option value="text" ${attr?.aValue === 'text' ? 'selected' : ''}>Text</option>
+                    <option value="number" ${attr?.aValue === 'number' ? 'selected' : ''}>Number</option>
+                </select>
+                <input type="hidden" name="attribute[${index}][aRequired]" id="hiddenInput-${type}-${index}" value="${attr?.aRequired ? 'true' : 'false' ?? 'false'}">
+                <input type="checkbox" id="checkbox-${type}-${index}" onchange="updateHiddenInput('${type}-' + ${index})" ${attr?.aRequired ? 'checked' : ''}> <label htmlfor="checkbox-${type}-${index}">Required</label>
+                <br><button type="button" class="my-2 btn btn-outline-danger remove-attribute" onclick="deleteAttributeClick(this)">Remove</button>
+            </div>
+        `;
+  }
+  function addAttributeClick(buttonElement) {
+    const attributesContainer = document.querySelector('#updateCategoryForm #categoryAttributesContainer');
+    const newIndex = attributesContainer.querySelectorAll('.attribute-field').length;
+    const newAttributeHTML = renderAttributeElement(newIndex, 'update');
+    document.querySelector('#updateCategoryForm #categoryAttributesContainer #addAttribute').insertAdjacentHTML("afterend", newAttributeHTML);
+  }
+
+  function addCreateAttributeClick() {
+    const attributesContainer = document.querySelector('#createCategoryForm #createCategoryAttributesContainer');
+    const newIndex = attributesContainer.querySelectorAll('.attribute-field').length;
+    const newAttributeHTML = renderAttributeElement(newIndex, 'create');
+    document.querySelector('#createCategoryForm #createCategoryAttributesContainer #addCreateAttribute').insertAdjacentHTML("afterend", newAttributeHTML);
+  }
+
+  function showUpdateModal(buttonElement) {
+    // Find the closest <tr> element which is the parent of the clicked button
+    const row = buttonElement.closest('tr');
+    const id = buttonElement.getAttribute('data-id');
+    const parentId = buttonElement.getAttribute('data-parentId');
+    document.querySelector('#updateCategoryForm').action = `/category/update/${id}`;
+
+    // Get the product data from the td elements
+    const categoryTitle = row.querySelector('#category-title').innerText;
+    const categoryParenCategory = row.querySelector('#category-parent-category').innerText;
+    const categoriesOptions = getParentCategoryOptions(parentId, id);
+
+    // Get the attributes data from the button element
+    const categoryAttributes = getAttributes(id);
+    let attributesHTML = "";
+    categoryAttributes.forEach((attr, index) => {
+        attributesHTML += renderAttributeElement(index, 'update', attr);
+    });
+
+    // delete the old attributes
+    document.querySelectorAll('#updateCategoryForm #categoryAttributesContainer .attribute-field').forEach(el => el.remove());
+
+    // Now set this data into the modal fields
+    document.querySelector('#updateCategoryForm #categoryId').value = id;
+    document.querySelector('#updateCategoryForm #categoryName').value = categoryTitle;
+    document.querySelector('#updateCategoryForm #parentCategory').innerHTML = categoriesOptions;
+    document.querySelector('#updateCategoryForm #categoryAttributesContainer #addAttribute').insertAdjacentHTML("afterend", attributesHTML);
+
+
+  }
+
+  function createCategory(buttonElement) {
+    // Clear any pre-existing data in the modal
+    document.querySelector('#createCategoryForm #createCategoryName').value = "";
+    document.querySelector('#createCategoryForm #createParentCategory').selectedIndex = 0;
+
+    // Remove any old attribute fields
+    document.querySelectorAll('#createCategoryForm #createCategoryAttributesContainer .attribute-field').forEach(el => el.remove());
+
+
+
+  }
+
+  function deleteCategoryModal(buttonElement) {
+    const row = buttonElement.closest('tr');
+    const catId = buttonElement.getAttribute('data-id');
+    document.querySelector('#deleteCategoryForm #delete-modal-input').value = catId;
+  }
+</script>

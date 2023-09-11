@@ -7,21 +7,22 @@
     </div>
 </header>
 <!-- Js -->
-<section id="home-content-product" class="container mt-5 py-5 w-100">
-    <div class="row py-5">
-        <% categoryList.forEach(category=> { %>
-            <section class="col">
-                <a role="button" class="fs-1 mb-4 mb-md-3 fw-bolder line-clamp-1 text-center text-dark 
-                link-underline link-dark link-underline-opacity-0 link-underline-opacity-75-hover"
-                    href="<%= navigatePage(" category", category.id) %>">
-                    <%= category.name %>
-                </a>
-                <div
-                    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 gy-5 gx-4 gx-lg-10 overflow-x-scroll flex-nowrap scrollbar pb-5">
-                    <% category.products.forEach(product=> { %>
-                        <%- include('./product-card', {navigatePage, product}) %>
-                            <% }) %>
-                </div>
-                <% }) %>
-    </div>
+<section id="home-content-product" class="container mt-5 w-100">
+    <% categoryProductList.forEach(category=> { %>
+        <section class="row my-5 py-5">
+            <a role="button" class="fs-1 pb-3
+            fw-bolder line-clamp-1 text-center text-dark 
+            link-underline link-dark link-underline-opacity-0 link-underline-opacity-75-hover" 
+            href="<%= navigatePage("category", category.content.id) %>">
+                <%= category.content.name %>
+            </a>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3
+                gx-4 gx-lg-10 flex-grow-1 justify-content-center
+                overflow-x-scroll flex-nowrap scrollbar pb-5 px-0">
+                <% category.products.forEach(product=> { %>
+                    <%- include('../partials/product-card', {navigatePage, product, formatCurrencyVND}) %>
+                        <% }) %>
+            </div>
+        </section>
+        <% }) %>
 </section>

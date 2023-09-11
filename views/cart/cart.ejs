@@ -1,46 +1,131 @@
-<div class="container-xl">
-  <!-- TODO: handle empty cart -->
-  <% cartItems.forEach( function(cartItem) { %>
-    <div class="card rounded-3 mb-4">
-      <div class="card-body p-4">
-        <div class="row d-flex justify-content-between align-items-center">
-          <div class="col-md-2 col-lg-2 col-xl-2">
-            <img src="<%= cartItem.product.image %>" class="img-fluid rounded-3" alt="<%= cartItem.product.image %>">
-          </div>
-          <div class="col-md-3 col-lg-3 col-xl-3">
-            <p class="lead fw-normal mb-2">
-              <%= cartItem.product.name %>
-            </p>
-          </div>
-          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-            <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-              <i class="fas fa-minus"></i>
-            </button>
+<section class="">
+  <div class="p-3 m-3 p-lg-5 m-lg-5">
+    <div class="d-flex justify-content-center align-items-center flex-column">
 
-            <input id="form1" min="0" name="quantity" value="<%= cartItem.quantity %>" type="number"
-              class="form-control form-control-sm" />
+      <section class="d-flex flex-column justify-content-between align-items-center mb-4">
+        <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+        <!-- <div>
+          <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
+        </div> -->
+      </section>
+      <% if (cartItems?.length!=0) { %>
+      <% cartItems.forEach(cartItem => { %>
+      <div class="card rounded-3 mb-4 shadow-sm w-100">
+        <section class="card-body p-4">
+          <div class="row d-flex justify-content-between align-items-center gy-2">
+            <!-- image -->
+            <div class="pb-2 pb-md-0 col-md-3 col-lg-2 h-sz-80 h-sz-md-40">
+              <img src="<%= cartItem.image %>" class="object-fit-cover w-100 h-100 rounded-3" alt="Cotton T-shirt">
+            </div>
+            <!-- title -->
+            <div class="pb-2 pb-md-0 col-md-9 col-lg-3">
+              <p class="lead fw-normal mb-2 line-clamp-2"><%= cartItem.title %></p>
+              <!-- <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p> -->
+            </div>
+            <div class="pb-2 pb-md-0 col-md-3 d-none d-md-inline d-lg-none"></div>
+            <!-- product price -->
+            <div class="d-none d-md-inline col-md-2 col-lg-1 w-auto">
+              <h5 class="w-100 m-0 p-0 text-end line-clamp-2"><%= formatCurrencyVND(cartItem.price) %></h5>
+            </div>
+            <!-- quantity -->
+            <div class="pb-2 pb-md-0 col-md-3 col-lg-3 d-flex">
+              <button class="decrease-btn btn btn-link px-2" data-path="<%= navigatePage("cart-decrease", cartItem.product_id) %>">
+                <i class="fas fa-minus"></i>
+              </button>
 
-            <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-              <i class="fas fa-plus"></i>
-            </button>
+              <input min="0" name="quantity" value="<%= cartItem.quantity %>" type="number" class="form-control form-control-sm quantity-input" data-path="<%= navigatePage("cart-change", cartItem.product_id) %>" />
+              <button class="increase-btn btn btn-link px-2" data-path="<%= navigatePage("cart-increase", cartItem.product_id) %>">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+            <!-- total price -->
+            <div class="pb-2 pb-md-0 col-md-2 col-lg-1 w-auto">
+              <h5 class="w-100 m-0 p-0 line-clamp-2"><%= formatCurrencyVND(cartItem.totalp) %></h5>
+            </div>
+            <!-- remove -->
+            <div class="pb-2 pb-md-0 col text-end">
+              <button class="delete-btn btn btn-link text-danger px-2" data-path="<%= navigatePage("cart-delete", cartItem.product_id) %>"><i class="fas fa-trash fa-lg"></i></a>
+            </div>
           </div>
-          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-            <h5 class="mb-0">$<%= cartItem.product.price %>
-            </h5>
-          </div>
-          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-            <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-          <h5 class="mb-0">$<%= cartItem.product.price %>
-          </h5>
-        </div>
-        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-          <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-        </div>
+        </section>
       </div>
+      <% }) %>
+      <% } else { %>
+      <h3 class="fs-3 pb-3
+        fw-medium text-center text-secondary ">
+        Empty Cart
+      </h3>
+      <% } %>
+
+
+      <section class="card w-100 shadow-sm">
+        <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+          <form action="/cart/place-order" method="post">
+            <button <%= cartItems?.length == 0 ? "disabled" : "" %> type="submit" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+          </form>
+          <h5 class="m-md-0 mt-3 p-0 text-end line-clamp-2"><%= formatCurrencyVND(totalPrice) %></h5>
+        </div>
+      </section>
+
     </div>
-</div>
-<% }); %>
   </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      // handle increase and decrease
+      $(".increase-btn, .decrease-btn").on("click", function(e) {
+        e.preventDefault(); // Stop the form from submitting normally
+        // get input element
+        const input = $(this).siblings('input[type=number]')[0];
+
+        let actionType = $(this).hasClass('increase-btn') ? "increase" : "decrease";
+        let actionPath = $(this).data("path");
+        // console.log(navigatePage(`${action}`, productId));
+        $.post(actionPath, {}, function(response) {
+          // console.log(response);
+          if (actionType == "increase") {
+            input.stepUp();
+          } else {
+            input.stepDown();
+          }
+          location.reload();
+        }).fail(function() {
+          // TODO: error here
+          alert("Error updating cart!");
+        });
+      });
+
+      // Handle changes to the quantity input
+      $(".quantity-input").on("input", function() {
+        const input = this;
+        const newQuantity = input.value;
+        if (isNaN(newQuantity) || newQuantity < 0 || newQuantity.trim() == "") {
+          input.value = 1;
+        }
+        let actionPath = $(this).data("path");
+        $.post(actionPath, {
+          quantity: newQuantity
+        }, function(response) {
+          input.value = newQuantity;
+          // location.reload();
+        }).fail(function() {
+          // TODO: error here
+          alert("Error communicating with the server when updating cart!");
+        });
+      });
+
+      // Handle delete
+      $(".delete-btn").on("click", function(e) {
+        e.preventDefault(); // Stop the form from submitting normally
+        // get post path
+        let actionPath = $(this).data("path");
+        // call route
+        $.post(actionPath, {}, function(response) {
+          location.reload();
+        }).fail(function() {
+          // TODO: error here
+          alert("Error deleting cart!");
+        });
+      });
+    });
+  </script>

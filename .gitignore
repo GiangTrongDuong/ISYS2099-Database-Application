@@ -1,0 +1,10 @@
+# Ignore files related to API keys
+# .env
+
+node_modules/*
+package-lock.json
+
+# Ignore all log files
+*.log
+
+.env

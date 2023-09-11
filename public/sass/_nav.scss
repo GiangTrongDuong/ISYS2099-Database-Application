@@ -3,10 +3,6 @@ nav {
         .navbar-brand {
             .web-logo {
                 width: 150px;
-
-                &:hover{
-                    
-                }
             }
         }
     }
@@ -19,9 +15,12 @@ nav {
                     a {
                         color: #838383;
                         &.nav-link {
-                            &.active {
-                                
+                            &.show {
+                                color: #333;
                             }
+                        }
+                        &:hover {
+                            color: #333;
                         }
 
                         &.create-listing {

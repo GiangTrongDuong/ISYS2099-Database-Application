@@ -1,0 +1,23 @@
+  <!-- Modal -->
+  <div class="modal fade <%= isFullScreenSm && "modal-fullscreen-sm-down" %>" id="<%= modalId %>">
+    <div class="modal-dialog">
+      <tionsec class="modal-content rounded-3">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><%= heading %></h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <%- body %>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </tionsec>
+    </div>
+  </div>
