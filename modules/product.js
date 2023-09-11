@@ -77,48 +77,55 @@ router.get(`${PRODUCT_ROUTE}/search`, async (req, res) => {
 router.get(`${PRODUCT_ROUTE}`, async (req, res) => {
   try {
     const catlist = await Category.getAllCats();
+    let productList = [];
     // console.log("Queryrr", req.query);
-    const { category, price, sortBy, ...attributeList } = req.query;
+    if (Object.keys(req.query).length !== 0) {
+      const { category, price, sortBy, ...attributeList } = req.query;
 
-    // {categoryId, attributes: [{name, value}]}
-    const attributes = [];
-    for (let aName in attributeList) {
-      // Iterate over each array of values for the given attribute name
-      // if value is not array
-      if (!Array.isArray(attributeList[aName])) {
-        attributes.push({
-          aName: aName,
-          value: attributeList[aName]
-        });
-      }
-      else {
-        for (let value of attributeList[aName]) {
+      // {categoryId, attributes: [{name, value}]}
+      const attributes = [];
+      for (let aName in attributeList) {
+        // Iterate over each array of values for the given attribute name
+        // if value is not array
+        if (!Array.isArray(attributeList[aName])) {
           attributes.push({
             aName: aName,
-            value: value
+            value: attributeList[aName]
           });
         }
+        else {
+          for (let value of attributeList[aName]) {
+            attributes.push({
+              aName: aName,
+              value: value
+            });
+          }
+        }
       }
-    }
 
-    const newFilter = {
-      category: category,
-      attribute: attributes
-    };
-    const result = await productDbMongo.filterProducts(newFilter.category, newFilter.attribute);
-    // convert sortBy to sortPrice and sortTime
-    let sortPrice = "";
-    let sortTime = "";
-    if (sortBy === "priceAsc") {
-      sortPrice = "ASC";
-    } else if (sortBy === "priceDesc") {
-      sortPrice = "DESC";
-    } else if (sortBy === "dateAsc") {
-      sortTime = "ASC";
+      const newFilter = {
+        category: category == "" ? null : category,
+        attribute: attributes
+      };
+      const result = await productDbMongo.filterProducts(newFilter.category, newFilter.attribute);
+      
+      // convert sortBy to sortPrice and sortTime
+      let sortPrice = "";
+      let sortTime = "";
+      if (sortBy === "priceAsc") {
+        sortPrice = "ASC";
+      } else if (sortBy === "priceDesc") {
+        sortPrice = "DESC";
+      } else if (sortBy === "dateAsc") {
+        sortTime = "ASC";
+      } else {
+        sortTime = "DESC";
+      }
+
+      productList = await db.fromListID(result, sortPrice, sortTime, price ? price : 0);
     } else {
-      sortTime = "DESC";
+      productList = await db.all();
     }
-    const productList = await db.fromListID(result, sortPrice, sortTime, price ? price : 0);
 
     // res.json(result);
     res.render('layout.ejs', {

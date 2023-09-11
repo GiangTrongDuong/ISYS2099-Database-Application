@@ -10,7 +10,7 @@
         <th scope="col">ID</th>
         <th scope="col">Username</th>
         <th scope="col">Display Name</th>
-        <th scope="col">Delete Admin</th>
+        <!-- <th scope="col">Delete Admin</th> -->
       </tr>
     </thead>
     <tbody>
@@ -19,11 +19,11 @@
         <td id="admin-id" scope="row"><%= admin.id %></td>
         <td id="admin-username"><%= admin.user_name %></td>
         <td id="admin-display"><%= admin.display_name %></td>
-        <td>
+        <!-- <td>
           <button id="admin-<%= admin.id %>" class="delete-submit-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAdminModal" data-path="<%= navigatePage("delete-user", admin.id) %>">
             Delete Admin
           </button>
-        </td>
+        </td> -->
       </tr>
       <% }) %>
     </tbody>

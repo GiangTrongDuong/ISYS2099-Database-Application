@@ -1,4 +1,4 @@
-const { connectionSeller: database } = require('./connection/dbSqlConnect');
+const { connectionSeller: database, connection: guestDb } = require('./connection/dbSqlConnect');
 const { parenthesesString, getCurrentTimeString } = require('../helperFuncs');
 
 async function from_id(pid) {
@@ -16,14 +16,14 @@ async function fromListID(pidList, sortPrice, sortTime, minPrice = 0) {
     return new Promise((resolve, reject) => {
         try {
             if (sortTime) { // ASC or DESC
-                database.query(`SELECT * FROM product WHERE id IN (${pidList})
-                WHERE price > ${minPrice} ORDER BY created_at ${sortTime};`, function (error, result) {
+                guestDb.query(`SELECT * FROM product WHERE id IN (${pidList})
+                AND price > ${minPrice} ORDER BY created_at ${sortTime};`, function (error, result) {
                     if (error) reject({ "cannot get matching product": error });
                     resolve(result);
                 });
             }
             else if (sortPrice) { // ASC or DESC
-                database.query(`SELECT * FROM product WHERE id IN (${pidList})
+                guestDb.query(`SELECT * FROM product WHERE id IN (${pidList})
                 AND price > ${minPrice} ORDER BY price ${sortPrice};`, function (error, result) {
                     if (error) reject({ "cannot get matching product": error });
                     resolve(result);
@@ -31,7 +31,7 @@ async function fromListID(pidList, sortPrice, sortTime, minPrice = 0) {
             }
             else { // if no sorting - sort latest product
 
-                database.query(`SELECT * FROM product WHERE id IN (${pidList})
+                guestDb.query(`SELECT * FROM product WHERE id IN (${pidList})
                 AND price > ${minPrice} ORDER BY created_at DESC;`, function (error, result) {
                     if (error) reject({ "cannot get matching product": error });
                     resolve(result);
@@ -47,7 +47,7 @@ async function fromListID(pidList, sortPrice, sortTime, minPrice = 0) {
 
 async function all() {
     return new Promise((resolve, reject) => {
-        database.query(`SELECT *
+        guestDb.query(`SELECT *
         FROM product;`, (error, results) => {
             if (error) reject(error);
             else resolve(results);
@@ -73,20 +73,20 @@ async function from_ids(pids) {
 async function get_from_multiple_categories(ids) {
     return new Promise((resolve, reject) => {
         // Create a string with multiple "?" depending on the number of ids
-        const placeholders = ids.map(() => '?').join(',');
-
-        database.query(`SELECT *
-                        FROM product
-                        WHERE category IN (${placeholders})`, ids, (error, results) => {
+        // const placeholders = ids.map(() => '?').join(',');
+        guestDb.query(`SELECT * FROM product WHERE category IN (?)`, [ids], (error, results) => {
             if (error) reject(error);
-            else resolve(results);
+            else {
+                console.log("Reultlngrekdsngfdkl");
+                resolve(results);
+            }
         });
     });
 }
 
 async function get_from_a_category(id) {
     return new Promise((resolve, reject) => {
-        database.query(`SELECT *
+        guestDb.query(`SELECT *
         FROM product
         WHERE category = ?;`, [id], (error, results) => {
             if (error) reject(error);
