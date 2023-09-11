@@ -85,9 +85,15 @@ router.get(`${CATEGORY_ROUTE}/:id`, async (req, res) => {
 router.post(`${CATEGORY_ROUTE}`, async (req, res) => {
     try {
         const newCat = req.body;
+        let parentCat = null;
         // console.log("CreatedCat", newCat);
+        if (newCat.parent_category == "") {
+            const createdCat = await Category.saveCat(null, newCat.name, newCat.attribute, parentCat);
+        res.redirect(`${WAREHOUSE_ROUTE}/categories`);
+        } else {
         const createdCat = await Category.saveCat(null, newCat.name, newCat.attribute, newCat.parent_category);
         res.redirect(`${WAREHOUSE_ROUTE}/categories`);
+    }
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
     }
@@ -110,8 +116,14 @@ router.post(`${CATEGORY_ROUTE}/update/:id`, async (req, res) => {
     try {
         const id = req.params.id;
         const newCat = req.body;
+        let parentCat = null;
+        if (newCat.parent_category == ""){
+            const updatedCat = await Category.updateCat(id, newCat.name, newCat.attribute, parentCat);
+            console.log("UPdated", updatedCat);
+        } else {
         const updatedCat = await Category.updateCat(id, newCat.name, newCat.attribute, newCat.parent_category);
         console.log("UPdated", updatedCat);
+    }
         res.redirect(`${WAREHOUSE_ROUTE}/categories`);
     } catch (error) {
         // res.status(500).send({ message: "Error retrieving categories", error: error.message });
