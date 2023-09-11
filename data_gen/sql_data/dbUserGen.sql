@@ -15,7 +15,7 @@ GRANT SELECT,INSERT
 ON testg2.user
 TO 'guestg2'@'localhost';
 
--- User Priviledge --
+-- Customer Priviledge --
 CREATE USER 'customerg2'@'localhost'
 IDENTIFIED BY 'userpass';
 
@@ -34,7 +34,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE
 ON testg2.cart_details
 TO 'customerg2'@'localhost';
 
-GRANT SELECT, INSERT, UPDATE
+GRANT SELECT, INSERT, UPDATE, DELETE
 ON testg2.order_details
 TO 'customerg2'@'localhost';
 
@@ -54,6 +54,10 @@ TO 'sellerg2'@'localhost';
     -- insert product into warehouse -> change warehouse storage
 GRANT UPDATE
 ON testg2.warehouse
+TO 'sellerg2'@'localhost';
+
+GRANT SELECT
+ON testg2.user
 TO 'sellerg2'@'localhost';
 
 GRANT SELECT, INSERT, UPDATE, DELETE
