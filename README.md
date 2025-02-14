@@ -1,5 +1,5 @@
 # ISYS2099-Database-Application
-Database application project for course ISYS2099 by group 2, semester 2 2023
+A E-Commerce Website project implementing both MYSQL (SQL language) and MongoDB (Non-SQL) and Nodejs. All front-end and back-end are build from scratch by team members.
 
 View the team members contribution [Here](#contribution)
 View the demo link here [Here](#demo-link)
